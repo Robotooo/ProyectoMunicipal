@@ -7,38 +7,29 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "licencias")
+@Table(name = "rutas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class Licencia implements Serializable {
+public class Ruta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", length = 45)
-    private String nombre;
+    @Column(name = "inicio", length = 45)
+    private String inicio;
 
-    @Column(unique = true)
-    private Integer telefono;
-
-    @Column(length = 50, unique = true)
-    private String email;
-
-    @Column(length = 45, unique = true)
-    private String distrito;
-
-    @Column
-    private boolean estado;
-
-    @Column
-    private Double ganancias;
+    @Column(name = "final_ruta", length = 45)
+    private String final_ruta;
 
     @Column
     private BigInteger bien;
+
+    @Column
+    private boolean estado;
 
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
