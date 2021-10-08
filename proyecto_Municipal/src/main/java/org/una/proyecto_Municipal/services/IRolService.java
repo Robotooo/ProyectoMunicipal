@@ -10,7 +10,7 @@ public interface IRolService {
 
     public Optional<RolDTO> findById(Long id);
 
-    public Optional<List<RolDTO>> findByEstado(boolean estado);
+    /*public Optional<List<RolDTO>> findByEstado(boolean estado);
 
     public Optional<List<RolDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
@@ -20,5 +20,5 @@ public interface IRolService {
 
     public void delete(Long id);
 
-    public void deleteAll();
+    public void deleteAll();*/
 }
