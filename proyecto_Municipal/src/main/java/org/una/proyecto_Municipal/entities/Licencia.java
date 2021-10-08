@@ -3,16 +3,17 @@ package org.una.proyecto_Municipal.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "licencias")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class Cliente implements Serializable {
+public class Licencia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +22,25 @@ public class Cliente implements Serializable {
     @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column(length = 45, unique = true)
-    private String cedula;
-
     @Column(unique = true)
     private Integer telefono;
+
+    @Column(length = 50, unique = true)
+    private String email;
+
+    @Column(length = 45, unique = true)
+    private String distrito;
 
     @Column
     private boolean estado;
 
-    @Column(name = "fecha_creacion", updatable = false)
+    @Column
+    private BigInteger bien;
+
+    @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_creacion;
+    private Date fecha_registro;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
@@ -44,8 +51,8 @@ public class Cliente implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        estado=true;
-        fecha_creacion = new Date();
+        estado = true;
+        fecha_registro = new Date();
         fecha_modificacion = new Date();
     }
 

@@ -1,15 +1,20 @@
 package org.una.proyecto_Municipal.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
+import org.una.proyecto_Municipal.entities.Transaccion;
+import org.una.proyecto_Municipal.repositories.ITransaccionRepository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TransaccionServiceImplementation implements ITransaccionService{
 
-
-    ITransaccionRepository transaccionRepository;
+    @Autowired
+    private ITransaccionRepository transaccionRepository;
 
     @Override
     public Optional<TransaccionDTO> findById(Long id) {
