@@ -19,11 +19,11 @@ public class Ruta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Column(name = "inicio", length = 45)
-    //private String inicio;
+    @Column(name = "inicio", length = 45)
+    private String inicio;
 
-    //@Column(name = "final", length = 45)
-    //private String final;
+    @Column(name = "final_ruta", length = 45)
+    private String final_ruta;
 
     @Column
     private BigInteger bien;
@@ -45,7 +45,7 @@ public class Ruta implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        estado=true;
+        estado = true;
         fecha_registro = new Date();
         fecha_modificacion = new Date();
     }

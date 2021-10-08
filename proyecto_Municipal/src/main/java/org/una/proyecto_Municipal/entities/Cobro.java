@@ -24,6 +24,10 @@ public class Cobro implements Serializable {
     @JoinColumn(name="colaborador_id")
     private Colaborador colaborador;
 
+    @ManyToOne
+    @JoinColumn(name="facturas_id")
+    private Factura factura;
+
     @Column
     private BigInteger bien;
 
@@ -50,7 +54,7 @@ public class Cobro implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        estado=true;
+        estado = true;
         fecha_creacion = new Date();
         fecha_modificacion = new Date();
     }

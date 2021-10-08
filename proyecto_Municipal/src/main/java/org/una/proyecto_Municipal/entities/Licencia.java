@@ -35,6 +35,9 @@ public class Licencia implements Serializable {
     private boolean estado;
 
     @Column
+    private Double ganancias;
+
+    @Column
     private BigInteger bien;
 
     @Column(name = "fecha_registro", updatable = false)
