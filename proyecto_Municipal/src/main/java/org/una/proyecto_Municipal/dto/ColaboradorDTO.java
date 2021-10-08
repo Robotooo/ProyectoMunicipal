@@ -1,17 +1,13 @@
 package org.una.proyecto_Municipal.dto;
 
 import lombok.*;
-
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ClienteDTO {
+public class ColaboradorDTO {
 
     private Long id;
     private String nombre;
