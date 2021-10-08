@@ -10,11 +10,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class TransaccionDTO {
-
+public class LicenciaDTO {
     private Long id;
-    private String objeto;
-    private String usuarioID;
-    private String accion;
-    private Date fechaCreacion;
+    private String nombre;
+    private Integer telefono;
+    private boolean estado;
+    private Date fecha_registro;
+    private Date fecha_modificacion;
+    private Double ganancias;
 }

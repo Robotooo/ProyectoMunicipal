@@ -8,7 +8,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ColaboradorDTO {
-
     private Long id;
     private String nombre;
     private String cedula;
@@ -16,5 +15,4 @@ public class ColaboradorDTO {
     private boolean estado;
     private Date fecha_creacion;
     private Date fecha_modificacion;
-
 }

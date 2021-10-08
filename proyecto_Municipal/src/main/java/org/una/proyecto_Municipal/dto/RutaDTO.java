@@ -1,6 +1,20 @@
 package org.una.proyecto_Municipal.dto;
 
-public class RutaDTO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.util.Date;
 
-    //TODO:
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class RutaDTO {
+    private Long id;
+    private String inicioRuta;
+    private String finalRuta;
+    private boolean estado;
+    private Date fecha_creacion;
+    private Date fecha_modificacion;
 }
