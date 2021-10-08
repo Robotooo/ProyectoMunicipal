@@ -1,4 +1,12 @@
 package org.una.proyecto_Municipal.repositories;
 
-public interface IRolRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.una.proyecto_Municipal.entities.Rol;
+
+import java.util.Date;
+import java.util.List;
+
+public interface IRolRepository extends JpaRepository<Rol, Long> {
+    public List<Rol> findByFechaCreacionBetween(Date startDate, Date endDate);
+
 }
