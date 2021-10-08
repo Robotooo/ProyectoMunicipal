@@ -14,7 +14,7 @@ import java.util.Date;
 public class FuncionarioDTO {
     private Long id;
     private String usuario;
-    private String contrasenia
+    private String contrasenia;
     private Integer telefono;
     private boolean estado;
     private Date fecha_creacion;

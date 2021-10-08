@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.entities.Parametro;
 
+import java.util.List;
+
 public interface IParametroRepository extends JpaRepository<Parametro, Long>{
 
     public List<Parametro> findByNombre(String nombre);
