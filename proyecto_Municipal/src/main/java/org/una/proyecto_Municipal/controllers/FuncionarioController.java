@@ -96,7 +96,7 @@ public class FuncionarioController {
         try {
             Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO);
             return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
-        } catch (Exception e) {
+        } catch (Exception | PasswordIsBlankException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -37,23 +37,16 @@ public class SwaggerConfiguration {
                 .select()
                 .apis(
                         RequestHandlerSelectors
-                                .basePackage("org.una.proyecto_Municipal.controllers"))
+                                .basePackage("org.una.proyecto_municipal.controllers"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiInfo())
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
-                        new Tag("Funcionarios", "Entidad de Funcionarios"),
-                        new Tag("Contribuyentes","Entidad de Contribuyentes"),
-                        new Tag("Cobros", "Entidad de Cobros"),
-                        new Tag("Licencias", "Entidad de Licencias"),
-                        new Tag("Parametros", "Entidad de Parametros"),
-                        new Tag("Propiedades", "Entidad de Propiedades"),
-                        new Tag("Roles", "Entidad de Roles"),
-                        new Tag("Rutas", "Entidad de Rutas"),
-                        new Tag("Transacciones", "Entidad de Transacciones")
+                        new Tag("Usuarios", "Entidad de Usuarios")
                 );
 
     }
+
 
 
     private ApiInfo apiInfo() {

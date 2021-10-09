@@ -3,8 +3,11 @@ package org.una.proyecto_Municipal.services;
 import org.apache.http.auth.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +16,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.una.proyecto_Municipal.dto.AuthenticationRequest;
+import org.una.proyecto_Municipal.dto.AuthenticationResponse;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import org.una.proyecto_Municipal.repositories.IFuncionarioRepository;
+import org.una.proyecto_Municipal.tramites.JwtProvider;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.ArrayList;
@@ -35,11 +42,11 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private JwtProvider jwtProvider;
+    @Autowired
+    private JwtProvider jwtProvider;
 
     //findBy...
     @Override
@@ -72,6 +79,44 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula) {
         return Optional.empty();
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Funcionario> funcionarioBuscado = funcionarioRepository.findByCedula(username);
+        if (funcionarioBuscado.isPresent()) {
+            Funcionario usuario = funcionarioBuscado.get();
+            List<GrantedAuthority> roles = new ArrayList<>();
+            roles.add(new SimpleGrantedAuthority("ADMIN"));
+            UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
+            return userDetails;
+        } else {
+            throw new UsernameNotFoundException("Username not found, check your request");
+        }
+    }
+
+    @Override
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException {
+        // Llama al "authenticationRequest para obtener la cedula
+        Optional<Funcionario> usuario = funcionarioRepository.findByCedula(authenticationRequest.getCedula());
+
+        if(usuario.isPresent() && bCryptPasswordEncoder.matches(authenticationRequest.getPassword(), usuario.get().getPasswordEncriptado())){
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // Set JWT
+            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
+            FuncionarioDTO funcionarioDto = MapperUtils.DtoFromEntity(usuario.get(), FuncionarioDTO.class);
+            authenticationResponse.setFuncionarioDTO(funcionarioDto);
+            authenticationResponse.setRolDTO(RolDTO.builder().nombre(funcionarioDto.getRol().getNombre()).build());
+
+            return authenticationResponse;
+        } else{
+            throw new InvalidCredentialsException();
+        }
+    }
+
 
     /*
         @Override
@@ -138,7 +183,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional
-    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) {
+    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException {
         funcionarioDTO.setPasswordEncriptado(encriptarPassword(funcionarioDTO.getPasswordEncriptado()));
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
@@ -150,12 +195,13 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
 
-    private String encriptarPassword(String password) {
+    private String encriptarPassword(String password) throws PasswordIsBlankException {
         if (!password.isBlank()) {
             return bCryptPasswordEncoder.encode(password);
-        } else {
-            return null;//throw new PasswordIsBlankException();
+        }else{
+            throw new PasswordIsBlankException();
         }
+
     }
 
 //    @Override
@@ -166,7 +212,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 //        return Optional.ofNullable(funcionarioDTOList);
 //
 //    }
-
+/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Funcionario> funcionarioBuscado = funcionarioRepository.findByCedula(username);
@@ -180,6 +226,8 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
             throw new UsernameNotFoundException("Username not found, check your request");
         }
     }
+
+*/
 
 //    @Override
 //    @Transactional(readOnly = true)
