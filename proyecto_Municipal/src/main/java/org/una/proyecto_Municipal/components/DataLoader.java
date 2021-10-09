@@ -9,16 +9,22 @@ import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.services.IFuncionarioService;
 import org.una.proyecto_Municipal.services.IRolService;
+/*import org.una.Proyecto_Municipal.dto.DepartamentoDTO;
+import org.una.inventario.dto.RolDTO;
+import org.una.inventario.dto.UsuarioDTO;
+import org.una.inventario.services.IDepartamentoService;
+import org.una.inventario.services.IRolService;
+import org.una.inventario.services.IUsuarioService;*/
 
 import java.util.Optional;
 
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    @Value("${app.admin-user}")
+    @Value("admin")
     private String cedula;
 
-    @Value("${app.password}")
+    @Value("Una2021")
     private String password;
 
     @Autowired
@@ -27,42 +33,38 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private IRolService rolService;
 
+
     @Override
     public void run(ApplicationArguments args) {
-
-        if (funcionarioService.findByCedulaAproximate(cedula).get().size() == 0) {
-
+        if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
 
             Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre("Colaborador").build());
             Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre("Auditor").build());
-            Optional<RolDTO> gerenteRol = rolService.create(RolDTO.builder().nombre("Contador").build());
-            Optional<RolDTO> gestorRol = rolService.create(RolDTO.builder().nombre("Usuario").build());
+            Optional<RolDTO> contadorRol = rolService.create(RolDTO.builder().nombre("Contador").build());
+            Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre("Usuario").build());
             Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre("Administrador").build());
 
 
-            FuncionarioDTO auditorFuncionario = FuncionarioDTO.builder()
+            FuncionarioDTO cajeroUsuario = FuncionarioDTO.builder()
                     .cedula("0123456789")
-                    .usuario("Usuario Prueba")
+                    .usuario("Usuario Prueba Cajero")
                     .passwordEncriptado("Una2021")
-                    .rol(auditorRol.orElseThrow()).build();
-            funcionarioService.create(auditorFuncionario);
+                    .rol(usuarioRol.orElseThrow()).build();
+            funcionarioService.create(cajeroUsuario);
 
-//            UsuarioDTO contadorUsuario = UsuarioDTO.builder()
-//                    .cedula("9876543210")
-//                    .nombreCompleto("Usuario Prueba Contador")
-//                    .esJefe(true)
-//                    .passwordEncriptado("Una2021")
-//                    .departamento(contabilidadDepartamento.orElseThrow())
-//                    .rol(contadorRol.orElseThrow()).build();
-//            usuarioService.create(contadorUsuario);
-//
-//            UsuarioDTO administradorUsuario = UsuarioDTO.builder()
-//                    .cedula(cedula)
-//                    .nombreCompleto("Usuario Administrador")
-//                    .passwordEncriptado(password)
-//                    .departamento(informaticaDepartamento.orElseThrow())
-//                    .rol(administradorRol.orElseThrow()).build();
-//            usuarioService.create(administradorUsuario);
+            FuncionarioDTO contadorUsuario = FuncionarioDTO.builder()
+                    .cedula("9876543210")
+                    .usuario("Usuario Prueba Contador")
+                    .passwordEncriptado("Una2021")
+                    .rol(contadorRol.orElseThrow()).build();
+            funcionarioService.create(contadorUsuario);
+
+            FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
+                    .cedula(cedula)
+                    .usuario("Usuario Administrador")
+                    .passwordEncriptado(password)
+                    .rol(administradorRol.orElseThrow()).build();
+            funcionarioService.create(administradorUsuario);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {
@@ -71,4 +73,3 @@ public class DataLoader implements ApplicationRunner {
     }
 
 }
-

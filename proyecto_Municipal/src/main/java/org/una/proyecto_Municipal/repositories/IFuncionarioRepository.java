@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
-    public List<Funcionario> findByNombreContainingIgnoreCase(String nombre);
+    //public List<Funcionario> findByNombreContainingIgnoreCase(String nombre);
 
     public List<Funcionario> findByUsuarioContaining(String nombreCompleto);
 
@@ -29,7 +29,7 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
 
     public List<Funcionario> findByEstado(boolean estado);
 
-    public List<Funcionario> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
+    //public List<Funcionario> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
 //    @Query("select u from Funcionario u where UPPER(u.usuario) like CONCAT('%',UPPER(:usuario),'%')")
 //    public Funcionario findNombreWithLikeSQL(@Param("usuario")String usuario);

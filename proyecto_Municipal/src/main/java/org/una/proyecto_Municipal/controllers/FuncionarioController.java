@@ -40,7 +40,7 @@ public class FuncionarioController {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
-
+/*
     @GetMapping("/usuario/{term}")
     public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
         try {
@@ -53,11 +53,11 @@ public class FuncionarioController {
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{id}")
+    @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -82,7 +82,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = CobroDTO.class, tags = "Funcionarios")
-    @GetMapping("/{id}")
+    //@GetMapping("/{id}")
     public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -102,7 +102,7 @@ public class FuncionarioController {
     }
 
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula", response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/byCedula/{cedula}")
+    //@GetMapping("/byCedula/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);

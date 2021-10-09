@@ -63,23 +63,36 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     @Override
     @Transactional(readOnly = true)
     public Optional<List<FuncionarioDTO>> findByUsuario(String user) {
-        List<Funcionario> funcionarioList = funcionarioRepository.findByNombreContainingIgnoreCase(user);
+        List<Funcionario> funcionarioList = funcionarioRepository.findByUsuario(user);
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
         return Optional.ofNullable(funcionarioDTOList);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula) {
-        if (cedula.trim().isEmpty()) throw new NotFoundInformationException();
-        List<Funcionario> funcionarioList = funcionarioRepository.findByCedulaContaining(cedula);
-        if (funcionarioList.isEmpty()) throw new NotFoundInformationException();
-
-        List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
-        if (funcionarioDTOList.isEmpty()) throw new NotFoundInformationException();
-
-        return Optional.ofNullable(funcionarioDTOList);
+        return Optional.empty();
     }
+
+    /*
+        @Override
+        @Transactional(readOnly = true)
+        public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula) {
+            if (cedula.trim().isEmpty()) throw new NotFoundInformationException();
+            List<Funcionario> funcionarioList = funcionarioRepository.findByCedulaContaining(cedula);
+            if (funcionarioList.isEmpty()) throw new NotFoundInformationException();
+
+            List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
+            if (funcionarioDTOList.isEmpty()) throw new NotFoundInformationException();
+
+            return Optional.ofNullable(funcionarioDTOList);
+        }
+    */
+
+    /*
+    @Override
+    public Optional<List<FuncionarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto) {
+        return Optional.empty();
+    }*/
 
     @Override
     public Optional<List<FuncionarioDTO>> findByRolId(Long id) {

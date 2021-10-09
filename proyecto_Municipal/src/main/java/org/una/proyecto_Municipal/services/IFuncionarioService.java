@@ -18,7 +18,7 @@ public interface IFuncionarioService {
 
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula);
 
-    public Optional<List<FuncionarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
+   // public Optional<List<FuncionarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
     public Optional<List<FuncionarioDTO>> findByRolId(Long id);
 
