@@ -15,7 +15,7 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
 
     //public List<Funcionario> findByNombreContainingIgnoreCase(String nombre);
 
-    public List<Funcionario> findByUsuarioContaining(String nombreCompleto);
+    //public List<Funcionario> findByUsuario(String usuario);
 
     public Funcionario findByCedulaAndPasswordEncriptado(String cedula, String passwordEncriptado);
 

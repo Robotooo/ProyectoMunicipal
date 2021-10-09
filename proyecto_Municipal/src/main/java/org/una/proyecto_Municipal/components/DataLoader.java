@@ -40,32 +40,24 @@ public class DataLoader implements ApplicationRunner {
 
             Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre("Colaborador").build());
             Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre("Auditor").build());
-            Optional<RolDTO> contadorRol = rolService.create(RolDTO.builder().nombre("Contador").build());
             Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre("Usuario").build());
             Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre("Administrador").build());
 
-
+/*
             FuncionarioDTO cajeroUsuario = FuncionarioDTO.builder()
-                    .cedula("0123456789")
+                    .cedula("0123453782")
                     .usuario("Usuario Prueba Cajero")
                     .passwordEncriptado("Una2021")
                     .rol(usuarioRol.orElseThrow()).build();
-            funcionarioService.create(cajeroUsuario);
-
-            FuncionarioDTO contadorUsuario = FuncionarioDTO.builder()
-                    .cedula("9876543210")
-                    .usuario("Usuario Prueba Contador")
-                    .passwordEncriptado("Una2021")
-                    .rol(contadorRol.orElseThrow()).build();
-            funcionarioService.create(contadorUsuario);
-
+            funcionarioService.create(cajeroUsuario);*/
+            /*
             FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
                     .cedula(cedula)
                     .usuario("Usuario Administrador")
                     .passwordEncriptado(password)
                     .rol(administradorRol.orElseThrow()).build();
             funcionarioService.create(administradorUsuario);
-
+*/
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {
             System.out.println("Se encontro el usuario administrador, continuando...");

@@ -31,9 +31,7 @@ public class RolController {
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }*/
 
-    @ApiOperation(value = "Crea un Rol",
-            response = RolDTO.class, responseContainer = "List", tags = "Roles")
-    @ResponseStatus(HttpStatus.OK)
+
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody RolDTO rolDto) {
