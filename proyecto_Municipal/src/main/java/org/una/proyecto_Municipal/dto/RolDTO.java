@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.dto;
 
 import lombok.*;
+
 import java.util.Date;
 
 @Data
@@ -9,7 +10,6 @@ import java.util.Date;
 @ToString
 @Builder
 public class RolDTO {
-
     private Long id;
     private String nombre;
     private Date fechaCreacion;

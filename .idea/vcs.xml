@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/proyecto_Municipal/src/main/java/org/una/proyecto_Municipal/entities/api_rest" vcs="Git" />
   </component>
 </project>

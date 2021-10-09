@@ -11,7 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Funcionario implements Serializable {
 
     @Id
@@ -24,8 +23,14 @@ public class Funcionario implements Serializable {
     @Column(length = 30, name = "contrasenia")
     private String contrasenia;
 
+    @Column(length = 45, unique = true)
+    private String cedula;
+
     @Column
     private boolean estado;
+
+    @Column(length = 100, name = "password_encriptado")
+    private String passwordEncriptado;
 
     @ManyToOne
     @JoinColumn(name="roles_id")

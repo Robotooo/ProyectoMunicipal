@@ -1,7 +1,11 @@
 package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
+import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Rol;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.IRolRepository;
@@ -11,12 +15,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class RolServiceImplementation implements IRolService{
-
 
     @Autowired
     private IRolRepository rolRepository;
 
+    //findBy...
     @Override
     public Optional<RolDTO> findById(Long id) {
         Optional<Rol> rol = rolRepository.findById(id);
@@ -25,12 +30,20 @@ public class RolServiceImplementation implements IRolService{
         RolDTO rolDTO = MapperUtils.DtoFromEntity(rol.get(), RolDTO.class);
         return Optional.ofNullable(rolDTO);
     }
-/*
+
     @Override
-    public Optional<List<RolDTO>> findByEstado(boolean estado) {
-        List<Rol> RolList = rolRepository.findByEstado(estado);
-        List<RolDTO> RolDTOList = MapperUtils.DtoListFromEntityList(RolList, RolTO.class);
-        return Optional.ofNullable(RolDTOList);
+    @Transactional(readOnly = true)
+    public Optional<List<RolDTO>> findAll() {
+        List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolRepository.findAll(), RolDTO.class);
+        return Optional.ofNullable(rolDTOList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<RolDTO>> findByNombreContainingAproximateIgnoreCase(String nombre) {
+        List<Rol> rolList = rolRepository.findByNombreContainingIgnoreCase(nombre);
+        List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolList, RolDTO.class);
+        return Optional.ofNullable(rolDTOList);
     }
 
     @Override
@@ -39,26 +52,43 @@ public class RolServiceImplementation implements IRolService{
 
         List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolList, RolDTO.class);
         return Optional.ofNullable(rolDTOList);
-        return Optional.empty();
+
     }
 
+    //detele...
     @Override
-    public Optional<RolDTO> create(RolDTO rolDTO) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<RolDTO> update(RolDTO rolDTO, Long id) {
-        return Optional.empty();
-    }
-
-    @Override
+    @Transactional
     public void delete(Long id) {
-
+        rolRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
+        rolRepository.deleteAll();
+    }
 
-    }*/
+    //get
+    private RolDTO getSavedRolDTO(RolDTO rolDTO) {
+        Rol rol = MapperUtils.EntityFromDto(rolDTO, Rol.class);
+        Rol rolCreated = rolRepository.save(rol);
+        return MapperUtils.DtoFromEntity(rolCreated, RolDTO.class);
+    }
+
+    //create & update
+    @Override
+    @Transactional
+    public Optional<RolDTO> create(RolDTO rolDTO) {
+        return Optional.ofNullable(getSavedRolDTO(rolDTO));
+    }
+
+    @Override
+    @Transactional
+    public Optional<RolDTO> update(RolDTO rolDTO, Long id) {
+        if (rolRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+
+        return Optional.ofNullable(getSavedRolDTO(rolDTO));
+
+    }
+
 }
