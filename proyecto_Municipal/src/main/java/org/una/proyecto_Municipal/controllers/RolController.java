@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/roles")
+@Api(tags = {"Roles"})
 public class RolController {
 
     private IRolService rolService;
