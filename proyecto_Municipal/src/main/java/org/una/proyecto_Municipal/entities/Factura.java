@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "facturas")
@@ -31,6 +33,9 @@ public class Factura implements Serializable {
 
     @Column(name = "tipo_pago", length = 45)
     private String tipo_pago;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
+    private List<Cobro> cobro = new ArrayList<>();
 
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)

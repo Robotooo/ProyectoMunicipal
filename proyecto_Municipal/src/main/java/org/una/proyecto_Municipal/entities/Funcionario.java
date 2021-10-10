@@ -3,7 +3,9 @@ package org.una.proyecto_Municipal.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "funcionarios")
@@ -35,6 +37,12 @@ public class Funcionario implements Serializable {
     @ManyToOne
     @JoinColumn(name="roles_id")
     private Rol rol;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajero")
+    private List<Factura> factura = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+    private List<Transaccion> transaccion= new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

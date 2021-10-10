@@ -3,7 +3,9 @@ package org.una.proyecto_Municipal.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -20,6 +22,9 @@ public class Rol implements Serializable {
 
     @Column(name = "nombre", length = 45)
     private String nombre;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
+    private List<Funcionario> funcionario = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
