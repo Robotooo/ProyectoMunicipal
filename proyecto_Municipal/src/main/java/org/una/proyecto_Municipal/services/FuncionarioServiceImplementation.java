@@ -16,10 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.una.proyecto_Municipal.dto.AuthenticationRequest;
-import org.una.proyecto_Municipal.dto.AuthenticationResponse;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.dto.RolDTO;
+import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
@@ -115,6 +112,21 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         } else{
             throw new InvalidCredentialsException();
         }
+    }
+
+    @Override
+    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<LicenciaDTO> create(LicenciaDTO LicenciaDTO) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id) {
+        return Optional.empty();
     }
 
 

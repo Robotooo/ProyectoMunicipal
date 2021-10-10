@@ -37,8 +37,8 @@ public class Licencia implements Serializable {
     @Column
     private Double ganancias;
 
-    @Column
-    private BigInteger bien;
+//    @Column
+//    private Long bien;
 
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)

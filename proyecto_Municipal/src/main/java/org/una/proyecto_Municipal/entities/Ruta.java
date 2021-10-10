@@ -25,8 +25,8 @@ public class Ruta implements Serializable {
     @Column(name = "final_ruta", length = 45)
     private String final_ruta;
 
-    @Column
-    private BigInteger bien;
+//    @Column
+//    private Long bien;
 
     @Column
     private boolean estado;

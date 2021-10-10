@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LicenciaServiceImplementation  implements ILicenciaService{
+public class LicenciaServiceImplementation /*implements ILicenciaService*/{
 
     @Autowired
     private ILicenciaRepository licenciaRepository;
 
     //findBy...
-    @Override
+    //@Override
     public Optional<LicenciaDTO> findById(Long id) {
         Optional<Licencia> proveedor = licenciaRepository.findById(id);
         if (proveedor.isEmpty()) throw new NotFoundInformationException();
@@ -28,30 +28,35 @@ public class LicenciaServiceImplementation  implements ILicenciaService{
         return Optional.ofNullable(proveedorDTO);
     }
 
-    @Override
+    //@Override
     @Transactional(readOnly = true)
     public Optional<List<LicenciaDTO>> findAll() {
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findAll(), LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
     }
 
-    @Override
+    //@Override
     public Optional<List<LicenciaDTO>> findByNombre(String nombre) {
         List<Licencia> licenciaList = licenciaRepository.findByNombre(nombre);
         List<LicenciaDTO> licenciaDTOList =  MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
     }
 
-    @Override
-    public Optional<LicenciaDTO> findByTelefono(String telefono) {  //??
-        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
-        if (licencia.isEmpty()) throw new NotFoundInformationException();
-
-        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
-        return Optional.ofNullable(licenciaDTO);
+    //@Override
+    public Optional<LicenciaDTO> findByTelefono(String telefono) {
+        return Optional.empty();
     }
 
-    @Override
+//    @Override
+//    public Optional<LicenciaDTO> findByTelefono(String telefono) {  //??
+//        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
+//        if (licencia.isEmpty()) throw new NotFoundInformationException();
+//
+//        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
+//        return Optional.ofNullable(licenciaDTO);
+//    }
+
+    //@Override
     public Optional<LicenciaDTO> findByEmail(String email) {
         Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByEmail(email));
         if (licencia.isEmpty()) throw new NotFoundInformationException();
@@ -60,35 +65,35 @@ public class LicenciaServiceImplementation  implements ILicenciaService{
         return Optional.ofNullable(licenciaDTO);
     }
 
-    @Override
+    //@Override
     public Optional<List<LicenciaDTO>> findByDistrito(boolean distrito) {
         List<Licencia> licenciaList = licenciaRepository.findByEstado(distrito);
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
     }
 
-    @Override
+    //@Override
     public Optional<List<LicenciaDTO>> findByEstado(boolean estado) {
         List<Licencia> licenciaList = licenciaRepository.findByEstado(estado);
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
     }
 
-    @Override
-    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
-        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findByBienId(id), LicenciaDTO.class);
-        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(licenciaDTOList);
-    }
+//    //@Override
+//    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
+//        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findByBienId(id), LicenciaDTO.class);
+//        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
+//        return Optional.ofNullable(licenciaDTOList);
+//    }
 
     //detele...
-    @Override
+    //@Override
     @Transactional
     public void delete(Long id) {
         licenciaRepository.deleteById(id);
     }
 
-    @Override
+    //@Override
     @Transactional
     public void deleteAll() {
         licenciaRepository.deleteAll();

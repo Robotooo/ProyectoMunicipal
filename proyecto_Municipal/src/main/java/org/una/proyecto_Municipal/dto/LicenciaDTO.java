@@ -20,5 +20,5 @@ public class LicenciaDTO {
     private Date fecha_registro;
     private Date fecha_modificacion;
     private Double ganancias;
-    private Long bien_id;
+    //private Long bien_id;
 }

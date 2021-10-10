@@ -13,4 +13,9 @@ public interface IFacturaService {
 
     public Optional<List<FacturaDTO>> findByNombre(String nombre);
 
+    //public Optional<List<FacturaDTO>> findByCajeroId(Long id);
+
+    public Optional<FacturaDTO> create(FacturaDTO facturaDTO);
+
+
 }

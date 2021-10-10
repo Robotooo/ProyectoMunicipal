@@ -30,16 +30,30 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) {
-        return Optional.empty();
+        List<Colaborador> contribuyenteList = colaboradorRepository.findByEstado(estado);
+        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
+        return Optional.ofNullable(contribuyenteDTOList);
     }
 
     @Override
     public Optional<List<ColaboradorDTO>> findByNombre(String nombre) {
-        return Optional.empty();
+        List<Colaborador> contribuyenteList = colaboradorRepository.findByNombre(nombre);
+        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
+        return Optional.ofNullable(contribuyenteDTOList);
     }
 
     @Override
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ColaboradorDTO> create(ColaboradorDTO contribuyenteDTO) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ColaboradorDTO> update(ColaboradorDTO contribuyenteDTO, Long id) {
         return Optional.empty();
     }
 }

@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.entities.Parametro;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -25,6 +26,13 @@ public class ParametroServiceImplementation implements IParametroService{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Optional<List<ParametroDTO>> findAll() {
+        List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroRepository.findAll(), ParametroDTO.class);
+        return Optional.ofNullable(parametroDTOList);
+    }
+
+    @Override
     public Optional<List<ParametroDTO>> findByNombre(String nombre) {
         List<Parametro> parametroList = parametroRepository.findByNombre(nombre);
         List<ParametroDTO> parametroDTOList =  MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);
@@ -37,4 +45,27 @@ public class ParametroServiceImplementation implements IParametroService{
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
     }
+
+    private ParametroDTO getSavedParametroDTO(ParametroDTO parametroDTO) {
+        Parametro parametro = MapperUtils.EntityFromDto(parametroDTO, Parametro.class);
+        Parametro parametroCreated = parametroRepository.save(parametro);
+        return MapperUtils.DtoFromEntity(parametroCreated, ParametroDTO.class);
+    }
+
+    @Override
+    @Transactional
+    public Optional<ParametroDTO> create(ParametroDTO parametroDTO) {
+        return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
+    }
+
+    @Override
+    @Transactional
+    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) {
+        if (parametroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+
+        return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
+
+    }
+
+
 }

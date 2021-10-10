@@ -31,21 +31,21 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de cobros a partir de su contribuyente",
-            response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findByContribuyenteId(@PathVariable(value = "id") Long id) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByContribuyenteId(id);
-        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su contribuyente",
+//            response = CobroDTO.class, tags = "Cobros")
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> findByContribuyenteId(@PathVariable(value = "id") Long id) {
+//        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradorId(id);
+//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+//    }
 
-    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-            response = CobroDTO.class, tags = "Proveedores")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
-        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
+//            response = CobroDTO.class, tags = "Proveedores")
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
+//        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
+//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             response = CobroDTO.class, tags = "Cobros")

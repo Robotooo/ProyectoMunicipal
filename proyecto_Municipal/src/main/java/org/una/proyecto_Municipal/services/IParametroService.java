@@ -9,7 +9,13 @@ public interface IParametroService{
 
     public Optional<ParametroDTO> findById(Long id);
 
+    public Optional<List<ParametroDTO>> findAll();
+
     public Optional<List<ParametroDTO>> findByNombre(String nombre);
 
     public Optional<List<ParametroDTO>> findByEstado(boolean estado);
+
+    public Optional<ParametroDTO> create(ParametroDTO parametroDTO);
+
+    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id);
 }

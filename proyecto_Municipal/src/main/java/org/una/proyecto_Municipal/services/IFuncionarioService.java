@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.una.proyecto_Municipal.dto.AuthenticationRequest;
 import org.una.proyecto_Municipal.dto.AuthenticationResponse;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import java.util.List;
@@ -40,6 +41,12 @@ public interface IFuncionarioService {
     public UserDetails loadUserByUsername(String username);
 
      public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException;
+
+    Optional<List<LicenciaDTO>> findByBienId(Long id);
+
+    public Optional<LicenciaDTO> create(LicenciaDTO LicenciaDTO);
+
+    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id);
 
     //  TODO: Hacer método "loadFuncionario"
 }

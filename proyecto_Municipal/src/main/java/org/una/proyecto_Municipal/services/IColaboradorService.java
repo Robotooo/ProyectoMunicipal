@@ -14,4 +14,10 @@ public interface IColaboradorService {
     public Optional<List<ColaboradorDTO>> findByNombre(String nombre);
 
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono);
+
+    public Optional<ColaboradorDTO> create(ColaboradorDTO contribuyenteDTO);
+
+    public Optional<ColaboradorDTO> update(ColaboradorDTO contribuyenteDTO, Long id);
+
+
 }

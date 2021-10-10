@@ -61,8 +61,8 @@ public class Propiedad implements Serializable {
     @Column
     private float area;
 
-    @Column
-    private BigInteger bien;
+//    @Column
+//    private Long bien;
 
     private static final long serialVersionUID = 1L;
 

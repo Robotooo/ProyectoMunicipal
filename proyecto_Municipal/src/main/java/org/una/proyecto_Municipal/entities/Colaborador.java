@@ -32,7 +32,7 @@ public class Colaborador implements Serializable {
     @Column
     private boolean estado;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaborador")
     private List<Cobro> cobro = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)

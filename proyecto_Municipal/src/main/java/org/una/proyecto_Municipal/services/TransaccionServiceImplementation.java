@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class TransaccionServiceImplementation implements ITransaccionService{
 
-
+    @Autowired
     ITransaccionRepository transaccionRepository;
 
     @Override
@@ -46,6 +46,43 @@ public class TransaccionServiceImplementation implements ITransaccionService{
     public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {
         return Optional.empty();
     }
+
+    private TransaccionDTO getSavedTransaccionDTO(TransaccionDTO transaccionDTO) {
+        Transaccion transaccion = MapperUtils.EntityFromDto(transaccionDTO, Transaccion.class);
+        Transaccion transaccionCreated = transaccionRepository.save(transaccion);
+        return MapperUtils.DtoFromEntity(transaccionCreated, TransaccionDTO.class);
+    }
+
+//    @Override
+//    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long id) {
+//        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transaccionRepository.findByFuncionarioId(id), TransaccionDTO.class);
+//        if (transaccionDTOList.isEmpty()) throw new NotFoundInformationException();
+//        return Optional.ofNullable(transaccionDTOList);
+//    }
+
+//    @Override
+//    public Optional<List<TransaccionDTO>> findByUsuarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate) {
+//        List<Transaccion> transaccionList = transaccionRepository.findByUsuarioIdAndFechaCreacionBetween(usuarioId,startDate,endDate);
+//        List<TransaccionDTO> transaccionDTOList =  MapperUtils.DtoListFromEntityList(transaccionList, TransaccionDTO.class);
+//        return Optional.ofNullable(transaccionDTOList);    }
+
+//    @Override
+//    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate) {
+//        List<Transaccion> transaccionList = transaccionRepository.findByRolIdAndFechaCreacionBetween(rolId,startDate,endDate);
+//        List<TransaccionDTO> transaccionDTOList =  MapperUtils.DtoListFromEntityList(transaccionList, TransaccionDTO.class);
+//        return Optional.ofNullable(transaccionDTOList);    }
+
+//    @Override
+//    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate) {
+//        List<Transaccion> transaccionList = transaccionRepository.findByObjetoAndFechaCreacionBetween(objetoId,startDate,endDate);
+//        List<TransaccionDTO> transaccionDTOList =  MapperUtils.DtoListFromEntityList(transaccionList, TransaccionDTO.class);
+//        return Optional.ofNullable(transaccionDTOList);    }
+//
+//    @Override
+//    public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {
+//        List<Transaccion> transaccionList = transaccionRepository.findByFechaCreacionBetween(startDate,endDate);
+//        List<TransaccionDTO> transaccionDTOList =  MapperUtils.DtoListFromEntityList(transaccionList, TransaccionDTO.class);
+//        return Optional.ofNullable(transaccionDTOList);    }
 
     @Override
     public TransaccionDTO create(TransaccionDTO transaccionDTO) {

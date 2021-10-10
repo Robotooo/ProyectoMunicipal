@@ -28,8 +28,8 @@ public class Cobro implements Serializable {
     @JoinColumn(name="facturas_id")
     private Factura factura;
 
-    @Column
-    private BigInteger bien;
+//    @Column
+//    private Long bien;
 
     @Column
     private Double monto;
