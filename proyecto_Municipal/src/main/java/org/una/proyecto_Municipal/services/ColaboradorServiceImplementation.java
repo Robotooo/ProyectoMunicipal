@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.entities.Colaborador;
@@ -13,6 +14,7 @@ import org.una.proyecto_Municipal.utils.MapperUtils;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Autowired

@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
@@ -12,6 +13,7 @@ import org.una.proyecto_Municipal.utils.MapperUtils;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PropiedadServiceImplementation implements IPropiedadService{
 
     @Autowired

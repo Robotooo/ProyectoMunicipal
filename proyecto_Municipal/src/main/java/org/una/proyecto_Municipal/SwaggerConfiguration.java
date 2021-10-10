@@ -37,12 +37,12 @@ public class SwaggerConfiguration {
                 .select()
                 .apis(
                         RequestHandlerSelectors
-                                .basePackage("org.una.proyecto_municipal.controllers"))
+                                .basePackage("org.una.proyecto_Municipal.controllers"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiInfo())
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
-                        new Tag("Usuarios", "Entidad de Usuarios")
+                        new Tag("Funcionarios", "Entidad de Funcionarios")
                 );
 
     }
