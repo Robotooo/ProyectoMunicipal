@@ -14,9 +14,9 @@ import org.una.proyecto_Municipal.services.ICobroService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/cobros")
-@Api(tags = {"Cobros"})
+//@RestController
+//@RequestMapping("/cobros")
+//@Api(tags = {"Cobros"})
 public class CobroController {
 
     private ICobroService cobroService;
