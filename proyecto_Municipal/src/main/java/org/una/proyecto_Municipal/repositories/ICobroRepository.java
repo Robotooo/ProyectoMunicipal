@@ -9,4 +9,10 @@ import java.util.List;
 public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     public List<Cobro> findByEstado(boolean estado);
+
+    public List<Cobro>  findByBienId(Long id);
+
+    //public List<Cobro>  findByContribuyenteId(Long id);
+
+    //public List<Cobro>  findByFacturaId(Long id);
 }

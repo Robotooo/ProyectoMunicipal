@@ -9,4 +9,6 @@ public interface IRutaRepository extends JpaRepository<Ruta, Long> {
 
     public List<Ruta> findByEstado(boolean estado);
 
+    public List<Ruta>  findByBienId(Long id);
+
 }

@@ -18,4 +18,6 @@ public interface ILicenciaRepository extends JpaRepository<Licencia, Long> {
     public List<Licencia> findByDistrito(String distrito);
 
     public List<Licencia> findByEstado(boolean estado);
+
+    public List<Licencia>  findByBienId(Long id);
 }
