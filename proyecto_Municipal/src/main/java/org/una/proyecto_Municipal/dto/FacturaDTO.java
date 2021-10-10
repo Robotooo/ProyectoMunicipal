@@ -16,4 +16,5 @@ public class FacturaDTO {
     private String nombre;
     private Double monto_cancelar;
     private String tipo_pago;
+    private FuncionarioDTO cajero_id;
 }

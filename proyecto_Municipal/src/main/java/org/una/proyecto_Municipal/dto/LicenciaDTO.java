@@ -13,9 +13,12 @@ import java.util.Date;
 public class LicenciaDTO {
     private Long id;
     private String nombre;
-    private Integer telefono;
+    private String telefono;
+    private String email;
+    private String distrito;
     private boolean estado;
     private Date fecha_registro;
     private Date fecha_modificacion;
     private Double ganancias;
+    private Long bien_id;
 }

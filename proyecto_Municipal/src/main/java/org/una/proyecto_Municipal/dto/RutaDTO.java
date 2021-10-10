@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class RutaDTO {
+
     private Long id;
     private String inicioRuta;
     private String finalRuta;
