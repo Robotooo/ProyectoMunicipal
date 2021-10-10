@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.components;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -34,30 +35,31 @@ public class DataLoader implements ApplicationRunner {
     private IRolService rolService;
 
 
+    @SneakyThrows
     @Override
     public void run(ApplicationArguments args) {
         if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
 
-            Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre("Colaborador").build());
-            Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre("Auditor").build());
-            Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre("Usuario").build());
-            Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre("Administrador").build());
+            Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.COLABORADOR.name()).build());
+            Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.AUDITOR.name()).build());
+            Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre(RolesTypes.GESTOR.name()).build());
+            Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ADMINISTRADOR.name()).build());
 
-/*
-            FuncionarioDTO cajeroUsuario = FuncionarioDTO.builder()
-                    .cedula("0123453782")
-                    .usuario("Usuario Prueba Cajero")
-                    .passwordEncriptado("Una2021")
-                    .rol(usuarioRol.orElseThrow()).build();
-            funcionarioService.create(cajeroUsuario);*/
-            /*
+
+//            FuncionarioDTO cajeroUsuario = FuncionarioDTO.builder()
+//                    .cedula("0123453782")
+//                    .usuario("Usuario Prueba Cajero")
+//                    .passwordEncriptado("Una2021")
+//                    .rol(usuarioRol.orElseThrow()).build();
+//            funcionarioService.create(cajeroUsuario);
+
             FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
                     .cedula(cedula)
                     .usuario("Usuario Administrador")
                     .passwordEncriptado(password)
                     .rol(administradorRol.orElseThrow()).build();
             funcionarioService.create(administradorUsuario);
-*/
+
             System.out.println("Se agrega el usuario inicial a la aplicación");
         }else {
             System.out.println("Se encontro el usuario administrador, continuando...");

@@ -1,5 +1,5 @@
 package org.una.proyecto_Municipal.components;
-/*
+
 public enum RolesTypes {
     COLABORADOR("COLABORADOR"),
     GESTOR("GESTOR"),
@@ -17,4 +17,3 @@ public enum RolesTypes {
     }
 
 }
-*/
