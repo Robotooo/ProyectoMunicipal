@@ -22,8 +22,6 @@ public class Funcionario implements Serializable {
     @Column(name = "usuario", length = 30)
     private String usuario;
 
-    @Column(length = 30, name = "contrasenia")
-    private String contrasenia;
 
     @Column(length = 45, unique = true)
     private String cedula;

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Table(name = "colaborador")
+@Table(name = "colaboradores")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,24 +18,24 @@ public class Colaborador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", length = 45)
+    @Column(name = "nombre", length = 45, nullable = false)
     private String nombre;
 
-    @Column(length = 45, unique = true)
+    @Column(length = 45, unique = true, nullable = false)
     private String cedula;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private Integer telefono;
 
-    @Column
+    @Column(nullable = false)
     private boolean estado;
 
-    @Column(name = "fecha_creacion", updatable = false)
+    @Column(name = "fecha_creacion", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date fecha_creacion;
 
-    @Column(name = "fecha_modificacion")
+    @Column(name = "fecha_modificacion", nullable = false, updatable = true)
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
     private Date fecha_modificacion;

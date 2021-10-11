@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
@@ -19,31 +16,40 @@ import java.util.Optional;
 @Api(tags = {"Colaboradores"})
 public class ColaboradorController {
 
-    private IColaboradorService contribuyenteService;
+    private IColaboradorService colaboradorService;
 
     @ApiOperation(value = "Obtiene un contribuyente a partir de su id",
-            response = ColaboradorDTO.class, tags = "Contribuyentes")
+            response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<ColaboradorDTO> contribuyenteFound = contribuyenteService.findById(id);
-        return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
+        Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su estado",
-            response = ColaboradorDTO.class, tags = "Contribuyentes")
+            response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
-        Optional<List<ColaboradorDTO>> contribuyenteFound = contribuyenteService.findByEstado(estado);
-        return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su nomnbre",
-            response = ColaboradorDTO.class, tags = "Contribuyentes")
+    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su nombre",
+            response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
-        Optional<List<ColaboradorDTO>> contribuyenteFound = contribuyenteService.findByNombre(departamentoName);
-        return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByNombre(departamentoName);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
 
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaborador")
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) {
+        Optional<ColaboradorDTO> colaboradorCreated = colaboradorService.create(colaboradorDTO);
+        return new ResponseEntity<>(colaboradorCreated, HttpStatus.CREATED);
     }
 
     //TODO: create, update, delete, findAll, findByEstado, findByCedula, findByValorImpositivo
