@@ -34,12 +34,12 @@ public class FacturaServiceImplementation implements  IFacturaService{
         return Optional.empty();
     }
 
-//    @Override
-//    public Optional<List<FacturaDTO>> findByCajeroId(Long id) {
-//        List<FacturaDTO> facturaDTOList = MapperUtils.DtoListFromEntityList(facturaRepository.findByCajeroId(id), FacturaDTO.class);
-//        if (facturaDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(facturaDTOList);
-//    }
+    @Override
+    public Optional<List<FacturaDTO>> findByCajeroId(Long id) {
+        List<FacturaDTO> facturaDTOList = MapperUtils.DtoListFromEntityList(facturaRepository.findByCajeroId(id), FacturaDTO.class);
+        if (facturaDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(facturaDTOList);
+    }
 
 
     private FacturaDTO getSavedFacturaDTO(FacturaDTO facturaDTO) {

@@ -30,7 +30,7 @@ public interface IFuncionarioService {
 
     public Optional<FuncionarioDTO> findByCedula(String cedula);
 
-    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
+    //public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
 
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException;
 
@@ -42,11 +42,11 @@ public interface IFuncionarioService {
 
      public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException;
 
-    Optional<List<LicenciaDTO>> findByBienId(Long id);
+    Optional<List<FuncionarioDTO>> findByBienId(Long id);
 
-    public Optional<LicenciaDTO> create(LicenciaDTO LicenciaDTO);
+    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
 
-    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id);
+    //public Optional<FuncionarioDTO> update(LicenciaDTO funcionarioDTO, Long id);
 
     //  TODO: Hacer método "loadFuncionario"
 }

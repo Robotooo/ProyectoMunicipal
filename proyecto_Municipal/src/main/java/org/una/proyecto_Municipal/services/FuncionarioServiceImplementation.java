@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.entities.Funcionario;
+import org.una.proyecto_Municipal.entities.Rol;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
@@ -115,19 +116,15 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
+    public Optional<List<FuncionarioDTO>> findByBienId(Long id) {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<LicenciaDTO> create(LicenciaDTO LicenciaDTO) {
-        return Optional.empty();
-    }
 
-    @Override
-    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id) {
-        return Optional.empty();
-    }
+//    @Override
+//    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id) {
+//        return Optional.empty();
+//    }
 
 
     /*
@@ -199,6 +196,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         funcionarioDTO.setPasswordEncriptado(encriptarPassword(funcionarioDTO.getPasswordEncriptado()));
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
+
 
     @Override
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException {

@@ -13,9 +13,9 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> findByBienId(Long id);
 
-    //public Optional<List<CobroDTO>> findByColaboradorId(Long id);
+    public Optional<List<CobroDTO>> findByColaboradorId(Long id);
 
-    //public Optional<List<CobroDTO>> findByFacturaId(Long id);
+    public Optional<List<CobroDTO>> findByFacturaId(Long id);
 
     public Optional<CobroDTO> create(CobroDTO cobroDTO);
 

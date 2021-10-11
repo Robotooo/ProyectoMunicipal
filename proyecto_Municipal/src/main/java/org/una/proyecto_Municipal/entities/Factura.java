@@ -32,7 +32,7 @@ public class Factura implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="cajero_id")
-    private Funcionario funcionario;
+    private Funcionario cajeroId;
 
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)

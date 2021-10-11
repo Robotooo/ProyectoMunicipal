@@ -30,26 +30,26 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTO);
     }
 
-//    @Override
-//    public Optional<List<CobroDTO>> findByBienId(Long id) {
-//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
-//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(cobroDTOList);
-//    }
+    @Override
+    public Optional<List<CobroDTO>> findByBienId(Long id) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
 
-//    @Override
-//    public Optional<List<CobroDTO>> findByColaboradorId(Long id) {
-//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByColaboradorId(id), CobroDTO.class);
-//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(cobroDTOList);
-//    }
-//
-//    @Override
-//    public Optional<List<CobroDTO>> findByFacturaId(Long id) {
-//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByFacturaId(id), CobroDTO.class);
-//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(cobroDTOList);
-//    }
+    @Override
+    public Optional<List<CobroDTO>> findByColaboradorId(Long id) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByColaboradores(id), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
+    public Optional<List<CobroDTO>> findByFacturaId(Long id) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByFacturaId(id), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -59,10 +59,6 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTOList);
     }
 
-    @Override
-    public Optional<List<CobroDTO>> findByBienId(Long id) {
-        return Optional.empty();
-    }
 
     private CobroDTO getSavedCobroDTO(CobroDTO cobroDTO) {
         Cobro cobro = MapperUtils.EntityFromDto(cobroDTO, Cobro.class);
