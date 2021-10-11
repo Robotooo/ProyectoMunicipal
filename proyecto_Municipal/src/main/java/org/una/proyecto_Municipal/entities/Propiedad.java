@@ -61,8 +61,9 @@ public class Propiedad implements Serializable {
     @Column
     private float area;
 
-//    @Column
-//    private Long bien;
+    @ManyToOne
+    @JoinColumn(name="bienes_id")
+    private Bien bien;
 
     private static final long serialVersionUID = 1L;
 

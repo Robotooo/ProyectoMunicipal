@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cobros")
@@ -21,15 +23,8 @@ public class Cobro implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="colaborador_id")
-    private Colaborador colaborador;
-
-    @ManyToOne
     @JoinColumn(name="facturas_id")
     private Factura factura;
-
-//    @Column
-//    private Long bien;
 
     @Column
     private Double monto;

@@ -38,11 +38,11 @@ public class Funcionario implements Serializable {
     @JoinColumn(name="roles_id")
     private Rol rol;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajero")
-    private List<Factura> factura = new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "cajero")
+    //private List<Factura> factura = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private List<Transaccion> transaccion= new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+    //private List<Transaccion> transaccion= new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

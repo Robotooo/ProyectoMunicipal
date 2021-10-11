@@ -3,9 +3,7 @@ package org.una.proyecto_Municipal.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "colaborador")
@@ -31,9 +29,6 @@ public class Colaborador implements Serializable {
 
     @Column
     private boolean estado;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaborador")
-    private List<Cobro> cobro = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
