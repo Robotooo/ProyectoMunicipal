@@ -88,13 +88,15 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         if (funcionarioBuscado.isPresent()) {
             Funcionario usuario = funcionarioBuscado.get();
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ADMIN"));
+            roles.add(new SimpleGrantedAuthority(usuario.getRol().getNombre()));
             UserDetails userDetails = new User(usuario.getCedula(), usuario.getPasswordEncriptado(), roles);
             return userDetails;
         } else {
             throw new UsernameNotFoundException("Username not found, check your request");
         }
     }
+
+
 
     @Override
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException {

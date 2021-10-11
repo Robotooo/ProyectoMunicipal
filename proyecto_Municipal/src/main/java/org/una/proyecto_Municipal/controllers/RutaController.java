@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
+import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IRutaService;
 
 import java.util.List;
@@ -57,5 +59,20 @@ public class RutaController {
         }
     }
 
-    //TODO: create, update, delete, findAll
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RutaDTO usuarioModified) throws PasswordIsBlankException {
+        Optional<RutaDTO> usuarioUpdated = rutaService.update(usuarioModified, id);
+        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        rutaService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    //TODO:  delete, findAll
 }

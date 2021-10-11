@@ -1,8 +1,7 @@
 package org.una.proyecto_Municipal.services;
 
-import org.una.proyecto_Municipal.dto.ParametroDTO;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
-import org.una.proyecto_Municipal.entities.Propiedad;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +19,6 @@ public interface IPropiedadService {
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO);
 
     public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, Long id);
+
+    public void delete(Long id);
 }

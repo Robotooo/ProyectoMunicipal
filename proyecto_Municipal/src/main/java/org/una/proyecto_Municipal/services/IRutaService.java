@@ -18,4 +18,6 @@ public interface IRutaService {
     public Optional<RutaDTO> create(RutaDTO rutaDTO);
 
     public Optional<RutaDTO> update(RutaDTO rutaDTO, Long id);
+
+    public void delete(Long id);
 }

@@ -107,6 +107,16 @@ public class FuncionarioController {
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
-    //TODO: update, delete
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
+        Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id);
+        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        funcionarioService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
 }

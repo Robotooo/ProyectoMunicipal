@@ -87,4 +87,10 @@ public class RutaServiceImplementation implements IRutaService{
         return Optional.ofNullable(getSavedRutaDTO(rutaDTO));
 
     }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        rutaRepository.deleteById(id);
+    }
 }

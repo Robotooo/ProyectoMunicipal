@@ -19,6 +19,7 @@ public class ParametroServiceImplementation implements IParametroService{
     private IParametroRepository parametroRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ParametroDTO> findById(Long id) {
         Optional<Parametro> parametro = parametroRepository.findById(id);
         if (parametro.isEmpty()) throw new NotFoundInformationException();
@@ -35,6 +36,7 @@ public class ParametroServiceImplementation implements IParametroService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<ParametroDTO>> findByNombre(String nombre) {
         List<Parametro> parametroList = parametroRepository.findByNombre(nombre);
         List<ParametroDTO> parametroDTOList =  MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);
@@ -42,6 +44,7 @@ public class ParametroServiceImplementation implements IParametroService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<ParametroDTO>> findByEstado(boolean estado) {
         List<Parametro> parametroList = parametroRepository.findByEstado(estado);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);

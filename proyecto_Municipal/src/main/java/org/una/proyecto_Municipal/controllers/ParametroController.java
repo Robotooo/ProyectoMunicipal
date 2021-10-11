@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
+import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IParametroService;
 
 import java.util.List;
@@ -47,6 +49,15 @@ public class ParametroController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) throws PasswordIsBlankException {
+        Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id);
+        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+    }
+
 
     //TODO: create, update, delete, findAll
 

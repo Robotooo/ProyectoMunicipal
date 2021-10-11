@@ -3,7 +3,7 @@ package org.una.proyecto_Municipal.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.una.proyecto_Municipal.dto.ParametroDTO;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.entities.Propiedad;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -47,13 +47,29 @@ public class PropiedadServiceImplementation implements IPropiedadService{
         return Optional.ofNullable(propiedadDTOList);
     }
 
+    private PropiedadDTO getSavedPropiedadDTO(PropiedadDTO funcionarioDTO) {
+        Propiedad funcionario = MapperUtils.EntityFromDto(funcionarioDTO, Propiedad.class);
+        Propiedad funcionarioCreated = propiedadRepository.save(funcionario);
+        return MapperUtils.DtoFromEntity(funcionarioCreated, PropiedadDTO.class);
+    }
+
     @Override
+    @Transactional
+    public void delete(Long id) {
+        propiedadRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO) {
-        return Optional.empty();
+        return Optional.ofNullable(getSavedPropiedadDTO(propiedadDTO));
     }
 
     @Override
     public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, Long id) {
-        return Optional.empty();
+        if (propiedadRepository.findById(id).isEmpty()) return Optional.empty();
+
+        return Optional.ofNullable(getSavedPropiedadDTO(propiedadDTO));
     }
 }

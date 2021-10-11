@@ -33,6 +33,7 @@ public interface IFuncionarioService {
 
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException;
 
+
     public void delete(Long id);
 
     public void deleteAll();

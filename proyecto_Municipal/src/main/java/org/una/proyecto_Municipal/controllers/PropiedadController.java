@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
+import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IPropiedadService;
 
 import java.util.Optional;
@@ -49,7 +51,24 @@ public class PropiedadController {
         return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
 
     }
-*/
+
+    */
+
+
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PropiedadDTO usuarioModified) throws PasswordIsBlankException {
+        Optional<PropiedadDTO> usuarioUpdated = propiedadService.update(usuarioModified, id);
+        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        propiedadService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
     //TODO: create, update, delete, findAll, findByEstado, findByZona
 
 }

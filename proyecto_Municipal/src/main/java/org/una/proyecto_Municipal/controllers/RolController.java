@@ -51,6 +51,7 @@ public class RolController {
         }
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolDTO rolModified) {
@@ -58,6 +59,7 @@ public class RolController {
         return new ResponseEntity<>(rolUpdated, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         rolService.delete(id);
