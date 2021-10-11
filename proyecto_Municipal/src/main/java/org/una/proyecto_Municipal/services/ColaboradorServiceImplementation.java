@@ -3,15 +3,10 @@ package org.una.proyecto_Municipal.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
-import org.una.proyecto_Municipal.dto.RolDTO;
-import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Colaborador;
-import org.una.proyecto_Municipal.entities.Rol;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.IColaboradorRepository;
-import org.una.proyecto_Municipal.repositories.IRolRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.List;
@@ -57,18 +52,16 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula) {
-        if (cedula.trim().isEmpty()) throw new NotFoundInformationException();
         List<Colaborador> colaboradorList = colaboradorRepository.findByCedulaContaining(cedula);
-        if (colaboradorList.isEmpty()) throw new NotFoundInformationException();
-
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono) {
-        //TODO: falta
-        return Optional.empty();
+        List<Colaborador> contribuyenteList = colaboradorRepository.findByTelefono(telefono);
+        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
+        return Optional.ofNullable(contribuyenteDTOList);
     }
 
     //get

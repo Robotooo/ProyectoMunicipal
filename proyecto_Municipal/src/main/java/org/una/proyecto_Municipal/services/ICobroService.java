@@ -1,6 +1,5 @@
 package org.una.proyecto_Municipal.services;
 
-import org.una.proyecto_Municipal.dto.BienDTO;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 
 import java.util.List;

@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.BienDTO;
-import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
@@ -54,6 +52,23 @@ public class ColaboradorController {
 
     }
 
+    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su telefono",
+            response = ColaboradorDTO.class, tags = "Colaboradores")
+    @GetMapping("/{telefono}")
+    public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByTelefono(telefono);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
+
+    }
+
+    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su cedula",
+            response = ColaboradorDTO.class, tags = "Colaboradores")
+    @GetMapping("/{cedula}")
+    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaborador")
     @PostMapping("/")
@@ -82,7 +97,6 @@ public class ColaboradorController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-
-    //TODO: findByCedula, findByValorImpositivo
+    //TODO: findByValorImpositivo
 
 }

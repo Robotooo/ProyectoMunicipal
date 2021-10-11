@@ -1,8 +1,6 @@
 package org.una.proyecto_Municipal.services;
 
-import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +26,5 @@ public interface IColaboradorService {
     public void delete(Long id);
 
     public void deleteAll();
-
 
 }

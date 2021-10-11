@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.BienDTO;
-import org.una.proyecto_Municipal.dto.FacturaDTO;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.entities.Bien;
-import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
-import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.repositories.IBienRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 

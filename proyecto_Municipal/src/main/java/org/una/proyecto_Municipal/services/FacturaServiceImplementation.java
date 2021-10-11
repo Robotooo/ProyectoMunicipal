@@ -15,23 +15,24 @@ import java.util.Optional;
 @Service
 public class FacturaServiceImplementation implements  IFacturaService{
 
-
     @Autowired
     private IFacturaRepository facturaRepository;
 
     @Override
     public Optional<FacturaDTO> findById(Long id) {
-        Optional<Factura> usuario = facturaRepository.findById(id);
-        if (usuario.isEmpty()) throw new NotFoundInformationException();
+        Optional<Factura> factura = facturaRepository.findById(id);
+        if (factura.isEmpty()) throw new NotFoundInformationException();
 
-        FacturaDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario.get(), FacturaDTO.class);
-        return Optional.ofNullable(usuarioDTO);
+        FacturaDTO facturaDTO = MapperUtils.DtoFromEntity(factura.get(), FacturaDTO.class);
+        return Optional.ofNullable(facturaDTO);
 
     }
 
     @Override
     public Optional<List<FacturaDTO>> findByNombre(String nombre) {
-        return Optional.empty();
+        List<Factura> facturaList = facturaRepository.findByNombre(nombre);
+        List<FacturaDTO> facturaDTOList = MapperUtils.DtoListFromEntityList(facturaList, FacturaDTO.class);
+        return Optional.ofNullable(facturaDTOList);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
         return Optional.ofNullable(facturaDTOList);
     }
 
-
+    //get
     private FacturaDTO getSavedFacturaDTO(FacturaDTO facturaDTO) {
         Factura factura = MapperUtils.EntityFromDto(facturaDTO, Factura.class);
         Factura facturaCreated = facturaRepository.save(factura);
@@ -62,6 +63,19 @@ public class FacturaServiceImplementation implements  IFacturaService{
 
         return Optional.ofNullable(getSavedFacturaDTO(facturaDTO));
 
+    }
+
+    //detele...
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        facturaRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        facturaRepository.deleteAll();
     }
 
 }

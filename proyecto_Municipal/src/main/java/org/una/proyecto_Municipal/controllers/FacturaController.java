@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.FacturaDTO;
 import org.una.proyecto_Municipal.services.IFacturaService;
@@ -30,15 +27,42 @@ public class FacturaController {
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una factura a partir del id del cajero",
-//            response = CobroDTO.class, tags = "Facturas")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "id") Long id) {
-//        Optional<List<FacturaDTO>> facturaFound = facturaService.findByCajeroId(id);
-//        return new ResponseEntity<>(facturaFound, HttpStatus.OK);
-//    }
+    /*@ApiOperation(value = "Obtiene una factura a partir del id del cajero",
+            response = CobroDTO.class, tags = "Facturas")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "id") Long id) {
+        Optional<List<FacturaDTO>> facturaFound = facturaService.findByCajeroId(id);
+        return new ResponseEntity<>(facturaFound, HttpStatus.OK);
+    }*/
 
-    //TODO: create, update, delete, findAll, findByContribuyenteFechaBetween,
-    // findByValorImpositvoFechaBetween
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Se crea una Factura", response = FacturaDTO.class, tags = "Factura")
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody FacturaDTO facturaDTO) {
+        Optional<FacturaDTO> facturaCreated = facturaService.create(facturaDTO);
+        return new ResponseEntity<>(facturaCreated, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FacturaDTO facturaModified) {
+        Optional<FacturaDTO> facturaUpdated = facturaService.update(facturaModified, id);
+        return new ResponseEntity<>(facturaUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        facturaService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        facturaService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    //TODO: findByContribuyenteFechaBetween, findByValorImpositvoFechaBetween
 
 }

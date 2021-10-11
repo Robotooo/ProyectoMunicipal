@@ -1,17 +1,11 @@
 package org.una.proyecto_Municipal.controllers;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.BienDTO;
 import org.una.proyecto_Municipal.dto.CobroDTO;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.services.ICobroService;
-import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.List;
 import java.util.Optional;

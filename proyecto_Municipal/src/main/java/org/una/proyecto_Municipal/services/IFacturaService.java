@@ -1,8 +1,6 @@
 package org.una.proyecto_Municipal.services;
 
-import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.FacturaDTO;
-import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,5 +15,10 @@ public interface IFacturaService {
 
     public Optional<FacturaDTO> create(FacturaDTO facturaDTO);
 
+    public Optional<FacturaDTO> update(FacturaDTO facturaDTO, Long id);
+
+    public void delete(Long id);
+
+    public void deleteAll();
 
 }
