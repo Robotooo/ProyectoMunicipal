@@ -92,7 +92,6 @@ public class FuncionarioController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody FuncionarioDTO funcionarioDTO) {
-
         try {
             Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO);
             return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);

@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Optional;
 //@Api(tags = {"Cobros"})
 public class CobroController {
 
+    @Autowired
     private ICobroService cobroService;
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
@@ -66,6 +68,7 @@ public class CobroController {
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody CobroDTO cobroDto) {

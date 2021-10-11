@@ -2,12 +2,10 @@ package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.services.IParametroService;
 
@@ -19,6 +17,7 @@ import java.util.Optional;
 @Api(tags = {"Parametros"})
 public class ParametroController {
 
+    @Autowired
     private IParametroService parametroService;
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id",
@@ -35,6 +34,18 @@ public class ParametroController {
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody ParametroDTO parametroDto) {
+        try {
+            Optional<ParametroDTO> parametroCreated = parametroService.create(parametroDto);
+            return new ResponseEntity<>(parametroCreated, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     //TODO: create, update, delete, findAll

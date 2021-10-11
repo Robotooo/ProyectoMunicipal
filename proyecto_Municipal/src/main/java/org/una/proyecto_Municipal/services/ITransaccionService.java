@@ -18,5 +18,5 @@ public interface ITransaccionService {
 
     public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
-    public TransaccionDTO create(TransaccionDTO transaccionDTO);
+    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO);
 }

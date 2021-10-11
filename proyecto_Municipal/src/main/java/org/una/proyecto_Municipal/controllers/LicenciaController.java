@@ -14,6 +14,7 @@ import java.util.Optional;
 
 public class LicenciaController {
 
+    //@Autowired
 //    private ILicenciaService licenciaService;
 //
 //    @ApiOperation(value = "Obtiene una liciencia a partir de su id",

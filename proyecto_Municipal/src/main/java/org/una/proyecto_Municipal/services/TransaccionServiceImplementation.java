@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.entities.Transaccion;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -53,6 +54,12 @@ public class TransaccionServiceImplementation implements ITransaccionService{
         return MapperUtils.DtoFromEntity(transaccionCreated, TransaccionDTO.class);
     }
 
+    @Override
+    @Transactional
+    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO) {
+        return Optional.ofNullable(getSavedTransaccionDTO(transaccionDTO));
+    }
+
 //    @Override
 //    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long id) {
 //        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transaccionRepository.findByFuncionarioId(id), TransaccionDTO.class);
@@ -84,8 +91,4 @@ public class TransaccionServiceImplementation implements ITransaccionService{
 //        List<TransaccionDTO> transaccionDTOList =  MapperUtils.DtoListFromEntityList(transaccionList, TransaccionDTO.class);
 //        return Optional.ofNullable(transaccionDTOList);    }
 
-    @Override
-    public TransaccionDTO create(TransaccionDTO transaccionDTO) {
-        return null;
-    }
 }

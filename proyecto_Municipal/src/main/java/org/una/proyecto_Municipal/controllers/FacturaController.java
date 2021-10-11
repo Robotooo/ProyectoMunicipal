@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Api(tags = {"Facturas"})
 public class FacturaController {
 
+    @Autowired
     private IFacturaService facturaService;
 
     @ApiOperation(value = "Obtiene una factura a partir de su id",
@@ -63,6 +65,6 @@ public class FacturaController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: findByContribuyenteFechaBetween, findByValorImpositvoFechaBetween
+    //TODO: findByContribuyenteFechaBetween, findByValorImpositvoFechaBetween, revisar findBycajeroId
 
 }

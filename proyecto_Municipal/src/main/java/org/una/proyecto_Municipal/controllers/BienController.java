@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 public class BienController {
 
+    @Autowired
     private IBienService bienService;
 
     @ApiOperation(value = "Obtiene un bien a partir de su id",
@@ -31,6 +33,7 @@ public class BienController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody BienDTO bienDto) {

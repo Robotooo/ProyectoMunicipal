@@ -2,13 +2,12 @@ package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.RutaDTO;
+import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.services.IRutaService;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.Optional;
 @Api(tags = {"Rutas"})
 public class RutaController {
 
+    @Autowired
     private IRutaService rutaService;
 
     @ApiOperation(value = "Obtiene una ruta a partir de su id",
@@ -44,6 +44,18 @@ public class RutaController {
 //        Optional<List<RutaDTO>> rutaFound = rutaService.findByBien(estado);
 //        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
 //    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody RutaDTO rutaDto) {
+        try {
+            Optional<RutaDTO> rutaCreated = rutaService.create(rutaDto);
+            return new ResponseEntity<>(rutaCreated, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     //TODO: create, update, delete, findAll
 }

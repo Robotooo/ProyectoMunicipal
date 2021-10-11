@@ -2,13 +2,12 @@ package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.ITransaccionService;
@@ -20,6 +19,7 @@ import java.util.Optional;
 @Api(tags = {"Transacciones"})
 public class TransaccionesController {
 
+    @Autowired
     private ITransaccionService transaccionService;
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
@@ -30,7 +30,19 @@ public class TransaccionesController {
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
     }
 
-    //TODO: create, update, delete, findAll, findByUsuarioIdAndFechaCreacionBetween,
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody TransaccionDTO transaccionDto) {
+        try {
+            Optional<TransaccionDTO> transaccionCreated = transaccionService.create(transaccionDto);
+            return new ResponseEntity<>(transaccionCreated, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //TODO: update, delete, findAll, findByUsuarioIdAndFechaCreacionBetween,
     // findByRolIdAndFechaCreacionBetween, findByObjetoAndFechaCreacionBetween,
     // findByFechaCreacionBetween
 }
