@@ -1,4 +1,4 @@
-package org.una.proyecto_Municipal.tramites;
+package org.una.proyecto_Municipal.jwt;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtProvider tokenProvider;
+    private org.una.proyecto_Municipal.tramites.JwtProvider tokenProvider;
 
     @Autowired
     private FuncionarioServiceImplementation funcionarioService;

@@ -7,15 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="inventario" />
         <module name="proyecto_Municipal" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="inventario" target="11" />
       <module name="proyecto_Municipal" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="inventario" options="-parameters" />
       <module name="proyecto_Municipal" options="-parameters" />
     </option>
   </component>
