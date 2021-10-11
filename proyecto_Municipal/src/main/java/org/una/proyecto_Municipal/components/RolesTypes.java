@@ -1,11 +1,11 @@
 package org.una.proyecto_Municipal.components;
 
 public enum RolesTypes {
-    COLABORADOR("COLABORADOR"),
-    GESTOR("GESTOR"),
-    AUDITOR("AUDITOR"),
-    GERENTE("GERENTE"),
-    ADMINISTRADOR("ADMINISTRADOR");
+    ROLE_COLABORADOR("COLABORADOR"),
+    ROLE_GESTOR("GESTOR"),
+    ROLE_AUDITOR("AUDITOR"),
+    ROLE_GERENTE("GERENTE"),
+    ROLE_ADMINISTRADOR("ADMINISTRADOR");
     private final String codigo;
 
     RolesTypes(String codigo) {

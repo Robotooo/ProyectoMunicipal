@@ -40,10 +40,10 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
 
-            Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.COLABORADOR.name()).build());
-            Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.AUDITOR.name()).build());
-            Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre(RolesTypes.GESTOR.name()).build());
-            Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ADMINISTRADOR.name()).build());
+            Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_COLABORADOR.name()).build());
+            Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_AUDITOR.name()).build());
+            Optional<RolDTO> usuarioRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GESTOR.name()).build());
+            Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
 
 
 //            FuncionarioDTO cajeroUsuario = FuncionarioDTO.builder()
