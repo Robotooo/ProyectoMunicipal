@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.BienDTO;
+import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
@@ -24,6 +26,15 @@ public class ColaboradorController {
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de todos los contribuyentes",
+            response = ColaboradorDTO.class, responseContainer = "List", tags = "Contribuyentes")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<ColaboradorDTO>> result = colaboradorService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su estado",
@@ -52,6 +63,26 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorCreated, HttpStatus.CREATED);
     }
 
-    //TODO: create, update, delete, findAll, findByEstado, findByCedula, findByValorImpositivo
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) {
+        Optional<ColaboradorDTO> colaboradorUpdated = colaboradorService.update(colaboradorModified, id);
+        return new ResponseEntity<>(colaboradorUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        colaboradorService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        colaboradorService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+
+    //TODO: findByCedula, findByValorImpositivo
 
 }

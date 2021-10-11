@@ -190,6 +190,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         return MapperUtils.DtoFromEntity(funcionarioCreated, FuncionarioDTO.class);
     }
 
+    //create & update
     @Override
     @Transactional
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException {

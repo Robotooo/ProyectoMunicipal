@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.CobroDTO;
-import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.entities.Cobro;
-import org.una.proyecto_Municipal.entities.Parametro;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICobroRepository;
-import org.una.proyecto_Municipal.repositories.IParametroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.List;
@@ -21,6 +18,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Autowired
     private ICobroRepository cobroRepository;
 
+    //findBy...
     @Override
     public Optional<CobroDTO> findById(Long id) {
         Optional<Cobro> cobro = cobroRepository.findById(id);
@@ -28,6 +26,13 @@ public class CobroServiceImplementation implements ICobroService{
 
         CobroDTO cobroDTO = MapperUtils.DtoFromEntity(cobro.get(), CobroDTO.class);
         return Optional.ofNullable(cobroDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CobroDTO>> findAll() {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findAll(), CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);
     }
 
     @Override
@@ -59,7 +64,7 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTOList);
     }
 
-
+    //get
     private CobroDTO getSavedCobroDTO(CobroDTO cobroDTO) {
         Cobro cobro = MapperUtils.EntityFromDto(cobroDTO, Cobro.class);
         Cobro cobroCreated = cobroRepository.save(cobro);
@@ -80,6 +85,19 @@ public class CobroServiceImplementation implements ICobroService{
 
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
 
+    }
+
+    //detele...
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        cobroRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        cobroRepository.deleteAll();
     }
 
 }

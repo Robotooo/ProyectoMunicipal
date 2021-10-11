@@ -2,8 +2,11 @@ package org.una.proyecto_Municipal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
+import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Colaborador;
 import org.una.proyecto_Municipal.entities.Rol;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -31,6 +34,13 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Optional<List<ColaboradorDTO>> findAll() {
+        List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorRepository.findAll(), ColaboradorDTO.class);
+        return Optional.ofNullable(colaboradorDTOList);
+    }
+
+    @Override
     public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) {
         List<Colaborador> contribuyenteList = colaboradorRepository.findByEstado(estado);
         List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
@@ -45,17 +55,56 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula) {
+        if (cedula.trim().isEmpty()) throw new NotFoundInformationException();
+        List<Colaborador> colaboradorList = colaboradorRepository.findByCedulaContaining(cedula);
+        if (colaboradorList.isEmpty()) throw new NotFoundInformationException();
+
+        List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        return Optional.ofNullable(colaboradorDTOList);
+    }
+
+    @Override
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono) {
+        //TODO: falta
         return Optional.empty();
     }
 
+    //get
+    private ColaboradorDTO getSavedColaboradorDTO(ColaboradorDTO colaboradorDTO) {
+        Colaborador colaborador = MapperUtils.EntityFromDto(colaboradorDTO, Colaborador.class);
+        Colaborador colaboradorCreated = colaboradorRepository.save(colaborador);
+        return MapperUtils.DtoFromEntity(colaboradorCreated, ColaboradorDTO.class);
+    }
+
+    //create & update
     @Override
-    public Optional<ColaboradorDTO> create(ColaboradorDTO contribuyenteDTO) {
-        return Optional.empty();
+    @Transactional
+    public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) {
+        return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
     }
 
     @Override
-    public Optional<ColaboradorDTO> update(ColaboradorDTO contribuyenteDTO, Long id) {
-        return Optional.empty();
+    @Transactional
+    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) {
+        if (colaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+
+        return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
+
     }
+
+    //detele...
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        colaboradorRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        colaboradorRepository.deleteAll();
+    }
+
 }
