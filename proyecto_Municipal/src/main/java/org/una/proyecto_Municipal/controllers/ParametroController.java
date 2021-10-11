@@ -37,4 +37,6 @@ public class ParametroController {
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
+    //TODO: create, update, delete, findAll
+
 }

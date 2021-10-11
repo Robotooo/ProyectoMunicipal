@@ -39,9 +39,11 @@ public class RutaController {
 
 //    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
 //            response = RutaDTO.class, tags = "Rutas")
-//    @GetMapping("/{estado}")
+//    @GetMapping("/{id}")
 //    public ResponseEntity<?> findByBienId(@PathVariable(value = "estado") boolean estado) {
 //        Optional<List<RutaDTO>> rutaFound = rutaService.findByBien(estado);
 //        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
 //    }
+
+    //TODO: create, update, delete, findAll
 }

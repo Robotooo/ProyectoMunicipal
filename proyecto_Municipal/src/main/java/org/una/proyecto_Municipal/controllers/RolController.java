@@ -61,4 +61,6 @@ public class RolController {
         rolService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
+
+    //TODO: findAll
 }

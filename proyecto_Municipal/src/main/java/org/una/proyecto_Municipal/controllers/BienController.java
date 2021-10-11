@@ -22,5 +22,6 @@ public class BienController {
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
 
+    //TODO: create, update, delete, findAll
 
 }

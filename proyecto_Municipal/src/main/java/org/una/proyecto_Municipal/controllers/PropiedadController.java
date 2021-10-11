@@ -30,7 +30,7 @@ public class PropiedadController {
     }
 
 /*
-    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su ",
+    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su nombre",
             response = PropiedadDTO.class, tags = "Propiedades")
     @GetMapping("/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
@@ -39,6 +39,6 @@ public class PropiedadController {
 
     }
 */
-    // TODO: Falta meterle métodos
+    //TODO: create, update, delete, findAll, findByEstado, findByZona
 
 }

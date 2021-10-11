@@ -34,7 +34,7 @@ public class LicenciaController {
 //
 //    @ApiOperation(value = "Obtiene una lista de licencias a partir de su nombre",
 //            response = LicenciaDTO.class, tags = "Licencias")
-//    @GetMapping("/{proveedorNombre}")
+//    @GetMapping("/{nombre}")
 //    public ResponseEntity<?> findByNombre(@PathVariable(value = "departamentoName") String nombre) {
 //        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findByNombre(nombre);
 //        return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
@@ -64,5 +64,7 @@ public class LicenciaController {
 //        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findByBienId(id);
 //        return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
 //    }
+
+    //TODO: create, update, delete, findAll, findByEstado
 
 }

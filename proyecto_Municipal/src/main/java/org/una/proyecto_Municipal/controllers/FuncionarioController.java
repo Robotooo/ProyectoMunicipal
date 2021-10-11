@@ -26,7 +26,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
-    @GetMapping()
+    @GetMapping("/{all}")
     public @ResponseBody
     ResponseEntity<?> findAll() {
         Optional<List<FuncionarioDTO>> result = funcionarioService.findAll();
@@ -82,7 +82,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = CobroDTO.class, tags = "Funcionarios")
-    //@GetMapping("/{id}")
+    @GetMapping("/{rol_id}")
     public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -102,10 +102,12 @@ public class FuncionarioController {
     }
 
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula", response = FuncionarioDTO.class, tags = "Funcionarios")
-    //@GetMapping("/byCedula/{cedula}")
+    @GetMapping("/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
+
+    //TODO: update, delete
 
 }

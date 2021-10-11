@@ -29,4 +29,8 @@ public class TransaccionesController {
         Optional<TransaccionDTO> transaccionFound = transaccionService.findById(id);
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
     }
+
+    //TODO: create, update, delete, findAll, findByUsuarioIdAndFechaCreacionBetween,
+    // findByRolIdAndFechaCreacionBetween, findByObjetoAndFechaCreacionBetween,
+    // findByFechaCreacionBetween
 }

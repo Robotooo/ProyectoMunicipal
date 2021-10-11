@@ -38,4 +38,7 @@ public class FacturaController {
 //        return new ResponseEntity<>(facturaFound, HttpStatus.OK);
 //    }
 
+    //TODO: create, update, delete, findAll, findByContribuyenteFechaBetween,
+    // findByValorImpositvoFechaBetween
+
 }

@@ -39,11 +39,13 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su nomnbre",
             response = ColaboradorDTO.class, tags = "Contribuyentes")
-    @GetMapping("/{proveedorNombre}")
+    @GetMapping("/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
         Optional<List<ColaboradorDTO>> contribuyenteFound = contribuyenteService.findByNombre(departamentoName);
         return new ResponseEntity<>(contribuyenteFound, HttpStatus.OK);
 
     }
+
+    //TODO: create, update, delete, findAll, findByEstado, findByCedula, findByValorImpositivo
 
 }
