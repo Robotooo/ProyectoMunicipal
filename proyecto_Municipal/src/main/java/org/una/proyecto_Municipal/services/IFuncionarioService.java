@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.una.proyecto_Municipal.dto.AuthenticationRequest;
 import org.una.proyecto_Municipal.dto.AuthenticationResponse;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import java.util.List;

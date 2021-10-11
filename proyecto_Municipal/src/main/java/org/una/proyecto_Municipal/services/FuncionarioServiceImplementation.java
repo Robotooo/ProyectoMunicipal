@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.entities.Funcionario;
-import org.una.proyecto_Municipal.entities.Rol;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
@@ -74,8 +73,13 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula) {
-        return Optional.empty();
+        List<Funcionario> usuarioList = funcionarioRepository.findByCedulaContaining(cedula);
+        if (usuarioList.isEmpty()) return Optional.empty();
+
+        List<FuncionarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, FuncionarioDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
     }
 
     @Override
