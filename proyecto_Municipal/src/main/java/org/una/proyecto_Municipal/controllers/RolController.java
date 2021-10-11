@@ -2,10 +2,13 @@ package org.una.proyecto_Municipal.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
+import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IRolService;
 
 import java.util.Date;
@@ -17,6 +20,7 @@ import java.util.Optional;
 @Api(tags = {"Roles"})
 public class RolController {
 
+    @Autowired
     private IRolService rolService;
 
     @ApiOperation(value = "Obtiene un Rol a partir de su id",
@@ -35,12 +39,16 @@ public class RolController {
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }*/
 
-
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody RolDTO rolDto) {
-        Optional<RolDTO> rolCreated = rolService.create(rolDto); //just Rol
-        return new ResponseEntity<>(rolCreated, HttpStatus.CREATED);
+        try {
+            Optional<RolDTO> rolCreated = rolService.create(rolDto);
+            return new ResponseEntity<>(rolCreated, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
