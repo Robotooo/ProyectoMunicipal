@@ -20,7 +20,7 @@ public class ColaboradorController {
     @Autowired
     private IColaboradorService colaboradorService;
 
-    @ApiOperation(value = "Obtiene un contribuyente a partir de su id",
+    @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
@@ -28,8 +28,8 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de todos los contribuyentes",
-            response = ColaboradorDTO.class, responseContainer = "List", tags = "Contribuyentes")
+    @ApiOperation(value = "Obtiene una lista de todos los colaboradores",
+            response = ColaboradorDTO.class, responseContainer = "List", tags = "Colaboradores")
     @GetMapping("/{all}")
     public @ResponseBody
     ResponseEntity<?> findAll() {
@@ -37,7 +37,7 @@ public class ColaboradorController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su estado",
+    @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
@@ -45,7 +45,7 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su nombre",
+    @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
@@ -54,7 +54,7 @@ public class ColaboradorController {
 
     }
 
-    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su telefono",
+    @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su telefono",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{telefono}")
     public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
@@ -63,7 +63,7 @@ public class ColaboradorController {
 
     }
 
-    @ApiOperation(value = "Obtiene una lista de contribuyentes a partir de su cedula",
+    @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su cedula",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{cedula}")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
@@ -72,7 +72,7 @@ public class ColaboradorController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaborador")
+    @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaboradores")
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) {

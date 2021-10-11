@@ -37,16 +37,16 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) {
-        List<Colaborador> contribuyenteList = colaboradorRepository.findByEstado(estado);
-        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
-        return Optional.ofNullable(contribuyenteDTOList);
+        List<Colaborador> colaboradorList = colaboradorRepository.findByEstado(estado);
+        List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
     public Optional<List<ColaboradorDTO>> findByNombre(String nombre) {
-        List<Colaborador> contribuyenteList = colaboradorRepository.findByNombre(nombre);
-        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
-        return Optional.ofNullable(contribuyenteDTOList);
+        List<Colaborador> colaboradorList = colaboradorRepository.findByNombre(nombre);
+        List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono) {
-        List<Colaborador> contribuyenteList = colaboradorRepository.findByTelefono(telefono);
-        List<ColaboradorDTO> contribuyenteDTOList = MapperUtils.DtoListFromEntityList(contribuyenteList, ColaboradorDTO.class);
-        return Optional.ofNullable(contribuyenteDTOList);
+        List<Colaborador> colaboradorList = colaboradorRepository.findByTelefono(telefono);
+        List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        return Optional.ofNullable(colaboradorDTOList);
     }
 
     //get

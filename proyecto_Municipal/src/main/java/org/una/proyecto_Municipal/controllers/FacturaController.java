@@ -38,7 +38,7 @@ public class FacturaController {
     }*/
 
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Se crea una Factura", response = FacturaDTO.class, tags = "Factura")
+    @ApiOperation(value = "Se crea una Factura", response = FacturaDTO.class, tags = "Facturas")
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody FacturaDTO facturaDTO) {
@@ -65,6 +65,6 @@ public class FacturaController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: findByContribuyenteFechaBetween, findByValorImpositvoFechaBetween, revisar findBycajeroId
+    //TODO: findByColaboradorFechaBetween, findByValorImpositvoFechaBetween, revisar findBycajeroId
 
 }

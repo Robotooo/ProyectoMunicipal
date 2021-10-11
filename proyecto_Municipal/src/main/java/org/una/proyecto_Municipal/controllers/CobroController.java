@@ -52,10 +52,10 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su contribuyente",
+//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
 //            response = CobroDTO.class, tags = "Cobros")
 //    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByContribuyenteId(@PathVariable(value = "id") Long id) {
+//    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
 //        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradorId(id);
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
