@@ -1,11 +1,11 @@
-package org.una.inventario.controllers;
+package org.una.proyecto_Municipal.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.inventario.exceptions.MissingInputsException;
-import org.una.inventario.exceptions.InformationNotSavedException;
-import org.una.inventario.exceptions.NotFoundInformationException;
-import org.una.inventario.exceptions.NotImplementedException;
+import org.una.proyecto_Municipal.exceptions.MissingInputsException;
+import org.una.proyecto_Municipal.exceptions.InformationNotSavedException;
+import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
+import org.una.proyecto_Municipal.exceptions.NotImplementedException;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
