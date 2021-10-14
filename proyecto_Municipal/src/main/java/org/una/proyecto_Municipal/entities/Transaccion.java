@@ -21,7 +21,7 @@ public class Transaccion implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="funcionarios_id")
-    private Funcionario funcionario;
+    private Funcionario usuarioId;
 
     @Column(name = "accion", length = 150)
     private String accion;
