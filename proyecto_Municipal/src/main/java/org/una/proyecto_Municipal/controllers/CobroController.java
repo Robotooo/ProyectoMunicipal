@@ -48,27 +48,27 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
             response = CobroDTO.class, tags = "Cobros")
-    //@GetMapping("/{id}")
+    @GetMapping("/{BienId}")
     public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
-//            response = CobroDTO.class, tags = "Cobros")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradorId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/{ColaboradorId}")
+    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradores(id);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-//            response = CobroDTO.class, tags = "Proveedores")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
+            response = CobroDTO.class, tags = "Proveedores")
+    @GetMapping("/{FacturaIdd}")
+    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
