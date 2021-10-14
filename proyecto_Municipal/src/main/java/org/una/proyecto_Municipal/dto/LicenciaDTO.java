@@ -17,8 +17,8 @@ public class LicenciaDTO {
     private String email;
     private String distrito;
     private boolean estado;
-    private Date fecha_registro;
-    private Date fecha_modificacion;
+    private Date fechaRegistro;
+    private Date fechaModificacion;
     private Double ganancias;
-    //private Long bien_id;
+    private Long bienId;
 }

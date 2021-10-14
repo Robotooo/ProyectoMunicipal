@@ -15,8 +15,8 @@ public class FuncionarioDTO {
     private Integer telefono;
     private String cedula;
     private boolean estado;
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
     private String passwordEncriptado;
     private RolDTO rol;
 }

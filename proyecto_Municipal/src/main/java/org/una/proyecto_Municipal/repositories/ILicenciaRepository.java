@@ -27,6 +27,8 @@ public interface ILicenciaRepository extends JpaRepository<Licencia, Long> {
 //            "INNER JOIN declaracion_anual ON licencias.id = dia_semana.licencias_comerciales_id " +
 //            "WHERE rutas_buses.estado = 1")
     //public Licencia findFormulaWithLikeSQL(@Param("licencia"));
+
+    //TODO: findByFechaRegistro
 }
 
 

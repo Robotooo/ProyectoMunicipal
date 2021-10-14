@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,9 @@ import org.una.proyecto_Municipal.services.ICobroService;
 import java.util.List;
 import java.util.Optional;
 
-//@RestController
-//@RequestMapping("/cobros")
-//@Api(tags = {"Cobros"})
+@RestController
+@RequestMapping("/cobros")
+@Api(tags = {"Cobros"})
 public class CobroController {
 
     @Autowired
@@ -47,7 +48,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
             response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
+    //@GetMapping("/{id}")
     public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
