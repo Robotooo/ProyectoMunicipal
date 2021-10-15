@@ -34,6 +34,9 @@ public class Factura implements Serializable {
     @JoinColumn(name="cajero_id")
     private Funcionario cajeroId;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
+    private List<Cobro> cobros= new ArrayList<>();
+
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)

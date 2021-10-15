@@ -13,4 +13,5 @@ public class RolDTO {
     private Long id;
     private String nombre;
     private Date fechaCreacion;
+    private FuncionarioDTO funcionarios;
 }

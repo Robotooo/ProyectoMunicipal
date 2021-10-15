@@ -56,7 +56,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
         return Optional.ofNullable(getSavedFacturaDTO(facturaDTO));
     }
 
-    //@Override
+    @Override
     @Transactional
     public Optional<FacturaDTO> update(FacturaDTO facturaDTO, Long id) {
         if (facturaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();

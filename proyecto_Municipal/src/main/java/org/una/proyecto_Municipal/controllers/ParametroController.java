@@ -59,6 +59,6 @@ public class ParametroController {
     }
 
 
-    //TODO: create, update, delete, findAll
+    //TODO:  delete, findAll
 
 }
