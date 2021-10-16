@@ -42,7 +42,15 @@ public class SwaggerConfiguration {
                 .build()
                 .apiInfo(apiInfo())
                 .tags(new Tag("Seguridad", "Metodos de Seguridad"),
-                        new Tag("Funcionarios", "Entidad de Funcionarios")
+                        new Tag("Funcionarios", "Entidad de Funcionarios"),
+                        new Tag("Colaboradores","Entidad de Colaboradores"),
+                        new Tag("Cobros", "Entidad de Cobros"),
+                        new Tag("Licencias", "Entidad de Licencias"),
+                        new Tag("Parametros", "Entidad de Parametros"),
+                        new Tag("Propiedades", "Entidad de Propiedades"),
+                        new Tag("Roles", "Entidad de Roles"),
+                        new Tag("Rutas", "Entidad de Rutas"),
+                        new Tag("Transacciones", "Entidad de Transacciones")
                 );
 
     }

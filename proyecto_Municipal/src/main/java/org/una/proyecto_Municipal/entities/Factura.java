@@ -25,10 +25,10 @@ public class Factura implements Serializable {
     private String nombre;
 
     @Column
-    private Double monto_cancelar;
+    private Double montoPagaCon;
 
     @Column(name = "tipo_pago", length = 45)
-    private String tipo_pago;
+    private String tipoPago;
 
     @ManyToOne
     @JoinColumn(name="cajero_id")
@@ -37,13 +37,13 @@ public class Factura implements Serializable {
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_cancelacion;
+    private Date fechaCancelacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
-        fecha_cancelacion = new Date();
+        fechaCancelacion = new Date();
     }
 
 }

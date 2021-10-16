@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.BienDTO;
 import org.una.proyecto_Municipal.services.IBienService;
@@ -33,6 +34,7 @@ public class BienController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -41,6 +43,7 @@ public class BienController {
         return new ResponseEntity<>(bienCreated, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BienDTO bienModified) {
@@ -48,12 +51,14 @@ public class BienController {
         return new ResponseEntity<>(bienUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         bienService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         bienService.deleteAll();

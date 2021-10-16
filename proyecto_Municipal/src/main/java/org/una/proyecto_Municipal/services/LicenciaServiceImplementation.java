@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LicenciaServiceImplementation /*implements ILicenciaService*/{
+public class LicenciaServiceImplementation implements ILicenciaService{
 
     @Autowired
     private ILicenciaRepository licenciaRepository;
@@ -79,12 +79,13 @@ public class LicenciaServiceImplementation /*implements ILicenciaService*/{
         return Optional.ofNullable(licenciaDTOList);
     }
 
-//    //@Override
-//    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
-//        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findByBienId(id), LicenciaDTO.class);
-//        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(licenciaDTOList);
-//    }
+
+    @Override
+    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
+        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findByBienId(id), LicenciaDTO.class);
+        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(licenciaDTOList);
+    }
 
     //detele...
     //@Override

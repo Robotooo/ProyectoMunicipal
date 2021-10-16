@@ -23,7 +23,7 @@ public class Ruta implements Serializable {
     private String inicio;
 
     @Column(name = "final_ruta", length = 45)
-    private String final_ruta;
+    private String finalRuta;
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
@@ -35,25 +35,25 @@ public class Ruta implements Serializable {
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_registro;
+    private Date fechaRegistro;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
-    private Date fecha_modificacion;
+    private Date fechaModificacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
         estado = true;
-        fecha_registro = new Date();
-        fecha_modificacion = new Date();
+        fechaRegistro = new Date();
+        fechaModificacion = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        fecha_modificacion = new Date();
+        fechaModificacion = new Date();
     }
 
 }

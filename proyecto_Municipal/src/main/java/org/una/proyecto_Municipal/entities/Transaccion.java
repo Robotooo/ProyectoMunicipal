@@ -21,7 +21,7 @@ public class Transaccion implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="funcionarios_id")
-    private Funcionario funcionario;
+    private Funcionario usuarioId;
 
     @Column(name = "accion", length = 150)
     private String accion;
@@ -32,13 +32,13 @@ public class Transaccion implements Serializable {
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_creacion;
+    private Date fechaCreacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
-        fecha_creacion = new Date();
+        fechaCreacion = new Date();
     }
 
 }

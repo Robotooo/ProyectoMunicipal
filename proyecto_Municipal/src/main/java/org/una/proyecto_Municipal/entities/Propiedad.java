@@ -41,16 +41,16 @@ public class Propiedad implements Serializable {
     private String metros;
 
     @Column(name = "valor_terreno", length = 45)
-    private String valor_terreno;
+    private String valorTerreno;
 
     @Column(name = "valor_construccion", length = 45)
-    private String valor_construccion;
+    private String valorConstruccion;
 
     @Column(name = "valor_otros", length = 45)
-    private String valor_otros;
+    private String valorOtros;
 
     @Column
-    private boolean es_estado;
+    private boolean esEstado;
 
     @Column
     private boolean estado;
@@ -70,24 +70,24 @@ public class Propiedad implements Serializable {
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_registro;
+    private Date fechaRegistro;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
-    private Date fecha_modificacion;
+    private Date fechaModificacion;
 
     @PrePersist
     public void prePersist() {
-        es_estado = true;
+        esEstado = true;
         estado = true;
-        fecha_registro = new Date();
-        fecha_modificacion = new Date();
+        fechaRegistro = new Date();
+        fechaModificacion = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        fecha_modificacion = new Date();
+        fechaModificacion = new Date();
     }
 
 }

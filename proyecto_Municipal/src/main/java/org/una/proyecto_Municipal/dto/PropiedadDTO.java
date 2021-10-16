@@ -21,12 +21,12 @@ public class PropiedadDTO {
     private Float area;
     private String plano;
     private String metros;
-    private String valor_terreno;
-    private String valor_construccion;
+    private String valorTerreno;
+    private String valorConstruccion;
     private String valorOtros;
-    private boolean es_estado;
+    private boolean esEstado;
     private Integer zona;
     private boolean estado;
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
 }

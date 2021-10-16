@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.una.proyecto_Municipal.dto.CobroDTO;
@@ -88,6 +89,7 @@ public class FuncionarioController {
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -107,6 +109,7 @@ public class FuncionarioController {
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
@@ -114,6 +117,7 @@ public class FuncionarioController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         funcionarioService.delete(id);

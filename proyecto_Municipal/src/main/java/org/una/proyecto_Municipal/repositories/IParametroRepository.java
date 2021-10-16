@@ -11,4 +11,6 @@ public interface IParametroRepository extends JpaRepository<Parametro, Long>{
     public List<Parametro> findByNombre(String nombre);
 
     public List<Parametro> findByEstado(boolean estado);
+
+    //TODO: findByFechaCreación
 }

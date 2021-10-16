@@ -12,9 +12,9 @@ import java.util.Date;
 @ToString
 public class FacturaDTO {
     private Long id;
-    private Date fecha_cancelacion;
+    private Date fechaCancelacion;
     private String nombre;
-    private Double monto_cancelar;
-    private String tipo_pago;
-    private FuncionarioDTO cajero_id;
+    private Double montoCancelar;
+    private String tipoPago;
+    private FuncionarioDTO cajeroId;
 }

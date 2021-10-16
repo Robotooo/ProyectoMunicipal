@@ -15,7 +15,7 @@ import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.repositories.IFuncionarioRepository;
-import org.una.proyecto_Municipal.tramites.JwtProvider;
+import org.una.proyecto_Municipal.jwt.JwtProvider;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.Optional;

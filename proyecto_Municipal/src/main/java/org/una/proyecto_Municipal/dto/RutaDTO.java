@@ -16,6 +16,6 @@ public class RutaDTO {
     private String inicioRuta;
     private String finalRuta;
     private boolean estado;
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
 }

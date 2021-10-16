@@ -1,9 +1,11 @@
 package org.una.proyecto_Municipal.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
@@ -11,9 +13,9 @@ import org.una.proyecto_Municipal.services.ICobroService;
 import java.util.List;
 import java.util.Optional;
 
-//@RestController
-//@RequestMapping("/cobros")
-//@Api(tags = {"Cobros"})
+@RestController
+@RequestMapping("/cobros")
+@Api(tags = {"Cobros"})
 public class CobroController {
 
     @Autowired
@@ -46,27 +48,27 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
             response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
+    @GetMapping("/{BienId}")
     public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
-//            response = CobroDTO.class, tags = "Cobros")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradorId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/{ColaboradorId}")
+    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByColaboradores(id);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-//            response = CobroDTO.class, tags = "Proveedores")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
+            response = CobroDTO.class, tags = "Proveedores")
+    @GetMapping("/{FacturaIdd}")
+    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -83,12 +85,14 @@ public class CobroController {
         return new ResponseEntity<>(cobroUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         cobroService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         cobroService.deleteAll();
