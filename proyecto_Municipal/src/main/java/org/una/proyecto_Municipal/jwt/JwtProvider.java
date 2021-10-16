@@ -1,4 +1,4 @@
-package org.una.proyecto_Municipal.jwt;
+package org.una.proyecto_Municipal.tramites;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;

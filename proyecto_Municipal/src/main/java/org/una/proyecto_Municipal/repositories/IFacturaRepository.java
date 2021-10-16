@@ -11,6 +11,4 @@ public interface IFacturaRepository extends JpaRepository<Factura, Long> {
 
     public List<Factura>  findByCajeroId(Long id);
 
-    public List<Factura>  findByFechaCancelacion(Long id);
-
 }

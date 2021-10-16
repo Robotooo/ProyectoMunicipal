@@ -43,7 +43,7 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
-    public Optional<List<CobroDTO>> findByColaboradores(Long id) {
+    public Optional<List<CobroDTO>> findByColaboradorId(Long id) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByColaboradores(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);

@@ -33,25 +33,25 @@ public class Colaborador implements Serializable {
     @Column(name = "fecha_creacion", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fechaCreacion;
+    private Date fecha_creacion;
 
     @Column(name = "fecha_modificacion", nullable = false, updatable = true)
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
-    private Date fechaModificacion;
+    private Date fecha_modificacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
         estado = true;
-        fechaCreacion = new Date();
-        fechaModificacion = new Date();
+        fecha_creacion = new Date();
+        fecha_modificacion = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        fechaModificacion = new Date();
+        fecha_modificacion = new Date();
     }
 
 }

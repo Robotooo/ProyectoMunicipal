@@ -15,7 +15,7 @@ import java.util.Date;
 public class CobroDTO {
     private Long id;
     private boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
-    private Colaborador colaboradores;
+    private Date fecha_creacion;
+    private Date fecha_modificacion;
+    private Colaborador colaborador;
 }

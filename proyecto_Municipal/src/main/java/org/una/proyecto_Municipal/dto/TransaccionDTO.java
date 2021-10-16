@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.proyecto_Municipal.entities.Funcionario;
-
 import java.util.Date;
 
 @Data
@@ -16,7 +14,7 @@ public class TransaccionDTO {
 
     private Long id;
     private String objeto;
-    private Funcionario usuarioId;
+    private String usuarioID;
     private String accion;
     private Date fechaCreacion;
 }
