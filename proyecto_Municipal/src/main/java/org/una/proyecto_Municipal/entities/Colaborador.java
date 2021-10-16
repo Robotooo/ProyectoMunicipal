@@ -30,6 +30,12 @@ public class Colaborador implements Serializable {
     @Column(nullable = false)
     private boolean estado;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradores")
+    private List<Cobro> cobros= new ArrayList<>();
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradores")
+//    private List<Bien> bienes= new ArrayList<>();
+
     @Column(name = "fecha_creacion", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)

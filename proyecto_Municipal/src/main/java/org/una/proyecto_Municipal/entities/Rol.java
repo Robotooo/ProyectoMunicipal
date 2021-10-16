@@ -24,7 +24,7 @@ public class Rol implements Serializable {
     private String nombre;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
-    private List<Funcionario> funcionario = new ArrayList<>();
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

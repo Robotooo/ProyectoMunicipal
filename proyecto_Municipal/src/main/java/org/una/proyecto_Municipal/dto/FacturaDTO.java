@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.proyecto_Municipal.entities.Cobro;
+
 import java.util.Date;
 
 @Data
@@ -12,9 +14,10 @@ import java.util.Date;
 @ToString
 public class FacturaDTO {
     private Long id;
-    private Date fecha_cancelacion;
+    private Date fechaCancelacion;
     private String nombre;
-    private Double monto_cancelar;
-    private String tipo_pago;
-    private FuncionarioDTO cajero_id;
+    private Double montoCancelar;
+    private String tipoPago;
+    private FuncionarioDTO cajeroId;
+    private Cobro cobros;
 }

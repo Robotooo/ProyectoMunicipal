@@ -29,6 +29,8 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
 
     public List<Funcionario> findByEstado(boolean estado);
 
+    public Funcionario findByTransaccionId(Long id);
+
     //public List<Funcionario> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
 //    @Query("select u from Funcionario u where UPPER(u.usuario) like CONCAT('%',UPPER(:usuario),'%')")

@@ -12,5 +12,6 @@ import java.util.Date;
 public class RolDTO {
     private Long id;
     private String nombre;
-    private Date fecha_creacion;
+    private Date fechaCreacion;
+    private FuncionarioDTO funcionarios;
 }

@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.proyecto_Municipal.entities.Bien;
 import org.una.proyecto_Municipal.entities.Colaborador;
+import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.Date;
 
@@ -15,7 +17,9 @@ import java.util.Date;
 public class CobroDTO {
     private Long id;
     private boolean estado;
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
-    private Colaborador colaborador;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
+    private Colaborador colaboradores;
+    private Bien bienId;
+    private Factura facturaId;
 }
