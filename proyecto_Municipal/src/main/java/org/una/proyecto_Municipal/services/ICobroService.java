@@ -13,11 +13,11 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> findByEstado(boolean estado);
 
-    public Optional<List<CobroDTO>> findByBienId(Long id);
+//    public Optional<List<CobroDTO>> findByBienId(Long id);
 
-    public Optional<List<CobroDTO>> findByColaboradores(Long id);
-
-    public Optional<List<CobroDTO>> findByFacturaId(Long id);
+//    //public Optional<List<CobroDTO>> findByColaboradores(Long id);
+//
+//    public Optional<List<CobroDTO>> findByFacturaId(Long id);
 
     public Optional<CobroDTO> create(CobroDTO cobroDTO);
 

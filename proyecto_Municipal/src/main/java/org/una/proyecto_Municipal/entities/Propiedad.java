@@ -63,7 +63,7 @@ public class Propiedad implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
-    private Bien bien;
+    private Bien bienId;
 
     private static final long serialVersionUID = 1L;
 

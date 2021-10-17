@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.una.proyecto_Municipal.entities.BienxColaborador;
+import org.una.proyecto_Municipal.entities.Licencia;
 
 import java.util.Date;
 
@@ -12,10 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CobroDTO {
+public class DeclaracionAnualDTO {
     private Long id;
-    private Boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
-    private BienxColaborador bienxColaboradorId;
+    private Licencia licencia;
+    private Double montoAnual;
+    private Float anio;
 }

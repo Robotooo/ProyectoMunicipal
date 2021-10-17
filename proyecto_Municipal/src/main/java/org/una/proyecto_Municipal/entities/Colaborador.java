@@ -11,31 +11,30 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Colaborador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", length = 45, nullable = false)
+    @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column(length = 45, unique = true, nullable = false)
+    @Column(length = 45)
     private String cedula;
 
-    @Column(unique = true, nullable = false)
+    @Column
     private Integer telefono;
 
-    @Column(nullable = false)
-    private boolean estado;
+    @Column
+    private Boolean estado;
 
-    @Column(name = "fecha_creacion", updatable = false, nullable = false)
+    @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
     private Date fechaCreacion;
 
-    @Column(name = "fecha_modificacion", nullable = false, updatable = true)
+    @Column(name = "fecha_modificacion", updatable = true)
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
     private Date fechaModificacion;

@@ -9,23 +9,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "bienes")
+@Table(name = "categorias_basura")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-public class Bien implements Serializable {
+public class CategoriaBasura implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToMany
-//    @JoinTable(name = "bienes_x_colaboradores",
-//            joinColumns = @JoinColumn(name = "bien_id"))
-//    private Colaborador bienXColaborador;
+    @Column
+    private String nombre;
 
-    private static final long serialVersionUID = 1L;
+    @Column
+    private String descripcion;
+
 
 }

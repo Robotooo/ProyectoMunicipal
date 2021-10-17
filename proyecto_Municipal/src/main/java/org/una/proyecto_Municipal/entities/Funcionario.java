@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.entities;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,19 +18,25 @@ public class Funcionario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @NotNull
     private Long id;
 
     @Column(name = "usuario", length = 30)
+//    @NotNull
     private String usuario;
 
 
     @Column(length = 45, unique = true)
+//    @NotNull
     private String cedula;
 
     @Column
+//    @NotNull
+
     private boolean estado;
 
     @Column(length = 100, name = "password_encriptado")
+//    @NotNull
     private String passwordEncriptado;
 
     @ManyToOne

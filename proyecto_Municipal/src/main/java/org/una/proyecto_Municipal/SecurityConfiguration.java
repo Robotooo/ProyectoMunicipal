@@ -26,7 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCrypt;
 
-
     @Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 

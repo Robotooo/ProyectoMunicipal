@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,23 +10,26 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "bienes")
+@Table(name = "categorias_x_propiedad")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-public class Bien implements Serializable {
+public class CategoriaxPropiedad implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToMany
-//    @JoinTable(name = "bienes_x_colaboradores",
-//            joinColumns = @JoinColumn(name = "bien_id"))
-//    private Colaborador bienXColaborador;
+    @ManyToOne
+    @JoinColumn(name="categorias_basura_id")
+    private CategoriaBasura categoriaBasuraId;
 
-    private static final long serialVersionUID = 1L;
+    @ManyToOne
+    @JoinColumn(name="propiedades_id")
+    private Propiedad propiedad;
+
+    @Column
+    private Integer cantidad;
 
 }
