@@ -58,7 +58,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }

@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import java.util.Date;
+import org.una.proyecto_Municipal.entities.Ruta;
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RutaDTO {
+public class DiaSemanaDTO {
     private Long id;
-    private String inicioRuta;
-    private String finalRuta;
-    private Boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
+    private Integer cantidadSalidas;
+    private String fechaDia;
+    private Ruta rutaId;
 }

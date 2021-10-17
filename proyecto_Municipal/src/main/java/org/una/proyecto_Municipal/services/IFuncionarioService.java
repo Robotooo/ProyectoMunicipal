@@ -25,7 +25,7 @@ public interface IFuncionarioService {
 
     public Optional<List<FuncionarioDTO>> findByRolId(Long id);
 
-    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado);
+    public Optional<List<FuncionarioDTO>> findByEstado(Boolean estado);
 
     public Optional<FuncionarioDTO> findByCedula(String cedula);
 

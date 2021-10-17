@@ -12,7 +12,7 @@ public class ColaboradorDTO {
     private String nombre;
     private String cedula;
     private Integer telefono;
-    private boolean estado;
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
+    private Boolean estado;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
 }

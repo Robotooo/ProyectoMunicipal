@@ -4,17 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RutaDTO {
+public class CategoriaBasuraDTO {
     private Long id;
-    private String inicioRuta;
-    private String finalRuta;
-    private Boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
+    private String nombre;
+    private String descripcion;
 }

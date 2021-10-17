@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LicenciaServiceImplementation /*implements ILicenciaService*/{
+public class LicenciaServiceImplementation implements ILicenciaService{
 
     @Autowired
     private ILicenciaRepository licenciaRepository;
@@ -66,17 +66,28 @@ public class LicenciaServiceImplementation /*implements ILicenciaService*/{
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByDistrito(boolean distrito) {
-        List<Licencia> licenciaList = licenciaRepository.findByEstado(distrito);
+    public Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito) {
+        return Optional.empty();
+    }
+
+//    @Override
+//    public Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito) {
+//        List<Licencia> licenciaList = licenciaRepository.findByEstado(distrito);
+//        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
+//        return Optional.ofNullable(licenciaDTOList);
+//    }
+
+    @Override
+    public Optional<List<LicenciaDTO>> findByEstado(Boolean estado) {
+        List<Licencia> licenciaList = licenciaRepository.findByEstado(estado);
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByEstado(boolean estado) {
-        List<Licencia> licenciaList = licenciaRepository.findByEstado(estado);
-        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
-        return Optional.ofNullable(licenciaDTOList);
+    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
+        return Optional.empty();
+        //TODO: findbyBienId
     }
 
 //    //@Override

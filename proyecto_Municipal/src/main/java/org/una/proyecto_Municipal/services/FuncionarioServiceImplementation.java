@@ -163,7 +163,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado) {
+    public Optional<List<FuncionarioDTO>> findByEstado(Boolean estado) {
         List<Funcionario> funcionarioList = funcionarioRepository.findByEstado(estado);
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
         return Optional.ofNullable(funcionarioDTOList);

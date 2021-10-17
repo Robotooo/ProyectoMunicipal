@@ -34,7 +34,7 @@ public class RutaController {
     @ApiOperation(value = "Obtiene una lista de rutas a partir de su estado",
             response = RutaDTO.class, tags = "Rutas")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<RutaDTO>> rutaFound = rutaService.findByEstado(estado);
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class RutaController {
 //    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
 //            response = RutaDTO.class, tags = "Rutas")
 //    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByBienId(@PathVariable(value = "estado") boolean estado) {
+//    public ResponseEntity<?> findByBienId(@PathVariable(value = "estado") Boolean estado) {
 //        Optional<List<RutaDTO>> rutaFound = rutaService.findByBien(estado);
 //        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
 //    }

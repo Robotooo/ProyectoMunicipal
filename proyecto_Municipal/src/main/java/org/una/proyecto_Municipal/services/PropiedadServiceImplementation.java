@@ -41,7 +41,7 @@ public class PropiedadServiceImplementation implements IPropiedadService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<PropiedadDTO>> findByEstado(boolean estado) {
+    public Optional<List<PropiedadDTO>> findByEstado(Boolean estado) {
         List<Propiedad> propiedadList = propiedadRepository.findByEstado(estado);
         List<PropiedadDTO> propiedadDTOList = MapperUtils.DtoListFromEntityList(propiedadList, PropiedadDTO.class);
         return Optional.ofNullable(propiedadDTOList);

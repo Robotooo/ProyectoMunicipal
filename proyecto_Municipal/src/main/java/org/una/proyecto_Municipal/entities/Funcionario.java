@@ -27,7 +27,7 @@ public class Funcionario implements Serializable {
     private String cedula;
 
     @Column
-    private boolean estado;
+    private Boolean estado;
 
     @Column(length = 100, name = "password_encriptado")
     private String passwordEncriptado;

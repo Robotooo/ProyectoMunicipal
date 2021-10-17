@@ -11,7 +11,7 @@ public interface IColaboradorService {
 
     public Optional<List<ColaboradorDTO>> findAll();
 
-    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado);
+    public Optional<List<ColaboradorDTO>> findByEstado(Boolean estado);
 
     public Optional<List<ColaboradorDTO>> findByNombre(String nombre);
 

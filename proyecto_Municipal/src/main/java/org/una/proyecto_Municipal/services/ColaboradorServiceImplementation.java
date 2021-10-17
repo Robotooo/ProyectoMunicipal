@@ -36,7 +36,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) {
+    public Optional<List<ColaboradorDTO>> findByEstado(Boolean estado) {
         List<Colaborador> colaboradorList = colaboradorRepository.findByEstado(estado);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTOList);

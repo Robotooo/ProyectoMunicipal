@@ -13,7 +13,7 @@ public interface IParametroService{
 
     public Optional<List<ParametroDTO>> findByNombre(String nombre);
 
-    public Optional<List<ParametroDTO>> findByEstado(boolean estado);
+    public Optional<List<ParametroDTO>> findByEstado(Boolean estado);
 
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO);
 

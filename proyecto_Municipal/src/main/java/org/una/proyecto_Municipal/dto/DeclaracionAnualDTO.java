@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.proyecto_Municipal.entities.Licencia;
+
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RutaDTO {
+public class DeclaracionAnualDTO {
     private Long id;
-    private String inicioRuta;
-    private String finalRuta;
-    private Boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
+    private Licencia licencia;
+    private Double montoAnual;
+    private Float anio;
 }

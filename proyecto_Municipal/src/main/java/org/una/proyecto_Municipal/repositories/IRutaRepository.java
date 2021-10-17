@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IRutaRepository extends JpaRepository<Ruta, Long> {
 
-    public List<Ruta> findByEstado(boolean estado);
+    public List<Ruta> findByEstado(Boolean estado);
 
     //public List<Ruta>  findByBienId(Long id);
 

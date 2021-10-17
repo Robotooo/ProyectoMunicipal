@@ -9,18 +9,25 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "bienes")
+@Table(name = "dia_semana")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-public class Bien implements Serializable {
+public class DiaSemana implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private static final long serialVersionUID = 1L;
+    @Column
+    private Integer cantidadSalidas;
+
+    @Column
+    private String fechaDia;
+
+    @ManyToOne
+    @JoinColumn(name="ruta_id")
+    private Ruta rutaId;
 
 }

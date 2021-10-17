@@ -39,18 +39,18 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByEstado(estado);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
-            response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
-        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
+//            response = CobroDTO.class, tags = "Cobros")
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
+//        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
+//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+//    }
 
 //    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
 //            response = CobroDTO.class, tags = "Cobros")

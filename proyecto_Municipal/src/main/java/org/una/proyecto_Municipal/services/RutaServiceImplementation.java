@@ -37,7 +37,7 @@ public class RutaServiceImplementation implements IRutaService{
 //    }
 
     @Override
-    public Optional<List<RutaDTO>> findByEstado(boolean estado) {
+    public Optional<List<RutaDTO>> findByEstado(Boolean estado) {
         List<Ruta> rutaList = rutaRepository.findByEstado(estado);
         List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaList, RutaDTO.class);
         return Optional.ofNullable(rutaDTOList);
