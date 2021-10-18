@@ -47,17 +47,14 @@ public class RolServiceImplementation implements IRolService{
     }
 */
 
-    /*
     @Override
     public Optional<List<RolDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {
-        List<Rol> rolList = rolRepository.findByFechacreacionBetween(startDate, endDate);
+        List<Rol> rolList = rolRepository.findByFechaCreacionBetween(startDate, endDate);
 
         List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolList, RolDTO.class);
         return Optional.ofNullable(rolDTOList);
 
     }
-
-    */
 
 
     //detele...

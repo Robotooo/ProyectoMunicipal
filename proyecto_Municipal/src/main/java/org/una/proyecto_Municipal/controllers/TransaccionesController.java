@@ -12,6 +12,8 @@ import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.ITransaccionService;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,7 +44,37 @@ public class TransaccionesController {
         }
     }
 
-    //TODO: update, delete, findAll, findByUsuarioIdAndFechaCreacionBetween,
-    // findByRolIdAndFechaCreacionBetween, findByObjetoAndFechaCreacionBetween,
-    // findByFechaCreacionBetween
+    @ApiOperation(value = "Obtiene una transaccion a partir de un rango de tiempo con dos fechas",
+            response = TransaccionDTO.class, tags = "Transacciones")
+    @GetMapping("/{startDate}")
+    public ResponseEntity<?> findByFechaCreacionBetween(@PathVariable(value = "startDate") Date startDate, Date endDate) {
+        Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByFechaCreacionBetween(startDate, endDate);
+        return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una transaccion a partir de un rango de tiempo con dos fechas",
+            response = TransaccionDTO.class, tags = "Transacciones")
+    @GetMapping("/{usuarioId}")
+    public ResponseEntity<?> findByUsuarioIdAndFechaCreacionBetween(@PathVariable(value = "usuarioId") Long usuarioId, Date startDate, Date endDate) {
+        Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByUsuarioIdAndFechaCreacionBetween(usuarioId,startDate, endDate);
+        return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
+    }
+    @ApiOperation(value = "Obtiene una transaccion a partir de un rango de tiempo con dos fechas",
+            response = TransaccionDTO.class, tags = "Transacciones")
+    @GetMapping("/{rolId}")
+    public ResponseEntity<?> findByRolIdAndFechaCreacionBetween(@PathVariable(value = "rolId") Long rolId, Date startDate, Date endDate) {
+        Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByRolIdAndFechaCreacionBetween(rolId,startDate, endDate);
+        return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una transaccion a partir de un rango de tiempo con dos fechas",
+            response = TransaccionDTO.class, tags = "Transacciones")
+    @GetMapping("/{objeto}")
+    public ResponseEntity<?> findByObjetoAndFechaCreacionBetween(@PathVariable(value = "objeto") String objeto, Date startDate, Date endDate) {
+        Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByObjetoAndFechaCreacionBetween(objeto,startDate, endDate);
+        return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
+    }
+
+
+    //TODO:
 }

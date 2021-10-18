@@ -30,22 +30,30 @@ public class TransaccionServiceImplementation implements ITransaccionService{
 
     @Override
     public Optional<List<TransaccionDTO>> findByUsuarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate) {
-        return Optional.empty();
+        List<Transaccion> transacciones = transaccionRepository.findByUsuarioIdAndFechaCreacionBetween(usuarioId, startDate, endDate);
+        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        return Optional.ofNullable(transaccionDTOList);
     }
 
     @Override
     public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate) {
-        return Optional.empty();
+        List<Transaccion> transacciones = transaccionRepository.findByRolIdAndFechaCreacionBetween(rolId, startDate, endDate);
+        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        return Optional.ofNullable(transaccionDTOList);
     }
 
     @Override
-    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate) {
-        return Optional.empty();
+    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objeto, Date startDate, Date endDate) {
+        List<Transaccion> transacciones = transaccionRepository.findByObjetoAndFechaCreacionBetween(objeto, startDate, endDate);
+        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        return Optional.ofNullable(transaccionDTOList);
     }
 
     @Override
     public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {
-        return Optional.empty();
+        List<Transaccion> transacciones = transaccionRepository.findByFechaCreacionBetween(startDate, endDate);
+        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        return Optional.ofNullable(transaccionDTOList);
     }
 
     private TransaccionDTO getSavedTransaccionDTO(TransaccionDTO transaccionDTO) {

@@ -23,6 +23,10 @@ public class Transaccion implements Serializable {
     @JoinColumn(name="funcionarios_id")
     private Funcionario usuarioId;
 
+    @ManyToOne
+    @JoinColumn(name="roles_id")
+    private Rol rolId;
+
     @Column(name = "accion", length = 150)
     private String accion;
 

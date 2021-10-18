@@ -31,14 +31,14 @@ public class RolController {
         Optional<RolDTO> rolFound = rolService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }
-/*
+
     @ApiOperation(value = "Obtiene un rol a partir de un rango de tiempo con dos fechas",
             response = RolDTO.class, tags = "Roles")
     @GetMapping("/{startDate}")
     public ResponseEntity<?> findByFechaCreacionBetween(@PathVariable(value = "startDate") Date startDate, Date endDate) {
         Optional<List<RolDTO>> rolFound = rolService.findByFechaCreacionBetween(startDate, endDate);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
-    }*/
+    }
 
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
