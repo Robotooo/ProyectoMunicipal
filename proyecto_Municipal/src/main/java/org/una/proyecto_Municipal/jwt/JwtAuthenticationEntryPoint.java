@@ -1,4 +1,4 @@
-package org.una.proyecto_Municipal.tramites;
+package org.una.proyecto_Municipal.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

@@ -15,6 +15,8 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
 
     Optional<Funcionario> findByCedula(String cedula);
 
+    public List<Funcionario> findByCedulaContaining(String cedula);
+
     public List<Funcionario> findByEstado(Boolean estado);
 
 //    public Funcionario findByCedulaAndPasswordEncriptado(String cedula, String passwordEncriptado);

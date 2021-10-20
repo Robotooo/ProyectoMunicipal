@@ -1,16 +1,8 @@
 package org.una.proyecto_Municipal.services;
 
-import io.swagger.annotations.ApiOperation;
-import org.apache.http.auth.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,16 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.una.proyecto_Municipal.dto.*;
-import org.una.proyecto_Municipal.entities.Colaborador;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import org.una.proyecto_Municipal.repositories.IFuncionarioRepository;
-import org.una.proyecto_Municipal.tramites.JwtProvider;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.ArrayList;
@@ -44,11 +32,6 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtProvider jwtProvider;
 
     //findBy...
     @Override
@@ -100,6 +83,15 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     }
 
     @Override
+    public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula) {
+        List<Funcionario> usuarioList = funcionarioRepository.findByCedulaContaining(cedula);
+        if (usuarioList.isEmpty()) return Optional.empty();
+
+        List<FuncionarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, FuncionarioDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Funcionario> funcionarioBuscado = funcionarioRepository.findByCedula(username);
         if (funcionarioBuscado.isPresent()) {
@@ -113,28 +105,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         }
     }
 
-    @Override
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException {
-        // Llama al "authenticationRequest para obtener la cedula
-        Optional<Funcionario> usuario = funcionarioRepository.findByCedula(authenticationRequest.getCedula());
 
-        if(usuario.isPresent() && bCryptPasswordEncoder.matches(authenticationRequest.getPassword(), usuario.get().getPasswordEncriptado())){
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            // Set JWT
-            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
-            FuncionarioDTO funcionarioDto = MapperUtils.DtoFromEntity(usuario.get(), FuncionarioDTO.class);
-            authenticationResponse.setFuncionarioDTO(funcionarioDto);
-            authenticationResponse.setRolDTO(RolDTO.builder().nombre(funcionarioDto.getRol().getNombre()).build());
-
-            return authenticationResponse;
-        } else{
-            throw new InvalidCredentialsException();
-        }
-    }
 
     private String encriptarPassword(String password) throws PasswordIsBlankException {
         if (!password.isBlank()) {
