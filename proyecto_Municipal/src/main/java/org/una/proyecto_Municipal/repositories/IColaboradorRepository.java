@@ -15,4 +15,6 @@ public interface IColaboradorRepository extends JpaRepository<Colaborador, Long>
 
     public List<Colaborador> findByCedulaContaining(String cedula);
 
+//  TODO: find Colaboradores by CobroId, BienId
+
 }

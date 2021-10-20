@@ -65,6 +65,8 @@ public class FacturaController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: findByColaboradorFechaBetween, findByValorImpositvoFechaBetween, revisar findBycajeroId
+    //TODO: findByColaboradorFechaBetween, findByValorImpositvoFechaBetween, revisar findByCajeroId
+
+    // Ver reportes de recibos de un Bien, un Contribuyente o un Funcionario, en un rango de fechas
 
 }

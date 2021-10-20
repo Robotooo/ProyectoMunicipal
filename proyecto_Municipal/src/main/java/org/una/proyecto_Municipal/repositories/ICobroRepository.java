@@ -14,5 +14,9 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     public List<Cobro>  findByColaboradores(Long id);
 
+    public List<Cobro>  findByColaboradoresCedula(String cedula);
+
     public List<Cobro>  findByFacturaId(Long id);
+
+
 }

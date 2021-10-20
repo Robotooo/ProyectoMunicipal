@@ -101,4 +101,8 @@ public class ColaboradorController {
 
     //TODO: findByValorImpositivo
 
+    // Cómo autorizar la petición de "eliminación" de un Gestor?
+    // El Gerente debe emitir listados generales...?
+    // El Admin debe consultar pantallas en desarrollo
+    // El Auditor debe ver listados de información o de transacciones
 }

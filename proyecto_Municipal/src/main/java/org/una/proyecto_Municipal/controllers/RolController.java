@@ -40,7 +40,7 @@ public class RolController {
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -53,7 +53,7 @@ public class RolController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
@@ -62,6 +62,7 @@ public class RolController {
         return new ResponseEntity<>(rolUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -69,6 +70,7 @@ public class RolController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         rolService.deleteAll();
