@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationRunner {
     @SneakyThrows
     @Override
     public void run(ApplicationArguments args) {
-        if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
+        if (funcionarioService.findByCedula(cedula).isEmpty()) {
 
             Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_COLABORADOR.name()).build());
             Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_AUDITOR.name()).build());

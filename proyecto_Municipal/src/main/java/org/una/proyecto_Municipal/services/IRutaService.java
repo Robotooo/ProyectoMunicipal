@@ -11,6 +11,8 @@ public interface IRutaService {
 
     public Optional<RutaDTO> findById(Long id);
 
+    public Optional<List<RutaDTO>> findAll();
+
     public Optional<List<RutaDTO>> findByEstado(Boolean estado);
 
     public Optional<List<RutaDTO>> findByBienId(Long id);
@@ -20,4 +22,7 @@ public interface IRutaService {
     public Optional<RutaDTO> update(RutaDTO rutaDTO, Long id);
 
     public void delete(Long id);
+
+    public void deleteAll();
+
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
@@ -31,6 +32,15 @@ public class RutaController {
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de todas las rutas",
+            response = RutaDTO.class, responseContainer = "List", tags = "Rutas")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<RutaDTO>> result = rutaService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Obtiene una lista de rutas a partir de su estado",
             response = RutaDTO.class, tags = "Rutas")
     @GetMapping("/{estado}")
@@ -39,13 +49,13 @@ public class RutaController {
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
-//            response = RutaDTO.class, tags = "Rutas")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByBienId(@PathVariable(value = "estado") Boolean estado) {
-//        Optional<List<RutaDTO>> rutaFound = rutaService.findByBien(estado);
-//        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
+            response = RutaDTO.class, tags = "Rutas")
+    @GetMapping("/{bien_id}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien_id") Long id) {
+        Optional<List<RutaDTO>> bienFound = rutaService.findByBienId(id);
+        return new ResponseEntity<>(bienFound, HttpStatus.OK);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -74,5 +84,10 @@ public class RutaController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO:  delete, findAll
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        rutaService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
 }

@@ -26,5 +26,6 @@ public class CategoriaBasura implements Serializable {
     @Column
     private String descripcion;
 
+    private static final long serialVersionUID = 1L;
 
 }

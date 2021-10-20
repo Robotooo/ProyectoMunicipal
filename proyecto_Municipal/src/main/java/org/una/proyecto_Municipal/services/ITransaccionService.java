@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.services;
 
+import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 
 import java.util.Date;
@@ -10,6 +11,8 @@ public interface ITransaccionService {
 
     public Optional<TransaccionDTO> findById(Long id);
 
+    public Optional<List<TransaccionDTO>> findAll();
+
     public Optional<List<TransaccionDTO>> findByUsuarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate);
 
     public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate);
@@ -19,4 +22,10 @@ public interface ITransaccionService {
     public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
     public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO);
+
+    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id);
+
+    public void delete(Long id);
+
+    public void deleteAll();
 }

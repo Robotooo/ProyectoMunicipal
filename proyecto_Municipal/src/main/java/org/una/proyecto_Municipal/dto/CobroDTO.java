@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.una.proyecto_Municipal.entities.BienxColaborador;
+import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.Date;
 
@@ -18,4 +19,5 @@ public class CobroDTO {
     private Date fechaCreacion;
     private Date fechaModificacion;
     private BienxColaborador bienxColaboradorId;
+    private Factura facturaId;
 }

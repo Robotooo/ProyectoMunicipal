@@ -9,6 +9,6 @@ public interface IFacturaRepository extends JpaRepository<Factura, Long> {
 
     public List<Factura> findByNombre(String nombre);
 
-    public List<Factura>  findByCajeroId(Long id);
+    public List<Factura> findByCajeroId(Long id);
 
 }

@@ -30,4 +30,6 @@ public class DiaSemana implements Serializable {
     @JoinColumn(name="ruta_id")
     private Ruta rutaId;
 
+    private static final long serialVersionUID = 1L;
+
 }

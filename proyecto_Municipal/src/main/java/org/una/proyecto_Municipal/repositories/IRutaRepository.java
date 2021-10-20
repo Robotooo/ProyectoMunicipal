@@ -9,14 +9,15 @@ public interface IRutaRepository extends JpaRepository<Ruta, Long> {
 
     public List<Ruta> findByEstado(Boolean estado);
 
-    //public List<Ruta>  findByBienId(Long id);
+    public List<Ruta> findByBienId(Long id);
 
-    //List<Ruta> findByCantidadSalidasAndFechaDia(Integer, String);
-
+//    List<Ruta> findByCantidadSalidasAndFechaDia(Integer, String);
+//
 //    @Query("SELECT rutas_buses.estado, dia_semana.cantidad_salidas, dia_semana.fecha_dia " +
 //            "FROM rutas_buses " +
 //            "INNER JOIN dia_semana ON rutas_buses.id = dia_semana.rutas_buses_id " +
 //            "WHERE rutas_buses.estado = 1")
-    //public Ruta findFormulaWithLikeSQL(@Param("ruta"));
+//
+//    public Ruta findFormulaWithLikeSQL(@Param("ruta"));
 
 }

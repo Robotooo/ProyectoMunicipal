@@ -18,4 +18,9 @@ public interface IParametroService{
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO);
 
     public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id);
+
+    public void delete(Long id);
+
+    public void deleteAll();
+
 }

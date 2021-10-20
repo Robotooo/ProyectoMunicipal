@@ -31,4 +31,6 @@ public class DeclaracionAnual implements Serializable {
     @JoinColumn(name="licencias_comerciales_id")
     private Licencia licenciaId;
 
+    private static final long serialVersionUID = 1L;
+
 }

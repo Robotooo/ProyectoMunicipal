@@ -31,4 +31,6 @@ public class BienxColaborador implements Serializable {
     @Column
     private Float porcentaje;
 
+    private static final long serialVersionUID = 1L;
+
 }

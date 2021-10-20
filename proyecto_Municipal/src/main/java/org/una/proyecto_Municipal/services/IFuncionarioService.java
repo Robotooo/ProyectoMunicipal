@@ -19,20 +19,15 @@ public interface IFuncionarioService {
 
     public Optional<List<FuncionarioDTO>> findByUsuario(String user);
 
-    public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula);
-
-   // public Optional<List<FuncionarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
-
     public Optional<List<FuncionarioDTO>> findByRolId(Long id);
 
     public Optional<List<FuncionarioDTO>> findByEstado(Boolean estado);
 
     public Optional<FuncionarioDTO> findByCedula(String cedula);
 
-    //public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
+    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
 
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException;
-
 
     public void delete(Long id);
 
@@ -40,13 +35,6 @@ public interface IFuncionarioService {
 
     public UserDetails loadUserByUsername(String username);
 
-     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException;
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException;
 
-    Optional<List<FuncionarioDTO>> findByBienId(Long id);
-
-    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
-
-    //public Optional<FuncionarioDTO> update(LicenciaDTO funcionarioDTO, Long id);
-
-    //  TODO: Hacer método "loadFuncionario"
 }

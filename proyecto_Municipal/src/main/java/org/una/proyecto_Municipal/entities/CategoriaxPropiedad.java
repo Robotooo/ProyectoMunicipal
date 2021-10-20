@@ -32,4 +32,6 @@ public class CategoriaxPropiedad implements Serializable{
     @Column
     private Integer cantidad;
 
+    private static final long serialVersionUID = 1L;
+
 }

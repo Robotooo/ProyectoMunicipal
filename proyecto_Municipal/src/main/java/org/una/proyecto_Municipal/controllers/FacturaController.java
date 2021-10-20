@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.FacturaDTO;
 import org.una.proyecto_Municipal.services.IFacturaService;
 
@@ -22,20 +21,20 @@ public class FacturaController {
     private IFacturaService facturaService;
 
     @ApiOperation(value = "Obtiene una factura a partir de su id",
-            response = CobroDTO.class, tags = "Facturas")
+            response = FacturaDTO.class, tags = "Facturas")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FacturaDTO> facturaFound = facturaService.findById(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
     }
 
-    /*@ApiOperation(value = "Obtiene una factura a partir del id del cajero",
-            response = CobroDTO.class, tags = "Facturas")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "id") Long id) {
+    @ApiOperation(value = "Obtiene una factura a partir del id del cajero",
+            response = FacturaDTO.class, tags = "Facturas")
+    @GetMapping("/{cajero_id}")
+    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "cajero_id") Long id) {
         Optional<List<FacturaDTO>> facturaFound = facturaService.findByCajeroId(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
-    }*/
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea una Factura", response = FacturaDTO.class, tags = "Facturas")
