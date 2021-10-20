@@ -108,7 +108,6 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         return MapperUtils.DtoFromEntity(licenciaCreated, LicenciaDTO.class);
     }
 
-    //create & update
     @Override
     @Transactional
     public Optional<LicenciaDTO> create(LicenciaDTO licenciaDTO) {
@@ -121,7 +120,6 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         if (licenciaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedLicenciaDTO(licenciaDTO));
-
     }
 
 }
