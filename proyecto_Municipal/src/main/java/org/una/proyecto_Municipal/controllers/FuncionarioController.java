@@ -35,8 +35,8 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<FuncionarioDTO>> result = funcionarioService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -50,14 +50,15 @@ public class FuncionarioController {
     }
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
-            response = FuncionarioDTO.class, tags = "Funcionarios")
+            response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene un funcionario a partir de su cedula", response = FuncionarioDTO.class, tags = "Funcionarios")
+    @ApiOperation(value = "Obtiene un funcionario a partir de su cedula",
+            response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
@@ -71,23 +72,6 @@ public class FuncionarioController {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
-
-//    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso",
-//            response = FuncionarioDTO.class, tags = "Seguridad")
-//    @PostMapping("/login")
-//    @ResponseBody
-//    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
-//    public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) { throw new MissingInputsException();  }
-//
-//        AuthenticationResponse authenticationResponse = null;
-//        try {
-//            authenticationResponse = funcionarioService.login(authenticationRequest);
-//        } catch (InvalidCredentialsException e) {
-//            e.printStackTrace();
-//        }
-//        return new ResponseEntity(authenticationResponse, HttpStatus.OK);
-//    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

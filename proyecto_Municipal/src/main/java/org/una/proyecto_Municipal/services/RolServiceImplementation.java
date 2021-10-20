@@ -37,7 +37,12 @@ public class RolServiceImplementation implements IRolService{
         List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolRepository.findAll(), RolDTO.class);
         return Optional.ofNullable(rolDTOList);
     }
-/*
+
+    @Override
+    public Optional<List<RolDTO>> findByNombre(String nombre) {
+        return Optional.empty();
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<List<RolDTO>> findByNombreContainingAproximateIgnoreCase(String nombre) {
@@ -45,7 +50,7 @@ public class RolServiceImplementation implements IRolService{
         List<RolDTO> rolDTOList = MapperUtils.DtoListFromEntityList(rolList, RolDTO.class);
         return Optional.ofNullable(rolDTOList);
     }
-*/
+
 
     @Override
     public Optional<List<RolDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {

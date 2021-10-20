@@ -34,8 +34,8 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de todos los parametros",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<ParametroDTO>> result = parametroService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

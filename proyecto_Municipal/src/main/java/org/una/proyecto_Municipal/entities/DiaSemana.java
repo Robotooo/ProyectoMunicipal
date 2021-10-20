@@ -24,7 +24,7 @@ public class DiaSemana implements Serializable {
     private Integer cantidadSalidas;
 
     @Column
-    private String fechaDia;
+    private String nombreDia;
 
     @ManyToOne
     @JoinColumn(name="ruta_id")

@@ -29,11 +29,11 @@ public class Rol implements Serializable {
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_creacion;
+    private Date fechaCreacion;
 
     @PrePersist
     public void prePersist() {
-        fecha_creacion = new Date();
+        fechaCreacion = new Date();
     }
 
 }

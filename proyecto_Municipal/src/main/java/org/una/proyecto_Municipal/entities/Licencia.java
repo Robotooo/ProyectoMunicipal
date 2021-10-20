@@ -23,7 +23,7 @@ public class Licencia implements Serializable {
     private String nombre;
 
     @Column(unique = true)
-    private Integer telefono;
+    private String telefono;
 
     @Column(length = 50, unique = true)
     private String email;

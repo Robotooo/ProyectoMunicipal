@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +12,9 @@ import org.una.proyecto_Municipal.services.ICobroService;
 import java.util.List;
 import java.util.Optional;
 
-//@RestController
-//@RequestMapping("/cobros")
-//@Api(tags = {"Cobros"})
+@RestController
+@RequestMapping("/cobros")
+@Api(tags = {"Cobros"})
 public class CobroController {
 
     @Autowired
@@ -30,14 +31,14 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de todos los bienes",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<CobroDTO>> result = cobroService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
-            response = CobroDTO.class, tags = "Cobros")
+            responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByEstado(estado);
@@ -53,16 +54,16 @@ public class CobroController {
 //    }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
-            response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
+            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
+    @GetMapping("/{colaborador_id}")
     public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-            response = CobroDTO.class, tags = "Proveedores")
-    @GetMapping("/{id}")
+            response = CobroDTO.class, responseContainer = "List", tags = "Proveedores")
+    @GetMapping("/{factura_id}")
     public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);

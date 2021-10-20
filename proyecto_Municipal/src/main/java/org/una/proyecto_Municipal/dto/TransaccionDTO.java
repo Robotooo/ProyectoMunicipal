@@ -14,7 +14,7 @@ public class TransaccionDTO {
 
     private Long id;
     private String objeto;
-    private String usuarioID;
+    private FuncionarioDTO funcionarioId;
     private String accion;
     private Date fechaCreacion;
 }

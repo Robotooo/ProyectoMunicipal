@@ -31,8 +31,8 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de todos los colaboradores",
             response = ColaboradorDTO.class, responseContainer = "List", tags = "Colaboradores")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<ColaboradorDTO>> result = colaboradorService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

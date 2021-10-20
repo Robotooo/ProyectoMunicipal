@@ -33,25 +33,25 @@ public class Parametro implements Serializable {
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_creacion;
+    private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
     @Temporal(TemporalType.DATE)
-    private Date fecha_modificacion;
+    private Date fechaModificacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
         estado = true;
-        fecha_creacion= new Date();
-        fecha_modificacion = new Date();
+        fechaCreacion= new Date();
+        fechaModificacion = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        fecha_modificacion = new Date();
+        fechaModificacion = new Date();
     }
 
 }

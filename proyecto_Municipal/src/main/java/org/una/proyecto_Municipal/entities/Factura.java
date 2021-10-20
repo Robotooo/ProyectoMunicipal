@@ -25,28 +25,28 @@ public class Factura implements Serializable {
     private String nombre;
 
     @Column
-    private Double monto_cancelar;
+    private Double montoCancelar;
 
     @Column(name = "tipo_pago", length = 45)
-    private String tipo_pago;
+    private String tipoPago;
 
     @ManyToOne
     @JoinColumn(name="cajero_id")
     private Funcionario cajeroId;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
-//    private List<Cobro> cobros= new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "facturas")
+    //private List<Cobro> cobros= new ArrayList<>();
 
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fecha_cancelacion;
+    private Date fechaCancelacion;
 
     private static final long serialVersionUID = 1L;
 
     @PrePersist
     public void prePersist() {
-        fecha_cancelacion = new Date();
+        fechaCancelacion = new Date();
     }
 
 }

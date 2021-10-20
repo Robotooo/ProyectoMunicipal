@@ -34,8 +34,8 @@ public class RolController {
     @ApiOperation(value = "Obtiene una lista de todos los roles",
             response = RolDTO.class, responseContainer = "List", tags = "Roles")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<RolDTO>> result = rolService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

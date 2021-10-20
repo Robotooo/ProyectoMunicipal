@@ -35,8 +35,8 @@ public class PropiedadController {
     @ApiOperation(value = "Obtiene una lista de todos los propiedades",
             response = PropiedadDTO.class, responseContainer = "List", tags = "Propiedades")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<PropiedadDTO>> result = propiedadService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

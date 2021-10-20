@@ -35,8 +35,8 @@ public class RutaController {
     @ApiOperation(value = "Obtiene una lista de todas las rutas",
             response = RutaDTO.class, responseContainer = "List", tags = "Rutas")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<RutaDTO>> result = rutaService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

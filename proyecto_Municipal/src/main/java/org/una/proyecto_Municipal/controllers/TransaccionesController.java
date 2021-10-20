@@ -36,8 +36,8 @@ public class TransaccionesController {
     @ApiOperation(value = "Obtiene una lista de todas las transacciones",
             response = TransaccionDTO.class, responseContainer = "List", tags = "Transacciones")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<TransaccionDTO>> result = transaccionService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,9 @@ import org.una.proyecto_Municipal.services.IBienService;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/bienes")
+@Api(tags = {"Bienes"})
 public class BienController {
 
     @Autowired
@@ -27,8 +31,8 @@ public class BienController {
     @ApiOperation(value = "Obtiene una lista de todos los bienes",
             response = BienDTO.class, responseContainer = "List", tags = "Bienes")
     @GetMapping("/{all}")
-    public @ResponseBody
-    ResponseEntity<?> findAll() {
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
         Optional<List<BienDTO>> result = bienService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

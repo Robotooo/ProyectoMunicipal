@@ -16,6 +16,8 @@ public interface IRolService {
 
     public Optional<List<RolDTO>> findByNombre(String nombre);
 
+    public Optional<List<RolDTO>> findByNombreContainingAproximateIgnoreCase(String nombre);
+
     public Optional<List<RolDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
     public void delete(Long id);
