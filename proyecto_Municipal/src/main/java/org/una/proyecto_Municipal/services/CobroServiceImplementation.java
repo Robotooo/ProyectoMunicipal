@@ -35,16 +35,16 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTOList);
     }
 
-    @Override
-    public Optional<List<CobroDTO>> findByBienId(Long id) {
-        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
-        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(cobroDTOList);
-    }
+//    @Override
+//    public Optional<List<CobroDTO>> findByBienId(Long id) {
+//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
+//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+//        return Optional.ofNullable(cobroDTOList);
+//    }
 
     @Override
-    public Optional<List<CobroDTO>> findByColaboradores(Long id) {
-        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByColaboradores(id), CobroDTO.class);
+    public Optional<List<CobroDTO>> findByBienxColaboradorId(Long id) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienxColaboradorId(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
     }
@@ -58,7 +58,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobroDTO>> findByEstado(boolean estado) {
+    public Optional<List<CobroDTO>> findByEstado(Boolean estado) {
         List<Cobro> cobroList = cobroRepository.findByEstado(estado);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);

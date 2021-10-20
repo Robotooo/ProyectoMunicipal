@@ -24,7 +24,8 @@ public class AutenticationController {
     @Autowired
     private IAutenticationService autenticationService;
 
-    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = FuncionarioDTO.class, tags = "Seguridad")
+    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso",
+            response = FuncionarioDTO.class, tags = "Seguridad")
     @PostMapping("")
     @ResponseBody
     public ResponseEntity<?> login(@Valid @RequestBody AuthenticationRequest authenticationRequest, BindingResult bindingResult) throws InvalidCredentialsException {

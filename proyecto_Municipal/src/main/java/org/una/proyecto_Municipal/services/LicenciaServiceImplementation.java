@@ -42,16 +42,19 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         return Optional.ofNullable(licenciaDTOList);
     }
 
-
-
     @Override
-    public Optional<LicenciaDTO> findByTelefono(String telefono) {  //??
-        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
-        if (licencia.isEmpty()) throw new NotFoundInformationException();
-
-        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
-        return Optional.ofNullable(licenciaDTO);
+    public Optional<LicenciaDTO> findByTelefono(String telefono) {
+        return Optional.empty();
     }
+
+//    @Override
+//    public Optional<LicenciaDTO> findByTelefono(String telefono) {  //??
+//        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
+//        if (licencia.isEmpty()) throw new NotFoundInformationException();
+//
+//        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
+//        return Optional.ofNullable(licenciaDTO);
+//    }
 
     @Override
     public Optional<LicenciaDTO> findByEmail(String email) {
@@ -63,14 +66,19 @@ public class LicenciaServiceImplementation implements ILicenciaService{
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByDistrito(boolean distrito) {
-        List<Licencia> licenciaList = licenciaRepository.findByEstado(distrito);
-        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
-        return Optional.ofNullable(licenciaDTOList);
+    public Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito) {
+        return Optional.empty();
     }
 
+//    @Override
+//    public Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito) {
+//        List<Licencia> licenciaList = licenciaRepository.findByEstado(distrito);
+//        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
+//        return Optional.ofNullable(licenciaDTOList);
+//    }
+
     @Override
-    public Optional<List<LicenciaDTO>> findByEstado(boolean estado) {
+    public Optional<List<LicenciaDTO>> findByEstado(Boolean estado) {
         List<Licencia> licenciaList = licenciaRepository.findByEstado(estado);
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);
@@ -79,6 +87,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
     @Override
     public Optional<List<LicenciaDTO>> findByBienId(Long id) {
         return Optional.empty();
+        //TODO: findbyBienId
     }
 
 //    //@Override
@@ -108,6 +117,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         return MapperUtils.DtoFromEntity(licenciaCreated, LicenciaDTO.class);
     }
 
+    //create & update
     @Override
     @Transactional
     public Optional<LicenciaDTO> create(LicenciaDTO licenciaDTO) {
@@ -120,6 +130,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         if (licenciaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedLicenciaDTO(licenciaDTO));
+
     }
 
 }

@@ -32,7 +32,7 @@ public class Licencia implements Serializable {
     private String distrito;
 
     @Column
-    private boolean estado;
+    private Boolean estado;
 
     @Column
     private Double ganancias;

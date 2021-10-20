@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,17 +10,26 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "bienes")
+@Table(name = "declaracion_anual")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-public class Bien implements Serializable {
+public class DeclaracionAnual implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private Double montoAnual;
+
+    @Column
+    private Float anio;
+
+    @ManyToOne
+    @JoinColumn(name="licencias_comerciales_id")
+    private Licencia licenciaId;
 
     private static final long serialVersionUID = 1L;
 

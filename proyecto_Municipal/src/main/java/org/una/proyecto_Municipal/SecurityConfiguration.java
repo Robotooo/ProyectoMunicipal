@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.una.proyecto_Municipal.jwt.JwtAuthenticationFilter;
 import org.una.proyecto_Municipal.services.FuncionarioServiceImplementation;
-import org.una.proyecto_Municipal.tramites.JwtAuthenticationEntryPoint;
+import org.una.proyecto_Municipal.jwt.JwtAuthenticationEntryPoint;
 
 
 @Configuration

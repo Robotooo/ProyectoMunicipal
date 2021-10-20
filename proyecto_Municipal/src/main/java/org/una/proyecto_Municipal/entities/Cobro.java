@@ -4,10 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "cobros")
@@ -15,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Cobro implements Serializable {
 
     @Id
@@ -24,15 +20,11 @@ public class Cobro implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="facturas_id")
-    private Factura factura;
+    private Factura facturaId;
 
     @ManyToOne
-    @JoinColumn(name="colaboradores_id")
-    private Colaborador colaboradores;
-
-    @ManyToOne
-    @JoinColumn(name="bienes_id")
-    private Bien bienId;
+    @JoinColumn(name="bienes_x_colaboradores_id")
+    private BienxColaborador bienxColaboradorId;
 
     @Column
     private Double monto;
@@ -41,7 +33,7 @@ public class Cobro implements Serializable {
     private Integer periodo;
 
     @Column
-    private boolean estado;
+    private Boolean estado;
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

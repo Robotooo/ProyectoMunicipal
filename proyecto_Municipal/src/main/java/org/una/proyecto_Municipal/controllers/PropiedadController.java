@@ -5,13 +5,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IPropiedadService;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,11 +28,36 @@ public class PropiedadController {
             response = PropiedadDTO.class, tags = "Propiedades")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<PropiedadDTO> proveedorFound = propiedadService.findById(id);
-        return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
+        Optional<PropiedadDTO> propiedadFound = propiedadService.findById(id);
+        return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @ApiOperation(value = "Obtiene una lista de todos los propiedades",
+            response = PropiedadDTO.class, responseContainer = "List", tags = "Propiedades")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<PropiedadDTO>> result = propiedadService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su estado",
+            response = PropiedadDTO.class, tags = "Propiedades")
+    @GetMapping("/{estado}")
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+        Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findByEstado(estado);
+        return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
+    }
+
+//    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su nombre",
+//            response = PropiedadDTO.class, tags = "Propiedades")
+//    @GetMapping("/{nombre}")
+//    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
+//        Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findByNombre(departamentoName);
+//        return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
+//
+//    }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -44,25 +70,11 @@ public class PropiedadController {
         }
     }
 
-/*
-    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su nombre",
-            response = PropiedadDTO.class, tags = "Propiedades")
-    @GetMapping("/{nombre}")
-    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
-        Optional<List<PropiedadDTO>> proveedorFound = propiedadService.findByNombre(departamentoName);
-        return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
-
-    }
-
-    */
-
-
-
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PropiedadDTO usuarioModified) throws PasswordIsBlankException {
-        Optional<PropiedadDTO> usuarioUpdated = propiedadService.update(usuarioModified, id);
-        return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
+        Optional<PropiedadDTO> propiedadUpdated = propiedadService.update(usuarioModified, id);
+        return new ResponseEntity<>(propiedadUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -71,6 +83,12 @@ public class PropiedadController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: create, update, delete, findAll, findByEstado, findByZona
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        propiedadService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    //TODO: findByZona
 
 }

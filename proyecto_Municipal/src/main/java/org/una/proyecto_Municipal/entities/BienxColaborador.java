@@ -9,17 +9,27 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "bienes")
+@Table(name = "bienes_x_colaboradores")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-public class Bien implements Serializable {
+public class BienxColaborador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="colaboradores_id")
+    private Colaborador colaboradorId;
+
+    @ManyToOne
+    @JoinColumn(name="bienes_id")
+    private Bien bienId;
+
+    @Column
+    private Float porcentaje;
 
     private static final long serialVersionUID = 1L;
 

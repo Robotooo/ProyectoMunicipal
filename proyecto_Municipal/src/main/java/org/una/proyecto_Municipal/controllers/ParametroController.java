@@ -31,10 +31,19 @@ public class ParametroController {
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de todos los parametros",
+            response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<ParametroDTO>> result = parametroService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su estado",
             response = ParametroDTO.class, tags = "Parametros")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
@@ -61,7 +70,16 @@ public class ParametroController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+        parametroService.delete(id);
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
 
-    //TODO: create, update, delete, findAll
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        parametroService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
 
 }

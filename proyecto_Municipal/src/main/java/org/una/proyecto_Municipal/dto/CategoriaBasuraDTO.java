@@ -4,17 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class TransaccionDTO {
-
+public class CategoriaBasuraDTO {
     private Long id;
-    private String objeto;
-    private String usuarioID;
-    private String accion;
-    private Date fechaCreacion;
+    private String nombre;
+    private String descripcion;
 }

@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.una.proyecto_Municipal.dto.CobroDTO;
@@ -25,6 +24,14 @@ public class FuncionarioController {
     @Autowired
     private IFuncionarioService funcionarioService;
 
+    @ApiOperation(value = "Obtiene una funcionario a partir de su id",
+            response = FuncionarioDTO.class, tags = "Funcionarios")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
+        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @GetMapping("/{all}")
@@ -34,33 +41,34 @@ public class FuncionarioController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una funcionario a partir de su id",
+    @ApiOperation(value = "Obtiene una funcionario a partir de su nombre usuario",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
+    @GetMapping("/{usuario}")
+    public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
-/*
-    @GetMapping("/usuario/{term}")
-    public ResponseEntity<?> findByNombreCompletoAproximateIgnoreCase(@PathVariable(value = "term") String term) {
-        try {
-            Optional<List<FuncionarioDTO>> result = funcionarioService.findByNombreCompletoAproximateIgnoreCase(term);
-            if (result.isPresent()) {
-                return new ResponseEntity<>(result, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
+        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene un funcionario a partir de su cedula", response = FuncionarioDTO.class, tags = "Funcionarios")
+    @GetMapping("/{cedula}")
+    public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
+        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
+        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
+            response = FuncionarioDTO.class, tags = "Funcionarios")
+    @GetMapping("/{rol_id}")
+    public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
@@ -81,15 +89,6 @@ public class FuncionarioController {
 //        return new ResponseEntity(authenticationResponse, HttpStatus.OK);
 //    }
 
-    @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
-            response = CobroDTO.class, tags = "Funcionarios")
-    @GetMapping("/{rol_id}")
-    public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
-        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
-    }
-
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -102,14 +101,6 @@ public class FuncionarioController {
         }
     }
 
-    @ApiOperation(value = "Obtiene un funcionario a partir de su cedula", response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{cedula}")
-    public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
-        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
-        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
-    }
-
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
@@ -117,10 +108,16 @@ public class FuncionarioController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         funcionarioService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        funcionarioService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
 }

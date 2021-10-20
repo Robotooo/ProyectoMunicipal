@@ -15,7 +15,7 @@ public class ParametroDTO {
     private int valor;
     private String nombre;
     private String descripcion;
-    private boolean estado;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
+    private Boolean estado;
+    private Date fecha_creacion;
+    private Date fecha_modificacion;
 }

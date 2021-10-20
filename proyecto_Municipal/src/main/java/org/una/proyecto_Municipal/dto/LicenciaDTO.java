@@ -16,7 +16,7 @@ public class LicenciaDTO {
     private String telefono;
     private String email;
     private String distrito;
-    private boolean estado;
+    private Boolean estado;
     private Date fechaRegistro;
     private Date fechaModificacion;
     private Double ganancias;

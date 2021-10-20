@@ -24,16 +24,16 @@ public class Rol implements Serializable {
     private String nombre;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
-    private List<Funcionario> funcionario = new ArrayList<>();
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fechaCreacion;
+    private Date fecha_creacion;
 
     @PrePersist
     public void prePersist() {
-        fechaCreacion = new Date();
+        fecha_creacion = new Date();
     }
 
 }

@@ -18,6 +18,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Autowired
     private IParametroRepository parametroRepository;
 
+    //findBy...
     @Override
     @Transactional(readOnly = true)
     public Optional<ParametroDTO> findById(Long id) {
@@ -45,18 +46,20 @@ public class ParametroServiceImplementation implements IParametroService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ParametroDTO>> findByEstado(boolean estado) {
+    public Optional<List<ParametroDTO>> findByEstado(Boolean estado) {
         List<Parametro> parametroList = parametroRepository.findByEstado(estado);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
     }
 
+    //get
     private ParametroDTO getSavedParametroDTO(ParametroDTO parametroDTO) {
         Parametro parametro = MapperUtils.EntityFromDto(parametroDTO, Parametro.class);
         Parametro parametroCreated = parametroRepository.save(parametro);
         return MapperUtils.DtoFromEntity(parametroCreated, ParametroDTO.class);
     }
 
+    //create & update
     @Override
     @Transactional
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO) {
@@ -72,5 +75,17 @@ public class ParametroServiceImplementation implements IParametroService{
 
     }
 
+    //detele...
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        parametroRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        parametroRepository.deleteAll();
+    }
 
 }

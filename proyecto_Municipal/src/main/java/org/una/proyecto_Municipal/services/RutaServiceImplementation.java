@@ -18,6 +18,7 @@ public class RutaServiceImplementation implements IRutaService{
     @Autowired
     private IRutaRepository rutaRepository;
 
+    //findBy...
     @Override
     public Optional<RutaDTO> findById(Long id) {
         Optional<Ruta> ruta = rutaRepository.findById(id);
@@ -27,17 +28,15 @@ public class RutaServiceImplementation implements IRutaService{
         return Optional.ofNullable(rutaDTO);
     }
 
-
-//
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Optional<List<RutaDTO>> findAll() {
-//        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findAll(), RutaDTO.class);
-//        return Optional.ofNullable(rutaDTOList);
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<RutaDTO>> findAll() {
+        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findAll(), RutaDTO.class);
+        return Optional.ofNullable(rutaDTOList);
+    }
 
     @Override
-    public Optional<List<RutaDTO>> findByEstado(boolean estado) {
+    public Optional<List<RutaDTO>> findByEstado(Boolean estado) {
         List<Ruta> rutaList = rutaRepository.findByEstado(estado);
         List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaList, RutaDTO.class);
         return Optional.ofNullable(rutaDTOList);
@@ -45,34 +44,32 @@ public class RutaServiceImplementation implements IRutaService{
 
     @Override
     public Optional<List<RutaDTO>> findByBienId(Long id) {
-        return Optional.empty();
+        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findByBienId(id), RutaDTO.class);
+        if (rutaDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(rutaDTOList);
     }
 
-//    @Override
-//    public Optional<List<RutaDTO>> findByBienId(Long id) {
-//        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findByBienId(id), RutaDTO.class);
-//        if (rutaDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(rutaDTOList);
-//    }
+    //delete
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        rutaRepository.deleteById(id);
+    }
 
-//    @Override
-//    @Transactional
-//    public void delete(Long id) {
-//        rutaRepository.deleteById(id);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void deleteAll() {
-//        rutaRepository.deleteAll();
-//    }
+    @Override
+    @Transactional
+    public void deleteAll() {
+        rutaRepository.deleteAll();
+    }
 
+    //get
     private RutaDTO getSavedRutaDTO(RutaDTO rutaDTO) {
         Ruta ruta = MapperUtils.EntityFromDto(rutaDTO, Ruta.class);
         Ruta rutaCreated = rutaRepository.save(ruta);
         return MapperUtils.DtoFromEntity(rutaCreated , RutaDTO.class);
     }
 
+    //create & update
     @Override
     @Transactional
     public Optional<RutaDTO> create(RutaDTO rutaDTO) {
@@ -88,9 +85,4 @@ public class RutaServiceImplementation implements IRutaService{
 
     }
 
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        rutaRepository.deleteById(id);
-    }
 }

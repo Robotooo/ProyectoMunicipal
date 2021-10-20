@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ITransaccionRepository extends JpaRepository<Transaccion, Long> {
 
-    public List<Transaccion> findByUsuarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate);
+    //public List<Transaccion> findByUsuarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate);
 
     public List<Transaccion> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate);
 
-    public List<Transaccion> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
+    //public List<Transaccion> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
 
-    public List<Transaccion> findByFechaCreacionBetween(Date startDate, Date endDate);
+    //public List<Transaccion> findByFechaCreacionBetween(Date startDate, Date endDate);
 
-    public List<Transaccion>  findByUsuarioId(Long id);
+    //public List<Transaccion> findByFuncionarioId(Long id);
 }

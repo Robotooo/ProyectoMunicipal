@@ -12,13 +12,16 @@ public interface IPropiedadService {
 
     public Optional<List<PropiedadDTO>> findAll();
 
-    public Optional<List<PropiedadDTO>> findByNombre(String nombre);
+//    public Optional<List<PropiedadDTO>> findByNombre(String nombre);
 
-    public Optional<List<PropiedadDTO>> findByEstado(boolean estado);
+    public Optional<List<PropiedadDTO>> findByEstado(Boolean estado);
 
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO);
 
     public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, Long id);
 
     public void delete(Long id);
+
+    public void deleteAll();
+
 }

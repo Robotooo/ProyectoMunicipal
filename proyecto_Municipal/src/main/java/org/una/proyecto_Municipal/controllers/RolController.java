@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
@@ -32,15 +31,23 @@ public class RolController {
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene un rol a partir de un rango de tiempo con dos fechas",
-            response = RolDTO.class, tags = "Roles")
-    @GetMapping("/{startDate}")
-    public ResponseEntity<?> findByFechaCreacionBetween(@PathVariable(value = "startDate") Date startDate, Date endDate) {
-        Optional<List<RolDTO>> rolFound = rolService.findByFechaCreacionBetween(startDate, endDate);
-        return new ResponseEntity<>(rolFound, HttpStatus.OK);
+    @ApiOperation(value = "Obtiene una lista de todos los roles",
+            response = RolDTO.class, responseContainer = "List", tags = "Roles")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<RolDTO>> result = rolService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+//    @ApiOperation(value = "Obtiene un rol a partir de un rango de tiempo con dos fechas",
+//            response = RolDTO.class, tags = "Roles")
+//    @GetMapping("/{startDate}")
+//    public ResponseEntity<?> findByFechaCreacionBetween(@PathVariable(value = "startDate") Date startDate, Date endDate) {
+//        Optional<List<RolDTO>> rolFound = rolService.findByFechaCreacionBetween(startDate, endDate);
+//        return new ResponseEntity<>(rolFound, HttpStatus.OK);
+//    }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -53,7 +60,6 @@ public class RolController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
@@ -62,7 +68,6 @@ public class RolController {
         return new ResponseEntity<>(rolUpdated, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -70,12 +75,10 @@ public class RolController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         rolService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: findAll
 }

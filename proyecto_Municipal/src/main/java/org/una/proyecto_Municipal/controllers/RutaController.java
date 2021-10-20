@@ -5,9 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.RolDTO;
 import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
@@ -32,23 +32,31 @@ public class RutaController {
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de todas las rutas",
+            response = RutaDTO.class, responseContainer = "List", tags = "Rutas")
+    @GetMapping("/{all}")
+    public @ResponseBody
+    ResponseEntity<?> findAll() {
+        Optional<List<RutaDTO>> result = rutaService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Obtiene una lista de rutas a partir de su estado",
             response = RutaDTO.class, tags = "Rutas")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<RutaDTO>> rutaFound = rutaService.findByEstado(estado);
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
-//            response = RutaDTO.class, tags = "Rutas")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByBienId(@PathVariable(value = "estado") boolean estado) {
-//        Optional<List<RutaDTO>> rutaFound = rutaService.findByBien(estado);
-//        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
+            response = RutaDTO.class, tags = "Rutas")
+    @GetMapping("/{bien_id}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien_id") Long id) {
+        Optional<List<RutaDTO>> bienFound = rutaService.findByBienId(id);
+        return new ResponseEntity<>(bienFound, HttpStatus.OK);
+    }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -61,7 +69,6 @@ public class RutaController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
@@ -70,7 +77,6 @@ public class RutaController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
@@ -78,5 +84,10 @@ public class RutaController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO:  delete, findAll
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteAll() throws Exception {
+        rutaService.deleteAll();
+        return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
 }
