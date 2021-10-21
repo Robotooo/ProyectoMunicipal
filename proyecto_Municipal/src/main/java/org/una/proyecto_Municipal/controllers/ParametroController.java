@@ -43,7 +43,7 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su estado",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }

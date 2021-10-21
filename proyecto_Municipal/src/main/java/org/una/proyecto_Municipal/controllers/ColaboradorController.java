@@ -40,7 +40,7 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }

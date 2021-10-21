@@ -40,7 +40,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByEstado(estado);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }

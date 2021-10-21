@@ -35,7 +35,7 @@ public class LicenciaController {
     @ApiOperation(value = "Obtiene una lista de licencias a partir de su estado",
             response = LicenciaDTO.class, responseContainer = "List", tags = "Licencias")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<LicenciaDTO>> proveedorFound = licenciaService.findByEstado(estado);
         return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
     }

@@ -44,7 +44,7 @@ public class PropiedadController {
     @ApiOperation(value = "Obtiene una lista de propiedades a partir de su estado",
             response = PropiedadDTO.class, tags = "Propiedades")
     @GetMapping("/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findByEstado(estado);
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
