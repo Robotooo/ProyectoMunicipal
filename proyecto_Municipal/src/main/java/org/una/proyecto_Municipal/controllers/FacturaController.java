@@ -22,7 +22,7 @@ public class FacturaController {
 
     @ApiOperation(value = "Obtiene una factura a partir de su id",
             response = FacturaDTO.class, tags = "Facturas")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FacturaDTO> facturaFound = facturaService.findById(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class FacturaController {
 
     @ApiOperation(value = "Obtiene una factura a partir del id del cajero",
             response = FacturaDTO.class, tags = "Facturas")
-    @GetMapping("/{cajero_id}")
+    @GetMapping("/cajero_id/{cajero_id}")
     public ResponseEntity<?> findByCajeroId(@PathVariable(value = "cajero_id") Long id) {
         Optional<List<FacturaDTO>> facturaFound = facturaService.findByCajeroId(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
@@ -39,14 +39,12 @@ public class FacturaController {
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea una Factura", response = FacturaDTO.class, tags = "Facturas")
     @PostMapping("/")
-    @ResponseBody
     public ResponseEntity<?> create(@RequestBody FacturaDTO facturaDTO) {
         Optional<FacturaDTO> facturaCreated = facturaService.create(facturaDTO);
         return new ResponseEntity<>(facturaCreated, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FacturaDTO facturaModified) {
         Optional<FacturaDTO> facturaUpdated = facturaService.update(facturaModified, id);
         return new ResponseEntity<>(facturaUpdated, HttpStatus.OK);

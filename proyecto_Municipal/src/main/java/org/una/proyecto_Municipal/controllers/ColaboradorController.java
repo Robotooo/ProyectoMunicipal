@@ -22,7 +22,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
-    @GetMapping("/{estado}")
+    @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Colaboradores")
-    @GetMapping("/{nombre}")
+    @GetMapping("/nombre/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByNombre(departamentoName);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
@@ -56,7 +56,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su telefono",
             response = ColaboradorDTO.class, tags = "Colaboradores")
-    @GetMapping("/{telefono}")
+    @GetMapping("/telefono/{telefono}")
     public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByTelefono(telefono);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
@@ -65,7 +65,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su cedula",
             response = ColaboradorDTO.class, tags = "Colaboradores")
-    @GetMapping("/{cedula}")
+    @GetMapping("/cedula/{cedula}")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);

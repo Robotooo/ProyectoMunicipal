@@ -25,7 +25,7 @@ public class RolController {
 
     @ApiOperation(value = "Obtiene un Rol a partir de su id",
             response = RolDTO.class, tags = "Roles")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<RolDTO> rolFound = rolService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);

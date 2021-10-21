@@ -27,7 +27,7 @@ public class TransaccionesController {
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = TransaccionDTO.class, tags = "Transacciones")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<TransaccionDTO> transaccionFound = transaccionService.findById(id);
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);

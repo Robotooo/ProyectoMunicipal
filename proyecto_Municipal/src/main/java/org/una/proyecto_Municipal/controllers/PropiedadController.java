@@ -26,7 +26,7 @@ public class PropiedadController {
 
     @ApiOperation(value = "Obtiene una propiedad a partir de su id",
             response = PropiedadDTO.class, tags = "Propiedades")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<PropiedadDTO> propiedadFound = propiedadService.findById(id);
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
@@ -43,7 +43,7 @@ public class PropiedadController {
 
     @ApiOperation(value = "Obtiene una lista de propiedades a partir de su estado",
             response = PropiedadDTO.class, tags = "Propiedades")
-    @GetMapping("/{estado}")
+    @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findByEstado(estado);
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);

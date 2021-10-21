@@ -25,7 +25,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id",
             response = ParametroDTO.class, tags = "Parametros")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ParametroDTO> parametroFound = parametroService.findById(id);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
@@ -42,7 +42,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su estado",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
-    @GetMapping("/{estado}")
+    @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@RequestParam(value="estado") boolean estado) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);

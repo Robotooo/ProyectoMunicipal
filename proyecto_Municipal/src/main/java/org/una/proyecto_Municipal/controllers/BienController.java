@@ -22,7 +22,7 @@ public class BienController {
 
     @ApiOperation(value = "Obtiene un bien a partir de su id",
             response = BienDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<BienDTO> bienFound = bienService.findById(id);
         return new ResponseEntity<>(bienFound, HttpStatus.OK);

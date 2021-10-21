@@ -28,8 +28,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una funcionario a partir de su id",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
-    @GetMapping("/{id}")
-    @ResponseBody
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -38,8 +37,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
-    @GetMapping("/{estado}")
-    @ResponseBody
+    @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -48,7 +46,6 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @GetMapping("/{all}")
-    @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<FuncionarioDTO>> result = funcionarioService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -56,8 +53,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una funcionario a partir de su nombre usuario",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{usuario}")
-    @ResponseBody
+    @GetMapping("/usuario/{usuario}")
     public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -66,8 +62,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{cedula}")
-    @ResponseBody
+    @GetMapping("/cedula/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -75,8 +70,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/{rol_id}")
-    @ResponseBody
+    @GetMapping("/rol_id/{rol_id}")
     public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -84,7 +78,6 @@ public class FuncionarioController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
-    @ResponseBody
     public ResponseEntity<?> create(@RequestBody FuncionarioDTO funcionarioDTO) {
         try {
             Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO);
@@ -95,7 +88,6 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
         Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);

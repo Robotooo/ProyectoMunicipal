@@ -22,7 +22,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CobroDTO> cobroFound = cobroService.findById(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/{estado}")
+    @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByEstado(estado);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
-    @GetMapping("/{colaborador_id}")
+    @GetMapping("/colaborador_id/{colaborador_id}")
     public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
@@ -63,7 +63,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
             response = CobroDTO.class, responseContainer = "List", tags = "Proveedores")
-    @GetMapping("/{factura_id}")
+    @GetMapping("/factura_id/{factura_id}")
     public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
