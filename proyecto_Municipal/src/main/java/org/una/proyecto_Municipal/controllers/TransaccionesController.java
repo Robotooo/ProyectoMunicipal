@@ -28,7 +28,7 @@ public class TransaccionesController {
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = TransaccionDTO.class, tags = "Transacciones")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<TransaccionDTO> transaccionFound = transaccionService.findById(id);
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
     }
@@ -57,14 +57,14 @@ public class TransaccionesController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody TransaccionDTO transaccionModified) throws PasswordIsBlankException {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody TransaccionDTO transaccionModified) throws PasswordIsBlankException {
         Optional<TransaccionDTO> transaccionUpdated = transaccionService.update(transaccionModified, id);
         return new ResponseEntity<>(transaccionUpdated, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         transaccionService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

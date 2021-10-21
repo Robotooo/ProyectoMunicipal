@@ -27,7 +27,7 @@ public class PropiedadController {
     @ApiOperation(value = "Obtiene una propiedad a partir de su id",
             response = PropiedadDTO.class, tags = "Propiedades")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<PropiedadDTO> propiedadFound = propiedadService.findById(id);
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
@@ -72,13 +72,13 @@ public class PropiedadController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody PropiedadDTO usuarioModified) throws PasswordIsBlankException {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody PropiedadDTO usuarioModified) throws PasswordIsBlankException {
         Optional<PropiedadDTO> propiedadUpdated = propiedadService.update(usuarioModified, id);
         return new ResponseEntity<>(propiedadUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         propiedadService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

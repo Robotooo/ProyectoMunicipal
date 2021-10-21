@@ -7,11 +7,11 @@ import org.una.proyecto_Municipal.entities.Funcionario;
 import java.util.List;
 import java.util.Optional;
 
-public interface IFuncionarioRepository extends JpaRepository<Funcionario, long> {
+public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
     public List<Funcionario> findByUsuario(String nombre);
 
-    public List<Funcionario> findByRolId(long id);
+    public List<Funcionario> findByRolId(Long id);
 
     Optional<Funcionario> findByCedula(String cedula);
 

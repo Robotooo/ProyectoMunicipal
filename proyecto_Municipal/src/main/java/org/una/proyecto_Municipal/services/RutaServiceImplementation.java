@@ -20,7 +20,7 @@ public class RutaServiceImplementation implements IRutaService{
 
     //findBy...
     @Override
-    public Optional<RutaDTO> findById(long id) {
+    public Optional<RutaDTO> findById(Long id) {
         Optional<Ruta> ruta = rutaRepository.findById(id);
         if (ruta.isEmpty()) throw new NotFoundInformationException();
 
@@ -43,7 +43,7 @@ public class RutaServiceImplementation implements IRutaService{
     }
 
     @Override
-    public Optional<List<RutaDTO>> findByBienId(long id) {
+    public Optional<List<RutaDTO>> findByBienId(Long id) {
         List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findByBienId(id), RutaDTO.class);
         if (rutaDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(rutaDTOList);
@@ -52,7 +52,7 @@ public class RutaServiceImplementation implements IRutaService{
     //delete
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         rutaRepository.deleteById(id);
     }
 
@@ -78,7 +78,7 @@ public class RutaServiceImplementation implements IRutaService{
 
     @Override
     @Transactional
-    public Optional<RutaDTO> update(RutaDTO rutaDTO, long id) {
+    public Optional<RutaDTO> update(RutaDTO rutaDTO, Long id) {
         if (rutaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedRutaDTO(rutaDTO));

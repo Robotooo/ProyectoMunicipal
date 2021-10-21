@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IParametroService{
 
-    public Optional<ParametroDTO> findById(long id);
+    public Optional<ParametroDTO> findById(Long id);
 
     public Optional<List<ParametroDTO>> findAll();
 
@@ -17,9 +17,9 @@ public interface IParametroService{
 
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO);
 
-    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, long id);
+    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id);
 
-    public void delete(long id);
+    public void delete(Long id);
 
     public void deleteAll();
 

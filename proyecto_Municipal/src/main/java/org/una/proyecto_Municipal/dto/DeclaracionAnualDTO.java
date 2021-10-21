@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class DeclaracionAnualDTO {
-    private long id;
+    private Long id;
     private LicenciaDTO licenciaId;
     private double montoAnual;
     private float anio;

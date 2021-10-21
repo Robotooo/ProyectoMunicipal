@@ -20,7 +20,7 @@ public class BienServiceImplementation implements IBienService{
 
     //findBy...
     @Override
-    public Optional<BienDTO> findById(long id) {
+    public Optional<BienDTO> findById(Long id) {
         Optional<Bien> bien = bienRepository.findById(id);
         if (bien.isEmpty()) throw new NotFoundInformationException();
 
@@ -51,7 +51,7 @@ public class BienServiceImplementation implements IBienService{
 
     //@Override
     @Transactional
-    public Optional<BienDTO> update(BienDTO bienDTO, long id) {
+    public Optional<BienDTO> update(BienDTO bienDTO, Long id) {
         if (bienRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedBienDTO(bienDTO));
@@ -61,7 +61,7 @@ public class BienServiceImplementation implements IBienService{
     //detele...
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         bienRepository.deleteById(id);
     }
 

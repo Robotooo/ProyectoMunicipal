@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class LicenciaDTO {
-    private long id;
+    private Long id;
     private String nombre;
     private String telefono;
     private String email;

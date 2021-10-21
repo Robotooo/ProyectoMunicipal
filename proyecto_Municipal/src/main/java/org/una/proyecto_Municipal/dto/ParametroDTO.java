@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ParametroDTO {
-    private long id;
+    private Long id;
     private int valor;
     private String nombre;
     private String descripcion;

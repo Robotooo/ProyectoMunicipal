@@ -7,15 +7,15 @@ import java.util.Optional;
 
 public interface IBienService {
 
-    public Optional<BienDTO> findById(long id);
+    public Optional<BienDTO> findById(Long id);
 
     public Optional<List<BienDTO>> findAll();
 
     public Optional<BienDTO> create(BienDTO bienDTO);
 
-    public Optional<BienDTO> update(BienDTO bienDTO, long id);
+    public Optional<BienDTO> update(BienDTO bienDTO, Long id);
 
-    public void delete(long id);
+    public void delete(Long id);
 
     public void deleteAll();
 

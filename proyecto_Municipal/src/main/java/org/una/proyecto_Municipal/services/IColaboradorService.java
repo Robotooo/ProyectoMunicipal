@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IColaboradorService {
 
-    public Optional<ColaboradorDTO> findById(long id);
+    public Optional<ColaboradorDTO> findById(Long id);
 
     public Optional<List<ColaboradorDTO>> findAll();
 
@@ -21,9 +21,9 @@ public interface IColaboradorService {
 
     public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO);
 
-    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, long id);
+    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id);
 
-    public void delete(long id);
+    public void delete(Long id);
 
     public void deleteAll();
 

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class DiaSemanaDTO {
-    private long id;
+    private Long id;
     private Integer cantidadSalidas;
     private String nombreDia;
     private RutaDTO rutaId;

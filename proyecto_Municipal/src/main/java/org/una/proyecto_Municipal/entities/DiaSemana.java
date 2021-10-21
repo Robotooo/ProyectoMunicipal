@@ -18,7 +18,7 @@ public class DiaSemana implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private Integer cantidadSalidas;

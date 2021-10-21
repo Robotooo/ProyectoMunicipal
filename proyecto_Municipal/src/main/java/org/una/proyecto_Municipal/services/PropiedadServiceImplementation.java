@@ -22,7 +22,7 @@ public class PropiedadServiceImplementation implements IPropiedadService{
     private IPropiedadRepository propiedadRepository;
 
     @Override
-    public Optional<PropiedadDTO> findById(long id) {
+    public Optional<PropiedadDTO> findById(Long id) {
 
         Optional<Propiedad> propiedad = propiedadRepository.findById(id);
         if (propiedad.isEmpty()) throw new NotFoundInformationException();
@@ -62,7 +62,7 @@ public class PropiedadServiceImplementation implements IPropiedadService{
     //delete
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         propiedadRepository.deleteById(id);
     }
 
@@ -80,7 +80,7 @@ public class PropiedadServiceImplementation implements IPropiedadService{
     }
 
     @Override
-    public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, long id) {
+    public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, Long id) {
         if (propiedadRepository.findById(id).isEmpty()) return Optional.empty();
 
         return Optional.ofNullable(getSavedPropiedadDTO(propiedadDTO));

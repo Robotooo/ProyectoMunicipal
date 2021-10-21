@@ -20,7 +20,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
 
     //findBy...
     @Override
-    public Optional<LicenciaDTO> findById(long id) {
+    public Optional<LicenciaDTO> findById(Long id) {
         Optional<Licencia> proveedor = licenciaRepository.findById(id);
         if (proveedor.isEmpty()) throw new NotFoundInformationException();
 
@@ -85,13 +85,13 @@ public class LicenciaServiceImplementation implements ILicenciaService{
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByBienId(long id) {
+    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
         return Optional.empty();
         //TODO: findbyBienId
     }
 
 //    //@Override
-//    public Optional<List<LicenciaDTO>> findByBienId(long id) {
+//    public Optional<List<LicenciaDTO>> findByBienId(Long id) {
 //        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findByBienId(id), LicenciaDTO.class);
 //        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
 //        return Optional.ofNullable(licenciaDTOList);
@@ -100,7 +100,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
     //detele...
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         licenciaRepository.deleteById(id);
     }
 
@@ -126,7 +126,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
 
     @Override
     @Transactional
-    public Optional<LicenciaDTO> update(LicenciaDTO licenciaDTO, long id) {
+    public Optional<LicenciaDTO> update(LicenciaDTO licenciaDTO, Long id) {
         if (licenciaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedLicenciaDTO(licenciaDTO));

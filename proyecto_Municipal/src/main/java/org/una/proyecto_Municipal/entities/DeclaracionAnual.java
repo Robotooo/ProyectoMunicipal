@@ -19,7 +19,7 @@ public class DeclaracionAnual implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private double montoAnual;

@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @Builder
 public class RolDTO {
-    private long id;
+    private Long id;
     private String nombre;
     private Date fechaCreacion;
     private FuncionarioDTO funcionarios;

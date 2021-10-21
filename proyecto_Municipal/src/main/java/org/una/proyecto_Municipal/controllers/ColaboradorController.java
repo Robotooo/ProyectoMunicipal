@@ -23,7 +23,7 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
@@ -82,13 +82,13 @@ public class ColaboradorController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody ColaboradorDTO colaboradorModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) {
         Optional<ColaboradorDTO> colaboradorUpdated = colaboradorService.update(colaboradorModified, id);
         return new ResponseEntity<>(colaboradorUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         colaboradorService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

@@ -36,7 +36,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     //findBy...
     @Override
     @Transactional(readOnly = true)
-    public Optional<FuncionarioDTO> findById(long id) {
+    public Optional<FuncionarioDTO> findById(Long id) {
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
         if (funcionario.isEmpty()) throw new NotFoundInformationException();
 
@@ -61,7 +61,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     }
 
     @Override
-    public Optional<List<FuncionarioDTO>> findByRolId(long id) {
+    public Optional<List<FuncionarioDTO>> findByRolId(Long id) {
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioRepository.findByRolId(id), FuncionarioDTO.class);
         if (funcionarioDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(funcionarioDTOList);
@@ -116,7 +116,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         funcionarioRepository.deleteById(id);
     }
 
@@ -142,7 +142,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
 
     @Override
-    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, long id) throws PasswordIsBlankException {
+    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException {
        if (funcionarioRepository.findById(id).isEmpty()) return Optional.empty();
 
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));

@@ -21,7 +21,7 @@ public class ParametroServiceImplementation implements IParametroService{
     //findBy...
     @Override
     @Transactional(readOnly = true)
-    public Optional<ParametroDTO> findById(long id) {
+    public Optional<ParametroDTO> findById(Long id) {
         Optional<Parametro> parametro = parametroRepository.findById(id);
         if (parametro.isEmpty()) throw new NotFoundInformationException();
 
@@ -68,7 +68,7 @@ public class ParametroServiceImplementation implements IParametroService{
 
     @Override
     @Transactional
-    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, long id) {
+    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) {
         if (parametroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
@@ -78,7 +78,7 @@ public class ParametroServiceImplementation implements IParametroService{
     //detele...
     @Override
     @Transactional
-    public void delete(long id) {
+    public void delete(Long id) {
         parametroRepository.deleteById(id);
     }
 

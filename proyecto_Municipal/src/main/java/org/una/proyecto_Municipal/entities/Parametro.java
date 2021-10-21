@@ -16,7 +16,7 @@ public class Parametro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "nombre", length = 45)
     private String nombre;

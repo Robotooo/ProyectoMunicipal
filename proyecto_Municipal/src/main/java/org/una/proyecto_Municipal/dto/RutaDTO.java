@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class RutaDTO {
-    private long id;
+    private Long id;
     private String inicioRuta;
     private String finalRuta;
     private boolean estado;

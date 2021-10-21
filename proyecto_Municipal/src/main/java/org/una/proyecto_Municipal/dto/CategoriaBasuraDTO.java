@@ -12,7 +12,7 @@ import org.una.proyecto_Municipal.entities.CategoriaxPropiedad;
 @NoArgsConstructor
 @ToString
 public class CategoriaBasuraDTO {
-    private long id;
+    private Long id;
     private String nombre;
     private String descripcion;
     private CategoriaxPropiedadDTO categoriaxPropiedad;
