@@ -5,7 +5,7 @@ import org.una.proyecto_Municipal.entities.Cobro;
 
 import java.util.List;
 
-public interface ICobroRepository extends JpaRepository<Cobro, Long> {
+public interface ICobroRepository extends JpaRepository<Cobro, long> {
 
     public List<Cobro> findByEstado(boolean estado);
 

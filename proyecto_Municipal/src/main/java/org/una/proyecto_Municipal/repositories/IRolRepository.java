@@ -9,7 +9,7 @@ import org.una.proyecto_Municipal.entities.Rol;
 import java.util.Date;
 import java.util.List;
 
-public interface IRolRepository extends JpaRepository<Rol, Long> {
+public interface IRolRepository extends JpaRepository<Rol, long> {
 
     public List<Rol> findByNombre(String nombre);
 

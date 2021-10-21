@@ -5,7 +5,7 @@ import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.List;
 
-public interface IFacturaRepository extends JpaRepository<Factura, Long> {
+public interface IFacturaRepository extends JpaRepository<Factura, long> {
 
     public List<Factura> findByNombre(String nombre);
 
