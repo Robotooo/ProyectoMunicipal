@@ -11,7 +11,7 @@ public class ColaboradorDTO {
     private Long id;
     private String nombre;
     private String cedula;
-    private Integer telefono;
+    private String telefono;
     private Boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;

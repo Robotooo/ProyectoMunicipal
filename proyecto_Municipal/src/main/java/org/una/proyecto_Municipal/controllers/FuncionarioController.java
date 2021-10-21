@@ -27,6 +27,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una funcionario a partir de su id",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{id}")
+    @ResponseBody
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -44,6 +45,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una funcionario a partir de su nombre usuario",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{usuario}")
+    @ResponseBody
     public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -52,6 +54,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @GetMapping("/{estado}")
+    @ResponseBody
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -60,6 +63,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{cedula}")
+    @ResponseBody
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -68,6 +72,7 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{rol_id}")
+    @ResponseBody
     public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
@@ -93,12 +98,14 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseBody
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         funcionarioService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
     @DeleteMapping("/")
+    @ResponseBody
     public ResponseEntity<?> deleteAll() throws Exception {
         funcionarioService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);

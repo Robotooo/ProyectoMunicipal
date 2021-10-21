@@ -41,7 +41,7 @@ public class ParametroController {
     }
 
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su estado",
-            response = ParametroDTO.class, tags = "Parametros")
+            response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @GetMapping("/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") Boolean estado) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
@@ -65,7 +65,7 @@ public class ParametroController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) throws PasswordIsBlankException {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) {
         Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
