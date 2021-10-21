@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class CobroDTO {
-    private Long id;
+    private long id;
     private double monto;
     private boolean estado;
     private Integer periodo;

@@ -23,7 +23,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<CobroDTO> cobroFound = cobroService.findById(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
@@ -48,7 +48,7 @@ public class CobroController {
 //    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
 //            response = CobroDTO.class, tags = "Cobros")
 //    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
+//    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") long id) {
 //        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
@@ -56,7 +56,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{colaborador_id}")
-    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
             response = CobroDTO.class, responseContainer = "List", tags = "Proveedores")
     @GetMapping("/{factura_id}")
-    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
@@ -79,13 +79,13 @@ public class CobroController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody CobroDTO cobroModified) {
         Optional<CobroDTO> cobroUpdated = cobroService.update(cobroModified, id);
         return new ResponseEntity<>(cobroUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         cobroService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

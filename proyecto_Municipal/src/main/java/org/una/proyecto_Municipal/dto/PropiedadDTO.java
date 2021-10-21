@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class PropiedadDTO {
-    private Long id;
+    private long id;
     private String provincia;
     private String canton;
     private String distrito;

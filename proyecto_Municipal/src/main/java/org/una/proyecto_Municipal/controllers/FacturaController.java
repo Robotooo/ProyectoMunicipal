@@ -23,7 +23,7 @@ public class FacturaController {
     @ApiOperation(value = "Obtiene una factura a partir de su id",
             response = FacturaDTO.class, tags = "Facturas")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<FacturaDTO> facturaFound = facturaService.findById(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class FacturaController {
     @ApiOperation(value = "Obtiene una factura a partir del id del cajero",
             response = FacturaDTO.class, tags = "Facturas")
     @GetMapping("/{cajero_id}")
-    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "cajero_id") Long id) {
+    public ResponseEntity<?> findByCajeroId(@PathVariable(value = "cajero_id") long id) {
         Optional<List<FacturaDTO>> facturaFound = facturaService.findByCajeroId(id);
         return new ResponseEntity<>(facturaFound, HttpStatus.OK);
     }
@@ -47,13 +47,13 @@ public class FacturaController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FacturaDTO facturaModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody FacturaDTO facturaModified) {
         Optional<FacturaDTO> facturaUpdated = facturaService.update(facturaModified, id);
         return new ResponseEntity<>(facturaUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         facturaService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

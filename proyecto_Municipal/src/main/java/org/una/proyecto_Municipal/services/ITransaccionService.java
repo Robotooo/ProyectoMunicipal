@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface ITransaccionService {
 
-    public Optional<TransaccionDTO> findById(Long id);
+    public Optional<TransaccionDTO> findById(long id);
 
     public Optional<List<TransaccionDTO>> findAll();
 
-    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(long usuarioId, Date startDate, Date endDate);
 
-    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(long rolId, Date startDate, Date endDate);
 
     public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
 
@@ -23,9 +23,9 @@ public interface ITransaccionService {
 
     public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO);
 
-    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id);
+    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, long id);
 
-    public void delete(Long id);
+    public void delete(long id);
 
     public void deleteAll();
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class FacturaDTO {
-    private Long id;
+    private long id;
     private Date fechaCancelacion;
     private String nombre;
     private Double montoCancelar;

@@ -27,7 +27,7 @@ public class RutaController {
     @ApiOperation(value = "Obtiene una ruta a partir de su id",
             response = RutaDTO.class, tags = "Rutas")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<RutaDTO> rutaFound = rutaService.findById(id);
         return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class RutaController {
     @ApiOperation(value = "Obtiene una lista de rutas a partir de su bien",
             response = RutaDTO.class, tags = "Rutas")
     @GetMapping("/{bien_id}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien_id") Long id) {
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien_id") long id) {
         Optional<List<RutaDTO>> bienFound = rutaService.findByBienId(id);
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
@@ -72,14 +72,14 @@ public class RutaController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RutaDTO usuarioModified) throws PasswordIsBlankException {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody RutaDTO usuarioModified) throws PasswordIsBlankException {
         Optional<RutaDTO> usuarioUpdated = rutaService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         rutaService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

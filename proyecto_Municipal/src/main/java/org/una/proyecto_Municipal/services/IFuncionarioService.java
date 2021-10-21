@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface IFuncionarioService {
 
-    public Optional<FuncionarioDTO> findById(Long id);
+    public Optional<FuncionarioDTO> findById(long id);
 
     public Optional<List<FuncionarioDTO>> findAll();
 
     public Optional<List<FuncionarioDTO>> findByUsuario(String user);
 
-    public Optional<List<FuncionarioDTO>> findByRolId(Long id);
+    public Optional<List<FuncionarioDTO>> findByRolId(long id);
 
     public Optional<List<FuncionarioDTO>> findByEstado(boolean estado);
 
@@ -25,9 +25,9 @@ public interface IFuncionarioService {
 
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
 
-    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException;
+    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, long id) throws PasswordIsBlankException;
 
-    public void delete(Long id);
+    public void delete(long id);
 
     public void deleteAll();
 

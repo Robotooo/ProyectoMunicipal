@@ -20,7 +20,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
 
     @Override
-    public Optional<ColaboradorDTO> findById(Long id) {
+    public Optional<ColaboradorDTO> findById(long id) {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if (colaborador.isEmpty()) throw new NotFoundInformationException();
 
@@ -80,7 +80,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     @Transactional
-    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) {
+    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, long id) {
         if (colaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
@@ -90,7 +90,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(long id) {
         colaboradorRepository.deleteById(id);
     }
 

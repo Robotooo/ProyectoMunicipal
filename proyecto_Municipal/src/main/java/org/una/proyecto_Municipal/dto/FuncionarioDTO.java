@@ -10,7 +10,7 @@ import java.util.Date;
 @ToString
 @Builder
 public class FuncionarioDTO {
-    private Long id;
+    private long id;
     private String usuario;
     private String telefono;
     private String cedula;

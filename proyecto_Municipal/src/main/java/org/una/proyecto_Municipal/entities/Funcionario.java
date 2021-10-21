@@ -17,7 +17,7 @@ public class Funcionario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "usuario", length = 30) // OJO "name"
     private String usuario;

@@ -19,7 +19,7 @@ public class CategoriaxPropiedad implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name="categorias_basura_id")

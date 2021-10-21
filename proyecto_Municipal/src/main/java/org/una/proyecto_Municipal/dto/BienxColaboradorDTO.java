@@ -13,7 +13,7 @@ import org.una.proyecto_Municipal.entities.Colaborador;
 @NoArgsConstructor
 @ToString
 public class BienxColaboradorDTO {
-    private Long id;
+    private long id;
     private ColaboradorDTO colaboradorId;
     private BienDTO bienId;
     private CobroDTO cobro;

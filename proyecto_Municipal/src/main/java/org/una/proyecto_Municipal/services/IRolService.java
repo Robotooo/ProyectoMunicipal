@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface IRolService {
 
-    public Optional<RolDTO> findById(Long id);
+    public Optional<RolDTO> findById(long id);
 
     public Optional<List<RolDTO>> findAll();
 
@@ -20,12 +20,12 @@ public interface IRolService {
 
     public Optional<List<RolDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
-    public void delete(Long id);
+    public void delete(long id);
 
     public void deleteAll();
 
     public Optional<RolDTO> create(RolDTO rolDTO);
 
-    public Optional<RolDTO> update(RolDTO rolDTO, Long id);
+    public Optional<RolDTO> update(RolDTO rolDTO, long id);
 
 }

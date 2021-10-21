@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @ToString
 public class CategoriaxPropiedadDTO {
-    private Long id;
+    private long id;
     private CategoriaBasuraDTO categoriaBasuraId;
     private PropiedadDTO propiedad;
     private Integer cantidad;

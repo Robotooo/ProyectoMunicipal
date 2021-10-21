@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ColaboradorDTO {
-    private Long id;
+    private long id;
     private String nombre;
     private String cedula;
     private String telefono;

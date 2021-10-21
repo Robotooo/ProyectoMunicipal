@@ -23,7 +23,7 @@ public class RolServiceImplementation implements IRolService{
 
     //findBy...
     @Override
-    public Optional<RolDTO> findById(Long id) {
+    public Optional<RolDTO> findById(long id) {
         Optional<Rol> rol = rolRepository.findById(id);
         if (rol.isEmpty()) throw new NotFoundInformationException();
 
@@ -65,7 +65,7 @@ public class RolServiceImplementation implements IRolService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(long id) {
         rolRepository.deleteById(id);
     }
 
@@ -91,7 +91,7 @@ public class RolServiceImplementation implements IRolService{
 
     @Override
     @Transactional
-    public Optional<RolDTO> update(RolDTO rolDTO, Long id) {
+    public Optional<RolDTO> update(RolDTO rolDTO, long id) {
         if (rolRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedRolDTO(rolDTO));

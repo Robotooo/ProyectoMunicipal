@@ -12,7 +12,7 @@ import java.util.Date;
 @ToString
 public class TransaccionDTO {
 
-    private Long id;
+    private long id;
     private String objeto;
     private String accion;
     private Date fechaCreacion;

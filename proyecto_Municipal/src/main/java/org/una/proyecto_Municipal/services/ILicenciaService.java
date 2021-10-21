@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ILicenciaService {
 
-    public Optional<LicenciaDTO> findById(Long id);
+    public Optional<LicenciaDTO> findById(long id);
 
     public Optional<List<LicenciaDTO>> findAll();
 
@@ -21,13 +21,13 @@ public interface ILicenciaService {
 
     public Optional<List<LicenciaDTO>> findByEstado(boolean estado);
 
-    Optional<List<LicenciaDTO>> findByBienId(Long id);
+    Optional<List<LicenciaDTO>> findByBienId(long id);
 
-    public void delete(Long id);
+    public void delete(long id);
 
     public void deleteAll();
 
     public Optional<LicenciaDTO> create(LicenciaDTO LicenciaDTO);
 
-    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, Long id);
+    public Optional<LicenciaDTO> update(LicenciaDTO LicenciaDTO, long id);
 }

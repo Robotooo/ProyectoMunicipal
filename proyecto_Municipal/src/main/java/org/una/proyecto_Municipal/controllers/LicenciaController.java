@@ -27,7 +27,7 @@ public class LicenciaController {
     @ApiOperation(value = "Obtiene una liciencia a partir de su id",
                 response = LicenciaDTO.class, tags = "Licencias")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<LicenciaDTO> proveedorFound = licenciaService.findById(id);
         return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
     }
@@ -68,7 +68,7 @@ public class LicenciaController {
     @ApiOperation(value = "Obtiene una lista de licencias a partir de su bien",
             response = LicenciaDTO.class, tags = "Licencias")
     @GetMapping("/{bien_id}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien") Long id) {
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien") long id) {
         Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findByBienId(id);
         return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
     }
@@ -87,7 +87,7 @@ public class LicenciaController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody LicenciaDTO licenciaModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody LicenciaDTO licenciaModified) {
         Optional<LicenciaDTO> licenciaUpdated = licenciaService.update(licenciaModified, id);
         return new ResponseEntity<>(licenciaUpdated, HttpStatus.OK);
     }

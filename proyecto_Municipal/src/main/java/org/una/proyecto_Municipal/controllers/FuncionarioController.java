@@ -28,7 +28,7 @@ public class FuncionarioController {
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class FuncionarioController {
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @GetMapping("/{rol_id}")
     @ResponseBody
-    public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findByRolId(@PathVariable(value = "id") long id) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
@@ -92,14 +92,14 @@ public class FuncionarioController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
         Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         funcionarioService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

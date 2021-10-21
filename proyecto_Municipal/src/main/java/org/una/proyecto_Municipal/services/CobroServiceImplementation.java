@@ -20,7 +20,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     //findBy...
     @Override
-    public Optional<CobroDTO> findById(Long id) {
+    public Optional<CobroDTO> findById(long id) {
         Optional<Cobro> cobro = cobroRepository.findById(id);
         if (cobro.isEmpty()) throw new NotFoundInformationException();
 
@@ -36,21 +36,21 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
 //    @Override
-//    public Optional<List<CobroDTO>> findByBienId(Long id) {
+//    public Optional<List<CobroDTO>> findByBienId(long id) {
 //        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
 //        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
 //        return Optional.ofNullable(cobroDTOList);
 //    }
 
     @Override
-    public Optional<List<CobroDTO>> findByBienxColaboradorId(Long id) {
+    public Optional<List<CobroDTO>> findByBienxColaboradorId(long id) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienxColaboradorId(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
     }
 
     @Override
-    public Optional<List<CobroDTO>> findByFacturaId(Long id) {
+    public Optional<List<CobroDTO>> findByFacturaId(long id) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByFacturaId(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
@@ -80,7 +80,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     @Transactional
-    public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id) {
+    public Optional<CobroDTO> update(CobroDTO cobroDTO, long id) {
         if (cobroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
@@ -90,7 +90,7 @@ public class CobroServiceImplementation implements ICobroService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(long id) {
         cobroRepository.deleteById(id);
     }
 

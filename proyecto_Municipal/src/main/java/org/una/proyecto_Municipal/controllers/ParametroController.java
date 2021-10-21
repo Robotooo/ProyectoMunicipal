@@ -26,7 +26,7 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene un parametro a partir de su id",
             response = ParametroDTO.class, tags = "Parametros")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<ParametroDTO> parametroFound = parametroService.findById(id);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
@@ -65,13 +65,13 @@ public class ParametroController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody ParametroDTO usuarioModified) {
         Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         parametroService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

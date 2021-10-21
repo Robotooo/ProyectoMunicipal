@@ -5,11 +5,11 @@ import org.una.proyecto_Municipal.entities.Ruta;
 
 import java.util.List;
 
-public interface IRutaRepository extends JpaRepository<Ruta, Long> {
+public interface IRutaRepository extends JpaRepository<Ruta, long> {
 
     public List<Ruta> findByEstado(boolean estado);
 
-    public List<Ruta> findByBienId(Long id);
+    public List<Ruta> findByBienId(long id);
 
 //    List<Ruta> findByCantidadSalidasAndFechaDia(Integer, String);
 //

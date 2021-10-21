@@ -26,7 +26,7 @@ public class RolController {
     @ApiOperation(value = "Obtiene un Rol a partir de su id",
             response = RolDTO.class, tags = "Roles")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<RolDTO> rolFound = rolService.findById(id);
         return new ResponseEntity<>(rolFound, HttpStatus.OK);
     }
@@ -63,14 +63,14 @@ public class RolController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolDTO rolModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody RolDTO rolModified) {
         Optional<RolDTO> rolUpdated = rolService.update(rolModified, id);
         return new ResponseEntity<>(rolUpdated, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         rolService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

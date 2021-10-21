@@ -19,7 +19,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
     private IFacturaRepository facturaRepository;
 
     @Override
-    public Optional<FacturaDTO> findById(Long id) {
+    public Optional<FacturaDTO> findById(long id) {
         Optional<Factura> factura = facturaRepository.findById(id);
         if (factura.isEmpty()) throw new NotFoundInformationException();
 
@@ -36,7 +36,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
     }
 
     @Override
-    public Optional<List<FacturaDTO>> findByCajeroId(Long id) {
+    public Optional<List<FacturaDTO>> findByCajeroId(long id) {
         List<FacturaDTO> facturaDTOList = MapperUtils.DtoListFromEntityList(facturaRepository.findByCajeroId(id), FacturaDTO.class);
         if (facturaDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(facturaDTOList);
@@ -58,7 +58,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
 
     @Override
     @Transactional
-    public Optional<FacturaDTO> update(FacturaDTO facturaDTO, Long id) {
+    public Optional<FacturaDTO> update(FacturaDTO facturaDTO, long id) {
         if (facturaRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
 
         return Optional.ofNullable(getSavedFacturaDTO(facturaDTO));
@@ -68,7 +68,7 @@ public class FacturaServiceImplementation implements  IFacturaService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(long id) {
         facturaRepository.deleteById(id);
     }
 

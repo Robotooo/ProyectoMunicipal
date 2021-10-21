@@ -14,7 +14,7 @@ import org.una.proyecto_Municipal.entities.Ruta;
 @NoArgsConstructor
 @ToString
 public class BienDTO {
-    private Long id;
+    private long id;
     private BienxColaboradorDTO bienxColaborador;
     private PropiedadDTO propiedad;
     private LicenciaDTO licencia;

@@ -23,7 +23,7 @@ public class BienController {
     @ApiOperation(value = "Obtiene un bien a partir de su id",
             response = BienDTO.class, tags = "Cobros")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") long id) {
         Optional<BienDTO> bienFound = bienService.findById(id);
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
@@ -47,13 +47,13 @@ public class BienController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BienDTO bienModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") long id, @RequestBody BienDTO bienModified) {
         Optional<BienDTO> bienUpdated = bienService.update(bienModified, id);
         return new ResponseEntity<>(bienUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) throws Exception {
         bienService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }

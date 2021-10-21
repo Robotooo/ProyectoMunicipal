@@ -5,14 +5,14 @@ import org.una.proyecto_Municipal.entities.Cobro;
 
 import java.util.List;
 
-public interface ICobroRepository extends JpaRepository<Cobro, Long> {
+public interface ICobroRepository extends JpaRepository<Cobro, long> {
 
     public List<Cobro> findByEstado(boolean estado);
 
-//    public List<Cobro> findByBienId(Long id);
+//    public List<Cobro> findByBienId(long id);
 
-    public List<Cobro> findByBienxColaboradorId(Long id);
+    public List<Cobro> findByBienxColaboradorId(long id);
 
-    public List<Cobro> findByFacturaId(Long id);
+    public List<Cobro> findByFacturaId(long id);
 
 }

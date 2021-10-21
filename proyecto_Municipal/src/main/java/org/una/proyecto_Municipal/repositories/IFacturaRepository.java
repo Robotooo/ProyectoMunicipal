@@ -5,10 +5,10 @@ import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.List;
 
-public interface IFacturaRepository extends JpaRepository<Factura, Long> {
+public interface IFacturaRepository extends JpaRepository<Factura, long> {
 
     public List<Factura> findByNombre(String nombre);
 
-    public List<Factura> findByCajeroId(Long id);
+    public List<Factura> findByCajeroId(long id);
 
 }
