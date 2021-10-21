@@ -24,10 +24,13 @@ public class Colaborador implements Serializable {
     private String cedula;
 
     @Column
-    private Integer telefono;
+    private String telefono;
 
     @Column
-    private Boolean estado;
+    private boolean estado;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<BienxColaborador> bienxColaborador = new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

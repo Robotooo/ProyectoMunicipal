@@ -12,9 +12,9 @@ import java.util.Date;
 public class FuncionarioDTO {
     private Long id;
     private String usuario;
-    private Integer telefono;
+    private String telefono;
     private String cedula;
-    private Boolean estado;
+    private boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String passwordEncriptado;

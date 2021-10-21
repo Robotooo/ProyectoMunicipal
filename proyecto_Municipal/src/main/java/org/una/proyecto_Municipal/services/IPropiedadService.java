@@ -14,7 +14,7 @@ public interface IPropiedadService {
 
 //    public Optional<List<PropiedadDTO>> findByNombre(String nombre);
 
-    public Optional<List<PropiedadDTO>> findByEstado(Boolean estado);
+    public Optional<List<PropiedadDTO>> findByEstado(boolean estado);
 
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO);
 

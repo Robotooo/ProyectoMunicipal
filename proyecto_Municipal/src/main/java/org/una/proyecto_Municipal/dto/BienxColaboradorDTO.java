@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.una.proyecto_Municipal.entities.Bien;
+import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Colaborador;
 
 @Data
@@ -13,7 +14,8 @@ import org.una.proyecto_Municipal.entities.Colaborador;
 @ToString
 public class BienxColaboradorDTO {
     private Long id;
-    private Colaborador colaboradorId;
-    private Bien bienId;
-    private Float porcentaje;
+    private ColaboradorDTO colaboradorId;
+    private BienDTO bienId;
+    private CobroDTO cobro;
+    private float porcentaje;
 }

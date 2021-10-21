@@ -15,9 +15,11 @@ import java.util.Date;
 @ToString
 public class CobroDTO {
     private Long id;
-    private Boolean estado;
+    private double monto;
+    private boolean estado;
+    private Integer periodo;
     private Date fechaCreacion;
     private Date fechaModificacion;
-    private BienxColaborador bienxColaboradorId;
-    private Factura facturaId;
+    private BienxColaboradorDTO bienxColaboradorId;
+    private FacturaDTO facturaId;
 }

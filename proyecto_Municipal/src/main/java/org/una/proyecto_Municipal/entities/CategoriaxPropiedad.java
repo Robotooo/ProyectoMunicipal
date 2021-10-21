@@ -27,7 +27,7 @@ public class CategoriaxPropiedad implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="propiedades_id")
-    private Propiedad propiedad;
+    private Propiedad propiedadId;
 
     @Column
     private Integer cantidad;

@@ -58,7 +58,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CobroDTO>> findByEstado(Boolean estado) {
+    public Optional<List<CobroDTO>> findByEstado(boolean estado) {
         List<Cobro> cobroList = cobroRepository.findByEstado(estado);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);

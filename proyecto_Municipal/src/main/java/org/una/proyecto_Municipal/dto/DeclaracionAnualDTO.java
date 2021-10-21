@@ -14,7 +14,7 @@ import java.util.Date;
 @ToString
 public class DeclaracionAnualDTO {
     private Long id;
-    private Licencia licencia;
-    private Double montoAnual;
-    private Float anio;
+    private LicenciaDTO licenciaId;
+    private double montoAnual;
+    private float anio;
 }

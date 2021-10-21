@@ -17,9 +17,9 @@ public interface ILicenciaService {
 
     public Optional<LicenciaDTO> findByEmail(String email);
 
-    Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito);
+    Optional<List<LicenciaDTO>> findByDistrito(String distrito);
 
-    public Optional<List<LicenciaDTO>> findByEstado(Boolean estado);
+    public Optional<List<LicenciaDTO>> findByEstado(boolean estado);
 
     Optional<List<LicenciaDTO>> findByBienId(Long id);
 

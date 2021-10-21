@@ -4,7 +4,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "propiedades")
@@ -50,10 +52,10 @@ public class Propiedad implements Serializable {
     private String valorOtros;
 
     @Column
-    private Boolean esEstado;
+    private boolean esEstado;
 
     @Column
-    private Boolean estado;
+    private boolean estado;
 
     @Column
     private Integer zona;
@@ -64,6 +66,10 @@ public class Propiedad implements Serializable {
     @ManyToOne
     @JoinColumn(name="bienes_id")
     private Bien bienId;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedadId")
+    private List<CategoriaxPropiedad> categoriaxPropiedad = new ArrayList<>();
 
     private static final long serialVersionUID = 1L;
 

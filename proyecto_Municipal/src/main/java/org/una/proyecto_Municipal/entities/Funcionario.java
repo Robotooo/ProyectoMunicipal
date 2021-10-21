@@ -19,15 +19,17 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario", length = 30)
+    @Column(name = "usuario", length = 30) // OJO "name"
     private String usuario;
 
+    @Column(length = 45, unique = true)
+    private String telefono;
 
     @Column(length = 45, unique = true)
     private String cedula;
 
     @Column
-    private Boolean estado;
+    private boolean estado;
 
     @Column(length = 100, name = "password_encriptado")
     private String passwordEncriptado;
@@ -36,11 +38,11 @@ public class Funcionario implements Serializable {
     @JoinColumn(name="roles_id")
     private Rol rol;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-//    private List<Factura> factura = new ArrayList<>();
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-//    private List<Transaccion> transaccion= new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajeroId")
+    private List<Factura> factura = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioId")
+    private List<Transaccion> transaccion= new ArrayList<>();
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

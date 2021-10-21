@@ -15,6 +15,6 @@ import javax.persistence.*;
 public class DiaSemanaDTO {
     private Long id;
     private Integer cantidadSalidas;
-    private String fechaDia;
-    private Ruta rutaId;
+    private String nombreDia;
+    private RutaDTO rutaId;
 }

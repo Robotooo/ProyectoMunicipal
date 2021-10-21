@@ -25,10 +25,10 @@ public class Parametro implements Serializable {
     private String descripcion;
 
     @Column
-    private Integer valor;
+    private int valor;
 
     @Column
-    private Boolean estado;
+    private boolean estado;
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

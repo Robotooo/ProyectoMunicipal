@@ -13,7 +13,7 @@ public interface IRutaService {
 
     public Optional<List<RutaDTO>> findAll();
 
-    public Optional<List<RutaDTO>> findByEstado(Boolean estado);
+    public Optional<List<RutaDTO>> findByEstado(boolean estado);
 
     public Optional<List<RutaDTO>> findByBienId(Long id);
 

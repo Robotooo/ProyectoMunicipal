@@ -14,7 +14,9 @@ public class RutaDTO {
     private Long id;
     private String inicioRuta;
     private String finalRuta;
-    private Boolean estado;
+    private boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;
+    private BienDTO bienId;
+    private DiaSemanaDTO dia;
 }

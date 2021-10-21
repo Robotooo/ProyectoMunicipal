@@ -19,5 +19,5 @@ public class FacturaDTO {
     private Double montoCancelar;
     private String tipoPago;
     private FuncionarioDTO cajeroId;
-    private Cobro cobros;
+    private CobroDTO cobros;
 }

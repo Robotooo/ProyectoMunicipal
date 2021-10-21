@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.una.proyecto_Municipal.entities.Bien;
+import org.una.proyecto_Municipal.entities.CategoriaxPropiedad;
 
 import java.util.Date;
 
@@ -19,16 +20,17 @@ public class PropiedadDTO {
     private String distrito;
     private String direccion;
     private String geolocalizacion;
-    private Float area;
+    private float area;
     private String plano;
     private String metros;
     private String valorTerreno;
     private String valorConstruccion;
     private String valorOtros;
-    private Boolean esEstado;
+    private boolean esEstado;
     private Integer zona;
-    private Boolean estado;
-    private Date fechaCreacion;
+    private boolean estado;
+    private Date fechaRegistro;
     private Date fechaModificacion;
-    private Bien bienId;
+    private BienDTO bienId;
+    private CategoriaxPropiedadDTO categoriaxPropiedad;
 }

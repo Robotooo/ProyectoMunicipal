@@ -31,15 +31,16 @@ public class Licencia implements Serializable {
     @Column(length = 45, unique = true)
     private String distrito;
 
-    @Column
-    private Boolean estado;
-
-    @Column
-    private Double ganancias;
-
     @ManyToOne
-    @JoinColumn(name="bienes_id")
-    private Bien bien;
+    @JoinColumn(name="bienes_id"/*, insertable = false, updatable = false*/)
+    private Bien bienId;
+
+    @Column
+    private boolean estado;
+
+    @Column
+    private double ganancias;
+
 
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)

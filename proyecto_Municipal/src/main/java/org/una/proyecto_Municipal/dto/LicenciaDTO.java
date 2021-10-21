@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.una.proyecto_Municipal.entities.Bien;
+
 import java.util.Date;
 
 @Data
@@ -16,9 +18,9 @@ public class LicenciaDTO {
     private String telefono;
     private String email;
     private String distrito;
-    private Boolean estado;
+    private boolean estado;
     private Date fechaRegistro;
     private Date fechaModificacion;
-    private Double ganancias;
-    private Long bienId;
+    private double ganancias;
+    private BienDTO bienId;
 }

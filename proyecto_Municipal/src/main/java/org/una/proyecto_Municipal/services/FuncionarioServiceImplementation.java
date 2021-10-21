@@ -69,7 +69,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<FuncionarioDTO>> findByEstado(Boolean estado) {
+    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado) {
         List<Funcionario> funcionarioList = funcionarioRepository.findByEstado(estado);
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
         return Optional.ofNullable(funcionarioDTOList);
@@ -105,8 +105,6 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         }
     }
 
-
-
     private String encriptarPassword(String password) throws PasswordIsBlankException {
         if (!password.isBlank()) {
             return bCryptPasswordEncoder.encode(password);
@@ -116,7 +114,6 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     }
 
-    //detele...
     @Override
     @Transactional
     public void delete(Long id) {
@@ -136,7 +133,6 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         return MapperUtils.DtoFromEntity(funcionarioCreated, FuncionarioDTO.class);
     }
 
-    //create & update
     @Override
     @Transactional
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException {
@@ -152,42 +148,6 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        Optional<Funcionario> funcionarioBuscado = funcionarioRepository.findByCedula(username);
-//        if (funcionarioBuscado.isPresent()) {
-//            Funcionario funcionario = funcionarioBuscado.get();
-//            List<GrantedAuthority> roles = new ArrayList<>();
-//            roles.add(new SimpleGrantedAuthority("ADMIN"));
-//            UserDetails userDetails = new User(funcionario.getCedula(), funcionario.getPasswordEncriptado(), roles);
-//            return userDetails;
-//        } else {
-//            throw new UsernameNotFoundException("Username not found, check your request");
-//        }
-//    }
 
-//    @Override
-//    @Transactional(readOnly = true)
-//    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) throws InvalidCredentialsException {
-//        Optional<Funcionario> funcionario = funcionarioRepository.findByCedula(authenticationRequest.getCedula());
-//
-//        if(funcionario.isPresent() && bCryptPasswordEncoder.matches(authenticationRequest.getPassword(), funcionario.get().getPasswordEncriptado())){
-//            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-//            Authentication authentication = authenticationManager
-//                    .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getCedula(), authenticationRequest.getPassword()));
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//            // Set JWT
-//            authenticationResponse.setJwt(jwtProvider.generateToken(authenticationRequest));
-//            FuncionarioDTO funcionarioDto = MapperUtils.DtoFromEntity(funcionario.get(), FuncionarioDTO.class);
-//            authenticationResponse.setFuncionarioDTO(funcionarioDto);
-//            authenticationResponse.setRolDTO(RolDTO.builder().nombre(funcionarioDto.getRol().getNombre()).build());
-//
-//            return authenticationResponse;
-//        } else{
-//            throw new InvalidCredentialsException();
-//        }
-//        return null;
-//    }
 
 }

@@ -22,10 +22,10 @@ public class DeclaracionAnual implements Serializable {
     private Long id;
 
     @Column
-    private Double montoAnual;
+    private double montoAnual;
 
     @Column
-    private Float anio;
+    private float anio;
 
     @ManyToOne
     @JoinColumn(name="licencias_comerciales_id")

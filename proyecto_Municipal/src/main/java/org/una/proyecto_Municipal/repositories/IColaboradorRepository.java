@@ -11,7 +11,7 @@ public interface IColaboradorRepository extends JpaRepository<Colaborador, Long>
 
     public List<Colaborador> findByTelefono(String telefono);
 
-    public List<Colaborador> findByEstado(Boolean estado);
+    public List<Colaborador> findByEstado(boolean estado);
 
     public List<Colaborador> findByCedulaContaining(String cedula);
 

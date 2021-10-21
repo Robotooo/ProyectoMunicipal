@@ -25,7 +25,7 @@ public class Factura implements Serializable {
     private String nombre;
 
     @Column
-    private Double montoCancelar;
+    private double montoCancelar;
 
     @Column(name = "tipo_pago", length = 45)
     private String tipoPago;
@@ -34,8 +34,8 @@ public class Factura implements Serializable {
     @JoinColumn(name="cajero_id")
     private Funcionario cajeroId;
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "facturas")
-    //private List<Cobro> cobros= new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facturaId")
+    private List<Cobro> cobros= new ArrayList<>();
 
     @Column(name = "fecha_cancelacion", updatable = false)
     @Temporal(TemporalType.DATE)

@@ -1,6 +1,8 @@
 package org.una.proyecto_Municipal.dto;
 
 import lombok.*;
+import org.una.proyecto_Municipal.entities.BienxColaborador;
+
 import java.util.Date;
 
 @Data
@@ -12,7 +14,8 @@ public class ColaboradorDTO {
     private String nombre;
     private String cedula;
     private String telefono;
-    private Boolean estado;
+    private boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;
+    private BienxColaboradorDTO bienxColaborador;
 }

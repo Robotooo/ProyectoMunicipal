@@ -11,5 +11,5 @@ public interface IPropiedadRepository extends JpaRepository<Propiedad, Long> {
 
     public List<Propiedad> findByProvincia(String provincia);
 
-    public List<Propiedad> findByEstado(Boolean estado);
+    public List<Propiedad> findByEstado(boolean estado);
 }

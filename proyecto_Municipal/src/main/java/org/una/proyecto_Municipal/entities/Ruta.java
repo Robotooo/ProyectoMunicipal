@@ -4,7 +4,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "rutas")
@@ -20,17 +22,20 @@ public class Ruta implements Serializable {
     private Long id;
 
     @Column(name = "inicio", length = 45)
-    private String inicio;
+    private String inicioRuta;
 
     @Column(name = "final_ruta", length = 45)
     private String finalRuta;
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
-    private Bien bien;
+    private Bien bienId;
 
     @Column
     private Boolean estado;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutaId")
+    private List<DiaSemana> dia = new ArrayList<>();
 
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)

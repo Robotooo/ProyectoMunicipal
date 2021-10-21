@@ -27,13 +27,13 @@ public class Cobro implements Serializable {
     private BienxColaborador bienxColaboradorId;
 
     @Column
-    private Double monto;
+    private double monto;
 
     @Column
     private Integer periodo;
 
     @Column
-    private Boolean estado;
+    private boolean estado;
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

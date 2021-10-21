@@ -66,7 +66,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
     }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByDistrito(Boolean distrito) {
+    public Optional<List<LicenciaDTO>> findByDistrito(String distrito) {
         return Optional.empty();
     }
 
@@ -78,7 +78,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
 //    }
 
     @Override
-    public Optional<List<LicenciaDTO>> findByEstado(Boolean estado) {
+    public Optional<List<LicenciaDTO>> findByEstado(boolean estado) {
         List<Licencia> licenciaList = licenciaRepository.findByEstado(estado);
         List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
         return Optional.ofNullable(licenciaDTOList);

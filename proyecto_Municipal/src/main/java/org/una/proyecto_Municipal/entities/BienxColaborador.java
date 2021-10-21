@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "bienes_x_colaboradores")
@@ -28,8 +30,11 @@ public class BienxColaborador implements Serializable {
     @JoinColumn(name="bienes_id")
     private Bien bienId;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaboradorId")
+    private List<Cobro> cobro = new ArrayList<>();
+
     @Column
-    private Float porcentaje;
+    private float porcentaje;
 
     private static final long serialVersionUID = 1L;
 
