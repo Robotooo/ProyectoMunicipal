@@ -6,7 +6,7 @@ import org.una.proyecto_Municipal.entities.Parametro;
 
 import java.util.List;
 
-public interface IParametroRepository extends JpaRepository<Parametro, long>{
+public interface IParametroRepository extends JpaRepository<Parametro, Long>{
 
     public List<Parametro> findByNombre(String nombre);
 

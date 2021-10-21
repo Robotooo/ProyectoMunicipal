@@ -15,7 +15,7 @@ public interface ITransaccionService {
 
     public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(long usuarioId, Date startDate, Date endDate);
 
-    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(long rolId, Date startDate, Date endDate);
+//    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(long rolId, Date startDate, Date endDate);
 
     public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
 

@@ -8,7 +8,7 @@ import org.una.proyecto_Municipal.entities.Rol;
 
 import java.util.List;
 
-public interface ILicenciaRepository extends JpaRepository<Licencia, long> {
+public interface ILicenciaRepository extends JpaRepository<Licencia, Long> {
 
     public List<Licencia> findByNombre(String nombre);
 

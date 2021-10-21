@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IColaboradorRepository extends JpaRepository<Colaborador, long> {
+public interface IColaboradorRepository extends JpaRepository<Colaborador, Long> {
 
     public List<Colaborador> findByNombre(String nombre);
 

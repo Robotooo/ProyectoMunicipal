@@ -6,11 +6,11 @@ import org.una.proyecto_Municipal.entities.Transaccion;
 import java.util.Date;
 import java.util.List;
 
-public interface ITransaccionRepository extends JpaRepository<Transaccion, long> {
+public interface ITransaccionRepository extends JpaRepository<Transaccion, Long> {
 
     public List<Transaccion> findByFuncionarioIdAndFechaCreacionBetween(long usuarioId, Date startDate, Date endDate);
 
-    public List<Transaccion> findByRolIdAndFechaCreacionBetween(long rolId, Date startDate, Date endDate);
+//    public List<Transaccion> findByRolIdAndFechaCreacionBetween(long rolId, Date startDate, Date endDate);
 
     public List<Transaccion> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
 

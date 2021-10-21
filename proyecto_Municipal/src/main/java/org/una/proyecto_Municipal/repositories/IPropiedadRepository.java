@@ -5,7 +5,7 @@ import org.una.proyecto_Municipal.entities.Propiedad;
 
 import java.util.List;
 
-public interface IPropiedadRepository extends JpaRepository<Propiedad, long> {
+public interface IPropiedadRepository extends JpaRepository<Propiedad, Long> {
 
 //    public List<Propiedad> findByNombre(String nombre);
 

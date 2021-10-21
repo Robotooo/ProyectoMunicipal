@@ -5,7 +5,7 @@ import org.una.proyecto_Municipal.entities.Ruta;
 
 import java.util.List;
 
-public interface IRutaRepository extends JpaRepository<Ruta, long> {
+public interface IRutaRepository extends JpaRepository<Ruta, Long> {
 
     public List<Ruta> findByEstado(boolean estado);
 
