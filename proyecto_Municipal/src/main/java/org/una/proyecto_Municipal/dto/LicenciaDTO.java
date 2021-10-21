@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.una.proyecto_Municipal.entities.Bien;
 
 import java.util.Date;
@@ -12,6 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class LicenciaDTO {
     private Long id;
     private String nombre;

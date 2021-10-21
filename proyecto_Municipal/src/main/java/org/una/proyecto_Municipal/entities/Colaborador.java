@@ -11,6 +11,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class Colaborador implements Serializable {
 
     @Id
@@ -20,13 +21,13 @@ public class Colaborador implements Serializable {
     @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column(length = 45)
+    @Column(name = "cedula",length = 45, unique = true)
     private String cedula;
 
-    @Column
+    @Column(name = "telefono", unique = true)
     private String telefono;
 
-    @Column
+    @Column(name = "estado")
     private boolean estado;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")

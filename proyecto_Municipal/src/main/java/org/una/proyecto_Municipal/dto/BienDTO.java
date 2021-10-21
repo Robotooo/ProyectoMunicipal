@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.una.proyecto_Municipal.entities.BienxColaborador;
 import org.una.proyecto_Municipal.entities.Licencia;
 import org.una.proyecto_Municipal.entities.Propiedad;
@@ -13,6 +10,7 @@ import org.una.proyecto_Municipal.entities.Ruta;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class BienDTO {
     private Long id;
     private BienxColaboradorDTO bienxColaborador;

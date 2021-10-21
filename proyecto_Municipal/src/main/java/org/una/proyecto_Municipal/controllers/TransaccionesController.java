@@ -77,4 +77,6 @@ public class TransaccionesController {
 
     //TODO: findByUsuarioIdAndFechaCreacionBetween, findByRolIdAndFechaCreacionBetween, findByObjetoAndFechaCreacionBetween,
     // findByFechaCreacionBetween
+    //El Auditor debe poder ver listados generales de información o transacciones
+
 }

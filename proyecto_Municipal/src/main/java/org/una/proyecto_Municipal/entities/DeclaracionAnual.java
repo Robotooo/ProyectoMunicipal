@@ -1,10 +1,7 @@
 package org.una.proyecto_Municipal.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,16 +12,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class DeclaracionAnual implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "monto_anual")
     private double montoAnual;
 
-    @Column
+    @Column(name = "anio")
     private float anio;
 
     @ManyToOne

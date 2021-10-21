@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Factura implements Serializable {
 
     @Id
@@ -24,8 +24,8 @@ public class Factura implements Serializable {
     @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column
-    private double montoCancelar;
+    @Column(name = "monto_paga_con")
+    private double montoPagaCon;
 
     @Column(name = "tipo_pago", length = 45)
     private String tipoPago;

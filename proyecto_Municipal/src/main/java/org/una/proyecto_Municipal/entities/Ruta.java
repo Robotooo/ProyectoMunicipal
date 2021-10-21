@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Ruta implements Serializable {
 
     @Id
@@ -31,7 +31,7 @@ public class Ruta implements Serializable {
     @JoinColumn(name="bienes_id")
     private Bien bienId;
 
-    @Column
+    @Column(name = "estado")
     private Boolean estado;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutaId")

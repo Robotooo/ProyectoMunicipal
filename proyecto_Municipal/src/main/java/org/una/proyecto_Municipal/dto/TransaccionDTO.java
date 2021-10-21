@@ -1,15 +1,14 @@
 package org.una.proyecto_Municipal.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class TransaccionDTO {
 
     private Long id;
@@ -17,5 +16,5 @@ public class TransaccionDTO {
     private String accion;
     private Date fechaCreacion;
     private FuncionarioDTO funcionarioId;
-    private RolDTO rolId;
+    //private RolDTO rolId;
 }

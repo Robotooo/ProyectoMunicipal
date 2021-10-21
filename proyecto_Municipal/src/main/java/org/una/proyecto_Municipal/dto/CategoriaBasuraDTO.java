@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.una.proyecto_Municipal.entities.CategoriaxPropiedad;
 
 
@@ -11,6 +8,7 @@ import org.una.proyecto_Municipal.entities.CategoriaxPropiedad;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class CategoriaBasuraDTO {
     private Long id;
     private String nombre;

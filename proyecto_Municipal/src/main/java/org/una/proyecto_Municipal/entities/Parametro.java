@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Parametro implements Serializable {
 
     @Id
@@ -24,10 +24,10 @@ public class Parametro implements Serializable {
     @Column(name = "descripcion", length = 150)
     private String descripcion;
 
-    @Column
+    @Column(name="valor")
     private int valor;
 
-    @Column
+    @Column(name="estado")
     private boolean estado;
 
     @Column(name = "fecha_creacion", updatable = false)

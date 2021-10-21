@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,16 +11,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class DiaSemana implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "cantidad_salidas")
     private Integer cantidadSalidas;
 
-    @Column
+    @Column(name = "nombre_dia")
     private String nombreDia;
 
     @ManyToOne

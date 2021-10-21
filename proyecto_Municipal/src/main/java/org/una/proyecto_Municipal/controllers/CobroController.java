@@ -97,5 +97,21 @@ public class CobroController {
     }
 
     //TODO: findByCedulaFechaBetween, findByEstadoCanceladoFechaBetween
+    //El gestor debe poder Buscar y Cancelar cobros
+    //El Gestor debe solicitar al Gerente una autorización para eliminar info
+    //El gerente debe generar cobros para un periodo o para todo el año
+    //El gerente debe autorizar solicitudes del gestor
+    //El gerente debe poder emitir listados generales
+    //El Cobro debe hacerse a uno o más contribuyentes según el porcentaje de posesión del bien % %
+    //El Pago o Cancelación de cobro se puede hacer mediante cedula o nombre del colaborador o con la referencia al valor impositivo
+    //Un cobro cancelado debe permitir generar Factura del mismo, también el vuelto
+    //Una función para exportar a Excel una lista de los cobros activos o cancelados; en un rango de fechas
+    //Funciones para dar mantenimiento a cobos generados, cancelados y recibos
+
+    //TODO: El BOT debe poder consultar la formula de licencias comerciales, limpieza de vías y rutas de buses
+    //El BOT debe consultar cobros pendientes de colaborador
+    // El BOT debe consultar los cobros de cierta fecha
+    // El BOT debe consultar los cobros de un tipo de impuesto
+    // El BOT debe consultar sobre los pagos de un cliente en un rango de fechas dado
 
 }

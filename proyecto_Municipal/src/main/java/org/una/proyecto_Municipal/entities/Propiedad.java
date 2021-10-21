@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Propiedad implements Serializable {
 
     @Id
@@ -51,16 +51,16 @@ public class Propiedad implements Serializable {
     @Column(name = "valor_otros", length = 45)
     private String valorOtros;
 
-    @Column
+    @Column(name="es_estado")
     private boolean esEstado;
 
-    @Column
+    @Column(name="estado")
     private boolean estado;
 
-    @Column
+    @Column(name="zona")
     private Integer zona;
 
-    @Column
+    @Column(name="area")
     private float area;
 
     @ManyToOne

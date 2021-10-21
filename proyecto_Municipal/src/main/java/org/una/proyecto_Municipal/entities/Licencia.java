@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 public class Licencia implements Serializable {
 
     @Id
@@ -22,23 +22,23 @@ public class Licencia implements Serializable {
     @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column(unique = true)
+    @Column(name = "telefono", unique = true)
     private String telefono;
 
-    @Column(length = 50, unique = true)
+    @Column(name = "email",length = 50, unique = true)
     private String email;
 
-    @Column(length = 45, unique = true)
+    @Column(name = "distrito",length = 45, unique = true)
     private String distrito;
 
     @ManyToOne
     @JoinColumn(name="bienes_id"/*, insertable = false, updatable = false*/)
     private Bien bienId;
 
-    @Column
+    @Column(name = "estado")
     private boolean estado;
 
-    @Column
+    @Column(name = "ganancias")
     private double ganancias;
 
 

@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.una.proyecto_Municipal.entities.CategoriaBasura;
 import org.una.proyecto_Municipal.entities.Propiedad;
 
@@ -15,6 +12,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class CategoriaxPropiedadDTO {
     private Long id;
     private CategoriaBasuraDTO categoriaBasuraId;

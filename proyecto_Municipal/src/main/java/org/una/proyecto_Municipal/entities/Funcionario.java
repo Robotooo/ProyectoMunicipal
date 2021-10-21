@@ -13,22 +13,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class Funcionario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario", length = 30) // OJO "name"
+    @Column(name = "usuario", length = 30)
     private String usuario;
 
-    @Column(length = 45, unique = true)
+    @Column(name = "telefono",length = 45, unique = true)
     private String telefono;
 
-    @Column(length = 45, unique = true)
+    @Column(name = "cedula",length = 45, unique = true)
     private String cedula;
 
-    @Column
+    @Column(name = "estado")
     private boolean estado;
 
     @Column(length = 100, name = "password_encriptado")

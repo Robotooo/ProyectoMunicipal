@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class Cobro implements Serializable {
 
     @Id
@@ -26,13 +27,13 @@ public class Cobro implements Serializable {
     @JoinColumn(name="bienes_x_colaboradores_id")
     private BienxColaborador bienxColaboradorId;
 
-    @Column
+    @Column(name = "monto")
     private double monto;
 
-    @Column
+    @Column(name = "periodo")
     private Integer periodo;
 
-    @Column
+    @Column(name = "estado")
     private boolean estado;
 
     @Column(name = "fecha_creacion", updatable = false)

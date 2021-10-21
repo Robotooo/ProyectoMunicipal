@@ -1,9 +1,6 @@
 package org.una.proyecto_Municipal.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class BienxColaborador implements Serializable {
 
     @Id
@@ -33,7 +31,7 @@ public class BienxColaborador implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaboradorId")
     private List<Cobro> cobro = new ArrayList<>();
 
-    @Column
+    @Column(name = "porcentaje")
     private float porcentaje;
 
     private static final long serialVersionUID = 1L;

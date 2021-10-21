@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.una.proyecto_Municipal.dto.CobroDTO;
@@ -26,10 +27,21 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una funcionario a partir de su id",
             response = FuncionarioDTO.class, tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
+        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
+            response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @GetMapping("/{estado}")
+    @ResponseBody
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
@@ -51,14 +63,6 @@ public class FuncionarioController {
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
-            response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
-    @GetMapping("/{estado}")
-    @ResponseBody
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
-        return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
-    }
 
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula",
             response = FuncionarioDTO.class, tags = "Funcionarios")

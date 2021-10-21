@@ -81,4 +81,6 @@ public class RolController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    //El Administrador debe poder consultar pantallas en desarrollo
+
 }
