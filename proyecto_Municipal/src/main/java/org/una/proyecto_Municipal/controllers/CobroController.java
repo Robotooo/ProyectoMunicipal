@@ -62,7 +62,7 @@ public class CobroController {
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-            response = CobroDTO.class, responseContainer = "List", tags = "Proveedores")
+            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/factura_id/{factura_id}")
     public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);

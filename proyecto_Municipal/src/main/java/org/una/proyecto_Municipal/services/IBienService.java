@@ -19,5 +19,4 @@ public interface IBienService {
 
     public void deleteAll();
 
-
 }
