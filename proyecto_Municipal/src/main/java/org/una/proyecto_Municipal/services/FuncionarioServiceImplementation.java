@@ -105,6 +105,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         }
     }
 
+
     private String encriptarPassword(String password) throws PasswordIsBlankException {
         if (!password.isBlank()) {
             return bCryptPasswordEncoder.encode(password);
