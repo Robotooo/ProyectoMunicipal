@@ -55,7 +55,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
-    @GetMapping("/colaborador_id/{colaborador_id}")
+    @GetMapping("/colaboradorId/{colaboradorId}")
     public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);

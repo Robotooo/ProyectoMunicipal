@@ -92,6 +92,6 @@ public class LicenciaController {
         return new ResponseEntity<>(licenciaUpdated, HttpStatus.OK);
     }
 
-    //TODO: create, update, delete, findAll, findByEstado
+    //TODO:  delete, findAll, findByEstado
 
 }

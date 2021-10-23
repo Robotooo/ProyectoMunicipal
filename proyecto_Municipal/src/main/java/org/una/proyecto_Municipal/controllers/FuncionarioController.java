@@ -70,9 +70,9 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/rol_id/{rol_id}")
-    public ResponseEntity<?> findByRolId(@PathVariable(value = "id") Long id) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(id);
+    @GetMapping("/rolId/{rol}")
+    public ResponseEntity<?> findByRolId(@PathVariable(value = "rol") Long rol) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(rol);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 

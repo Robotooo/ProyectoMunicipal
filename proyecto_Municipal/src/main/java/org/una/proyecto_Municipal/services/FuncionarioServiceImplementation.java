@@ -62,7 +62,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     public Optional<List<FuncionarioDTO>> findByRolId(Long id) {
-        List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioRepository.findByRolId(id), FuncionarioDTO.class);
+        List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioRepository.findByRol(id), FuncionarioDTO.class);
         if (funcionarioDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(funcionarioDTOList);
     }

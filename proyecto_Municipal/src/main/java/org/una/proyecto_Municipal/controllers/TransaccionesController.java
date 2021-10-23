@@ -5,11 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.CobroDTO;
-import org.una.proyecto_Municipal.dto.RolDTO;
-import org.una.proyecto_Municipal.dto.RutaDTO;
-import org.una.proyecto_Municipal.dto.TransaccionDTO;
+import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.ITransaccionService;
@@ -42,6 +40,7 @@ public class TransaccionesController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -60,6 +59,15 @@ public class TransaccionesController {
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody TransaccionDTO transaccionModified) throws PasswordIsBlankException {
         Optional<TransaccionDTO> transaccionUpdated = transaccionService.update(transaccionModified, id);
         return new ResponseEntity<>(transaccionUpdated, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de transacciones a partir del id de Funcionario",
+            response = FuncionarioDTO.class, tags = "Transacciones")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @GetMapping("/funcionarioId/{funcionarioId}")
+    public ResponseEntity<?> findByFuncionarioId(@PathVariable(value = "funcionarioId") Long funcionarioId) {
+        Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByFuncionarioId(funcionarioId);
+        return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)

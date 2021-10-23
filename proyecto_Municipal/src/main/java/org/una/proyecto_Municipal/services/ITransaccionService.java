@@ -21,6 +21,8 @@ public interface ITransaccionService {
 
     public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
 
+    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long id);
+
     public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO);
 
     public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id);

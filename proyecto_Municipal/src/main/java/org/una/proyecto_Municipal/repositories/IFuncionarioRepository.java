@@ -11,7 +11,7 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
 
     public List<Funcionario> findByUsuario(String nombre);
 
-    public List<Funcionario> findByRolId(Long id);
+    public List<Funcionario> findByRol(Long id);
 
     Optional<Funcionario> findByCedula(String cedula);
 

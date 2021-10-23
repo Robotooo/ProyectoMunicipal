@@ -64,6 +64,13 @@ public class TransaccionServiceImplementation implements ITransaccionService{
         return Optional.ofNullable(transaccionDTOList);
     }
 
+    @Override
+    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long id) {
+        List<Transaccion> transacciones = transaccionRepository.findByFuncionarioId(id);
+        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        return Optional.ofNullable(transaccionDTOList);
+    }
+
     //get
     private TransaccionDTO getSavedTransaccionDTO(TransaccionDTO transaccionDTO) {
         Transaccion transaccion = MapperUtils.EntityFromDto(transaccionDTO, Transaccion.class);
