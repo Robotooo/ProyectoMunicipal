@@ -1,7 +1,7 @@
 package org.una.proyecto_Municipal.components;
 
 public enum RolesTypes {
-    ROLE_COLABORADOR("COLABORADOR"),
+    //ROLE_COLABORADOR("COLABORADOR"),
     ROLE_GESTOR("GESTOR"),
     ROLE_AUDITOR("AUDITOR"),
     ROLE_GERENTE("GERENTE"),
