@@ -16,16 +16,23 @@ import java.util.List;
 @Builder
 public class BienxColaborador implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
+    @EmbeddedId
+    BienesxColaboradorKey bienesxcolaboradorKey;
+
+    @MapsId("colaboradorId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="colaboradoresId")
+    @JoinColumn(name="colaborador_id")
     private Colaborador colaboradorId;
 
+    @MapsId("bienId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="bienesId")
+    @JoinColumn(name="bien_id")
     private Bien bienId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaboradorId")
@@ -34,6 +41,6 @@ public class BienxColaborador implements Serializable {
     @Column(name = "porcentaje")
     private float porcentaje;
 
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
 
 }

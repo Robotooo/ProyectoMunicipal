@@ -11,7 +11,7 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
 //    public List<Cobro> findByBienId(Long id);
 
-    public List<Cobro> findByBienxColaboradorId(Long id);
+//    public List<Cobro> findByBienxColaboradorId(Long id);
 
     public List<Cobro> findByFacturaId(Long id);
 

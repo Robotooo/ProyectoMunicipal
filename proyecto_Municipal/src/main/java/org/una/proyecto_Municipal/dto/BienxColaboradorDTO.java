@@ -11,7 +11,7 @@ import org.una.proyecto_Municipal.entities.Colaborador;
 @ToString
 @Builder
 public class BienxColaboradorDTO {
-    private Long id;
+//    private Long id;
     private ColaboradorDTO colaboradorId;
     private BienDTO bienId;
     private CobroDTO cobro;
