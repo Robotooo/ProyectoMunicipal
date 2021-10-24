@@ -21,11 +21,11 @@ public class BienxColaborador implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="colaboradores_id")
+    @JoinColumn(name="colaboradoresId")
     private Colaborador colaboradorId;
 
     @ManyToOne
-    @JoinColumn(name="bienes_id")
+    @JoinColumn(name="bienesId")
     private Bien bienId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaboradorId")

@@ -16,12 +16,29 @@ import java.util.Optional;
 @RequestMapping("/bienesxcolaboradores")
 @Api(tags = {"BienesxColaboradores"})
 public class BienxColaboradorController {
-    /*
+
     @Autowired
     private IBienxColaboradorService bienxcolaboradorService;
 
+    @ApiOperation(value = "Obtiene una lista de bienes por colaborador a partir de su bien",
+            response = BienxColaboradorDTO.class, tags = "Bienes por Colaborador")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
+        Optional<List<BienxColaboradorDTO>> bienxcolaboradorFound = bienxcolaboradorService.findByBienId(id);
+        return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de bienes por colaborador a partir de su colaborador",
+            response = BienxColaboradorDTO.class, responseContainer = "List", tags = "Bienes por Colaborador")
+    @GetMapping("/colaboradorId/{colaboradorId}")
+    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
+        Optional<List<BienxColaboradorDTO>> bienxcolaboradorFound = bienxcolaboradorService.findByColaboradorId(id);
+        return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
+    }
+
+    /*
     @ApiOperation(value = "Obtiene un bien a partir de su id",
-            response = BienxColaboradorDTO.class, tags = "Cobros")
+            response = BienxColaboradorDTO.class, tags = "Bienes por Colaborador")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<BienxColaboradorDTO> bienFound = bienxcolaboradorService.findById(id);
@@ -29,7 +46,7 @@ public class BienxColaboradorController {
     }
 
     @ApiOperation(value = "Obtiene una lista de todos los bienes",
-            response = BienxColaboradorDTO.class, responseContainer = "List", tags = "Bienes")
+            response = BienxColaboradorDTO.class, responseContainer = "List", tags = "Bienes por Colaborador")
     @GetMapping("/{all}")
     @ResponseBody
     public ResponseEntity<?> findAll() {

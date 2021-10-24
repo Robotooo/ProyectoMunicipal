@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IBienxColaboradorService {
+
+    public Optional<List<BienxColaboradorDTO>> findByBienId(Long id);
+
+    public Optional<List<BienxColaboradorDTO>> findByColaboradorId(Long id);
+
     /*
     public Optional<BienxColaboradorDTO> findById(Long id);
 

@@ -1,8 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
 import lombok.*;
-import org.una.proyecto_Municipal.entities.BienxColaborador;
-import org.una.proyecto_Municipal.entities.Factura;
 
 import java.util.Date;
 

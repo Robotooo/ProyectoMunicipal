@@ -14,10 +14,25 @@ import java.util.Optional;
 
 @Service
 public class BienxColaboradorServiceImplementation implements IBienxColaboradorService{
-    /*
+
     @Autowired
     private IBienxColaboradorRepository bienxcolaboradorRepository;
 
+    @Override
+    public Optional<List<BienxColaboradorDTO>> findByBienId(Long id) {
+        List<BienxColaboradorDTO> bienxcolaboradorDTOList = MapperUtils.DtoListFromEntityList(bienxcolaboradorRepository.findByBienId(id), BienxColaboradorDTO.class);
+        if (bienxcolaboradorDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(bienxcolaboradorDTOList);
+    }
+
+    @Override
+    public Optional<List<BienxColaboradorDTO>> findByColaboradorId(Long id) {
+        List<BienxColaboradorDTO> bienxcolaboradorDTOList = MapperUtils.DtoListFromEntityList(bienxcolaboradorRepository.findByColaboradorId(id), BienxColaboradorDTO.class);
+        if (bienxcolaboradorDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(bienxcolaboradorDTOList);
+    }
+
+    /*
     //findBy...
     @Override
     public Optional<BienxColaboradorDTO> findById(Long id) {
