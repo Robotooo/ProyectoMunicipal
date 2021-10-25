@@ -45,6 +45,14 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
+            responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/tipo/{tipo}")
+    public ResponseEntity<?> findByTipo(@PathVariable(value = "tipo") int tipo) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByTipo(tipo);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
 //    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
 //            response = CobroDTO.class, tags = "Cobros")
 //    @GetMapping("/{id}")

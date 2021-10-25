@@ -13,6 +13,8 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> findByEstado(boolean estado);
 
+    public Optional<List<CobroDTO>> findByTipo(int tipo);
+
 //    public Optional<List<CobroDTO>> findByBienId(Long id);
 
 //    public Optional<List<CobroDTO>> findByBienxColaboradorId(Long id);

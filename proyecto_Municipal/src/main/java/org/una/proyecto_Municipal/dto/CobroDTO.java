@@ -13,6 +13,7 @@ public class CobroDTO {
     private Long id;
     private double monto;
     private boolean estado;
+    private int tipo;
     private Integer periodo;
     private Date fechaCreacion;
     private Date fechaModificacion;

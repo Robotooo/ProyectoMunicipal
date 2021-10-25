@@ -64,6 +64,12 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTOList);
     }
 
+    @Override
+    public Optional<List<CobroDTO>> findByTipo(int tipo) {
+        List<Cobro> cobroList = cobroRepository.findByTipo(tipo);
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);    }
+
     //get
     private CobroDTO getSavedCobroDTO(CobroDTO cobroDTO) {
         Cobro cobro = MapperUtils.EntityFromDto(cobroDTO, Cobro.class);

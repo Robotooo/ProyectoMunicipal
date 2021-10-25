@@ -31,6 +31,9 @@ public class Cobro implements Serializable {
     @Column(name = "monto")
     private double monto;
 
+    @Column(name = "tipo")
+    private int tipo;
+
     @Column(name = "periodo")
     private Integer periodo;
 
