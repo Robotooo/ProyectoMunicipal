@@ -47,6 +47,7 @@ public class DataLoader implements ApplicationRunner {
             Optional<RolDTO> gestorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GESTOR.name()).build());
             Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
             Optional<RolDTO> gerenteRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GERENTE.name()).build());
+            Optional<RolDTO> botRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_BOT.name()).build());
 
             FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
                     .cedula("0123453782")
@@ -63,6 +64,14 @@ public class DataLoader implements ApplicationRunner {
                     .rol(administradorRol.orElseThrow()).build();
 
             funcionarioService.create(administradorUsuario);
+
+            FuncionarioDTO botUsuario = FuncionarioDTO.builder()
+                    .cedula("roboto")
+                    .usuario("Usuario Bot")
+                    .passwordEncriptado("botcito")
+                    .rol(botRol.orElseThrow()).build();
+
+            funcionarioService.create(botUsuario);
 
             ColaboradorDTO colaborador = ColaboradorDTO.builder()
                     .cedula("116380047")
@@ -119,7 +128,7 @@ public class DataLoader implements ApplicationRunner {
             cobroService.create(cobro3);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
-        }else {
+        } else {
             System.out.println("Se encontro el usuario administrador, continuando...");
         }
     }
