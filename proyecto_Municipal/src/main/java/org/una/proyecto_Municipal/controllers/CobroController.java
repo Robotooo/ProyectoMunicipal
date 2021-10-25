@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
+import org.una.proyecto_Municipal.services.IColaboradorService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +23,9 @@ public class CobroController {
 
     @Autowired
     private ICobroService cobroService;
+
+    @Autowired
+    private IColaboradorService colaboradorService;
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
@@ -70,20 +76,36 @@ public class CobroController {
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
 
-    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
-    @GetMapping("/factura_id/{factura_id}")
-    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
-        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
+//            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
+//    @GetMapping("/factura_id/{factura_id}")
+//    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
+//        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
+//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
             response = CobroDTO.class, tags = "Licencias")
     @GetMapping("/cedula/{cobros}")
     public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cobros") String cedula) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula);
-        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+
+        if(!colaboradorFound.isEmpty()){
+            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+                if(!cobrosPendientes.isEmpty()){
+
+                    for (CobroDTO c : cobrosPendientes.get()) {
+                        if (1 == clbrdr.getId()) {
+                            //c.getBienxColaboradorId().getColaboradorId().getId()
+                                lstCobroDTOFilter.add(c);
+                        }
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
 
 //    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",

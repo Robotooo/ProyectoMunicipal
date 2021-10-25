@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
+import org.una.proyecto_Municipal.services.ICobroService;
+import org.una.proyecto_Municipal.services.IColaboradorService;
 import org.una.proyecto_Municipal.services.ILicenciaService;
 //import org.una.proyecto_Municipal.services.ILicenciaService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +28,12 @@ public class LicenciaController {
 
     @Autowired
     private ILicenciaService licenciaService;
+
+    @Autowired
+    private IColaboradorService colaboradorService;
+
+    @Autowired
+    private ICobroService cobroService;
 
     @ApiOperation(value = "Obtiene una liciencia a partir de su id",
                 response = LicenciaDTO.class, tags = "Licencias")
@@ -73,14 +84,6 @@ public class LicenciaController {
         return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
-            response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cobros}")
-    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cobros") String cedula) {
-        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findPendienteTotalLicencias(cedula);
-        return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
-    }
-
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -98,6 +101,33 @@ public class LicenciaController {
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody LicenciaDTO licenciaModified) {
         Optional<LicenciaDTO> licenciaUpdated = licenciaService.update(licenciaModified, id);
         return new ResponseEntity<>(licenciaUpdated, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros por Licencias comerciales",
+            response = LicenciaDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cedula}")
+    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+
+        if(!colaboradorFound.isEmpty()){
+            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+                // Era necesario utilizar findByColaboradorId
+                if(!cobrosPendientes.isEmpty()){
+
+                    for (CobroDTO c : cobrosPendientes.get()) {
+                        if (1 == clbrdr.getId()) {
+                            //c.getBienxColaboradorId().getColaboradorId().getId()
+                            if(c.getTipo() == 2){
+                                lstCobroDTOFilter.add(c);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
 
     //TODO:  delete, findAll, findByEstado

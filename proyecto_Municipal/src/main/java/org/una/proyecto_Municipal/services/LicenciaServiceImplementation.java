@@ -42,18 +42,22 @@ public class LicenciaServiceImplementation implements ILicenciaService{
         return Optional.ofNullable(licenciaDTOList);
     }
 
+
     @Override
     public Optional<LicenciaDTO> findByTelefono(String telefono) {
-        return Optional.empty();
+        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
+        if (licencia.isEmpty()) throw new NotFoundInformationException();
+
+        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
+        return Optional.ofNullable(licenciaDTO);
     }
 
 //    @Override
-//    public Optional<LicenciaDTO> findByTelefono(String telefono) {  //??
-//        Optional<Licencia> licencia = Optional.ofNullable(licenciaRepository.findByTelefono(telefono));
-//        if (licencia.isEmpty()) throw new NotFoundInformationException();
-//
-//        LicenciaDTO licenciaDTO = MapperUtils.DtoFromEntity(licencia.get(), LicenciaDTO.class);
-//        return Optional.ofNullable(licenciaDTO);
+//    @Transactional
+//    public Optional< List<LicenciaDTO>> findPendienteTotalLicencias(String cedula){
+//        List<Licencia> licenciaList = licenciaRepository.findPendienteTotalLicencias(cedula);
+//        List<LicenciaDTO> licenciaDTOList =  MapperUtils.DtoListFromEntityList(licenciaList, LicenciaDTO.class);
+//        return Optional.ofNullable(licenciaDTOList);
 //    }
 
     @Override
@@ -97,12 +101,7 @@ public class LicenciaServiceImplementation implements ILicenciaService{
 //        return Optional.ofNullable(licenciaDTOList);
 //    }
 
-    @Override
-    public Optional<List<LicenciaDTO>> findPendienteTotalLicencias(String cedula) {
-        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findPendienteTotalLicencias(cedula), LicenciaDTO.class);
-        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(licenciaDTOList);
-    }
+
 
     //detele...
     @Override

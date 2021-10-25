@@ -8,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
+import org.una.proyecto_Municipal.services.ICobroService;
+import org.una.proyecto_Municipal.services.IColaboradorService;
 import org.una.proyecto_Municipal.services.IRutaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,12 @@ public class RutaController {
 
     @Autowired
     private IRutaService rutaService;
+
+    @Autowired
+    private IColaboradorService colaboradorService;
+
+    @Autowired
+    private ICobroService cobroService;
 
     @ApiOperation(value = "Obtiene una ruta a partir de su id",
             response = RutaDTO.class, tags = "Rutas")
@@ -54,13 +63,6 @@ public class RutaController {
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de los pedientes de rutas",
-            response = RutaDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cobros}")
-    public ResponseEntity<?> findPendienteTotalRuta(@PathVariable(value = "cobros") String cedula) {
-        Optional<List<RutaDTO>> rutaFound = rutaService.findPendienteTotalRutas(cedula);
-        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
-    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -93,6 +95,35 @@ public class RutaController {
     public ResponseEntity<?> deleteAll() throws Exception {
         rutaService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros con respecto a Rutas de buses",
+            response = LicenciaDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cedula}")
+    public ResponseEntity<?> findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+
+        if(!colaboradorFound.isEmpty()){
+            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+                // Era necesario utilizar findByColaboradorId
+
+                if(!cobrosPendientes.isEmpty()) {
+                    for (CobroDTO c : cobrosPendientes.get()) {
+                        if (1 == clbrdr.getId()) {
+                            //c.getBienxColaboradorId().getColaboradorId().getId()
+                            if(c.getTipo() == 1){
+                                lstCobroDTOFilter.add(c);
+                            }
+                        }
+                    }
+
+                }
+
+                }
+            }
+        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
 
 }

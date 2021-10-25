@@ -6,10 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.ColaboradorDTO;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
+import org.una.proyecto_Municipal.services.ICobroService;
+import org.una.proyecto_Municipal.services.IColaboradorService;
 import org.una.proyecto_Municipal.services.IPropiedadService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +27,12 @@ public class PropiedadController {
 
     @Autowired
     private IPropiedadService propiedadService;
+
+    @Autowired
+    private IColaboradorService colaboradorService;
+
+    @Autowired
+    private ICobroService cobroService;
 
     @ApiOperation(value = "Obtiene una propiedad a partir de su id",
             response = PropiedadDTO.class, tags = "Propiedades")
@@ -47,13 +59,6 @@ public class PropiedadController {
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de los pedientes de propiedades",
-            response = PropiedadDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cobros}")
-    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cobros") String cedula) {
-        Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findPendienteTotalPropiedad(cedula);
-        return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
-    }
 
 //    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su nombre",
 //            response = PropiedadDTO.class, tags = "Propiedades")
@@ -93,6 +98,34 @@ public class PropiedadController {
     public ResponseEntity<?> deleteAll() throws Exception {
         propiedadService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros por Limpieza de vías",
+            response = LicenciaDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cedula}")
+    public ResponseEntity<?> findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+
+        if(!colaboradorFound.isEmpty()){
+            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+                // Era necesario utilizar findByColaboradorId
+
+                if(!cobrosPendientes.isEmpty()) {
+                    for (CobroDTO c : cobrosPendientes.get()) {
+                    if (2 == clbrdr.getId()) {
+                        //c.getBienxColaboradorId().getColaboradorId().getId()
+                        if(c.getTipo() == 2){
+                            lstCobroDTOFilter.add(c);
+                        }
+                    }
+                }
+
+                }
+            }
+        }
+        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
 
     //TODO: findByZona

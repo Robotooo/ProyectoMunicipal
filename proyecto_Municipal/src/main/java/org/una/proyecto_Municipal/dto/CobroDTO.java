@@ -19,4 +19,6 @@ public class CobroDTO {
     private Date fechaModificacion;
     private BienxColaboradorDTO bienxColaboradorId;
     private FacturaDTO facturaId;
+
+
 }

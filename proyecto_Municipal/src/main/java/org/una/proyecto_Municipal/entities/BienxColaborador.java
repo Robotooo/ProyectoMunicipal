@@ -21,7 +21,7 @@ public class BienxColaborador implements Serializable {
 //    private Long id;
 
     @EmbeddedId
-    BienesxColaboradorKey bienesxcolaboradorKey;
+    BienesxColaboradorKey bienesxColaboradorKey;
 
     @MapsId("colaboradorId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

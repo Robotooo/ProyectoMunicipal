@@ -17,7 +17,7 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     public List<Cobro> findByTipo(int tipo);
 
-    public List<Cobro> findByFacturaId(Long id);
+    //public List<Cobro> findByFacturaId(Long id);
 
     @Query(value = "SELECT cobros.monto " +
         "FROM cobros " +
