@@ -67,6 +67,13 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
+    public Optional<List<CobroDTO>> findByTipo(int tipo) {
+        List<Cobro> cobroList = cobroRepository.findByTipo(tipo);
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
     public Optional<List<CobroDTO>> findCobroByCedula(String cedula) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
