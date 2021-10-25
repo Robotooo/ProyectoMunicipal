@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,22 @@ public class CobroController {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
+            response = CobroDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cobros}")
+    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cobros") String cedula) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+//    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
+//            response = CobroDTO.class, tags = "Licencias")
+//    @GetMapping("/cedula/{cobros}")
+//    public ResponseEntity<?> findCobroByCedulaAndFechasBeetwen(@PathVariable(value = "cobros") String cedula, Date fechaInicio, Date fechaFinal) {
+//        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndFechasBeetwen(cedula, fechaInicio, fechaFinal);
+//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

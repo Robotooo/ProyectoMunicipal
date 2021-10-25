@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.dto.RolDTO;
-import org.una.proyecto_Municipal.dto.RutaDTO;
-import org.una.proyecto_Municipal.dto.TransaccionDTO;
+import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IRutaService;
 
@@ -55,6 +52,14 @@ public class RutaController {
     public ResponseEntity<?> findByBienId(@PathVariable(value = "bien_id") Long id) {
         Optional<List<RutaDTO>> bienFound = rutaService.findByBienId(id);
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de los pedientes de rutas",
+            response = RutaDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cobros}")
+    public ResponseEntity<?> findPendienteTotalRuta(@PathVariable(value = "cobros") String cedula) {
+        Optional<List<RutaDTO>> rutaFound = rutaService.findPendienteTotalRutas(cedula);
+        return new ResponseEntity<>(rutaFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)

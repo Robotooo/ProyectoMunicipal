@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.services;
 
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
+import org.una.proyecto_Municipal.dto.RutaDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public interface IPropiedadService {
 //    public Optional<List<PropiedadDTO>> findByNombre(String nombre);
 
     public Optional<List<PropiedadDTO>> findByEstado(boolean estado);
+
+    public Optional<List<PropiedadDTO>> findPendienteTotalPropiedad(String cedula);
 
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO);
 

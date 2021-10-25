@@ -23,6 +23,8 @@ public interface ILicenciaService {
 
     Optional<List<LicenciaDTO>> findByBienId(Long id);
 
+    public Optional<List<LicenciaDTO>> findPendienteTotalLicencias(String cedula);
+
     public void delete(Long id);
 
     public void deleteAll();

@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICobroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +65,20 @@ public class CobroServiceImplementation implements ICobroService{
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);
     }
+
+    @Override
+    public Optional<List<CobroDTO>> findCobroByCedula(String cedula) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+//    @Override
+//    public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBeetwen(String cedula, Date fechaInicio, Date fechaFinal) {
+//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedulaAndFechasBeetwen(cedula, fechaInicio, fechaFinal), CobroDTO.class);
+//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+//        return Optional.ofNullable(cobroDTOList);
+//    }
 
     //get
     private CobroDTO getSavedCobroDTO(CobroDTO cobroDTO) {

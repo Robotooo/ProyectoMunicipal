@@ -73,6 +73,14 @@ public class LicenciaController {
         return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
+            response = LicenciaDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cobros}")
+    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cobros") String cedula) {
+        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findPendienteTotalLicencias(cedula);
+        return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
