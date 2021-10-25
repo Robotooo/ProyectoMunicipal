@@ -14,13 +14,13 @@ public interface IRutaRepository extends JpaRepository<Ruta, Long> {
 
 //    List<Ruta> findByCantidadSalidasAndFechaDia(Integer, String);
 //
-    @Query(value = "SELECT rutas.estado, dia_semana.cantidad_salidas, dia_semana.nombre_dia " +
+    @Query(value = "SELECT dia_semana.cantidad_salidas" +
             "FROM rutas " +
             "INNER JOIN dia_semana ON dia_semana.ruta_id = rutas.id " +
             "INNER JOIN bienes ON bienes.id = rutas.bienes_id " +
             "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.bien_id = bienes.id " +
             "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
             "WHERE rutas.estado = 1 AND colaboradores.cedula = ?1", nativeQuery = true)
-    public Ruta findFormulaWithLikeSQL(String cedula);
+    public Ruta findPendienteTotalRutas(String cedula);
 
 }
