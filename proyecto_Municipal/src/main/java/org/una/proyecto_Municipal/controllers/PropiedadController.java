@@ -101,8 +101,8 @@ public class PropiedadController {
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros por Limpieza de vías",
-            response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cedula}")
+            response = LicenciaDTO.class, tags = "Propiedades")
+    @GetMapping("/byCedula/{cedula}")
     public ResponseEntity<?> findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();

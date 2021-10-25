@@ -84,16 +84,18 @@ public class CobroController {
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
 
-    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
-            response = CobroDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cobros}")
-    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cobros") String cedula) {
+    @ApiOperation(value = "Obtiene una lista de los Cobros pendientes por número de Cédula",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/byCedula/{cedula}")
+    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
 
         if(!colaboradorFound.isEmpty()){
             for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
                 Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+                // Era necesario utilizar findByColaboradorId
+
                 if(!cobrosPendientes.isEmpty()){
 
                     for (CobroDTO c : cobrosPendientes.get()) {
@@ -107,6 +109,32 @@ public class CobroController {
         }
         return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
+
+//    @ApiOperation(value = "Obtiene una lista de los Pagos realizados con el número de cédula",
+//            response = CobroDTO.class, tags = "Cobros")
+//    @GetMapping("/byCedula/{cedula2}")
+//    public ResponseEntity<?> findPagoByCedula(@PathVariable(value = "cedula2") String cedula2) {
+//        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula2);
+//        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+//
+//        if(!colaboradorFound.isEmpty()){
+//            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+//                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(false);
+//                // Era necesario utilizar findByColaboradorId
+//
+//                if(!cobrosPendientes.isEmpty()){
+//
+//                    for (CobroDTO c : cobrosPendientes.get()) {
+//                        if (1 == clbrdr.getId()) {
+//                            //c.getBienxColaboradorId().getColaboradorId().getId()
+//                            lstCobroDTOFilter.add(c);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
+//    }
 
 //    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
 //            response = CobroDTO.class, tags = "Licencias")

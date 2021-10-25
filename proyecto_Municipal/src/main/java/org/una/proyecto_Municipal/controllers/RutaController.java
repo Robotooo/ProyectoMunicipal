@@ -98,8 +98,8 @@ public class RutaController {
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros con respecto a Rutas de buses",
-            response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cedula}")
+            response = LicenciaDTO.class, tags = "Rutas")
+    @GetMapping("/byCedula/{cedula}")
     public ResponseEntity<?> findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();

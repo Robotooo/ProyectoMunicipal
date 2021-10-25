@@ -105,7 +105,7 @@ public class LicenciaController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por Licencias comerciales",
             response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/cedula/{cedula}")
+    @GetMapping("/byCedula/{cedula}")
     public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
