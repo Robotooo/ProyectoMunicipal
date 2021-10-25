@@ -15,10 +15,10 @@ import java.util.Optional;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    @Value("admin")
+    @Value("${spring.security.user.name}")
     private String cedula;
 
-    @Value("Una2021")
+    @Value("${spring.security.user.password}")
     private String password;
 
     @Autowired

@@ -22,11 +22,15 @@ public interface ILicenciaRepository extends JpaRepository<Licencia, Long> {
 
     //public List<Licencia>  findByBienId(Long id);
 
-//    @Query("SELECT licencias.estado, licencias.ganancias, declaracion_anual.monto_anual, declaracion_anual.anio " +
-//            "FROM licencias " +
-//            "INNER JOIN declaracion_anual ON licencias.id = dia_semana.licencias_comerciales_id " +
-//            "WHERE rutas_buses.estado = 1")
-    //public Licencia findFormulaWithLikeSQL(@Param("licencia"));
+    @Query(value = "SELECT licencias.ganancias, declaracion_anual.monto_anual, declaracion_anual.anio " +
+            "FROM licencias " +
+            "INNER JOIN declaracion_anual ON licencias.id = declaracion_anual.licencias_comerciales_id " +
+            "INNER JOIN bienes ON bienes.id = licencias.bienes_id " +
+            "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.bien_id = bienes.id " +
+            "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
+            "WHERE licencias.estado = 1 AND colaboradores.cedula = ?1", nativeQuery = true)
+    public List<Licencia> findFormulaWithLikeSQL(String cedula);
+
 }
 
 
