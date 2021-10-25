@@ -26,7 +26,7 @@ public interface ILicenciaRepository extends JpaRepository<Licencia, Long> {
             "INNER JOIN bienes ON bienes.id = licencias.bienes_id " +
             "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.bien_id = bienes.id " +
             "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
-            "WHERE licencias.estado = 1 AND colaboradores.cedula = ?1", nativeQuery = true)
+            "WHERE licencias.estado = 1 AND colaboradores.cedula = :cedula", nativeQuery = true)
     public List<Licencia> findPendienteTotalLicencias(String cedula);
 
 }

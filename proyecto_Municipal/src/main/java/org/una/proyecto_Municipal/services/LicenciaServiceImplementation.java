@@ -97,6 +97,13 @@ public class LicenciaServiceImplementation implements ILicenciaService{
 //        return Optional.ofNullable(licenciaDTOList);
 //    }
 
+    @Override
+    public Optional<List<LicenciaDTO>> findPendienteTotalLicencias(String cedula) {
+        List<LicenciaDTO> licenciaDTOList = MapperUtils.DtoListFromEntityList(licenciaRepository.findPendienteTotalLicencias(cedula), LicenciaDTO.class);
+        if (licenciaDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(licenciaDTOList);
+    }
+
     //detele...
     @Override
     @Transactional

@@ -3,10 +3,7 @@ package org.una.proyecto_Municipal.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
-import org.una.proyecto_Municipal.entities.Parametro;
 import org.una.proyecto_Municipal.entities.Propiedad;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.IPropiedadRepository;
@@ -49,6 +46,13 @@ public class PropiedadServiceImplementation implements IPropiedadService{
     public Optional<List<PropiedadDTO>> findByEstado(boolean estado) {
         List<Propiedad> propiedadList = propiedadRepository.findByEstado(estado);
         List<PropiedadDTO> propiedadDTOList = MapperUtils.DtoListFromEntityList(propiedadList, PropiedadDTO.class);
+        return Optional.ofNullable(propiedadDTOList);
+    }
+
+    @Override
+    public Optional<List<PropiedadDTO>> findPendienteTotalPropiedad(String cedula) {
+        List<PropiedadDTO> propiedadDTOList = MapperUtils.DtoListFromEntityList(propiedadRepository.findPendienteTotalPropiedad(cedula), PropiedadDTO.class);
+        if (propiedadDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(propiedadDTOList);
     }
 

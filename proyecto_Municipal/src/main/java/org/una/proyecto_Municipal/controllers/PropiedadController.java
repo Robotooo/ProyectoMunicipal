@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.proyecto_Municipal.dto.FuncionarioDTO;
-import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IPropiedadService;
@@ -46,6 +44,14 @@ public class PropiedadController {
     @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findByEstado(estado);
+        return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de los pedientes de propiedades",
+            response = PropiedadDTO.class, tags = "Licencias")
+    @GetMapping("/cedula/{cobros}")
+    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cobros") String cedula) {
+        Optional<List<PropiedadDTO>> propiedadFound = propiedadService.findPendienteTotalPropiedad(cedula);
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
 
