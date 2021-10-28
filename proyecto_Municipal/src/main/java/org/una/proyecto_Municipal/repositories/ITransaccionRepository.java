@@ -16,5 +16,5 @@ public interface ITransaccionRepository extends JpaRepository<Transaccion, Long>
 
     public List<Transaccion> findByFechaCreacionBetween(Date startDate, Date endDate);
 
-    public List<Transaccion> findByFuncionarioId(Long id);
+    public List<Transaccion> findByFuncionarioId(Long funcionarioId);
 }

@@ -64,7 +64,7 @@ public class TransaccionesController {
     @ApiOperation(value = "Obtiene una lista de transacciones a partir del id de Funcionario",
             response = FuncionarioDTO.class, tags = "Transacciones")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
-    @GetMapping("/funcionarioId/{funcionarioId}")
+    @GetMapping("/byFuncionarioId/{funcionarioId}")
     public ResponseEntity<?> findByFuncionarioId(@PathVariable(value = "funcionarioId") Long funcionarioId) {
         Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByFuncionarioId(funcionarioId);
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
