@@ -83,8 +83,8 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
-    public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal) {
-        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedulaAndFechasBetween(cedula, fechaInicio, fechaFinal), CobroDTO.class);
+    public Optional<List<CobroDTO>> findPagosByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findPagosByCedulaAndFechasBetween(cedula, fechaInicio, fechaFinal), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
     }

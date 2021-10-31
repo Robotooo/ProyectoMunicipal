@@ -149,13 +149,13 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/CobroByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")
-    public ResponseEntity<?>findCobroByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
+    @GetMapping("/PagosByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")
+    public ResponseEntity<?>findPagosByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
         LocalDate dateini = LocalDate.parse(fechaInicio);
         LocalDate datefin = LocalDate.parse(fechaFinal);
         Date di  = convertLocaDateToDate(dateini);
         Date df  = convertLocaDateToDate(datefin);
-        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndFechasBetween(cedula, di, df);
+        Optional<List<CobroDTO>> cobroFound = cobroService.findPagosByCedulaAndFechasBetween(cedula, di, df);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
