@@ -49,13 +49,6 @@ public class RutaServiceImplementation implements IRutaService{
         return Optional.ofNullable(rutaDTOList);
     }
 
-    @Override
-    public Optional<List<RutaDTO>> findPendienteTotalRutas(String cedula) {
-        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findPendienteTotalRutas(cedula), RutaDTO.class);
-        if (rutaDTOList.isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(rutaDTOList);
-    }
-
     //delete
     @Override
     @Transactional

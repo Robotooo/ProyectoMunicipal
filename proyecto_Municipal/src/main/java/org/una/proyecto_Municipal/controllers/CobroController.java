@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
@@ -148,7 +149,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/CobroByCedulaAndFechasBeetwen/{cedula}/{fechaInicio}/{fechaFinal}")
+    @GetMapping("/CobroByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<?>findCobroByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
         LocalDate dateini = LocalDate.parse(fechaInicio);
         LocalDate datefin = LocalDate.parse(fechaFinal);
@@ -160,6 +161,30 @@ public class CobroController {
 
     private Date convertLocaDateToDate(LocalDate ld) {
         return Date.from(ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros por licencias comerciales",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedulaLicencias/{cedula}")
+    public ResponseEntity<?>findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalLicencias(cedula);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros por propiedades",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedulaPropiedades/{cedula}")
+    public ResponseEntity<?>findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalPropiedades(cedula);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros por rutas",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedulaRutas/{cedula}")
+    public ResponseEntity<?>findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalRutas(cedula);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)

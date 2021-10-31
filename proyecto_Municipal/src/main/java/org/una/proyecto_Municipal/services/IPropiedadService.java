@@ -17,8 +17,6 @@ public interface IPropiedadService {
 
     public Optional<List<PropiedadDTO>> findByEstado(boolean estado);
 
-    public Optional<List<PropiedadDTO>> findPendienteTotalPropiedad(String cedula);
-
     public Optional<PropiedadDTO> create(PropiedadDTO propiedadDTO);
 
     public Optional<PropiedadDTO> update(PropiedadDTO propiedadDTO, Long id);

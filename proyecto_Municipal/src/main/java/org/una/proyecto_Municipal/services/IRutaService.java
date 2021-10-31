@@ -15,8 +15,6 @@ public interface IRutaService {
 
     public Optional<List<RutaDTO>> findByBienId(Long id);
 
-    public Optional<List<RutaDTO>> findPendienteTotalRutas(String cedula);
-
     public Optional<RutaDTO> create(RutaDTO rutaDTO);
 
     public Optional<RutaDTO> update(RutaDTO rutaDTO, Long id);

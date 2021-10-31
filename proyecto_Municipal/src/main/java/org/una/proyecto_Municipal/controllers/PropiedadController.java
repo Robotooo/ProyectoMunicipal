@@ -100,34 +100,6 @@ public class PropiedadController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de cobros por Limpieza de vías",
-            response = LicenciaDTO.class, tags = "Propiedades")
-    @GetMapping("/byCedula/{cedula}")
-    public ResponseEntity<?> findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
-        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-
-        if(!colaboradorFound.isEmpty()){
-            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
-                // Era necesario utilizar findByColaboradorId
-
-                if(!cobrosPendientes.isEmpty()) {
-                    for (CobroDTO c : cobrosPendientes.get()) {
-                    if (2 == clbrdr.getId()) {
-                        //c.getBienxColaboradorId().getColaboradorId().getId()
-                        if(c.getTipo() == 2){
-                            lstCobroDTOFilter.add(c);
-                        }
-                    }
-                }
-
-                }
-            }
-        }
-        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
-    }
-
     //TODO: findByZona
 
 }

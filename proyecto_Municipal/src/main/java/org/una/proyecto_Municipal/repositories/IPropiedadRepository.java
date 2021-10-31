@@ -14,12 +14,4 @@ public interface IPropiedadRepository extends JpaRepository<Propiedad, Long> {
 
     public List<Propiedad> findByEstado(boolean estado);
 
-    @Query(value = "SELECT propiedades.metros, propiedades.zona " +
-            "FROM propiedades " +
-            "INNER JOIN bienes ON bienes.id = propiedades.bienes_id " +
-            "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.bien_id = bienes.id " +
-            "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
-            "WHERE propiedades.zona = 1 OR propiedades.zona = 2 AND colaboradores.cedula = :cedula", nativeQuery = true)
-    public List<Propiedad> findPendienteTotalPropiedad(String cedula);
-
 }

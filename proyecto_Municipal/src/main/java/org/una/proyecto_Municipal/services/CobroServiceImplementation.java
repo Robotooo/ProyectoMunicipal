@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.entities.Cobro;
+import org.una.proyecto_Municipal.entities.Licencia;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICobroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
@@ -84,6 +86,30 @@ public class CobroServiceImplementation implements ICobroService{
     public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedulaAndFechasBetween(cedula, fechaInicio, fechaFinal), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
+    @Transactional
+    public Optional< List<CobroDTO>> findPendienteTotalLicencias(String cedula){
+        List<Cobro> cobroList = cobroRepository.findPendienteTotalLicencias(cedula);
+        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
+    @Transactional
+    public Optional< List<CobroDTO>> findPendienteTotalPropiedades(String cedula){
+        List<Cobro> cobroList = cobroRepository.findPendienteTotalPropiedades(cedula);
+        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
+    @Transactional
+    public Optional< List<CobroDTO>> findPendienteTotalRutas(String cedula){
+        List<Cobro> cobroList = cobroRepository.findPendienteTotalRutas(cedula);
+        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);
     }
 

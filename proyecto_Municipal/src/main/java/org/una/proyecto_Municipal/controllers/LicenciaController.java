@@ -103,33 +103,6 @@ public class LicenciaController {
         return new ResponseEntity<>(licenciaUpdated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de cobros por Licencias comerciales",
-            response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/byCedula/{cedula}")
-    public ResponseEntity<?> findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
-        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-
-        if(!colaboradorFound.isEmpty()){
-            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
-                // Era necesario utilizar findByColaboradorId
-                if(!cobrosPendientes.isEmpty()){
-
-                    for (CobroDTO c : cobrosPendientes.get()) {
-                        if (1 == clbrdr.getId()) {
-                            //c.getBienxColaboradorId().getColaboradorId().getId()
-                            if(c.getTipo() == 2){
-                                lstCobroDTOFilter.add(c);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
-    }
-
-    //TODO:  delete, findAll, findByEstado
+    //TODO: delete, findAll
 
 }

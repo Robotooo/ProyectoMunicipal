@@ -49,13 +49,6 @@ public class PropiedadServiceImplementation implements IPropiedadService{
         return Optional.ofNullable(propiedadDTOList);
     }
 
-    @Override
-    public Optional<List<PropiedadDTO>> findPendienteTotalPropiedad(String cedula) {
-        List<PropiedadDTO> propiedadDTOList = MapperUtils.DtoListFromEntityList(propiedadRepository.findPendienteTotalPropiedad(cedula), PropiedadDTO.class);
-        if (propiedadDTOList.isEmpty()) throw new NotFoundInformationException();
-        return Optional.ofNullable(propiedadDTOList);
-    }
-
     //get
     private PropiedadDTO getSavedPropiedadDTO(PropiedadDTO funcionarioDTO) {
         Propiedad funcionario = MapperUtils.EntityFromDto(funcionarioDTO, Propiedad.class);

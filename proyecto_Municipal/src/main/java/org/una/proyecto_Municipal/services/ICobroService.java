@@ -1,6 +1,7 @@
 package org.una.proyecto_Municipal.services;
 
 import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,12 @@ public interface ICobroService {
     public Optional<List<CobroDTO>> findCobroByCedula(String cedula);
 
     public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
+
+    public Optional<List<CobroDTO>> findPendienteTotalLicencias(String cedula);
+
+    public Optional<List<CobroDTO>> findPendienteTotalPropiedades(String cedula);
+
+    public Optional<List<CobroDTO>> findPendienteTotalRutas(String cedula);
 
     public Optional<CobroDTO> create(CobroDTO cobroDTO);
 

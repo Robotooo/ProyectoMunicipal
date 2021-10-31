@@ -63,7 +63,6 @@ public class RutaController {
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
 
-
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -95,35 +94,6 @@ public class RutaController {
     public ResponseEntity<?> deleteAll() throws Exception {
         rutaService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "Obtiene una lista de cobros con respecto a Rutas de buses",
-            response = LicenciaDTO.class, tags = "Rutas")
-    @GetMapping("/byCedula/{cedula}")
-    public ResponseEntity<?> findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
-        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-
-        if(!colaboradorFound.isEmpty()){
-            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
-                // Era necesario utilizar findByColaboradorId
-
-                if(!cobrosPendientes.isEmpty()) {
-                    for (CobroDTO c : cobrosPendientes.get()) {
-                        if (1 == clbrdr.getId()) {
-                            //c.getBienxColaboradorId().getColaboradorId().getId()
-                            if(c.getTipo() == 1){
-                                lstCobroDTOFilter.add(c);
-                            }
-                        }
-                    }
-
-                }
-
-                }
-            }
-        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
     }
 
 }
