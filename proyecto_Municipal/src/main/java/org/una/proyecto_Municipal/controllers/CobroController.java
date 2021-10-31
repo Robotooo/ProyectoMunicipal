@@ -11,6 +11,8 @@ import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,31 +86,31 @@ public class CobroController {
 //        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
 //    }
 
-    @ApiOperation(value = "Obtiene una lista de los Cobros pendientes por número de Cédula",
-            response = CobroDTO.class, tags = "Cobros")
-    @GetMapping("/byCedula/{cedula}")
-    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
-        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-
-        if(!colaboradorFound.isEmpty()){
-            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
-                // Era necesario utilizar findByColaboradorId
-
-                if(!cobrosPendientes.isEmpty()){
-
-                    for (CobroDTO c : cobrosPendientes.get()) {
-                        if (1 == clbrdr.getId()) {
-                            //c.getBienxColaboradorId().getColaboradorId().getId()
-                                lstCobroDTOFilter.add(c);
-                        }
-                    }
-                }
-            }
-        }
-        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "Obtiene una lista de los Cobros pendientes por número de Cédula",
+//            response = CobroDTO.class, tags = "Cobros")
+//    @GetMapping("/byCedula/{cedula}")
+//    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
+//        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+//        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
+//
+//        if(!colaboradorFound.isEmpty()){
+//            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
+//                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
+//                // Era necesario utilizar findByColaboradorId
+//
+//                if(!cobrosPendientes.isEmpty()){
+//
+//                    for (CobroDTO c : cobrosPendientes.get()) {
+//                        if (1 == clbrdr.getId()) {
+//                            //c.getBienxColaboradorId().getColaboradorId().getId()
+//                                lstCobroDTOFilter.add(c);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
+//    }
 
 //    @ApiOperation(value = "Obtiene una lista de los Pagos realizados con el número de cédula",
 //            response = CobroDTO.class, tags = "Cobros")
@@ -136,13 +138,29 @@ public class CobroController {
 //        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
 //    }
 
-//    @ApiOperation(value = "Obtiene una lista de los pedientes de licencias",
-//            response = CobroDTO.class, tags = "Licencias")
-//    @GetMapping("/cedula/{cobros}")
-//    public ResponseEntity<?> findCobroByCedulaAndFechasBeetwen(@PathVariable(value = "cobros") String cedula, Date fechaInicio, Date fechaFinal) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndFechasBeetwen(cedula, fechaInicio, fechaFinal);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedula/{cedula}")
+    public ResponseEntity<?>findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula entre fechas",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedulaAndFechasBeetwen/{cedula}/{fechaInicio}/{fechaFinal}")
+    public ResponseEntity<?>findCobroByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
+        LocalDate dateini = LocalDate.parse(fechaInicio);
+        LocalDate datefin = LocalDate.parse(fechaFinal);
+        Date di  = convertLocaDateToDate(dateini);
+        Date df  = convertLocaDateToDate(datefin);
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndFechasBetween(cedula, di, df);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+    private Date convertLocaDateToDate(LocalDate ld) {
+        return Date.from(ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")

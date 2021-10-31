@@ -24,7 +24,7 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> findCobroByCedula(String cedula);
 
-//    public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBeetwen(String cedula, Date fechaInicio, Date fechaFinal);
+    public Optional<List<CobroDTO>> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 
     public Optional<CobroDTO> create(CobroDTO cobroDTO);
 

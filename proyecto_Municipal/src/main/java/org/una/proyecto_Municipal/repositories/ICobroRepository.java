@@ -19,18 +19,17 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     //public List<Cobro> findByFacturaId(Long id);
 
-    @Query(value = "SELECT cobros.monto " +
-        "FROM cobros " +
-        "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.colaborador_id = cobros.colaborador_id " +
-        "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
-        "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula", nativeQuery = true)
+    @Query(value = "SELECT cobros.* " +
+            "FROM cobros " +
+            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findCobroByCedula(String cedula);
 
-//    @Query(value = "SELECT cobros.monto, cobros.fecha_modificacion " +
-//            "FROM cobros " +
-//            "INNER JOIN bienes_x_colaboradores ON bienes_x_colaboradores.colaborador_id = cobros.colaborador_id " +
-//            "INNER JOIN colaboradores ON colaboradores.id = bienes_x_colaboradores.colaborador_id " +
-//            "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula AND cobros.fecha_modificacion BETWEEN :fechaInicio AND :fechaFinal", nativeQuery = true)
-//    public List<Cobro> findCobroByCedulaAndFechasBeetwen(String cedula, Date fechaInicio, Date fechaFinal);
+    @Query(value = "SELECT cobros.* " +
+            "FROM cobros " +
+            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula " +
+            "AND cobros.fecha_modificacion BETWEEN :fechaInicio AND :fechaFinal ", nativeQuery = true)
+    public List<Cobro> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 
 }
