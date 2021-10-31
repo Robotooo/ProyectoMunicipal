@@ -28,7 +28,7 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
             "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
-            "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula " +
+            "WHERE cobros.estado = 0 AND colaboradores.cedula = :cedula " +
             "AND cobros.fecha_modificacion BETWEEN :fechaInicio AND :fechaFinal ", nativeQuery = true)
     public List<Cobro> findCobroByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 

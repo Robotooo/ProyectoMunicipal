@@ -146,7 +146,7 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula entre fechas",
+    @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/CobroByCedulaAndFechasBeetwen/{cedula}/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<?>findCobroByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
