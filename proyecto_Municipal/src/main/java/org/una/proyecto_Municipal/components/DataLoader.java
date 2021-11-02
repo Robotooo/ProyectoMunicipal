@@ -155,28 +155,13 @@ public class DataLoader implements ApplicationRunner {
             parametroService.create(help1);
 
             ParametroDTO help2 = ParametroDTO.builder()
-                    .descripcion("/licencia Devuelve la formula de licencias comerciales")
+                    .descripcion("/formulas Devuelve las formulas de calculo de impuestos.")
                     .estado(true)
                     .nombre("Help")
                     .valor(3)
                     .build();
             parametroService.create(help2);
 
-            ParametroDTO help3 = ParametroDTO.builder()
-                    .descripcion("/limpieza Devuelve la formula de limpieza de vias")
-                    .estado(true)
-                    .nombre("Help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help3);
-
-            ParametroDTO help4 = ParametroDTO.builder()
-                    .descripcion("/rutas Devuelve la formula de rutas de buses")
-                    .estado(true)
-                    .nombre("Help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help4);
 
             ParametroDTO help5 = ParametroDTO.builder()
                     .descripcion("/pendiente Cedula Devuelve los pendientes asociados a una cedula")
