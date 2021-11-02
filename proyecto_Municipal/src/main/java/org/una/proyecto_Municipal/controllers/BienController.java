@@ -32,6 +32,7 @@ public class BienController {
             response = BienDTO.class, responseContainer = "List", tags = "Bienes")
     @GetMapping("/{all}")
     @ResponseBody
+
     public ResponseEntity<?> findAll() {
         Optional<List<BienDTO>> result = bienService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);

@@ -40,11 +40,11 @@ public class ParametroController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de parametros a partir de su estado",
+    @ApiOperation(value = "Obtiene una lista de parametros a partir de su valor",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<?> findByEstado(@RequestParam(value="estado") boolean estado) {
-        Optional<List<ParametroDTO>> parametroFound = parametroService.findByEstado(estado);
+    @GetMapping("/valor/{valor}")
+    public ResponseEntity<?> findByValor(@RequestParam(value="valor") int valor) {
+        Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 

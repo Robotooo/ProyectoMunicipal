@@ -36,6 +36,9 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private ICobroService cobroService;
 
+    @Autowired
+    private IParametroService parametroService;
+
 
     @SneakyThrows
     @Override
@@ -126,6 +129,63 @@ public class DataLoader implements ApplicationRunner {
                     .build();
 
             cobroService.create(cobro3);
+
+
+            ParametroDTO horario1 = ParametroDTO.builder()
+                    .descripcion("Lunes a Viernes de 8:00 am a 5:00 pm")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(2)
+                    .build();
+            parametroService.create(horario1);
+
+            ParametroDTO horario2 = ParametroDTO.builder()
+                    .descripcion("Sabado de 8:00 am a 12:00 md")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(2)
+                    .build();
+            parametroService.create(horario2);
+
+            ParametroDTO help1 = ParametroDTO.builder()
+                    .descripcion("/horario Devuelve el horario de la empresa")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(3)
+                    .build();
+            parametroService.create(help1);
+
+            ParametroDTO help2 = ParametroDTO.builder()
+                    .descripcion("/licencia Devuelve la formula de licencias comerciales")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(3)
+                    .build();
+            parametroService.create(help2);
+
+            ParametroDTO help3 = ParametroDTO.builder()
+                    .descripcion("/limpieza Devuelve la formula de limpieza de vias")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(3)
+                    .build();
+            parametroService.create(help3);
+
+            ParametroDTO help4 = ParametroDTO.builder()
+                    .descripcion("/rutas Devuelve la formula de rutas de buses")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(3)
+                    .build();
+            parametroService.create(help4);
+
+            ParametroDTO help5 = ParametroDTO.builder()
+                    .descripcion("/pendiente Cedula, Devuelve los pendientes asociados a una cedula")
+                    .estado(true)
+                    .nombre("Horario")
+                    .valor(3)
+                    .build();
+            parametroService.create(help5);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
         } else {
