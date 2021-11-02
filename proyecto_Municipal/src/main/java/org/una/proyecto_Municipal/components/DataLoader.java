@@ -133,10 +133,35 @@ public class DataLoader implements ApplicationRunner {
             ParametroDTO horario1 = ParametroDTO.builder()
                     .descripcion("Lunes a Viernes de 8:00 am a 5:00 pm")
                     .estado(true)
-                    .nombre("Horario")
+                    .nombre("formulas")
                     .valor(2)
                     .build();
             parametroService.create(horario1);
+
+
+            ParametroDTO formula1 = ParametroDTO.builder()
+                    .descripcion("Formula Licencias comerciales: Tarifa trimestral = Ganancias brutas * 0,2 (minimo de 40 000 colones)")
+                    .estado(true)
+                    .nombre("Formula")
+                    .valor(1)
+                    .build();
+            parametroService.create(formula1);
+
+            ParametroDTO formula2 = ParametroDTO.builder()
+                    .descripcion("Formula propiedades: Tarifa bimestral = metros de frente / 1500 (mínimo de 8 metros a cobrar y un máximo de 35)")
+                    .estado(true)
+                    .nombre("Formula")
+                    .valor(1)
+                    .build();
+            parametroService.create(formula2);
+
+            ParametroDTO formula3 = ParametroDTO.builder()
+                    .descripcion("Formula rutas: Tarifa mensual = cantidad de salidas diarias * 200")
+                    .estado(true)
+                    .nombre("Formula")
+                    .valor(1)
+                    .build();
+            parametroService.create(formula3);
 
             ParametroDTO horario2 = ParametroDTO.builder()
                     .descripcion("Sabado de 8:00 am a 12:00 md")
@@ -179,7 +204,7 @@ public class DataLoader implements ApplicationRunner {
             parametroService.create(help4);
 
             ParametroDTO help5 = ParametroDTO.builder()
-                    .descripcion("/impuesto cedula tipo de impuesto Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
+                    .descripcion("/impuesto cedula tipo de impuesto (1. Licencias comerciales 2. Limpieza de vías 3. Rutas de buses) Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
                     .estado(true)
                     .nombre("Help")
                     .valor(3)
