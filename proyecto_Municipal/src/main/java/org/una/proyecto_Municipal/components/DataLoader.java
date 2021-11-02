@@ -155,24 +155,31 @@ public class DataLoader implements ApplicationRunner {
             parametroService.create(help1);
 
             ParametroDTO help2 = ParametroDTO.builder()
-                    .descripcion("/formulas Devuelve las formulas de calculo de impuestos.")
+                    .descripcion("/formulas Devuelve las formulas de calculo de impuestos")
                     .estado(true)
                     .nombre("Help")
                     .valor(3)
                     .build();
             parametroService.create(help2);
 
-
-            ParametroDTO help5 = ParametroDTO.builder()
+            ParametroDTO help3 = ParametroDTO.builder()
                     .descripcion("/pendiente Cedula Devuelve los pendientes asociados a una cedula")
                     .estado(true)
                     .nombre("Help")
                     .valor(3)
                     .build();
-            parametroService.create(help5);
+            parametroService.create(help3);
 
-            ParametroDTO help6 = ParametroDTO.builder()
+            ParametroDTO help4 = ParametroDTO.builder()
                     .descripcion("/pagos cedula fecha inicio fecha final Devuelve los pagos asociados a una cedula entre un rango de fechas")
+                    .estado(true)
+                    .nombre("Help")
+                    .valor(3)
+                    .build();
+            parametroService.create(help4);
+
+            ParametroDTO help5 = ParametroDTO.builder()
+                    .descripcion("/impuesto cedula tipo de impuesto Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
                     .estado(true)
                     .nombre("Help")
                     .valor(3)
