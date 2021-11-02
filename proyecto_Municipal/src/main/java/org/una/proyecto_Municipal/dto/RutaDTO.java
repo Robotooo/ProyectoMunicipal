@@ -11,6 +11,7 @@ import java.util.Date;
 @Builder
 public class RutaDTO {
     private Long id;
+    private String nombreRuta;
     private String inicioRuta;
     private String finalRuta;
     private boolean estado;

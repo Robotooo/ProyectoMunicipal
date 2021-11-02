@@ -14,11 +14,11 @@ public interface IBienxColaboradorService {
     /*
     public Optional<BienxColaboradorDTO> findById(Long id);
 
-    public Optional<List<BienxColaboradorDTO>> findAll();
+    public Optional<List<BienxColaboradorDTO>> findAll();*/
 
     public Optional<BienxColaboradorDTO> create(BienxColaboradorDTO bienxcolaboradorDTO);
 
-    public Optional<BienxColaboradorDTO> update(BienxColaboradorDTO bienxcolaboradorDTO, Long id);
+    /*public Optional<BienxColaboradorDTO> update(BienxColaboradorDTO bienxcolaboradorDTO, Long id);
 
     public void delete(Long id);
 

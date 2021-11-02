@@ -48,7 +48,7 @@ public class BienxColaboradorServiceImplementation implements IBienxColaboradorS
     public Optional<List<BienxColaboradorDTO>> findAll() {
         List<BienxColaboradorDTO> bienDTOList = MapperUtils.DtoListFromEntityList(bienxcolaboradorRepository.findAll(), BienxColaboradorDTO.class);
         return Optional.ofNullable(bienDTOList);
-    }
+    }*/
 
     //get
     private BienxColaboradorDTO getSavedBienxColaboradorDTO(BienxColaboradorDTO bienxcolaboradorDTO) {
@@ -64,7 +64,7 @@ public class BienxColaboradorServiceImplementation implements IBienxColaboradorS
         return Optional.ofNullable(getSavedBienxColaboradorDTO(bienDTO));
     }
 
-    //@Override
+    /*//@Override
     @Transactional
     public Optional<BienxColaboradorDTO> update(BienxColaboradorDTO bienxcolaboradorDTO, Long id) {
         if (bienxcolaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();

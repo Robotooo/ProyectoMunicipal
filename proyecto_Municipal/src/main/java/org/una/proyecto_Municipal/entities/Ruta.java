@@ -21,6 +21,9 @@ public class Ruta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nombre_ruta", length = 45)
+    private String nombreRuta;
+
     @Column(name = "inicio", length = 45)
     private String inicioRuta;
 

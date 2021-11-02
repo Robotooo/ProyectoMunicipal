@@ -36,6 +36,14 @@ public class BienxColaboradorController {
         return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody BienxColaboradorDTO bienDto) {
+        Optional<BienxColaboradorDTO> bienCreated = bienxcolaboradorService.create(bienDto);
+        return new ResponseEntity<>(bienCreated, HttpStatus.CREATED);
+    }
+
     /*
     @ApiOperation(value = "Obtiene un bien a partir de su id",
             response = BienxColaboradorDTO.class, tags = "Bienes por Colaborador")

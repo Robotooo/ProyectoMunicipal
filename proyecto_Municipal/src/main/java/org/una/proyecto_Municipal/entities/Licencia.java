@@ -28,7 +28,7 @@ public class Licencia implements Serializable {
     @Column(name = "email",length = 50, unique = true)
     private String email;
 
-    @Column(name = "distrito",length = 45, unique = true)
+    @Column(name = "distrito",length = 45)
     private String distrito;
 
     @ManyToOne
