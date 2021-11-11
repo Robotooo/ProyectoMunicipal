@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Licencia;
 
@@ -51,4 +52,11 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 
-}
+    @Query(value = "{call generarCobros(/*:tipo_in*/)}", nativeQuery=true)
+    public String generarCobros(/*@Param("tipo_in") String tipo_in*/);
+
+//    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)
+//    Boolean calculateValuesOfActivesForInventory(Long inventoryId);
+
+
+        }

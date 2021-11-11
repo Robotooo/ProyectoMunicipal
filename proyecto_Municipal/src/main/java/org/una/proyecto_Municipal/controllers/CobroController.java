@@ -35,6 +35,7 @@ public class CobroController {
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CobroDTO> cobroFound = cobroService.findById(id);
+        cobroService.generarCobros();
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
@@ -194,6 +195,10 @@ public class CobroController {
         Optional<CobroDTO> cobroCreated = cobroService.create(cobroDto);
         return new ResponseEntity<>(cobroCreated, HttpStatus.CREATED);
     }
+
+
+    // TODO: hacer método createList
+
 
     @PutMapping("/{id}")
     @ResponseBody

@@ -149,4 +149,10 @@ public class CobroServiceImplementation implements ICobroService{
         cobroRepository.deleteAll();
     }
 
+    @Override
+    public void generarCobros() {
+        String mensaje;
+        mensaje = cobroRepository.generarCobros();
+    }
+
 }

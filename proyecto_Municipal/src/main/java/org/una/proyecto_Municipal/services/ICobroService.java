@@ -41,6 +41,8 @@ public interface ICobroService {
 
     public void deleteAll();
 
+    public void generarCobros();
+
     //TODO: Función para buscar cobro con número de cédula o número de activo
 
 }
