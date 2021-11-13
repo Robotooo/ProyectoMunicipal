@@ -148,6 +148,15 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/CobroByCedulaAndTipo/{cedula}/{tipo}")
+    public ResponseEntity<?>findCobroByCedulaAndTipo(@PathVariable(value = "cedula") String cedula,@PathVariable(value = "tipo") String tipo) {
+        System.out.println("Controller");
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndTipo(cedula,tipo);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/PagosByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")

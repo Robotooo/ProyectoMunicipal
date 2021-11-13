@@ -12,6 +12,7 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICobroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +79,32 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     public Optional<List<CobroDTO>> findCobroByCedula(String cedula) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
+    public Optional<List<CobroDTO>> findCobroByCedulaAndTipo(String cedula,String tipo) {
+
+        System.out.println("Service");
+
+        List<CobroDTO> cobroDTOList = new ArrayList<CobroDTO>();
+        switch (tipo){
+            case "LicenciaComercial":
+                System.out.println("into IF");
+                cobroDTOList = MapperUtils.DtoListFromEntityList
+                        (cobroRepository.findPendienteTotalLicencias(cedula), CobroDTO.class);
+                break;
+            case "Limpiezadevías":
+                cobroDTOList = MapperUtils.DtoListFromEntityList
+                        (cobroRepository.findPendienteTotalPropiedades(cedula), CobroDTO.class);
+                break;
+            case "Rutasdebuses":
+                cobroDTOList = MapperUtils.DtoListFromEntityList
+                        (cobroRepository.findPendienteTotalRutas(cedula), CobroDTO.class);
+                break;
+        }
+
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
     }
