@@ -20,14 +20,14 @@ public class Calendar  implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "monto")
-    private double monto;
+    @Column(name = "periodo")
+    private int periodo;
 
     @Column(name = "tipo")
     private int tipo;
 
-    @Column(name = "porcentaje")
-    private Integer porcentaje;
+//    @Column(name = "porcentaje")
+//    private Integer porcentaje;
 
     @Column(name = "fecha_1", updatable = false)
     @Temporal(TemporalType.DATE)
