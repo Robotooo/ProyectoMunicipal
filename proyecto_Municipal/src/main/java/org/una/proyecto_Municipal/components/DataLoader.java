@@ -7,7 +7,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.una.proyecto_Municipal.dto.*;
-import org.una.proyecto_Municipal.entities.BienxColaborador;
 import org.una.proyecto_Municipal.services.*;
 import lombok.SneakyThrows;
 
@@ -57,6 +56,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     private IPropiedadService propiedadService;
+
+    @Autowired
+    private ICalendarioService calendarioService;
 
     @SneakyThrows
     @Override
@@ -334,6 +336,12 @@ public class DataLoader implements ApplicationRunner {
                     .valor(3)
                     .build();
             parametroService.create(help5);
+//TODO:
+//            CalendarDTO licenciaCalendario = CalendarDTO.builder()
+//                    .monto(10000)
+//                    .
+//                    .build();
+//            calendarioService.create(licenciaCalendario);
 
             System.out.println("Se agrega el usuario inicial a la aplicación");
         } else {
