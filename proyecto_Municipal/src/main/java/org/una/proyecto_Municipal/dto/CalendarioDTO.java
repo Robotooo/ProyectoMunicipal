@@ -8,5 +8,5 @@ import lombok.*;
 //@NoArgsConstructor
 @ToString
 @Builder
-public class CalendarDTO {
+public class CalendarioDTO {
 }

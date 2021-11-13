@@ -9,13 +9,13 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "calendar")
+@Table(name = "calendario")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class Calendar  implements Serializable {
+public class Calendario implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
