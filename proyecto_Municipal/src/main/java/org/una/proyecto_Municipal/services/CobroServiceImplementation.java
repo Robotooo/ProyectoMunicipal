@@ -103,6 +103,10 @@ public class CobroServiceImplementation implements ICobroService{
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findPendienteTotalRutas(cedula), CobroDTO.class);
                 break;
+            case "Cobrostotales":
+                cobroDTOList = MapperUtils.DtoListFromEntityList
+                        (cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
+
         }
 
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
