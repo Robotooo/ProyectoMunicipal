@@ -23,32 +23,32 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "INNER JOIN colaboradores ON cobros.colaboradores_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findCobroByCedula(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "INNER JOIN colaboradores ON cobros.colaboradores_id = colaboradores.id " +
             "WHERE cobros.estado = 0 AND colaboradores.cedula = :cedula " +
             "AND cobros.fecha_modificacion BETWEEN :fechaInicio AND :fechaFinal ", nativeQuery = true)
     public List<Cobro> findPagosByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "INNER JOIN colaboradores ON cobros.bienx_colaborador_id.colaboradores_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalLicencias(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "INNER JOIN colaboradores ON cobros.colaboradores_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 2 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalPropiedades(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN colaboradores ON cobros.colaborador_id = colaboradores.id " +
+            "INNER JOIN colaboradores ON cobros.colaboradores_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 

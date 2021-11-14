@@ -44,7 +44,7 @@ public class RutaServiceImplementation implements IRutaService{
 
     @Override
     public Optional<List<RutaDTO>> findByBienId(Long id) {
-        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findByBienId(id), RutaDTO.class);
+        List<RutaDTO> rutaDTOList = MapperUtils.DtoListFromEntityList(rutaRepository.findByBienesId(id), RutaDTO.class);
         if (rutaDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(rutaDTOList);
     }

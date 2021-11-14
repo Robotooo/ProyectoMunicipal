@@ -33,7 +33,7 @@ public class Licencia implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="bienes_id"/*, insertable = false, updatable = false*/)
-    private Bien bienId;
+    private Bien bienesId;
 
     @Column(name = "estado")
     private boolean estado;

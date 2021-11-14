@@ -25,9 +25,16 @@ public class Cobro implements Serializable {
     private Factura facturaId;
 
     @ManyToOne
-    @JoinColumn(name="bienes_id")
-    @JoinColumn(name="colaborador_id")
-    private BienxColaborador bienxColaboradorId;
+    @JoinColumn(name="bienxColaborador_id")
+    private BienxColaborador bienxColaborador;
+
+//    @ManyToOne
+//    @JoinColumn(name="bienes_id")
+//    private BienxColaborador bien;
+
+//    @ManyToOne
+//    @JoinColumn(name="colaboradores_id")
+//    private BienxColaborador colaborador;
 
     @Column(name = "monto")
     private double monto;

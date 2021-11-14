@@ -33,8 +33,8 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private IBienService bienService;
 
-    @Autowired
-    private IBienxColaboradorService bienxcolaboradorService;
+//    @Autowired
+//    private IBienxColaboradorService bienxcolaboradorService;
 
     @Autowired
     private ICobroService cobroService;
@@ -74,7 +74,7 @@ public class DataLoader implements ApplicationRunner {
 
             //funcionarios
             FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
-                    .cedula("0123453782")
+                    .cedula("01234537682")
                     .usuario("Usuario Prueba Cajero")
                     .passwordEncriptado("Una2021")
                     .rol(gestorRol.orElseThrow()).build();

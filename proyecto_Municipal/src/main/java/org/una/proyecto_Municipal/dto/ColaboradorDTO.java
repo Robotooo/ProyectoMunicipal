@@ -1,7 +1,7 @@
 package org.una.proyecto_Municipal.dto;
 
 import lombok.*;
-import org.una.proyecto_Municipal.entities.BienxColaborador;
+import org.una.proyecto_Municipal.entities.Bien;
 
 import java.util.Date;
 
@@ -18,5 +18,6 @@ public class ColaboradorDTO {
     private boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;
-    private BienxColaboradorDTO bienxColaborador;
+    //private BienxColaboradorDTO bienxColaborador;
+    private Bien bien;
 }

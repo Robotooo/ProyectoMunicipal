@@ -65,7 +65,7 @@ public class Propiedad implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
-    private Bien bienId;
+    private Bien bienesId;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedadId")

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "bienes_x_colaboradores")
+@Table(name = "bienes_colaboradores")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,27 +16,30 @@ import java.util.List;
 @Builder
 public class BienxColaborador implements Serializable {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @EmbeddedId
-    BienesxColaboradorKey bienesxColaboradorKey;
+//    @EmbeddedId
+//    BienesxColaboradorKey bienesxColaboradorKey;
 
-    @MapsId("colaboradorId")
+    //@MapsId("colaboradorId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="colaborador_id")
+    @JoinColumn(name="colaboradores_id")
     private Colaborador colaboradorId;
 
-    @MapsId("bienId")
+    //@MapsId("bienId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="bien_id")
+    @JoinColumn(name="bienes_id")
     private Bien bienId;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaboradorId")
-    private List<Cobro> cobro = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaborador")
+    private List<Cobro> cobros = new ArrayList<>();
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bien")
+//    private List<Cobro> cobroBien = new ArrayList<>();
 
     @Column(name = "porcentaje")
     private float porcentaje;

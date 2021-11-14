@@ -20,16 +20,21 @@ public class Bien implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
-    private List<BienxColaborador> bienxColaborador = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
+//    private List<BienxColaborador> bienxColaborador = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Colaborador> colaboradores = new ArrayList<>();
+
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
     private List<Propiedad> propiedad = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
     private List<Licencia> licencia = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
     private List<Ruta> ruta = new ArrayList<>();
 
     private static final long serialVersionUID = 1L;
