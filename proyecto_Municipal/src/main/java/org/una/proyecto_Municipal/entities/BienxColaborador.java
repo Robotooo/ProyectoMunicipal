@@ -20,16 +20,11 @@ public class BienxColaborador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @EmbeddedId
-//    BienesxColaboradorKey bienesxColaboradorKey;
-
-    //@MapsId("colaboradorId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
     @JoinColumn(name="colaboradores_id")
     private Colaborador colaboradorId;
 
-    //@MapsId("bienId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
     @JoinColumn(name="bienes_id")
@@ -44,6 +39,6 @@ public class BienxColaborador implements Serializable {
     @Column(name = "porcentaje")
     private float porcentaje;
 
-//    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 }

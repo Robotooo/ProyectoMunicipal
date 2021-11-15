@@ -16,5 +16,4 @@ public class BienxColaboradorDTO {
     private BienDTO bienId;
     private CobroDTO cobro;
     private float porcentaje;
-
 }

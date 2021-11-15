@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bienesxcolaboradores")
-@Api(tags = {"BienesxColaboradores"})
+@RequestMapping("/bienes_colaboradores")
+@Api(tags = {"Bienes_Colaboradores"})
 public class BienxColaboradorController {
 
     @Autowired
@@ -36,15 +36,6 @@ public class BienxColaboradorController {
         return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
-    @ResponseBody
-    public ResponseEntity<?> create(@RequestBody BienxColaboradorDTO bienDto) {
-        Optional<BienxColaboradorDTO> bienCreated = bienxcolaboradorService.create(bienDto);
-        return new ResponseEntity<>(bienCreated, HttpStatus.CREATED);
-    }
-
-    /*
     @ApiOperation(value = "Obtiene un bien a partir de su id",
             response = BienxColaboradorDTO.class, tags = "Bienes por Colaborador")
     @GetMapping("/id/{id}")
@@ -88,5 +79,5 @@ public class BienxColaboradorController {
         bienxcolaboradorService.deleteAll();
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
-    */
+
 }
