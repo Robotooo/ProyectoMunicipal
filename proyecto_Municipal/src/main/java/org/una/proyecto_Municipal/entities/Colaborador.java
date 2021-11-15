@@ -7,10 +7,10 @@ import java.util.*;
 
 @Entity
 @Table(name = "colaboradores")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 public class Colaborador implements Serializable {
 

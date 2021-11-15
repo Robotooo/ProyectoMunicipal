@@ -86,7 +86,7 @@ public class CobroServiceImplementation implements ICobroService{
             case "LicenciaComercial":
                 System.out.println("into IF");
                 cobroDTOList = MapperUtils.DtoListFromEntityList
-                        (cobroRepository.findPendienteTotalLicencias(cedula), CobroDTO.class);
+                        (cobroRepository.findByBienxColaborador_ColaboradorId_CedulaAndTipo("116380047",1), CobroDTO.class);
                 break;
             case "Limpiezadevías":
                 cobroDTOList = MapperUtils.DtoListFromEntityList

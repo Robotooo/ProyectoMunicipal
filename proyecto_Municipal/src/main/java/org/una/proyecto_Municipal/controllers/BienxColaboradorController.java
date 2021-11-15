@@ -52,6 +52,14 @@ public class BienxColaboradorController {
         Optional<List<BienxColaboradorDTO>> result = bienxcolaboradorService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+//    @ResponseStatus(HttpStatus.OK)
+//    @PostMapping("/")
+//    @ResponseBody
+//    public ResponseEntity<?> create(@RequestParam("colaborador_id") Integer colaboradorId,
+//                                    @RequestParam("bien_id") bienId, @RequestParam("porcentaje") Float porcentaje) {
+//        Optional<BienxColaboradorDTO> bienCreated = bienxcolaboradorService.create(bienDto);
+//        return new ResponseEntity<>(bienCreated, HttpStatus.CREATED);
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
@@ -65,7 +73,7 @@ public class BienxColaboradorController {
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BienxColaboradorDTO bienModified) {
         Optional<BienxColaboradorDTO> bienUpdated = bienxcolaboradorService.update(bienModified, id);
-        return new ResponseEntity<>(bienUpdated, HttpStatus.OK);
+         return new ResponseEntity<>(bienUpdated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

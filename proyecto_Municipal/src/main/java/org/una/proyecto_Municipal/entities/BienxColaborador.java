@@ -9,10 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "bienes_x_colaboradores")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 public class BienxColaborador implements Serializable {
 

@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Licencia;
 
+import java.lang.invoke.ConstantBootstraps;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalLicencias(String cedula);
+
+    public List<Cobro> findByBienxColaborador_ColaboradorId_CedulaAndTipo(String cedula, int tipo);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +

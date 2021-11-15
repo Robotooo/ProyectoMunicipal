@@ -18,6 +18,6 @@ public class CobroDTO {
     private Integer periodo;
     private Date fechaCreacion;
     private Date fechaModificacion;
-    private BienxColaboradorDTO bienxColaboradorId;
-    private FacturaDTO facturaId;
+    private BienxColaboradorDTO bienxColaborador;
+    private FacturaDTO factura;
 }
