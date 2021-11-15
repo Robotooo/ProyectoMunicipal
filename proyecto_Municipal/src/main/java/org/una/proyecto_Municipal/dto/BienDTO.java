@@ -12,7 +12,7 @@ import org.una.proyecto_Municipal.entities.Ruta;
 @Builder
 public class BienDTO {
     private Long id;
-    //private BienxColaboradorDTO bienxColaborador;
+    private BienxColaboradorDTO bienxColaborador;
     private ColaboradorDTO colaborador;
     private PropiedadDTO propiedad;
     private LicenciaDTO licencia;

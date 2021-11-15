@@ -23,8 +23,8 @@ public class Bien implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienId")
     private List<BienxColaborador> bienxColaborador = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Colaborador> colaboradores = new ArrayList<>();
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    private List<Colaborador> colaboradores = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
     private List<Propiedad> propiedad = new ArrayList<>();

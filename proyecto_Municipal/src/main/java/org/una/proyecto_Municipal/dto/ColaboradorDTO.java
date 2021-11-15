@@ -18,6 +18,6 @@ public class ColaboradorDTO {
     private boolean estado;
     private Date fechaCreacion;
     private Date fechaModificacion;
-    //private BienxColaboradorDTO bienxColaborador;
+    private BienxColaboradorDTO bienxColaborador;
     private Bien bien;
 }

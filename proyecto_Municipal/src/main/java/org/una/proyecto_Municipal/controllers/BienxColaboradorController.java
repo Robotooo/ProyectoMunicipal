@@ -22,8 +22,8 @@ public class BienxColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de bienes por colaborador a partir de su bien",
             response = BienxColaboradorDTO.class, tags = "Bienes por Colaborador")
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
+    @GetMapping("/bienId/{bienId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long id) {
         Optional<List<BienxColaboradorDTO>> bienxcolaboradorFound = bienxcolaboradorService.findByBienId(id);
         return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class BienxColaboradorController {
     @ApiOperation(value = "Obtiene una lista de bienes por colaborador a partir de su colaborador",
             response = BienxColaboradorDTO.class, responseContainer = "List", tags = "Bienes por Colaborador")
     @GetMapping("/colaboradorId/{colaboradorId}")
-    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "colaboradorId") Long id) {
         Optional<List<BienxColaboradorDTO>> bienxcolaboradorFound = bienxcolaboradorService.findByColaboradorId(id);
         return new ResponseEntity<>(bienxcolaboradorFound, HttpStatus.OK);
     }
