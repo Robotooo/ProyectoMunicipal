@@ -13,47 +13,45 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
     public List<Cobro> findByEstado(boolean estado);
 
-//    public List<Cobro> findByBienId(Long id);
-
-//    public List<Cobro> findByBienxColaboradorId(Long id);
+    public List<Cobro> findByBienxColaboradorId(Long id);
 
     public List<Cobro> findByTipo(int tipo);
 
-    //public List<Cobro> findByFacturaId(Long id);
+//    public List<Cobro> findByFacturaId(Long id);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN bienes_colaboradores ON cobros.bienx_colaborador_id = bienes_colaboradores.id " +
-            "INNER JOIN colaboradores ON bienes_colaboradores.colaboradores_id = colaboradores.id " +
+            "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
+            "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findCobroByCedula(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN bienes_colaboradores ON cobros.bienx_colaborador_id = bienes_colaboradores.id " +
-            "INNER JOIN colaboradores ON bienx_colaborador_id.colaboradores_id = colaboradores.id " +
+            "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
+            "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 0 AND colaboradores.cedula = :cedula " +
             "AND cobros.fecha_modificacion BETWEEN :fechaInicio AND :fechaFinal ", nativeQuery = true)
     public List<Cobro> findPagosByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN bienes_colaboradores ON cobros.bienx_colaborador_id = bienes_colaboradores.id " +
-            "INNER JOIN colaboradores ON bienes_colaboradores.colaboradores_id = colaboradores.id " +
+            "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
+            "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 1 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalLicencias(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN bienes_colaboradores ON cobros.bienx_colaborador_id = bienes_colaboradores.id " +
-            "INNER JOIN colaboradores ON bienes_colaboradores.colaboradores_id = colaboradores.id " +
+            "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
+            "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 2 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalPropiedades(String cedula);
 
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
-            "INNER JOIN bienes_colaboradores ON cobros.bienx_colaborador_id = bienes_colaboradores.id " +
-            "INNER JOIN colaboradores ON bienes_colaboradores.colaboradores_id = colaboradores.id " +
+            "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
+            "INNER JOIN colaboradores ON bienes_x_colaboradores.colaborador_id = colaboradores.id " +
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 
@@ -64,4 +62,4 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 //    Boolean calculateValuesOfActivesForInventory(Long inventoryId);
 
 
-        }
+    }

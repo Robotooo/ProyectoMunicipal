@@ -30,6 +30,7 @@ public class CobroController {
     @Autowired
     private IColaboradorService colaboradorService;
 
+    //findBy...
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/id/{id}")
@@ -64,81 +65,13 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien",
-//            response = CobroDTO.class, tags = "Cobros")
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findByBienId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
-
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su colaborador",
-//            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
-//    @GetMapping("/colaboradorId/{colaboradorId}")
-//    public ResponseEntity<?> findByColaboradorId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
-
-//    @ApiOperation(value = "Obtiene una lista de cobros a partir de su factura",
-//            response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
-//    @GetMapping("/factura_id/{factura_id}")
-//    public ResponseEntity<?> findByFacturaId(@PathVariable(value = "id") Long id) {
-//        Optional<List<CobroDTO>> cobroFound = cobroService.findByFacturaId(id);
-//        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
-//    }
-
-//    @ApiOperation(value = "Obtiene una lista de los Cobros pendientes por número de Cédula",
-//            response = CobroDTO.class, tags = "Cobros")
-//    @GetMapping("/byCedula/{cedula}")
-//    public ResponseEntity<?> findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
-//        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
-//        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-//
-//        if(!colaboradorFound.isEmpty()){
-//            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-//                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(true);
-//                // Era necesario utilizar findByColaboradorId
-//
-//                if(!cobrosPendientes.isEmpty()){
-//
-//                    for (CobroDTO c : cobrosPendientes.get()) {
-//                        if (1 == clbrdr.getId()) {
-//                            //c.getBienxColaboradorId().getColaboradorId().getId()
-//                                lstCobroDTOFilter.add(c);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
-//    }
-
-//    @ApiOperation(value = "Obtiene una lista de los Pagos realizados con el número de cédula",
-//            response = CobroDTO.class, tags = "Cobros")
-//    @GetMapping("/byCedula/{cedula2}")
-//    public ResponseEntity<?> findPagoByCedula(@PathVariable(value = "cedula2") String cedula2) {
-//        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula2);
-//        List<CobroDTO> lstCobroDTOFilter = new ArrayList<>();
-//
-//        if(!colaboradorFound.isEmpty()){
-//            for(ColaboradorDTO clbrdr : colaboradorFound.get()) {
-//                Optional<List<CobroDTO>> cobrosPendientes = cobroService.findByEstado(false);
-//                // Era necesario utilizar findByColaboradorId
-//
-//                if(!cobrosPendientes.isEmpty()){
-//
-//                    for (CobroDTO c : cobrosPendientes.get()) {
-//                        if (1 == clbrdr.getId()) {
-//                            //c.getBienxColaboradorId().getColaboradorId().getId()
-//                            lstCobroDTOFilter.add(c);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return new ResponseEntity<>(lstCobroDTOFilter, HttpStatus.OK);
-//    }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien x colaborador",
+            responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/bienxcolaboradorId/{bienxcolaboradorId}")
+    public ResponseEntity<?> findByBienxColaboradorId(@PathVariable(value = "bienxcolaboradorId") Long id) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
@@ -205,10 +138,6 @@ public class CobroController {
         return new ResponseEntity<>(cobroCreated, HttpStatus.CREATED);
     }
 
-
-    // TODO: hacer método createList
-
-
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified) {
@@ -228,22 +157,6 @@ public class CobroController {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    //TODO: findByCedulaFechaBetween, findByEstadoCanceladoFechaBetween
-    //El gestor debe poder Buscar y Cancelar cobros
-    //El Gestor debe solicitar al Gerente una autorización para eliminar info
-    //El gerente debe generar cobros para un periodo o para todo el año
-    //El gerente debe autorizar solicitudes del gestor
-    //El gerente debe poder emitir listados generales
-    //El Cobro debe hacerse a uno o más contribuyentes según el porcentaje de posesión del bien % %
-    //El Pago o Cancelación de cobro se puede hacer mediante cedula o nombre del colaborador o con la referencia al valor impositivo
-    //Un cobro cancelado debe permitir generar Factura del mismo, también el vuelto
-    //Una función para exportar a Excel una lista de los cobros activos o cancelados; en un rango de fechas
-    //Funciones para dar mantenimiento a cobos generados, cancelados y recibos
-
-    //TODO: El BOT debe poder consultar la formula de licencias comerciales, limpieza de vías y rutas de buses
-    //El BOT debe consultar cobros pendientes de colaborador
-    // El BOT debe consultar los cobros de cierta fecha
-    // El BOT debe consultar los cobros de un tipo de impuesto
-    // El BOT debe consultar sobre los pagos de un cliente en un rango de fechas dado
+    // TODO: hacer método createList
 
 }
