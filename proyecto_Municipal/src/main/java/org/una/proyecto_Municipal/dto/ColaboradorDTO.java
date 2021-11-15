@@ -19,5 +19,5 @@ public class ColaboradorDTO {
     private Date fechaCreacion;
     private Date fechaModificacion;
     private BienxColaboradorDTO bienxColaborador;
-    private Bien bien;
+//    private Bien bien;
 }

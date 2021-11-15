@@ -21,10 +21,10 @@ public class Colaborador implements Serializable {
     @Column(name = "nombre", length = 45)
     private String nombre;
 
-    @Column(name = "cedula",length = 45, unique = true)
+    @Column(name = "cedula", length = 45, unique = true)
     private String cedula;
 
-    @Column(name = "telefono", unique = true)
+    @Column(name = "telefono", length = 45, unique = true)
     private String telefono;
 
     @Column(name = "estado")

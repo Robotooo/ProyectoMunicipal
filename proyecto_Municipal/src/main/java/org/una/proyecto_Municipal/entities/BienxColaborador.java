@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "bienes_colaboradores")
+@Table(name = "bienes_x_colaboradores")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,21 +20,16 @@ public class BienxColaborador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="colaboradores_id")
+    @JoinColumn(name="colaborador_id")
     private Colaborador colaboradorId;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
-    @JoinColumn(name="bienes_id")
+    @JoinColumn(name="bien_id")
     private Bien bienId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienxColaborador")
     private List<Cobro> cobros = new ArrayList<>();
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bien")
-//    private List<Cobro> cobroBien = new ArrayList<>();
 
     @Column(name = "porcentaje")
     private float porcentaje;

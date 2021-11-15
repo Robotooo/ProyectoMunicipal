@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bienes_colaboradores")
-@Api(tags = {"Bienes_Colaboradores"})
+@RequestMapping("/bienes_x_colaboradores")
+@Api(tags = {"Bienes por Colaborador"})
 public class BienxColaboradorController {
 
     @Autowired
