@@ -36,7 +36,7 @@ public class CobroServiceImplementation implements ICobroService{
     public Optional<CobroDTO> findById(Long id) {
         Optional<Cobro> cobro = cobroRepository.findById(id);
         if (cobro.isEmpty()) throw new NotFoundInformationException();
-
+        cobroRepository.saveTransaction("buscar por Id","Cobro","2",date);
         CobroDTO cobroDTO = MapperUtils.DtoFromEntity(cobro.get(), CobroDTO.class);
         return Optional.ofNullable(cobroDTO);
     }
@@ -44,6 +44,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional(readOnly = true)
     public Optional<List<CobroDTO>> findAll() {
+        cobroRepository.saveTransaction("buscar todos","Cobro","2",date);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findAll(), CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);
     }
@@ -57,6 +58,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     public Optional<List<CobroDTO>> findByBienId(Long id) {
+        cobroRepository.saveTransaction("buscar por bien Id","Cobro","2",date);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
@@ -65,6 +67,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional(readOnly = true)
     public Optional<List<CobroDTO>> findByEstado(boolean estado) {
+        cobroRepository.saveTransaction("buscar por estado","Cobro","2",date);
         List<Cobro> cobroList = cobroRepository.findByEstado(estado);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);
@@ -72,6 +75,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     public Optional<List<CobroDTO>> findByTipo(int tipo) {
+        cobroRepository.saveTransaction("buscar por tipo","Cobro","2",date);
         List<Cobro> cobroList = cobroRepository.findByTipo(tipo);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
         return Optional.ofNullable(cobroDTOList);
@@ -92,19 +96,22 @@ public class CobroServiceImplementation implements ICobroService{
         List<CobroDTO> cobroDTOList = new ArrayList<CobroDTO>();
         switch (tipo){
             case "LicenciaComercial":
-                System.out.println("into IF");
+                cobroRepository.saveTransaction("buscar por cedula y licencia","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findByBienxColaborador_ColaboradorId_CedulaAndTipo("116380047",1), CobroDTO.class);
                 break;
             case "Limpiezadevías":
+                cobroRepository.saveTransaction("buscar por cedula y limpieza de vias","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findPendienteTotalPropiedades(cedula), CobroDTO.class);
                 break;
             case "Rutasdebuses":
+                cobroRepository.saveTransaction("buscar por cedula y rutas de buses","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findPendienteTotalRutas(cedula), CobroDTO.class);
                 break;
             case "Cobrostotales":
+                cobroRepository.saveTransaction("buscar por cedula","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
 
@@ -142,6 +149,7 @@ public class CobroServiceImplementation implements ICobroService{
     public Optional< List<CobroDTO>> findPendienteTotalRutas(String cedula){
         List<Cobro> cobroList = cobroRepository.findPendienteTotalRutas(cedula);
         List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        cobroRepository.saveTransaction("buscar pedientes sobre rutas de buses","Cobro","2",date);
         return Optional.ofNullable(cobroDTOList);
     }
 

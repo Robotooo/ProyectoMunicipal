@@ -21,12 +21,18 @@ public class ParametroServiceImplementation implements IParametroService{
     @Autowired
     private IParametroRepository parametroRepository;
 
+    Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+
+    public ParametroServiceImplementation() throws ParseException {
+    }
+
     //findBy...
     @Override
     @Transactional(readOnly = true)
     public Optional<ParametroDTO> findById(Long id) {
         Optional<Parametro> parametro = parametroRepository.findById(id);
         if (parametro.isEmpty()) throw new NotFoundInformationException();
+        parametroRepository.saveTransaction("buscar por Id","Parametro","2",date);
 
         ParametroDTO parametroDTO = MapperUtils.DtoFromEntity(parametro.get(), ParametroDTO.class);
         return Optional.ofNullable(parametroDTO);
@@ -35,6 +41,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ParametroDTO>> findAll() {
+        parametroRepository.saveTransaction("buscar todos","Parametro","2",date);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroRepository.findAll(), ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
     }
@@ -66,7 +73,6 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
         parametroRepository.saveTransaction("crear","Parametro","2",date);
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
     }
@@ -75,7 +81,6 @@ public class ParametroServiceImplementation implements IParametroService{
     @Transactional
     public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) throws ParseException {
         if (parametroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
         parametroRepository.saveTransaction("actualizar","Parametro","2",date);
 
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
@@ -86,16 +91,13 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional
     public void delete(Long id) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
         parametroRepository.saveTransaction("eliminacion","Parametro","2",date);
-
         parametroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
         parametroRepository.saveTransaction("eliminacion de todos los elementos","Parametro","2",date);
         parametroRepository.deleteAll();
     }
