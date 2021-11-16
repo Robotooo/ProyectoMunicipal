@@ -33,6 +33,8 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> findPendienteTotalRutas(String cedula);
 
+    public Optional<List<CobroDTO>> generarCobrosRuta(Date fechaP, int periodo);
+
     public Optional<CobroDTO> create(CobroDTO cobroDTO);
 
     public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id);

@@ -79,6 +79,9 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             );
 
 
+    @Query(value = "CALL CobroRuta(:fechaP,:periodo);", nativeQuery = true)
+    public List<Cobro> generarCobrosRuta(@Param("fechaP") Date fechaP, @Param("periodo") int periodo);
+
 //    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)
 //    Boolean calculateValuesOfActivesForInventory(Long inventoryId);
 

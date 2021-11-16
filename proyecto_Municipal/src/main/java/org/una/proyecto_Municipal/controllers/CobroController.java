@@ -138,6 +138,16 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Genera cobros de ruta",
+            response = CobroDTO.class, tags = "Cobros")
+    @PostMapping("/GenerarCobro/{fechaP}/{periodo}")
+    public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
+        LocalDate fecha = LocalDate.parse(fechaP);
+        Date fp  = convertLocaDateToDate(fecha);
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(fp, periodo);
+        return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody

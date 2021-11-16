@@ -179,6 +179,14 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
+    @Transactional
+    public Optional< List<CobroDTO>> generarCobrosRuta(Date fechaP, int periodo){
+        List<Cobro> cobroList = cobroRepository.generarCobrosRuta(fechaP,periodo);
+        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
+        return Optional.ofNullable(cobroDTOList);
+    }
+
+    @Override
     public void generarCobros() {
         String mensaje;
         mensaje = cobroRepository.saveTransaction("GenerarCobros","Cobro","1");
