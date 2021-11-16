@@ -63,6 +63,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO) {
+        parametroRepository.saveTransaction("crear","Parametro","2");
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
     }
 
@@ -70,6 +71,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Transactional
     public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) {
         if (parametroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        parametroRepository.saveTransaction("actualizar","Parametro","2");
 
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
 
@@ -79,12 +81,15 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional
     public void delete(Long id) {
+        parametroRepository.saveTransaction("eliminacion","Parametro","2");
+
         parametroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
+        parametroRepository.saveTransaction("eliminacion de todos los elementos","Parametro","2");
         parametroRepository.deleteAll();
     }
 

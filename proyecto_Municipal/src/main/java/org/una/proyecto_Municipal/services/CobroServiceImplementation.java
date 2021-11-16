@@ -148,6 +148,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public Optional<CobroDTO> create(CobroDTO cobroDTO) {
+        cobroRepository.saveTransaction("creacion","Cobro","2");
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
     }
 
@@ -155,6 +156,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Transactional
     public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id) {
         if (cobroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        cobroRepository.saveTransaction("actualizacion","Cobro","2");
 
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
 
@@ -164,19 +166,22 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public void delete(Long id) {
+        cobroRepository.saveTransaction("eliminacion","Cobro","2");
         cobroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
+        cobroRepository.saveTransaction("eliminacion de todos los elementos","Cobro","2");
+
         cobroRepository.deleteAll();
     }
 
     @Override
     public void generarCobros() {
         String mensaje;
-        mensaje = cobroRepository.saveTransaction("1");
+        mensaje = cobroRepository.saveTransaction("GenerarCobros","Cobro","1");
     }
 
 }

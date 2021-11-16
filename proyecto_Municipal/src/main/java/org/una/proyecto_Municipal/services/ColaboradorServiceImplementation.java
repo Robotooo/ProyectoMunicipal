@@ -75,6 +75,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Override
     @Transactional
     public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) {
+        colaboradorRepository.saveTransaction("creacion","Colaborador","2");
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
     }
 
@@ -82,6 +83,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Transactional
     public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) {
         if (colaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        colaboradorRepository.saveTransaction("actualizar","Colaborador","2");
 
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
 
@@ -91,12 +93,14 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Override
     @Transactional
     public void delete(Long id) {
+        colaboradorRepository.saveTransaction("eliminar","Colaborador","2");
         colaboradorRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
+        colaboradorRepository.saveTransaction("eliminar todos","Colaborador","2");
         colaboradorRepository.deleteAll();
     }
 
