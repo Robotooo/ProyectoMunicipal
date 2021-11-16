@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
@@ -33,6 +34,7 @@ public class CobroController {
     //findBy...
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CobroDTO> cobroFound = cobroService.findById(id);
@@ -43,6 +45,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de todos los bienes",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{all}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<CobroDTO>> result = cobroService.findAll();
@@ -51,6 +54,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByEstado(estado);
@@ -59,6 +63,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/bien/{bienId}")
     public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(bienId);
@@ -67,6 +72,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<?> findByTipo(@PathVariable(value = "tipo") int tipo) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByTipo(tipo);
@@ -75,6 +81,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su bien x colaborador",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/bienxcolaboradorId/{bienxcolaboradorId}")
     public ResponseEntity<?> findByBienxColaboradorId(@PathVariable(value = "bienxcolaboradorId") Long id) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findByBienxColaboradorId(id);
@@ -83,6 +90,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedula/{cedula}")
     public ResponseEntity<?>findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula);
@@ -91,6 +99,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaAndTipo/{cedula}/{tipo}")
     public ResponseEntity<?>findCobroByCedulaAndTipo(@PathVariable(value = "cedula") String cedula,@PathVariable(value = "tipo") String tipo) {
         System.out.println("Controller");
@@ -100,6 +109,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/PagosByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<?>findPagosByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
         LocalDate dateini = LocalDate.parse(fechaInicio);
@@ -116,6 +126,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por licencias comerciales",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaLicencias/{cedula}")
     public ResponseEntity<?>findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalLicencias(cedula);
@@ -124,6 +135,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por propiedades",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaPropiedades/{cedula}")
     public ResponseEntity<?>findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalPropiedades(cedula);
@@ -132,6 +144,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por rutas",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaRutas/{cedula}")
     public ResponseEntity<?>findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalRutas(cedula);
@@ -140,6 +153,7 @@ public class CobroController {
 
     @ApiOperation(value = "Genera cobros de ruta",
             response = CobroDTO.class, tags = "Cobros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/GenerarCobro/{fechaP}/{periodo}")
     public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
         LocalDate fecha = LocalDate.parse(fechaP);
@@ -150,6 +164,7 @@ public class CobroController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody CobroDTO cobroDto) {
         Optional<CobroDTO> cobroCreated = cobroService.create(cobroDto);
@@ -157,18 +172,20 @@ public class CobroController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified) {
         Optional<CobroDTO> cobroUpdated = cobroService.update(cobroModified, id);
         return new ResponseEntity<>(cobroUpdated, HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         cobroService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         cobroService.deleteAll();

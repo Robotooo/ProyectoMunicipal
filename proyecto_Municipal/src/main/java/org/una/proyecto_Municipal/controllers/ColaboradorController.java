@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
@@ -23,6 +24,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) throws ParseException {
         Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
@@ -31,6 +33,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de todos los colaboradores",
             response = ColaboradorDTO.class, responseContainer = "List", tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}")
     @ResponseBody
     public ResponseEntity<?> findAll() throws ParseException {
@@ -40,6 +43,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/estado/{estado}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) throws ParseException {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
@@ -48,6 +52,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByNombre(departamentoName);
@@ -57,6 +62,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su telefono",
             response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/telefono/{telefono}")
     public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByTelefono(telefono);
@@ -66,6 +72,7 @@ public class ColaboradorController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su cedula",
             response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/cedula/{cedula}")
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
@@ -74,6 +81,7 @@ public class ColaboradorController {
 
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) throws ParseException {
@@ -81,6 +89,7 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorCreated, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) throws ParseException {
@@ -88,12 +97,14 @@ public class ColaboradorController {
         return new ResponseEntity<>(colaboradorUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         colaboradorService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         colaboradorService.deleteAll();

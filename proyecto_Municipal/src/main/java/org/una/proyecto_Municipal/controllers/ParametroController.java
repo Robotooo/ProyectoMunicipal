@@ -26,6 +26,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id",
             response = ParametroDTO.class, tags = "Parametros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ParametroDTO> parametroFound = parametroService.findById(id);
@@ -34,6 +35,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de todos los parametros",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}")
     @ResponseBody
     public ResponseEntity<?> findAll() {
@@ -43,6 +45,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su valor",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/valor/{valor}")
     public ResponseEntity<?> findByValor(@RequestParam(value="valor") int valor) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor);
@@ -71,12 +74,14 @@ public class ParametroController {
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         parametroService.delete(id);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         parametroService.deleteAll();
