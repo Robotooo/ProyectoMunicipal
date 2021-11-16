@@ -57,6 +57,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ParametroDTO>> findByValor(int valor) {
+        parametroRepository.saveTransaction("buscar por valor","Parametro","2",date);
         List<Parametro> parametroList = parametroRepository.findByValor(valor);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroList, ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
