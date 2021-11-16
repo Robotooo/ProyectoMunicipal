@@ -9,6 +9,9 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.IParametroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,16 +65,18 @@ public class ParametroServiceImplementation implements IParametroService{
     //create & update
     @Override
     @Transactional
-    public Optional<ParametroDTO> create(ParametroDTO parametroDTO) {
-        parametroRepository.saveTransaction("crear","Parametro","2");
+    public Optional<ParametroDTO> create(ParametroDTO parametroDTO) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        parametroRepository.saveTransaction("crear","Parametro","2",date);
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
     }
 
     @Override
     @Transactional
-    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) {
+    public Optional<ParametroDTO> update(ParametroDTO parametroDTO, Long id) throws ParseException {
         if (parametroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        parametroRepository.saveTransaction("actualizar","Parametro","2");
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        parametroRepository.saveTransaction("actualizar","Parametro","2",date);
 
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
 
@@ -80,16 +85,18 @@ public class ParametroServiceImplementation implements IParametroService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
-        parametroRepository.saveTransaction("eliminacion","Parametro","2");
+    public void delete(Long id) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        parametroRepository.saveTransaction("eliminacion","Parametro","2",date);
 
         parametroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public void deleteAll() {
-        parametroRepository.saveTransaction("eliminacion de todos los elementos","Parametro","2");
+    public void deleteAll() throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        parametroRepository.saveTransaction("eliminacion de todos los elementos","Parametro","2",date);
         parametroRepository.deleteAll();
     }
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) throws ParseException {
         Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
@@ -32,7 +33,7 @@ public class ColaboradorController {
             response = ColaboradorDTO.class, responseContainer = "List", tags = "Colaboradores")
     @GetMapping("/{all}")
     @ResponseBody
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll() throws ParseException {
         Optional<List<ColaboradorDTO>> result = colaboradorService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -40,7 +41,7 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @GetMapping("/estado/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) throws ParseException {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
@@ -75,14 +76,14 @@ public class ColaboradorController {
     @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaboradores")
     @PostMapping("/")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) {
+    public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) throws ParseException {
         Optional<ColaboradorDTO> colaboradorCreated = colaboradorService.create(colaboradorDTO);
         return new ResponseEntity<>(colaboradorCreated, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) throws ParseException {
         Optional<ColaboradorDTO> colaboradorUpdated = colaboradorService.update(colaboradorModified, id);
         return new ResponseEntity<>(colaboradorUpdated, HttpStatus.OK);
     }

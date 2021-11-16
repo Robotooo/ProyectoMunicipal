@@ -12,6 +12,8 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICobroRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,12 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Autowired
     private ICobroRepository cobroRepository;
+
+    Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+
+    public CobroServiceImplementation() throws ParseException {
+    }
+
 
     //findBy...
     @Override
@@ -148,7 +156,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public Optional<CobroDTO> create(CobroDTO cobroDTO) {
-        cobroRepository.saveTransaction("creacion","Cobro","2");
+        cobroRepository.saveTransaction("creacion","Cobro","2",date);
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
     }
 
@@ -156,7 +164,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Transactional
     public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id) {
         if (cobroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        cobroRepository.saveTransaction("actualizacion","Cobro","2");
+        cobroRepository.saveTransaction("actualizacion","Cobro","2",date);
 
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
 
@@ -166,14 +174,14 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public void delete(Long id) {
-        cobroRepository.saveTransaction("eliminacion","Cobro","2");
+        cobroRepository.saveTransaction("eliminacion","Cobro","2",date);
         cobroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
-        cobroRepository.saveTransaction("eliminacion de todos los elementos","Cobro","2");
+        cobroRepository.saveTransaction("eliminacion de todos los elementos","Cobro","2",date);
 
         cobroRepository.deleteAll();
     }
@@ -189,7 +197,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     public void generarCobros() {
         String mensaje;
-        mensaje = cobroRepository.saveTransaction("GenerarCobros","Cobro","1");
+        mensaje = cobroRepository.saveTransaction("GenerarCobros","Cobro","1",date);
     }
 
 }

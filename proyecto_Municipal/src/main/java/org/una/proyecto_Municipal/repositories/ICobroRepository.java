@@ -71,11 +71,12 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 
-    @Query(value = "{call saveTransaction(:accion_in, :objeto_in, :funId_in)}", nativeQuery=true)
+    @Query(value = "{call saveTransaction(:accion_in, :objeto_in, :funId_in, :date_in)}", nativeQuery=true)
     public String saveTransaction(
             @Param("accion_in") String accion_in,
             @Param("objeto_in") String objeto_in,
-            @Param("funId_in") String funId_in
+            @Param("funId_in") String funId_in,
+            @Param("date_in") Date date_in
             );
 
 

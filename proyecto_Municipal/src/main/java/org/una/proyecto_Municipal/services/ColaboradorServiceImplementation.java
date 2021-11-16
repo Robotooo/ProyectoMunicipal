@@ -9,6 +9,9 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.IColaboradorRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +23,11 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
 
     @Override
-    public Optional<ColaboradorDTO> findById(Long id) {
+    public Optional<ColaboradorDTO> findById(Long id) throws ParseException {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if (colaborador.isEmpty()) throw new NotFoundInformationException();
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("buscar por id","Colaborador","2",date);
 
         ColaboradorDTO colaboradorDTO = MapperUtils.DtoFromEntity(colaborador.get(), ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTO);
@@ -30,15 +35,21 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ColaboradorDTO>> findAll() {
+    public Optional<List<ColaboradorDTO>> findAll() throws ParseException {
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorRepository.findAll(), ColaboradorDTO.class);
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("buscar todos","Colaborador","2",date);
+
         return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) {
+    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) throws ParseException {
         List<Colaborador> colaboradorList = colaboradorRepository.findByEstado(estado);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("buscarPorEstado","Colaborador","2",date);
+
         return Optional.ofNullable(colaboradorDTOList);
     }
 
@@ -74,16 +85,18 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     //create & update
     @Override
     @Transactional
-    public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) {
-        colaboradorRepository.saveTransaction("creacion","Colaborador","2");
+    public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("creacion","Colaborador","2",date);
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
     }
 
     @Override
     @Transactional
-    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) {
+    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) throws ParseException {
         if (colaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        colaboradorRepository.saveTransaction("actualizar","Colaborador","2");
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("actualizar","Colaborador","2",date);
 
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
 
@@ -92,15 +105,17 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
-        colaboradorRepository.saveTransaction("eliminar","Colaborador","2");
+    public void delete(Long id) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("eliminar","Colaborador","2",date);
         colaboradorRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public void deleteAll() {
-        colaboradorRepository.saveTransaction("eliminar todos","Colaborador","2");
+    public void deleteAll() throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
+        colaboradorRepository.saveTransaction("eliminar todos","Colaborador","2",date);
         colaboradorRepository.deleteAll();
     }
 

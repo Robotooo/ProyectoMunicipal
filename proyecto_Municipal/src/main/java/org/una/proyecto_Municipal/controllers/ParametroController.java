@@ -12,6 +12,7 @@ import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IParametroService;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +66,7 @@ public class ParametroController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) throws ParseException {
         Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }

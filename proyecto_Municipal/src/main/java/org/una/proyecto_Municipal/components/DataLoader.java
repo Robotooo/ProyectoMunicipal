@@ -11,8 +11,8 @@ import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.*;
 import lombok.SneakyThrows;
 
-import javax.mail.internet.ParseException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -384,7 +384,7 @@ public class DataLoader implements ApplicationRunner {
         funcionarioService.create(botUsuario);
     }
 
-    private void loadColaboradores(){
+    private void loadColaboradores() throws ParseException {
         ColaboradorDTO colaborador = ColaboradorDTO.builder()
                 .cedula("116380047")
                 .nombre("Andrey")
@@ -407,7 +407,7 @@ public class DataLoader implements ApplicationRunner {
         colaboradorService.create(colaborador2);
     }
 
-    private void loadParametros(){
+    private void loadParametros() throws ParseException {
         //parametros
         ParametroDTO horario1 = ParametroDTO.builder()
                 .descripcion("Lunes a Viernes de 8:00 am a 5:00 pm")
