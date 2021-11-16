@@ -154,11 +154,21 @@ public class CobroController {
     @ApiOperation(value = "Genera cobros de ruta",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/GenerarCobro/{fechaP}/{periodo}")
+    @PostMapping("/GenerarCobroRuta/{fechaP}/{periodo}")
     public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
         LocalDate fecha = LocalDate.parse(fechaP);
         Date fp  = convertLocaDateToDate(fecha);
         Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(fp, periodo);
+        return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Genera cobros de ruta",
+            response = CobroDTO.class, tags = "Cobros")
+    @PostMapping("/GenerarCobroLicencia/{fechaP}/{periodo}")
+    public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
+        LocalDate fecha = LocalDate.parse(fechaP);
+        Date fp  = convertLocaDateToDate(fecha);
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(fp, periodo);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
