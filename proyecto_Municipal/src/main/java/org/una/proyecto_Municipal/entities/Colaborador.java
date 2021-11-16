@@ -30,8 +30,8 @@ public class Colaborador implements Serializable {
     @Column(name = "estado")
     private boolean estado;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<BienxColaborador> bienxColaborador = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+//    private List<BienxColaborador> bienxColaborador = new ArrayList<>();
 
 //    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "colaboradores")
 //    private List<Bien> bienes = new ArrayList<>();

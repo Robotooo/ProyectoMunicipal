@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -65,6 +66,7 @@ public class Propiedad implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
+    @JsonBackReference
     private Bien bienesId;
 
 

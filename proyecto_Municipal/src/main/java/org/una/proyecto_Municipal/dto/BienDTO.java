@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 public class BienDTO {
     private Long id;
-    private List<BienxColaboradorDTO> bienesxColaborador;
+    //private List<BienxColaboradorDTO> bienesxColaborador;
 //    private ColaboradorDTO colaborador;
     private PropiedadDTO propiedad;
     private LicenciaDTO licencia;
