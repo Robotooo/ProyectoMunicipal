@@ -71,8 +71,8 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 
-    @Query(value = "{call saveTransaction()}", nativeQuery=true)
-    public String saveTransaction(/*@Param("funId_in") String funId_in*/);
+    @Query(value = "{call saveTransaction(:funId_in)}", nativeQuery=true)
+    public String saveTransaction(@Param("funId_in") String funId_in);
 
 
 //    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)

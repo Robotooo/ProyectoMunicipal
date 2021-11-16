@@ -176,7 +176,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     public void generarCobros() {
         String mensaje;
-        mensaje = cobroRepository.saveTransaction();
+        mensaje = cobroRepository.saveTransaction("1");
     }
 
 }
