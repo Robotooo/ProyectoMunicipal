@@ -47,12 +47,12 @@ public class CobroServiceImplementation implements ICobroService{
         return Optional.ofNullable(cobroDTOList);
     }
 
-//    @Override
-//    public Optional<List<CobroDTO>> findByFacturaId(Long id) {
-//        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByFacturaId(id), CobroDTO.class);
-//        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
-//        return Optional.ofNullable(cobroDTOList);
-//    }
+    @Override
+    public Optional<List<CobroDTO>> findByBienId(Long id) {
+        List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
+        if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
+        return Optional.ofNullable(cobroDTOList);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -176,7 +176,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     public void generarCobros() {
         String mensaje;
-        mensaje = cobroRepository.generarCobros();
+        mensaje = cobroRepository.saveTransaction("2");
     }
 
 }

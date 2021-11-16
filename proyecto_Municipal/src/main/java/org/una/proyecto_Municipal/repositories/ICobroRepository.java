@@ -20,6 +20,19 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
 //    public List<Cobro> findByFacturaId(Long id);
 
+     //TODO: procedimiento almacenado
+
+    @Query(value= "INSERT INTO cobros (tipo,monto)"+
+            "VALUES(1,(SELECT p.valor_terreno FROM propiedades p JOIN bienes b ON p.bienes_id.id = b.id)" +
+                    " * (SELECT p.valor FROM parametros p WHERE p.nombre = montoPorMetroFrenteLicencia))", nativeQuery = true)
+    public void generarCobroLicencia();
+
+    @Query(value = "SELECT cobros.* FROM cobros"
+            + "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id"
+            + "INNER JOIN bienes ON bienes.bienx_colaborador_id = bienes_colaboradores.id"
+            + "WHERE bienes.id = :id"   ,nativeQuery = true)
+    public List<Cobro> findByBienId(Long id);
+
     @Query(value = "SELECT cobros.* " +
             "FROM cobros " +
             "INNER JOIN bienes_x_colaboradores ON cobros.bienx_colaborador_id = bienes_x_colaboradores.id " +
@@ -58,8 +71,9 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             "WHERE cobros.estado = 1 AND cobros.tipo = 3 AND colaboradores.cedula = :cedula ", nativeQuery = true)
     public List<Cobro> findPendienteTotalRutas(String cedula);
 
-    @Query(value = "{call generarCobros(/*:tipo_in*/)}", nativeQuery=true)
-    public String generarCobros(/*@Param("tipo_in") String tipo_in*/);
+    @Query(value = "{call saveTransaction(:funId_in)}", nativeQuery=true)
+    public String saveTransaction(@Param("funId_in") String funId_in);
+
 
 //    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)
 //    Boolean calculateValuesOfActivesForInventory(Long inventoryId);

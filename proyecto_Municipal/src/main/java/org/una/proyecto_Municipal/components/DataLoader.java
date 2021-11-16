@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.una.proyecto_Municipal.dto.*;
+import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.*;
 import lombok.SneakyThrows;
 
@@ -65,66 +66,15 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
 
-            //Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_COLABORADOR.name()).build());
-            Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_AUDITOR.name()).build());
-            Optional<RolDTO> gestorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GESTOR.name()).build());
-            Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
-            Optional<RolDTO> gerenteRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GERENTE.name()).build());
-            Optional<RolDTO> botRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_BOT.name()).build());
+
 
             //funcionarios
-            FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
-                    .cedula("01234537682")
-                    .usuario("Usuario Prueba Cajero")
-                    .passwordEncriptado("Una2021")
-                    .rol(gestorRol.orElseThrow()).build();
-            funcionarioService.create(gestorUsuario);
-
-            FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
-                    .cedula(cedula)
-                    .usuario("Usuario Administrador")
-                    .passwordEncriptado(password)
-                    .rol(administradorRol.orElseThrow()).build();
-            funcionarioService.create(administradorUsuario);
-
-            FuncionarioDTO botUsuario = FuncionarioDTO.builder()
-                    .cedula("roboto")
-                    .usuario("Usuario Bot")
-                    .passwordEncriptado("botcito")
-                    .rol(botRol.orElseThrow()).build();
-            funcionarioService.create(botUsuario);
+            loadFuncionarios();
 
             //colaboradores
-            ColaboradorDTO colaborador = ColaboradorDTO.builder()
-                    .cedula("116380047")
-                    .nombre("Andrey")
-                    .telefono("89417655")
-                    .build();
-            colaboradorService.create(colaborador);
+            loadColaboradores();
 
-            ColaboradorDTO colaborador1 = ColaboradorDTO.builder()
-                    .cedula("117940673")
-                    .nombre("Danah")
-                    .telefono("61519481")
-                    .build();
-            colaboradorService.create(colaborador1);
-
-            ColaboradorDTO colaborador2 = ColaboradorDTO.builder()
-                    .cedula("116950926")
-                    .nombre("Henry")
-                    .telefono("83594798")
-                    .build();
-            colaboradorService.create(colaborador2);
-
-            //bienes
-            BienDTO bien = BienDTO.builder().build();
-            bienService.create(bien);
-
-            BienDTO bien1 = BienDTO.builder().build();
-            bienService.create(bien1);
-
-            BienDTO bien2 = BienDTO.builder().build();
-            bienService.create(bien2);
+            //loadBienes();
 
             //cobros
             CobroDTO cobro = CobroDTO.builder()
@@ -162,6 +112,7 @@ public class DataLoader implements ApplicationRunner {
             //rutas
             RutaDTO ruta = RutaDTO.builder()
                     .estado(true)
+                    //.bienId(bien)
                     .nombreRuta("PZ - SJ")
                     .finalRuta("fin")
                     .inicioRuta("ini")
@@ -175,26 +126,7 @@ public class DataLoader implements ApplicationRunner {
                     .build();
             diasemanaService.create(dia);
 
-            //licencias
-            LicenciaDTO licencia = LicenciaDTO.builder()
-                    .distrito("San Isidro")
-                    .email("licencia1@gmail.com")
-                    .estado(true)
-                    .ganancias(300000)
-                    .nombre("licencia1")
-                    .telefono("12345678")
-                    .build();
-            licenciaService.create(licencia);
-
-            LicenciaDTO licencia2 = LicenciaDTO.builder()
-                    .distrito("San Isidro")
-                    .email("licencia2@gmail.com")
-                    .estado(true)
-                    .ganancias(500000)
-                    .nombre("licencia2")
-                    .telefono("87654321")
-                    .build();
-            licenciaService.create(licencia2);
+           loadLicencias();
 
             //declaraciones anules
             DeclaracionAnualDTO declaracion = DeclaracionAnualDTO.builder()
@@ -256,86 +188,7 @@ public class DataLoader implements ApplicationRunner {
                     .build();
             propiedadService.create(propiedad2);
 
-            //parametros
-            ParametroDTO horario1 = ParametroDTO.builder()
-                    .descripcion("Lunes a Viernes de 8:00 am a 5:00 pm")
-                    .estado(true)
-                    .nombre("horario")
-                    .valor(2)
-                    .build();
-            parametroService.create(horario1);
-
-            ParametroDTO horario2 = ParametroDTO.builder()
-                    .descripcion("Sabado de 8:00 am a 12:00 md")
-                    .estado(true)
-                    .nombre("horario")
-                    .valor(2)
-                    .build();
-            parametroService.create(horario2);
-
-            ParametroDTO formula1 = ParametroDTO.builder()
-                    .descripcion("Formula licencias comerciales -> Tarifa trimestral = Ganancias brutas * 0,2 (minimo de 40 000 colones)")
-                    .estado(true)
-                    .nombre("formula")
-                    .valor(1)
-                    .build();
-            parametroService.create(formula1);
-
-            ParametroDTO formula2 = ParametroDTO.builder()
-                    .descripcion("Formula limpieza de vías -> Tarifa bimestral = metros de frente / 1500 (mínimo de 8 metros a cobrar y un máximo de 35)")
-                    .estado(true)
-                    .nombre("formula")
-                    .valor(1)
-                    .build();
-            parametroService.create(formula2);
-
-            ParametroDTO formula3 = ParametroDTO.builder()
-                    .descripcion("Formula rutas de buses -> Tarifa mensual = cantidad de salidas diarias * 200")
-                    .estado(true)
-                    .nombre("formula")
-                    .valor(1)
-                    .build();
-            parametroService.create(formula3);
-
-            ParametroDTO help1 = ParametroDTO.builder()
-                    .descripcion("/horario Devuelve el horario de la empresa")
-                    .estado(true)
-                    .nombre("help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help1);
-
-            ParametroDTO help2 = ParametroDTO.builder()
-                    .descripcion("/formulas Devuelve las formulas de calculo de impuestos")
-                    .estado(true)
-                    .nombre("help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help2);
-
-            ParametroDTO help3 = ParametroDTO.builder()
-                    .descripcion("/pendiente cedula Devuelve los pendientes asociados a una cedula")
-                    .estado(true)
-                    .nombre("help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help3);
-
-            ParametroDTO help4 = ParametroDTO.builder()
-                    .descripcion("/pagos cedula fecha inicio fecha final Devuelve los pagos asociados a una cedula entre un rango de fechas")
-                    .estado(true)
-                    .nombre("help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help4);
-
-            ParametroDTO help5 = ParametroDTO.builder()
-                    .descripcion("/impuesto cedula tipo de impuesto (1. Licencias comerciales 2. Limpieza de vías 3. Rutas de buses) Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
-                    .estado(true)
-                    .nombre("help")
-                    .valor(3)
-                    .build();
-            parametroService.create(help5);
+            loadParametros();
 //TODO:
 //            CalendarDTO licenciaCalendario = CalendarDTO.builder()
 //                    .monto(10000)
@@ -347,6 +200,294 @@ public class DataLoader implements ApplicationRunner {
         } else {
             System.out.println("Se encontro el usuario administrador, continuando...");
         }
+    }
+
+    private void loadBienes(){
+        LicenciaDTO licencia = LicenciaDTO.builder()
+                .distrito("San Isidro")
+                .email("licencia1@gmail.com")
+                .estado(true)
+                .ganancias(300000)
+                .nombre("licencia1")
+                .telefono("12345678")
+                .build();
+        licenciaService.create(licencia);
+
+        LicenciaDTO licencia2 = LicenciaDTO.builder()
+                .distrito("San Isidro")
+                .email("licencia2@gmail.com")
+                .estado(true)
+                .ganancias(500000)
+                .nombre("licencia2")
+                .telefono("87654321")
+                .build();
+        licenciaService.create(licencia2);
+
+        //bienes
+        BienDTO bien = BienDTO.builder().build();
+        bienService.create(bien);
+
+        BienDTO bien1 = BienDTO.builder().build();
+        bienService.create(bien1);
+
+        BienDTO bien2 = BienDTO.builder().build();
+        bienService.create(bien2);
+    }
+
+    private void loadLicencias(){
+
+        //bienes
+        BienDTO bien = BienDTO.builder().build();
+        bienService.create(bien);
+
+        BienDTO bien1 = BienDTO.builder().build();
+        bienService.create(bien1);
+
+        BienDTO bien2 = BienDTO.builder().build();
+        bienService.create(bien2);
+        //licencias
+        LicenciaDTO licencia = LicenciaDTO.builder().bienId(bien2)
+                .distrito("San Isidro")
+                .email("licencia1@gmail.com")
+                .estado(true)
+                .ganancias(300000)
+                .nombre("licencia1")
+                .telefono("12345678")
+                .build();
+        licenciaService.create(licencia);
+
+        LicenciaDTO licencia2 = LicenciaDTO.builder().bienId(bien)
+                .distrito("San Isidro")
+                .email("licencia2@gmail.com")
+                .estado(true)
+                .ganancias(500000)
+                .nombre("licencia2")
+                .telefono("87654321")
+                .build();
+        licenciaService.create(licencia2);
+    }
+
+    private void loadFuncionarios() throws PasswordIsBlankException {
+
+        //Optional<RolDTO> colaboradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_COLABORADOR.name()).build());
+        Optional<RolDTO> auditorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_AUDITOR.name()).build());
+        Optional<RolDTO> gestorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GESTOR.name()).build());
+        Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
+        Optional<RolDTO> gerenteRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GERENTE.name()).build());
+        Optional<RolDTO> botRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_BOT.name()).build());
+
+
+
+        FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
+                .cedula("01234537682")
+                .usuario("Usuario Prueba Cajero")
+                .passwordEncriptado("Una2021")
+                .rol(gestorRol.orElseThrow()).build();
+        funcionarioService.create(gestorUsuario);
+
+        FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
+                .cedula(cedula)
+                .usuario("Usuario Administrador")
+                .passwordEncriptado(password)
+                .rol(administradorRol.orElseThrow()).build();
+        funcionarioService.create(administradorUsuario);
+
+        FuncionarioDTO botUsuario = FuncionarioDTO.builder()
+                .cedula("roboto")
+                .usuario("Usuario Bot")
+                .passwordEncriptado("botcito")
+                .rol(botRol.orElseThrow()).build();
+        funcionarioService.create(botUsuario);
+    }
+
+    private void loadColaboradores(){
+        ColaboradorDTO colaborador = ColaboradorDTO.builder()
+                .cedula("116380047")
+                .nombre("Andrey")
+                .telefono("89417655")
+                .build();
+        colaboradorService.create(colaborador);
+
+        ColaboradorDTO colaborador1 = ColaboradorDTO.builder()
+                .cedula("117940673")
+                .nombre("Danah")
+                .telefono("61519481")
+                .build();
+        colaboradorService.create(colaborador1);
+
+        ColaboradorDTO colaborador2 = ColaboradorDTO.builder()
+                .cedula("116950926")
+                .nombre("Henry")
+                .telefono("83594798")
+                .build();
+        colaboradorService.create(colaborador2);
+    }
+
+    private void loadParametros(){
+        //parametros
+        ParametroDTO horario1 = ParametroDTO.builder()
+                .descripcion("Lunes a Viernes de 8:00 am a 5:00 pm")
+                .estado(true)
+                .nombre("horario")
+                .valor(2)
+                .build();
+        parametroService.create(horario1);
+
+        ParametroDTO horario2 = ParametroDTO.builder()
+                .descripcion("Sabado de 8:00 am a 12:00 md")
+                .estado(true)
+                .nombre("horario")
+                .valor(2)
+                .build();
+        parametroService.create(horario2);
+
+        ParametroDTO formula1 = ParametroDTO.builder()
+                .descripcion("Formula licencias comerciales -> Tarifa trimestral = Ganancias brutas * 0,2 (minimo de 40 000 colones)")
+                .estado(true)
+                .nombre("formula")
+                .valor(1)
+                .build();
+        parametroService.create(formula1);
+
+        ParametroDTO formula2 = ParametroDTO.builder()
+                .descripcion("Formula limpieza de vías -> Tarifa bimestral = metros de frente / 1500 (mínimo de 8 metros a cobrar y un máximo de 35)")
+                .estado(true)
+                .nombre("formula")
+                .valor(1)
+                .build();
+        parametroService.create(formula2);
+
+        ParametroDTO formula3 = ParametroDTO.builder()
+                .descripcion("Formula rutas de buses -> Tarifa mensual = cantidad de salidas diarias * 200")
+                .estado(true)
+                .nombre("formula")
+                .valor(1)
+                .build();
+        parametroService.create(formula3);
+
+        ParametroDTO help1 = ParametroDTO.builder()
+                .descripcion("/horario Devuelve el horario de la empresa")
+                .estado(true)
+                .nombre("help")
+                .valor(3)
+                .build();
+        parametroService.create(help1);
+
+        ParametroDTO help2 = ParametroDTO.builder()
+                .descripcion("/formulas Devuelve las formulas de calculo de impuestos")
+                .estado(true)
+                .nombre("help")
+                .valor(3)
+                .build();
+        parametroService.create(help2);
+
+        ParametroDTO help3 = ParametroDTO.builder()
+                .descripcion("/pendiente cedula Devuelve los pendientes asociados a una cedula")
+                .estado(true)
+                .nombre("help")
+                .valor(3)
+                .build();
+        parametroService.create(help3);
+
+        ParametroDTO help4 = ParametroDTO.builder()
+                .descripcion("/pagos cedula fecha inicio fecha final Devuelve los pagos asociados a una cedula entre un rango de fechas")
+                .estado(true)
+                .nombre("help")
+                .valor(3)
+                .build();
+        parametroService.create(help4);
+
+        ParametroDTO help5 = ParametroDTO.builder()
+                .descripcion("/impuesto cedula tipo de impuesto (1. Licencias comerciales 2. Limpieza de vías 3. Rutas de buses) Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
+                .estado(true)
+                .nombre("help")
+                .valor(3)
+                .build();
+        parametroService.create(help5);
+
+        //--------------------------
+        //---Variables 'valores'----
+        //--------------------------
+
+        ParametroDTO periodoCobroLicencia = ParametroDTO.builder()
+                .descripcion("/cantidad de meses por los que se cobra")
+                .estado(true)
+                .nombre("PeriodoCobroLicencia")
+                .valor(4)
+                .build();
+        parametroService.create(periodoCobroLicencia);
+
+        ParametroDTO montoMinimoLicencia = ParametroDTO.builder()
+                .descripcion("/monto mínimo a cobrar por el servicio de licencia")
+                .estado(true)
+                .nombre("MontoMinimoLicencia")
+                .valor(4)
+                .build();
+        parametroService.create(montoMinimoLicencia);
+
+        ParametroDTO porcentajeSobreGananciaBrutaLicencia = ParametroDTO.builder()
+                .descripcion("/Porcentaje sobre ganancias brutas que se va a cobrar")
+                .estado(true)
+                .nombre("PorcentajeSobreGananciasBrutasLicencia")
+                .valor(4)
+                .build();
+        parametroService.create(porcentajeSobreGananciaBrutaLicencia);
+
+        ParametroDTO costoTimbre = ParametroDTO.builder()
+                .descripcion("/Costo del timbre")
+                .estado(true)
+                .nombre("CostoTimbre")
+                .valor(3)
+                .build();
+        parametroService.create(costoTimbre);
+
+        ParametroDTO periodoCobroLimpieza = ParametroDTO.builder()
+                .descripcion("/cantidad de meses por los que se cobra")
+                .estado(true)
+                .nombre("PeriodoCobroLimpieza")
+                .valor(4)
+                .build();
+        parametroService.create(periodoCobroLimpieza);
+
+        ParametroDTO montoPorMetroFrenteLimpieza = ParametroDTO.builder()
+                .descripcion("/monto a cobrar por cada metro de frente en la propiedad")
+                .estado(true)
+                .nombre("montoPorMetroFrenteLimpieza")
+                .valor(4)
+                .build();
+        parametroService.create(montoPorMetroFrenteLimpieza);
+
+        ParametroDTO maximoMetrosLimpieza = ParametroDTO.builder()
+                .descripcion("/cantidad máxima de metros de frente a considerar")
+                .estado(true)
+                .nombre("maximoMetrosLimpieza")
+                .valor(3)
+                .build();
+        parametroService.create(maximoMetrosLimpieza);
+
+        ParametroDTO minimoMetrosLimpieza = ParametroDTO.builder()
+                .descripcion("/cantidad minima de metros de frente a considerar")
+                .estado(true)
+                .nombre("minimoMetrosLimpieza")
+                .valor(3)
+                .build();
+        parametroService.create(minimoMetrosLimpieza);
+
+        ParametroDTO periodoCobroBuses = ParametroDTO.builder()
+                .descripcion("/cantidad de meses por los que se cobra")
+                .estado(true)
+                .nombre("PeriodoCobroBuses")
+                .valor(4)
+                .build();
+        parametroService.create(periodoCobroBuses);
+
+        ParametroDTO salidaPorDiaBuses = ParametroDTO.builder()
+                .descripcion("/cantidad de salidas por dia")
+                .estado(true)
+                .nombre("salidaPorDiaBuses")
+                .valor(4)
+                .build();
+        parametroService.create(salidaPorDiaBuses);
     }
 
 }
