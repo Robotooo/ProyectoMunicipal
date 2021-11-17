@@ -27,7 +27,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una funcionario a partir de su id",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GESTOR') or hasRole('GERENTE')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
