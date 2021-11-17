@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.una.proyecto_Municipal.entities.Bien;
 import org.una.proyecto_Municipal.entities.CategoriaxPropiedad;
@@ -29,6 +30,7 @@ public class PropiedadDTO {
     private boolean estado;
     private Date fechaRegistro;
     private Date fechaModificacion;
-    private BienDTO bienId;
+    @JsonIgnore
+    private BienDTO bien;
     private CategoriaxPropiedadDTO categoriaxPropiedad;
 }

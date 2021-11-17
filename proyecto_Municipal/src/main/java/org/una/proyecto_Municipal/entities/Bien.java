@@ -27,9 +27,9 @@ public class Bien implements Serializable {
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<Colaborador> colaboradores = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
-    @JsonManagedReference
-    private List<Propiedad> propiedad = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bien")
+    //@JsonManagedReference
+    private List<Propiedad> propiedades = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bienesId")
     @JsonManagedReference

@@ -89,7 +89,7 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Override
     @Transactional
     public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) throws ParseException {
-        colaboradorRepository.saveTransaction("creacion","Colaborador","2",date);
+        //colaboradorRepository.saveTransaction("creacion","Colaborador","2",date);
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
     }
 

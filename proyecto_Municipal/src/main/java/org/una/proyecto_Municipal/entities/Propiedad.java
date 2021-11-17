@@ -66,8 +66,8 @@ public class Propiedad implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="bienes_id")
-    @JsonBackReference
-    private Bien bienesId;
+    //@JsonBackReference
+    private Bien bien;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedadId")

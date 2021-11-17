@@ -164,7 +164,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public Optional<CobroDTO> create(CobroDTO cobroDTO) {
-        cobroRepository.saveTransaction("creacion","Cobro","2",date);
+        //cobroRepository.saveTransaction("creacion","Cobro","2",date);
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
     }
 
