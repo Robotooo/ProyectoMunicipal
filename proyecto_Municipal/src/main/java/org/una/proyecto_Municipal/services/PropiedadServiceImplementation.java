@@ -69,6 +69,11 @@ public class PropiedadServiceImplementation implements IPropiedadService{
         propiedadRepository.deleteAll();
     }
 
+    @Override
+    public Optional<List<PropiedadDTO>> findByBienId(Long bienId) {
+        return Optional.empty();
+    }
+
     //create & update
     @Override
     @Transactional

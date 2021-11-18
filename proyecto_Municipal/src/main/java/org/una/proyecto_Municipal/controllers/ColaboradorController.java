@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.services.IColaboradorService;
 
@@ -77,6 +78,15 @@ public class ColaboradorController {
     public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
         Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
+            responseContainer = "List", response = CobroDTO.class, tags = "Colaboradores")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/bien/{bienId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
+        Optional<List<ColaboradorDTO>> cobroFound = colaboradorService.findByBienId(bienId);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)

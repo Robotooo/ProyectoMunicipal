@@ -17,6 +17,7 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import org.una.proyecto_Municipal.repositories.IFuncionarioRepository;
+import org.una.proyecto_Municipal.repositories.ISolicitudRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Autowired
     private IFuncionarioRepository funcionarioRepository;
+
+    private ISolicitudRepository solicitudRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -139,6 +142,11 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException {
         funcionarioDTO.setPasswordEncriptado(encriptarPassword(funcionarioDTO.getPasswordEncriptado()));
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
+    }
+
+    @Transactional
+    public Optional<SolicitudDTO> crearSolicitud(SolicitudDTO solicitud){
+        return null;
     }
 
 

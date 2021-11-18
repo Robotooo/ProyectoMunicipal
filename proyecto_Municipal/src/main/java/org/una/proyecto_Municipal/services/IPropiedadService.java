@@ -25,4 +25,5 @@ public interface IPropiedadService {
 
     public void deleteAll();
 
+    Optional<List<PropiedadDTO>> findByBienId(Long bienId);
 }

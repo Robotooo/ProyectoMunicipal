@@ -78,9 +78,9 @@ public class LicenciaController {
 
     @ApiOperation(value = "Obtiene una lista de licencias a partir de su bien",
             response = LicenciaDTO.class, tags = "Licencias")
-    @GetMapping("/bienes_id/{bienes_id}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "bien") Long id) {
-        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findByBienId(id);
+    @GetMapping("/bienId/{bienId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
+        Optional<List<LicenciaDTO>> licenciaFound = licenciaService.findByBienId(bienId);
         return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
     }
 

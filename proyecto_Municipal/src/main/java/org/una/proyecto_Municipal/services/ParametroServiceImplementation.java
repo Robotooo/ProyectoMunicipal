@@ -103,4 +103,9 @@ public class ParametroServiceImplementation implements IParametroService{
         parametroRepository.deleteAll();
     }
 
+    @Override
+    public Optional<List<ParametroDTO>> findByEstado(boolean estado) {
+        return Optional.empty();
+    }
+
 }

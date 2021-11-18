@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 
+import org.una.proyecto_Municipal.dto.SolicitudDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IFuncionarioService;
 
@@ -83,6 +84,17 @@ public class FuncionarioController {
             Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO);
             return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
         } catch (Exception | PasswordIsBlankException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/solicitud/")
+    public ResponseEntity<?> createSolicitud(@RequestBody SolicitudDTO solicitud) {
+        try {
+            Optional<SolicitudDTO> usuarioCreated = null;// = funcionarioService.create(solicitud);
+            return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
+        } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

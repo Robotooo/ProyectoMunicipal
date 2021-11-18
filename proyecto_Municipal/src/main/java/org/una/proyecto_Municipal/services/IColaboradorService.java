@@ -28,4 +28,5 @@ public interface IColaboradorService {
 
     public void deleteAll() throws ParseException;
 
+    Optional<List<ColaboradorDTO>> findByBienId(Long bienId);
 }

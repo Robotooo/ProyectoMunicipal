@@ -82,111 +82,11 @@ public class DataLoader implements ApplicationRunner {
 
             loadParametros();
 
-            //cobros
-            CobroDTO cobro = CobroDTO.builder()
-                    .estado(true)
-                    .monto(50000)
-                    .tipo(1) //1. licencias 2. propiedades 3. rutas
-                    .periodo(3)
-                    .build();
-            cobroService.create(cobro);
+            loadCobros();
 
-            CobroDTO cobro1 = CobroDTO.builder()
-                    .estado(false)
-                    .monto(40000)
-                    .tipo(3)
-                    .periodo(1)
-                    .build();
-            cobroService.create(cobro1);
+            loadCalendario();
 
-            CobroDTO cobro2 = CobroDTO.builder()
-                    .estado(true)
-                    .monto(35000)
-                    .tipo(2)
-                    .periodo(2)
-                    .build();
-            cobroService.create(cobro2);
-
-            CobroDTO cobro3 = CobroDTO.builder()
-                    .estado(false)
-                    .monto(45000)
-                    .tipo(3)
-                    .periodo(1)
-                    .build();
-            cobroService.create(cobro3);
-
-
-            Date d1 = convertStringToDate("2021-11-16");
-            Date d2 = convertStringToDate("2022-2-16");
-            Date d3 = convertStringToDate("2022-5-16");
-            Date d4 = convertStringToDate("2022-8-16");
-            Date d5 = convertStringToDate("2022-11-16");
-            CalendarioDTO calendarioLicencias = CalendarioDTO.builder()
-                    .id(Long.valueOf(1))
-                    .tipo(1)
-                    .periodo(3)
-                    .fecha1(d1)
-                    .fecha2(d2)
-                    .fecha3(d3)
-                    .fecha4(d4)
-                    .fecha5(d5)
-                    .build();
-            calendarioService.create(calendarioLicencias);
-
-            d1 = convertStringToDate("2021-11-16");
-            d2 = convertStringToDate("2022-1-16");
-            d3 = convertStringToDate("2022-3-16");
-            d4 = convertStringToDate("2022-5-16");
-            d5 = convertStringToDate("2022-7-16");
-            Date d6 = convertStringToDate("2022-9-16");
-            Date d7 = convertStringToDate("2022-11-16");
-            CalendarioDTO calendarioLimpieza = CalendarioDTO.builder()
-                    .id(Long.valueOf(2))
-                    .tipo(2)
-                    .periodo(2)
-                    .fecha1(d1)
-                    .fecha2(d2)
-                    .fecha3(d3)
-                    .fecha4(d4)
-                    .fecha5(d5)
-                    .fecha6(d6)
-                    .fecha7(d7)
-                    .build();
-            calendarioService.create(calendarioLimpieza);
-
-            d1 = convertStringToDate("2021-11-16");
-            d2 = convertStringToDate("2021-12-16");
-            d3 = convertStringToDate("2022-1-16");
-            d4 = convertStringToDate("2022-2-16");
-            d5 = convertStringToDate("2022-3-16");
-            d6 = convertStringToDate("2022-4-16");
-            d7 = convertStringToDate("2022-5-16");
-            Date d8 = convertStringToDate("2022-6-16");
-            Date d9 = convertStringToDate("2022-7-16");
-            Date d10 = convertStringToDate("2022-8-16");
-            Date d11 = convertStringToDate("2022-9-16");
-
-
-
-            CalendarioDTO calendarioRutas = CalendarioDTO.builder()
-                    .id(Long.valueOf(3))
-                    .tipo(3)
-                    .periodo(1)
-                    .fecha1(d1)
-                    .fecha2(d2)
-                    .fecha3(d3)
-                    .fecha4(d4)
-                    .fecha5(d5)
-                    .fecha6(d6)
-                    .fecha7(d7)
-                    .fecha8(d8)
-                    .fecha9(d9)
-                    .fecha10(d10)
-                    .fecha11(d11)
-                    .build();
-            calendarioService.create(calendarioRutas);
-
-
+            loadLicencias();
 
             //rutas
             RutaDTO ruta = RutaDTO.builder()
@@ -205,7 +105,7 @@ public class DataLoader implements ApplicationRunner {
                     .build();
             diasemanaService.create(dia);
 
-           loadLicencias();
+
 
             //declaraciones anules
             DeclaracionAnualDTO declaracion = DeclaracionAnualDTO.builder()
@@ -281,6 +181,114 @@ public class DataLoader implements ApplicationRunner {
         }
     }
 
+    private void loadCalendario() throws ParseException {
+
+        Date d1 = convertStringToDate("2021-11-16");
+        Date d2 = convertStringToDate("2022-2-16");
+        Date d3 = convertStringToDate("2022-5-16");
+        Date d4 = convertStringToDate("2022-8-16");
+        Date d5 = convertStringToDate("2022-11-16");
+        CalendarioDTO calendarioLicencias = CalendarioDTO.builder()
+                .id(Long.valueOf(1))
+                .tipo(1)
+                .periodo(3)
+                .fecha1(d1)
+                .fecha2(d2)
+                .fecha3(d3)
+                .fecha4(d4)
+                .fecha5(d5)
+                .build();
+        calendarioService.create(calendarioLicencias);
+
+        d1 = convertStringToDate("2021-11-16");
+        d2 = convertStringToDate("2022-1-16");
+        d3 = convertStringToDate("2022-3-16");
+        d4 = convertStringToDate("2022-5-16");
+        d5 = convertStringToDate("2022-7-16");
+        Date d6 = convertStringToDate("2022-9-16");
+        Date d7 = convertStringToDate("2022-11-16");
+        CalendarioDTO calendarioLimpieza = CalendarioDTO.builder()
+                .id(Long.valueOf(2))
+                .tipo(2)
+                .periodo(2)
+                .fecha1(d1)
+                .fecha2(d2)
+                .fecha3(d3)
+                .fecha4(d4)
+                .fecha5(d5)
+                .fecha6(d6)
+                .fecha7(d7)
+                .build();
+        calendarioService.create(calendarioLimpieza);
+
+        d1 = convertStringToDate("2021-11-16");
+        d2 = convertStringToDate("2021-12-16");
+        d3 = convertStringToDate("2022-1-16");
+        d4 = convertStringToDate("2022-2-16");
+        d5 = convertStringToDate("2022-3-16");
+        d6 = convertStringToDate("2022-4-16");
+        d7 = convertStringToDate("2022-5-16");
+        Date d8 = convertStringToDate("2022-6-16");
+        Date d9 = convertStringToDate("2022-7-16");
+        Date d10 = convertStringToDate("2022-8-16");
+        Date d11 = convertStringToDate("2022-9-16");
+
+
+
+        CalendarioDTO calendarioRutas = CalendarioDTO.builder()
+                .id(Long.valueOf(3))
+                .tipo(3)
+                .periodo(1)
+                .fecha1(d1)
+                .fecha2(d2)
+                .fecha3(d3)
+                .fecha4(d4)
+                .fecha5(d5)
+                .fecha6(d6)
+                .fecha7(d7)
+                .fecha8(d8)
+                .fecha9(d9)
+                .fecha10(d10)
+                .fecha11(d11)
+                .build();
+        calendarioService.create(calendarioRutas);
+    }
+
+    private void loadCobros() {
+
+        CobroDTO cobro = CobroDTO.builder()
+                .estado(true)
+                .monto(50000)
+                .tipo(1) //1. licencias 2. propiedades 3. rutas
+                .periodo(3)
+                .build();
+        cobroService.create(cobro);
+
+        CobroDTO cobro1 = CobroDTO.builder()
+                .estado(false)
+                .monto(40000)
+                .tipo(3)
+                .periodo(1)
+                .build();
+        cobroService.create(cobro1);
+
+        CobroDTO cobro2 = CobroDTO.builder()
+                .estado(true)
+                .monto(35000)
+                .tipo(2)
+                .periodo(2)
+                .build();
+        cobroService.create(cobro2);
+
+        CobroDTO cobro3 = CobroDTO.builder()
+                .estado(false)
+                .monto(45000)
+                .tipo(3)
+                .periodo(1)
+                .build();
+        cobroService.create(cobro3);
+    }
+
     private Date convertStringToDate(String fechaString) throws java.text.ParseException {
         Date date = new SimpleDateFormat("yyyy-mm-dd").parse(fechaString);
         return date;
@@ -327,6 +335,7 @@ public class DataLoader implements ApplicationRunner {
         BienDTO bien1 = BienDTO.builder().build();
         bienService.create(bien1);
 
+
         BienDTO bien2 = BienDTO.builder().build();
         bienService.create(bien2);
         //licencias
@@ -337,6 +346,7 @@ public class DataLoader implements ApplicationRunner {
                 .ganancias(300000)
                 .nombre("licencia1")
                 .telefono("12345678")
+                .bienId(bien)
                 .build();
         licenciaService.create(licencia);
 
@@ -347,8 +357,11 @@ public class DataLoader implements ApplicationRunner {
                 .ganancias(500000)
                 .nombre("licencia2")
                 .telefono("87654321")
+                .bienId(bien2)
                 .build();
         licenciaService.create(licencia2);
+
+        //bien.setLicencia(licencia.getId());
     }
 
     private void loadFuncionarios() throws PasswordIsBlankException {

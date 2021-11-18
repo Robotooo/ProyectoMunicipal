@@ -118,4 +118,9 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
         colaboradorRepository.deleteAll();
     }
 
+    @Override
+    public Optional<List<ColaboradorDTO>> findByBienId(Long bienId) {
+        return Optional.empty();
+    }
+
 }

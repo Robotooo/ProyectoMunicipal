@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.services;
 
+import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
 
 import java.text.ParseException;
@@ -24,4 +25,5 @@ public interface IParametroService{
 
     public void deleteAll() throws ParseException;
 
+    Optional<List<ParametroDTO>> findByEstado(boolean estado);
 }

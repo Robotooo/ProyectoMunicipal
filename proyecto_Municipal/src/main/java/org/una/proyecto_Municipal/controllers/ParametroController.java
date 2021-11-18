@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.una.proyecto_Municipal.dto.CobroDTO;
+import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.ParametroDTO;
+import org.una.proyecto_Municipal.entities.Parametro;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.IParametroService;
 
@@ -42,6 +45,25 @@ public class ParametroController {
         Optional<List<ParametroDTO>> result = parametroService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+    @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
+            responseContainer = "List", response = CobroDTO.class, tags = "Parametros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
+        Optional<List<ParametroDTO>> cobroFound = parametroService.findByEstado(estado);
+        return new ResponseEntity<>(cobroFound, HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
+            response = ColaboradorDTO.class, tags = "Parametros")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String nombre) {
+        Optional<List<ParametroDTO>> colaboradorFound = parametroService.findByNombre(nombre);
+        return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
+    }
+
 
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su valor",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")

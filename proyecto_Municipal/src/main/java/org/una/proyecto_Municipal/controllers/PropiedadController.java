@@ -10,6 +10,7 @@ import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
 import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
+import org.una.proyecto_Municipal.entities.Propiedad;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.ICobroService;
 import org.una.proyecto_Municipal.services.IColaboradorService;
@@ -59,6 +60,13 @@ public class PropiedadController {
         return new ResponseEntity<>(propiedadFound, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Obtiene una lista de licencias a partir de su bien",
+            response = LicenciaDTO.class, tags = "Licencias")
+    @GetMapping("/bienId/{bienId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
+        Optional<List<PropiedadDTO>> licenciaFound = propiedadService.findByBienId(bienId);
+        return new ResponseEntity<>(licenciaFound, HttpStatus.OK);
+    }
 
 //    @ApiOperation(value = "Obtiene una lista de propiedades a partir de su nombre",
 //            response = PropiedadDTO.class, tags = "Propiedades")
