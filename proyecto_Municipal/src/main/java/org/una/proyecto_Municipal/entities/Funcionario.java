@@ -39,6 +39,12 @@ public class Funcionario implements Serializable {
     @JoinColumn(name="roles_id")
     private Rol rol;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gestor")
+    private List<Solicitud> solicitudesEnviadas = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gerente")
+    private List<Solicitud> solicitudesRecibidas = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajeroId")
     private List<Factura> factura = new ArrayList<>();
 

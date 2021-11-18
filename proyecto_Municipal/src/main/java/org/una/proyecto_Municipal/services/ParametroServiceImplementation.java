@@ -74,7 +74,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Override
     @Transactional
     public Optional<ParametroDTO> create(ParametroDTO parametroDTO) throws ParseException {
-        //parametroRepository.saveTransaction("crear","Parametro","2",date);
+        parametroRepository.saveTransaction("crear","Parametro","2",date);
         return Optional.ofNullable(getSavedParametroDTO(parametroDTO));
     }
 
