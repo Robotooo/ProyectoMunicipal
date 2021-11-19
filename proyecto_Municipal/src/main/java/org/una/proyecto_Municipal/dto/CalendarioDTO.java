@@ -11,7 +11,6 @@ import java.util.Date;
 @ToString
 @Builder
 public class CalendarioDTO {
-
     private Long id;
     private int periodo;
     private int tipo;

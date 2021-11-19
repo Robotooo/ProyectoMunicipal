@@ -1,6 +1,5 @@
 package org.una.proyecto_Municipal.components;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -10,8 +9,6 @@ import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 import org.una.proyecto_Municipal.services.*;
 import lombok.SneakyThrows;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,12 +67,8 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (funcionarioService.findByCedulaAproximate(cedula).isEmpty()) {
 
-
-
-            //funcionarios
             loadFuncionarios();
 
-            //colaboradores
             loadColaboradores();
 
             //loadBienes();
@@ -88,87 +81,11 @@ public class DataLoader implements ApplicationRunner {
 
             loadLicencias();
 
-            //rutas
-            RutaDTO ruta = RutaDTO.builder()
-                    .estado(true)
-                    //.bienId(bien)
-                    .nombreRuta("PZ - SJ")
-                    .finalRuta("fin")
-                    .inicioRuta("ini")
-                    .build();
-            rutaService.create(ruta);
+            loadRutas();
 
-            //dias semana
-            DiaSemanaDTO dia = DiaSemanaDTO.builder()
-                    .cantidadSalidas(5)
-                    .nombreDia("lunes")
-                    .build();
-            diasemanaService.create(dia);
+            loadPropiedades();
 
-
-
-            //declaraciones anules
-            DeclaracionAnualDTO declaracion = DeclaracionAnualDTO.builder()
-                    .anio(2019)
-                    .montoAnual(1000000)
-                    .build();
-            declaracionService.create(declaracion);
-
-            DeclaracionAnualDTO declaracion1 = DeclaracionAnualDTO.builder()
-                    .anio(2020)
-                    .montoAnual(2000000)
-                    .build();
-            declaracionService.create(declaracion1);
-
-            DiaSemanaDTO dia1 = DiaSemanaDTO.builder()
-                    .cantidadSalidas(9)
-                    .nombreDia("martes")
-                    .build();
-            diasemanaService.create(dia1);
-
-            DiaSemanaDTO dia2 = DiaSemanaDTO.builder()
-                    .cantidadSalidas(6)
-                    .nombreDia("miércoles")
-                    .build();
-            diasemanaService.create(dia2);
-
-            DiaSemanaDTO dia3 = DiaSemanaDTO.builder()
-                    .cantidadSalidas(7)
-                    .nombreDia("jueves")
-                    .build();
-            diasemanaService.create(dia3);
-
-            DiaSemanaDTO dia4 = DiaSemanaDTO.builder()
-                    .cantidadSalidas(10)
-                    .nombreDia("viernes")
-                    .build();
-            diasemanaService.create(dia4);
-
-            //propiedades
-            PropiedadDTO propiedad = PropiedadDTO.builder()
-                    .canton("Pérez Zeledón")
-                    .direccion("Barrio ...")
-                    .distrito("San Isidro")
-                    .esEstado(true)
-                    .estado(true)
-                    .provincia("San José")
-                    .zona(1)
-                    .build();
-            propiedadService.create(propiedad);
-
-            PropiedadDTO propiedad2 = PropiedadDTO.builder()
-                    .canton("Pérez Zeledón")
-                    .direccion("Barrio ...")
-                    .distrito("San Isidro")
-                    .esEstado(true)
-                    .estado(true)
-                    .provincia("San José")
-                    .zona(2)
-                    .build();
-            propiedadService.create(propiedad2);
-
-
-//TODO:
+//          TODO:
 //            CalendarDTO licenciaCalendario = CalendarDTO.builder()
 //                    .monto(10000)
 //                    .
@@ -181,8 +98,13 @@ public class DataLoader implements ApplicationRunner {
         }
     }
 
-    private void loadCalendario() throws ParseException {
+    private Date convertStringToDate(String fechaString) throws java.text.ParseException {
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(fechaString);
+        return date;
+    }
 
+    private void loadCalendario() throws ParseException {
+        //calendario licencias
         Date d1 = convertStringToDate("2021-11-16");
         Date d2 = convertStringToDate("2022-2-16");
         Date d3 = convertStringToDate("2022-5-16");
@@ -200,6 +122,7 @@ public class DataLoader implements ApplicationRunner {
                 .build();
         calendarioService.create(calendarioLicencias);
 
+        //calendario limpieza de vías
         d1 = convertStringToDate("2021-11-16");
         d2 = convertStringToDate("2022-1-16");
         d3 = convertStringToDate("2022-3-16");
@@ -221,6 +144,7 @@ public class DataLoader implements ApplicationRunner {
                 .build();
         calendarioService.create(calendarioLimpieza);
 
+        //calendario rutas
         d1 = convertStringToDate("2021-11-16");
         d2 = convertStringToDate("2021-12-16");
         d3 = convertStringToDate("2022-1-16");
@@ -232,8 +156,6 @@ public class DataLoader implements ApplicationRunner {
         Date d9 = convertStringToDate("2022-7-16");
         Date d10 = convertStringToDate("2022-8-16");
         Date d11 = convertStringToDate("2022-9-16");
-
-
 
         CalendarioDTO calendarioRutas = CalendarioDTO.builder()
                 .id(Long.valueOf(3))
@@ -255,7 +177,7 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void loadCobros() {
-
+        //cobros
         CobroDTO cobro = CobroDTO.builder()
                 .estado(true)
                 .monto(50000)
@@ -289,45 +211,75 @@ public class DataLoader implements ApplicationRunner {
         cobroService.create(cobro3);
     }
 
-    private Date convertStringToDate(String fechaString) throws java.text.ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(fechaString);
-        return date;
+    private void loadRutas(){
+        //rutas
+        RutaDTO ruta = RutaDTO.builder()
+                .estado(true)
+                //.bienId(bien)
+                .nombreRuta("PZ - SJ")
+                .finalRuta("fin")
+                .inicioRuta("ini")
+                .build();
+        rutaService.create(ruta);
+
+        //dias semana
+        DiaSemanaDTO dia = DiaSemanaDTO.builder()
+                .cantidadSalidas(5)
+                .nombreDia("lunes")
+                .build();
+        diasemanaService.create(dia);
+
+        DiaSemanaDTO dia1 = DiaSemanaDTO.builder()
+                .cantidadSalidas(9)
+                .nombreDia("martes")
+                .build();
+        diasemanaService.create(dia1);
+
+        DiaSemanaDTO dia2 = DiaSemanaDTO.builder()
+                .cantidadSalidas(6)
+                .nombreDia("miércoles")
+                .build();
+        diasemanaService.create(dia2);
+
+        DiaSemanaDTO dia3 = DiaSemanaDTO.builder()
+                .cantidadSalidas(7)
+                .nombreDia("jueves")
+                .build();
+        diasemanaService.create(dia3);
+
+        DiaSemanaDTO dia4 = DiaSemanaDTO.builder()
+                .cantidadSalidas(10)
+                .nombreDia("viernes")
+                .build();
+        diasemanaService.create(dia4);
     }
 
-    private void loadBienes(){
-        LicenciaDTO licencia = LicenciaDTO.builder()
+    private void loadPropiedades(){
+        //propiedades
+        PropiedadDTO propiedad = PropiedadDTO.builder()
+                .canton("Pérez Zeledón")
+                .direccion("Barrio ...")
                 .distrito("San Isidro")
-                .email("licencia1@gmail.com")
+                .esEstado(true)
                 .estado(true)
-                .ganancias(300000)
-                .nombre("licencia1")
-                .telefono("12345678")
+                .provincia("San José")
+                .zona(1)
                 .build();
-        licenciaService.create(licencia);
+        propiedadService.create(propiedad);
 
-        LicenciaDTO licencia2 = LicenciaDTO.builder()
+        PropiedadDTO propiedad2 = PropiedadDTO.builder()
+                .canton("Pérez Zeledón")
+                .direccion("Barrio ...")
                 .distrito("San Isidro")
-                .email("licencia2@gmail.com")
+                .esEstado(true)
                 .estado(true)
-                .ganancias(500000)
-                .nombre("licencia2")
-                .telefono("87654321")
+                .provincia("San José")
+                .zona(2)
                 .build();
-        licenciaService.create(licencia2);
-
-        //bienes
-        BienDTO bien = BienDTO.builder().build();
-        bienService.create(bien);
-
-        BienDTO bien1 = BienDTO.builder().build();
-        bienService.create(bien1);
-
-        BienDTO bien2 = BienDTO.builder().build();
-        bienService.create(bien2);
+        propiedadService.create(propiedad2);
     }
 
     private void loadLicencias(){
-
         //bienes
         BienDTO bien = BienDTO.builder().build();
         bienService.create(bien);
@@ -335,9 +287,9 @@ public class DataLoader implements ApplicationRunner {
         BienDTO bien1 = BienDTO.builder().build();
         bienService.create(bien1);
 
-
         BienDTO bien2 = BienDTO.builder().build();
         bienService.create(bien2);
+
         //licencias
         LicenciaDTO licencia = LicenciaDTO.builder().bienId(bien2)
                 .distrito("San Isidro")
@@ -361,7 +313,18 @@ public class DataLoader implements ApplicationRunner {
                 .build();
         licenciaService.create(licencia2);
 
-        //bien.setLicencia(licencia.getId());
+        //declaraciones anules
+        DeclaracionAnualDTO declaracion = DeclaracionAnualDTO.builder()
+                .anio(2019)
+                .montoAnual(1000000)
+                .build();
+        declaracionService.create(declaracion);
+
+        DeclaracionAnualDTO declaracion1 = DeclaracionAnualDTO.builder()
+                .anio(2020)
+                .montoAnual(2000000)
+                .build();
+        declaracionService.create(declaracion1);
     }
 
     private void loadFuncionarios() throws PasswordIsBlankException {
@@ -372,8 +335,6 @@ public class DataLoader implements ApplicationRunner {
         Optional<RolDTO> administradorRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_ADMINISTRADOR.name()).build());
         Optional<RolDTO> gerenteRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_GERENTE.name()).build());
         Optional<RolDTO> botRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_BOT.name()).build());
-
-
 
         FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
                 .cedula("01234537682")
@@ -398,6 +359,7 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void loadColaboradores() throws ParseException {
+        //colaboradores
         ColaboradorDTO colaborador = ColaboradorDTO.builder()
                 .cedula("116380047")
                 .nombre("Andrey")
@@ -507,7 +469,7 @@ public class DataLoader implements ApplicationRunner {
         //--------------------------
 
         ParametroDTO periodoCobroLicencia = ParametroDTO.builder()
-                .descripcion("/cantidad de meses por los que se cobra")
+                .descripcion("cantidad de meses por los que se cobra")
                 .estado(true)
                 .nombre("PeriodoCobroLicencia")
                 .valor(4)
@@ -515,7 +477,7 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(periodoCobroLicencia);
 
         ParametroDTO montoMinimoLicencia = ParametroDTO.builder()
-                .descripcion("/monto mínimo a cobrar por el servicio de licencia")
+                .descripcion("monto mínimo a cobrar por el servicio de licencia")
                 .estado(true)
                 .nombre("MontoMinimoLicencia")
                 .valor(4)
@@ -523,7 +485,7 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(montoMinimoLicencia);
 
         ParametroDTO porcentajeSobreGananciaBrutaLicencia = ParametroDTO.builder()
-                .descripcion("/Porcentaje sobre ganancias brutas que se va a cobrar")
+                .descripcion("porcentaje sobre ganancias brutas que se va a cobrar")
                 .estado(true)
                 .nombre("PorcentajeSobreGananciasBrutasLicencia")
                 .valor(4)
@@ -531,15 +493,15 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(porcentajeSobreGananciaBrutaLicencia);
 
         ParametroDTO costoTimbre = ParametroDTO.builder()
-                .descripcion("/Costo del timbre")
+                .descripcion("costo del timbre")
                 .estado(true)
                 .nombre("CostoTimbre")
-                .valor(3)
+                .valor(4)
                 .build();
         parametroService.create(costoTimbre);
 
         ParametroDTO periodoCobroLimpieza = ParametroDTO.builder()
-                .descripcion("/cantidad de meses por los que se cobra")
+                .descripcion("cantidad de meses por los que se cobra")
                 .estado(true)
                 .nombre("PeriodoCobroLimpieza")
                 .valor(4)
@@ -547,7 +509,7 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(periodoCobroLimpieza);
 
         ParametroDTO montoPorMetroFrenteLimpieza = ParametroDTO.builder()
-                .descripcion("/monto a cobrar por cada metro de frente en la propiedad")
+                .descripcion("monto a cobrar por cada metro de frente en la propiedad")
                 .estado(true)
                 .nombre("montoPorMetroFrenteLimpieza")
                 .valor(4)
@@ -555,23 +517,23 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(montoPorMetroFrenteLimpieza);
 
         ParametroDTO maximoMetrosLimpieza = ParametroDTO.builder()
-                .descripcion("/cantidad máxima de metros de frente a considerar")
+                .descripcion("cantidad máxima de metros de frente a considerar")
                 .estado(true)
                 .nombre("maximoMetrosLimpieza")
-                .valor(3)
+                .valor(4)
                 .build();
         parametroService.create(maximoMetrosLimpieza);
 
         ParametroDTO minimoMetrosLimpieza = ParametroDTO.builder()
-                .descripcion("/cantidad minima de metros de frente a considerar")
+                .descripcion("cantidad minima de metros de frente a considerar")
                 .estado(true)
                 .nombre("minimoMetrosLimpieza")
-                .valor(3)
+                .valor(4)
                 .build();
         parametroService.create(minimoMetrosLimpieza);
 
         ParametroDTO periodoCobroBuses = ParametroDTO.builder()
-                .descripcion("/cantidad de meses por los que se cobra")
+                .descripcion("cantidad de meses por los que se cobra")
                 .estado(true)
                 .nombre("PeriodoCobroBuses")
                 .valor(4)
@@ -579,7 +541,7 @@ public class DataLoader implements ApplicationRunner {
         parametroService.create(periodoCobroBuses);
 
         ParametroDTO salidaPorDiaBuses = ParametroDTO.builder()
-                .descripcion("/cantidad de salidas por dia")
+                .descripcion("cantidad de salidas por dia")
                 .estado(true)
                 .nombre("salidaPorDiaBuses")
                 .valor(4)

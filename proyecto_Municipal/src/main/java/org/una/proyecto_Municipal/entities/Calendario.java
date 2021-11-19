@@ -26,6 +26,9 @@ public class Calendario implements Serializable {
     @Column(name = "tipo")
     private int tipo;
 
+    @Column(name = "anio")
+    private int anio;
+
     @Column(name = "fecha_1")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -93,6 +96,5 @@ public class Calendario implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 }
