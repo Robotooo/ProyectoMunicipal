@@ -11,7 +11,7 @@ public interface IParametroService{
 
     public Optional<ParametroDTO> findById(Long id);
 
-    public Optional<List<ParametroDTO>> findAll();
+    public Optional<List<ParametroDTO>> findAll(Long idFuncionario);
 
     public Optional<List<ParametroDTO>> findByNombre(String nombre);
 

@@ -33,6 +33,9 @@ public class Transaccion implements Serializable {
     @Column(name = "objeto", length = 50)
     private String objeto;
 
+    @Column(name = "parametro", length = 50)
+    private String parametro;
+
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)

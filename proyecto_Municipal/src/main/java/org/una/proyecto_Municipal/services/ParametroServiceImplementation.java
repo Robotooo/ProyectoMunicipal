@@ -40,8 +40,9 @@ public class ParametroServiceImplementation implements IParametroService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ParametroDTO>> findAll() {
-        parametroRepository.saveTransaction("buscar todos","Parametro","2",date);
+    public Optional<List<ParametroDTO>> findAll(Long idFuncionario) {
+        //parametroRepository.saveTransaction("buscar todos","Parametro","2",date);
+        parametroRepository.registrarTransaccion("buscar todos", "Parametro",Long.valueOf(1),idFuncionario);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroRepository.findAll(), ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
     }

@@ -26,7 +26,13 @@ public interface IColaboradorRepository extends JpaRepository<Colaborador, Long>
             @Param("date_in") Date date_in
     );
 
-
+    @Query(value = "{call registrarTransaccion(:accion_in, :objeto_in, :funId_in, :parametro_in)}", nativeQuery=true)
+    public String registrarTransaccion(
+            @Param("accion_in") String accion_in,
+            @Param("objeto_in") String objeto_in,
+            @Param("funId_in") Long funId_in,
+            @Param("parametro_in") String parametro_in
+    );
 
 //  TODO: find Colaboradores by CobroId, BienId
 

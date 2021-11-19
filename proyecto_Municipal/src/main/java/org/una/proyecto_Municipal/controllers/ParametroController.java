@@ -39,10 +39,10 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de todos los parametros",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/{all}")
+    @GetMapping("/{all}/{idFuncionario}")
     @ResponseBody
-    public ResponseEntity<?> findAll() {
-        Optional<List<ParametroDTO>> result = parametroService.findAll();
+    public ResponseEntity<?> findAll(@PathVariable(value = "idFuncionario") Long idFuncionario) {
+        Optional<List<ParametroDTO>> result = parametroService.findAll(idFuncionario);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",

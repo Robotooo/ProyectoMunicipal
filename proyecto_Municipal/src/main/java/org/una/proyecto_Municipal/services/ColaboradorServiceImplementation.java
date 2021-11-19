@@ -64,8 +64,9 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula) {
-        colaboradorRepository.saveTransaction("buscar por cedula","Colaborador","2",date);
+    public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula,Long funId) {
+        //colaboradorRepository.saveTransaction("buscar por cedula","Colaborador","2",date);
+        colaboradorRepository.registrarTransaccion("buscar por cedula","Colaborador",funId,cedula);
         List<Colaborador> colaboradorList = colaboradorRepository.findByCedulaContaining(cedula);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTOList);

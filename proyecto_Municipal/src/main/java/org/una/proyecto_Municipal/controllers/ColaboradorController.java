@@ -74,9 +74,10 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su cedula",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/cedula/{cedula}")
-    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula);
+    @GetMapping("/cedula/{cedula}/{funId}")
+    public ResponseEntity<?> findByCedulaAproximate(@PathVariable(value = "cedula") String cedula,
+                                                    @PathVariable(value = "funId") Long funId) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByCedulaAproximate(cedula,funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 

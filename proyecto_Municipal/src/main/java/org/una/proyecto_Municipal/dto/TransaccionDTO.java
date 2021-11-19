@@ -12,8 +12,9 @@ import java.util.Date;
 public class TransaccionDTO {
 
     private Long id;
-    private String objeto;
     private String accion;
+    private String objeto;
+    private String parametro;
     private Date fechaCreacion;
     private FuncionarioDTO funcionarioId;
 }

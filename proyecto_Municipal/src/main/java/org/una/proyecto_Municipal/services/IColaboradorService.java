@@ -16,7 +16,7 @@ public interface IColaboradorService {
 
     public Optional<List<ColaboradorDTO>> findByNombre(String nombre);
 
-    public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula);
+    public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula,Long funId);
 
     public Optional<List<ColaboradorDTO>> findByTelefono(String telefono);
 
