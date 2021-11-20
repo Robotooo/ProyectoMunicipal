@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.una.proyecto_Municipal.entities.Cobro;
 import org.una.proyecto_Municipal.entities.Licencia;
@@ -88,11 +89,11 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
     );
 
 
-    @Query(value = "CALL CobroRuta(:fechaP,:periodo);", nativeQuery = true)
-    public List<Cobro> generarCobrosRuta(@Param("fechaP") Date fechaP, @Param("periodo") int periodo);
+    @Procedure("CobroRuta")
+    public void generarCobrosRuta(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") Date fecha, @Param("anio") int anio);
 
-    @Query(value = "CALL CobroLicencia(:fechaP,:periodo);", nativeQuery = true)
-    public List<Cobro> generarCobrosLicencia(@Param("fechaP") Date fechaP, @Param("periodo") int periodo);
+    @Procedure("CobroLicencia")
+    public void generarCobrosLicencia(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") Date fecha, @Param("anio") int anio);
 
 //    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)
 //    Boolean calculateValuesOfActivesForInventory(Long inventoryId);
