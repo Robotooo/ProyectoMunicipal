@@ -151,21 +151,21 @@ public class CobroController {
     @ApiOperation(value = "Genera cobros de ruta",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/GenerarCobroRuta/{fechaP}/{periodo}")
-    public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
-        LocalDate fecha = LocalDate.parse(fechaP);
-        Date fp  = convertLocaDateToDate(fecha);
-        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(fp, periodo);
+    @PostMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
+    public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "tipo") int tipo, @PathVariable(value = "periodo") int periodo, @PathVariable(value = "fecha") String fecha, @PathVariable(value = "anio") int anio) {
+        LocalDate fechaC = LocalDate.parse(fecha);
+        Date fp  = convertLocaDateToDate(fechaC);
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(tipo, periodo,fp, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Genera cobros de ruta",
             response = CobroDTO.class, tags = "Cobros")
-    @PostMapping("/GenerarCobroLicencia/{fechaP}/{periodo}")
-    public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "fechaP") String fechaP, @PathVariable(value = "periodo") int periodo) {
-        LocalDate fecha = LocalDate.parse(fechaP);
-        Date fp  = convertLocaDateToDate(fecha);
-        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(fp, periodo);
+    @PostMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
+    public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo, @PathVariable(value = "periodo") int periodo, @PathVariable(value = "fecha") String fecha, @PathVariable(value = "anio") int anio) {
+        LocalDate fechaC = LocalDate.parse(fecha);
+        Date fp  = convertLocaDateToDate(fechaC);
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(tipo, periodo,fp, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 

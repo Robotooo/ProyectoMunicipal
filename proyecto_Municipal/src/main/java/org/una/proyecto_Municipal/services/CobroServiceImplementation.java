@@ -188,18 +188,16 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     @Transactional
-    public Optional< List<CobroDTO>> generarCobrosRuta(Date fechaP, int periodo){
-        List<Cobro> cobroList = cobroRepository.generarCobrosRuta(fechaP,periodo);
-        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
-        return Optional.ofNullable(cobroDTOList);
+    public Optional< List<CobroDTO>> generarCobrosRuta(int tipo, int periodo, Date fecha, int anio){
+        cobroRepository.generarCobrosRuta(tipo,periodo,fecha,anio);
+        return Optional.empty();
     }
 
     @Override
     @Transactional
-    public Optional< List<CobroDTO>> generarCobrosLicencia(Date fechaP, int periodo){
-        List<Cobro> cobroList = cobroRepository.generarCobrosLicencia(fechaP,periodo);
-        List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
-        return Optional.ofNullable(cobroDTOList);
+    public Optional<List<CobroDTO>> generarCobrosLicencia(int tipo, int periodo, Date fecha, int anio){
+        cobroRepository.generarCobrosLicencia(tipo,periodo,fecha,anio);
+        return Optional.empty();
     }
 
     @Override
