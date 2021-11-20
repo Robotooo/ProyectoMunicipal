@@ -20,10 +20,10 @@ public class BienServiceImplementation implements IBienService{
 
     //findBy...
     @Override
-    public Optional<BienDTO> findById(Long id) {
+    public Optional<BienDTO> findById(Long id, Long funId) {
         Optional<Bien> bien = bienRepository.findById(id);
         if (bien.isEmpty()) throw new NotFoundInformationException();
-
+        bienRepository.registrarTransaccion("buscar por id","Bien",funId,String.valueOf(id));
         BienDTO bienDTO = MapperUtils.DtoFromEntity(bien.get(), BienDTO.class);
         return Optional.ofNullable(bienDTO);
     }
@@ -39,20 +39,24 @@ public class BienServiceImplementation implements IBienService{
     private BienDTO getSavedBienDTO(BienDTO bienDTO) {
         Bien bien = MapperUtils.EntityFromDto(bienDTO, Bien.class);
         Bien bienCreated = bienRepository.save(bien);
+
         return MapperUtils.DtoFromEntity(bienCreated, BienDTO.class);
     }
 
     //create & update
     @Override
     @Transactional
-    public Optional<BienDTO> create(BienDTO bienDTO) {
+    public Optional<BienDTO> create(BienDTO bienDTO, Long funId) {
+        bienRepository.registrarTransaccion("crear","Bien",funId,null);
         return Optional.ofNullable(getSavedBienDTO(bienDTO));
+
     }
 
-    //@Override
+    @Override
     @Transactional
-    public Optional<BienDTO> update(BienDTO bienDTO, Long id) {
+    public Optional<BienDTO> update(BienDTO bienDTO, Long id, Long funId) {
         if (bienRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        bienRepository.registrarTransaccion("actualizar","Bien",funId,String.valueOf(id));
 
         return Optional.ofNullable(getSavedBienDTO(bienDTO));
 
@@ -61,7 +65,8 @@ public class BienServiceImplementation implements IBienService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id, Long funId) {
+        bienRepository.registrarTransaccion("eliminar por id","Bien",funId,String.valueOf(id));
         bienRepository.deleteById(id);
     }
 

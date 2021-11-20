@@ -22,9 +22,9 @@ public class BienController {
 
     @ApiOperation(value = "Obtiene un bien a partir de su id",
             response = BienDTO.class, tags = "Bienes")
-    @GetMapping("/id/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<BienDTO> bienFound = bienService.findById(id);
+    @GetMapping("/id/{id}/{funId}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) {
+        Optional<BienDTO> bienFound = bienService.findById(id,funId);
         return new ResponseEntity<>(bienFound, HttpStatus.OK);
     }
 
@@ -38,23 +38,23 @@ public class BienController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{funId}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody BienDTO bienDto) {
-        Optional<BienDTO> bienCreated = bienService.create(bienDto);
+    public ResponseEntity<?> create(@RequestBody BienDTO bienDto, @PathVariable(value = "funId") Long funId) {
+        Optional<BienDTO> bienCreated = bienService.create(bienDto,funId);
         return new ResponseEntity<>(bienCreated, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BienDTO bienModified) {
-        Optional<BienDTO> bienUpdated = bienService.update(bienModified, id);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody BienDTO bienModified, @PathVariable(value = "funId") Long funId) {
+        Optional<BienDTO> bienUpdated = bienService.update(bienModified, id, funId);
         return new ResponseEntity<>(bienUpdated, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        bienService.delete(id);
+    @DeleteMapping("/{id}/{funId}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
+        bienService.delete(id,funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 

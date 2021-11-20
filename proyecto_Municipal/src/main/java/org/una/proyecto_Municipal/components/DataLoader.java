@@ -282,15 +282,14 @@ public class DataLoader implements ApplicationRunner {
     private void loadLicencias(){
         //bienes
         BienDTO bien = BienDTO.builder().build();
-        bienService.create(bien);
+        bienService.create(bien,Long.valueOf(1));
 
         BienDTO bien1 = BienDTO.builder().build();
-        bienService.create(bien1);
+        bienService.create(bien1,Long.valueOf(1));
 
         BienDTO bien2 = BienDTO.builder().build();
-        bienService.create(bien2);
+        bienService.create(bien2,Long.valueOf(1));
 
-        //licencias
         LicenciaDTO licencia = LicenciaDTO.builder().bienId(bien2)
                 .distrito("San Isidro")
                 .email("licenacia1@gmail.com")
@@ -337,8 +336,8 @@ public class DataLoader implements ApplicationRunner {
         Optional<RolDTO> botRol = rolService.create(RolDTO.builder().nombre(RolesTypes.ROLE_BOT.name()).build());
 
         FuncionarioDTO gestorUsuario = FuncionarioDTO.builder()
-                .cedula("01234537682")
-                .usuario("Usuario Prueba Cajero")
+                .cedula("01x34z37y68ñ25")
+                .usuario("Data Loader")
                 .passwordEncriptado("Una2021")
                 .rol(gestorRol.orElseThrow()).build();
         funcionarioService.create(gestorUsuario);
@@ -356,6 +355,20 @@ public class DataLoader implements ApplicationRunner {
                 .passwordEncriptado("botcito")
                 .rol(botRol.orElseThrow()).build();
         funcionarioService.create(botUsuario);
+
+        FuncionarioDTO gerenteUsuario = FuncionarioDTO.builder()
+                .cedula("2211")
+                .usuario("Usuario Gerente")
+                .passwordEncriptado("gerencia")
+                .rol(gerenteRol.orElseThrow()).build();
+        funcionarioService.create(gerenteUsuario);
+
+        FuncionarioDTO auditorUsuario = FuncionarioDTO.builder()
+                .cedula("8801")
+                .usuario("Usuario Auditor")
+                .passwordEncriptado("auditoría")
+                .rol(auditorRol.orElseThrow()).build();
+        funcionarioService.create(auditorUsuario);
     }
 
     private void loadColaboradores() throws ParseException {
