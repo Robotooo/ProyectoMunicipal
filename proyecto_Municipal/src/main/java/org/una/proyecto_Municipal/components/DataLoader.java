@@ -99,68 +99,67 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private Date convertStringToDate(String fechaString) throws java.text.ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(fechaString);
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString);
         return date;
     }
 
     private void loadCalendario() throws ParseException {
         //calendario licencias
-        Date d1 = convertStringToDate("2021-11-16");
-        Date d2 = convertStringToDate("2022-2-16");
-        Date d3 = convertStringToDate("2022-5-16");
-        Date d4 = convertStringToDate("2022-8-16");
-        Date d5 = convertStringToDate("2022-11-16");
+        Date d1 = convertStringToDate("2021-02-01");
+        Date d2 = convertStringToDate("2021-04-01");
+        Date d3 = convertStringToDate("2021-06-01");
+        Date d4 = convertStringToDate("2021-08-01");
+        Date d5 = convertStringToDate("2021-10-01");
+        Date d6 = convertStringToDate("2021-12-01");
         CalendarioDTO calendarioLicencias = CalendarioDTO.builder()
                 .id(Long.valueOf(1))
                 .tipo(1)
-                .periodo(3)
-                .fecha1(d1)
-                .fecha2(d2)
-                .fecha3(d3)
-                .fecha4(d4)
-                .fecha5(d5)
-                .build();
-        calendarioService.create(calendarioLicencias);
-
-        //calendario limpieza de vías
-        d1 = convertStringToDate("2021-11-16");
-        d2 = convertStringToDate("2022-1-16");
-        d3 = convertStringToDate("2022-3-16");
-        d4 = convertStringToDate("2022-5-16");
-        d5 = convertStringToDate("2022-7-16");
-        Date d6 = convertStringToDate("2022-9-16");
-        Date d7 = convertStringToDate("2022-11-16");
-        CalendarioDTO calendarioLimpieza = CalendarioDTO.builder()
-                .id(Long.valueOf(2))
-                .tipo(2)
-                .periodo(2)
+                .periodo(6)
                 .fecha1(d1)
                 .fecha2(d2)
                 .fecha3(d3)
                 .fecha4(d4)
                 .fecha5(d5)
                 .fecha6(d6)
-                .fecha7(d7)
+                .anio(2021)
+                .build();
+        calendarioService.create(calendarioLicencias);
+
+        //calendario limpieza de vías
+        d1 = convertStringToDate("2021-03-01");
+        d2 = convertStringToDate("2021-06-01");
+        d3 = convertStringToDate("2021-09-01");
+        d4 = convertStringToDate("2021-12-01");
+        CalendarioDTO calendarioLimpieza = CalendarioDTO.builder()
+                .id(Long.valueOf(2))
+                .tipo(2)
+                .periodo(4)
+                .fecha1(d1)
+                .fecha2(d2)
+                .fecha3(d3)
+                .fecha4(d4)
+                .anio(2021)
                 .build();
         calendarioService.create(calendarioLimpieza);
 
         //calendario rutas
-        d1 = convertStringToDate("2021-11-16");
-        d2 = convertStringToDate("2021-12-16");
-        d3 = convertStringToDate("2022-1-16");
-        d4 = convertStringToDate("2022-2-16");
-        d5 = convertStringToDate("2022-3-16");
-        d6 = convertStringToDate("2022-4-16");
-        d7 = convertStringToDate("2022-5-16");
-        Date d8 = convertStringToDate("2022-6-16");
-        Date d9 = convertStringToDate("2022-7-16");
-        Date d10 = convertStringToDate("2022-8-16");
-        Date d11 = convertStringToDate("2022-9-16");
+        d1 = convertStringToDate("2021-01-01");
+        d2 = convertStringToDate("2021-02-01");
+        d3 = convertStringToDate("2021-03-01");
+        d4 = convertStringToDate("2021-04-01");
+        d5 = convertStringToDate("2021-05-01");
+        d6 = convertStringToDate("2021-06-01");
+        Date d7 = convertStringToDate("2021-07-01");
+        Date d8 = convertStringToDate("2021-08-01");
+        Date d9 = convertStringToDate("2021-09-01");
+        Date d10 = convertStringToDate("2021-10-01");
+        Date d11 = convertStringToDate("2021-11-01");
+        Date d12 = convertStringToDate("2021-12-01");
 
         CalendarioDTO calendarioRutas = CalendarioDTO.builder()
                 .id(Long.valueOf(3))
                 .tipo(3)
-                .periodo(1)
+                .periodo(12)
                 .fecha1(d1)
                 .fecha2(d2)
                 .fecha3(d3)
@@ -172,6 +171,8 @@ public class DataLoader implements ApplicationRunner {
                 .fecha9(d9)
                 .fecha10(d10)
                 .fecha11(d11)
+                .fecha12(d12)
+                .anio(2021)
                 .build();
         calendarioService.create(calendarioRutas);
     }
