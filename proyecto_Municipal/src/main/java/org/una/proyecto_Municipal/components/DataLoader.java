@@ -341,35 +341,35 @@ public class DataLoader implements ApplicationRunner {
                 .usuario("Data Loader")
                 .passwordEncriptado("Una2021")
                 .rol(gestorRol.orElseThrow()).build();
-        funcionarioService.create(gestorUsuario);
+        funcionarioService.create(gestorUsuario,Long.valueOf(1));
 
         FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
                 .cedula(cedula)
                 .usuario("Usuario Administrador")
                 .passwordEncriptado(password)
                 .rol(administradorRol.orElseThrow()).build();
-        funcionarioService.create(administradorUsuario);
+        funcionarioService.create(administradorUsuario,Long.valueOf(1));
 
         FuncionarioDTO botUsuario = FuncionarioDTO.builder()
                 .cedula("roboto")
                 .usuario("Usuario Bot")
                 .passwordEncriptado("botcito")
                 .rol(botRol.orElseThrow()).build();
-        funcionarioService.create(botUsuario);
+        funcionarioService.create(botUsuario,Long.valueOf(1));
 
         FuncionarioDTO gerenteUsuario = FuncionarioDTO.builder()
                 .cedula("2211")
                 .usuario("Usuario Gerente")
                 .passwordEncriptado("gerencia")
                 .rol(gerenteRol.orElseThrow()).build();
-        funcionarioService.create(gerenteUsuario);
+        funcionarioService.create(gerenteUsuario,Long.valueOf(1));
 
         FuncionarioDTO auditorUsuario = FuncionarioDTO.builder()
                 .cedula("8801")
                 .usuario("Usuario Auditor")
                 .passwordEncriptado("auditoría")
                 .rol(auditorRol.orElseThrow()).build();
-        funcionarioService.create(auditorUsuario);
+        funcionarioService.create(auditorUsuario,Long.valueOf(1));
     }
 
     private void loadColaboradores() throws ParseException {
