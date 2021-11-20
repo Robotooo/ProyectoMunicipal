@@ -9,25 +9,25 @@ import java.util.Optional;
 
 public interface IFuncionarioService {
 
-    public Optional<FuncionarioDTO> findById(Long id);
+    public Optional<FuncionarioDTO> findById(Long id,Long funId);
 
     public Optional<List<FuncionarioDTO>> findAll();
 
-    public Optional<List<FuncionarioDTO>> findByUsuario(String user);
+    public Optional<List<FuncionarioDTO>> findByUsuario(String user,Long funId);
 
-    public Optional<List<FuncionarioDTO>> findByRolId(Long id);
+    public Optional<List<FuncionarioDTO>> findByRolId(Long id,Long funId);
 
-    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado);
+    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado,Long funId);
 
     public Optional<FuncionarioDTO> findByCedula(String cedula);
 
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula);
 
-    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException;
+    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO,Long funId) throws PasswordIsBlankException;
 
-    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException;
+    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id,Long funId) throws PasswordIsBlankException;
 
-    public void delete(Long id);
+    public void delete(Long id,Long funId);
 
     public void deleteAll();
 

@@ -39,10 +39,10 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     //findBy...
     @Override
     @Transactional(readOnly = true)
-    public Optional<FuncionarioDTO> findById(Long id) {
+    public Optional<FuncionarioDTO> findById(Long id,Long funId) {
         Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
         if (funcionario.isEmpty()) throw new NotFoundInformationException();
-
+        funcionarioRepository.registrarTransaccion("buscar por id","Funcionario",funId,String.valueOf(id));
         FuncionarioDTO funcionarioDTO = MapperUtils.DtoFromEntity(funcionario.get(), FuncionarioDTO.class);
         return Optional.ofNullable(funcionarioDTO);
 
@@ -57,24 +57,29 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<FuncionarioDTO>> findByUsuario(String user) {
+    public Optional<List<FuncionarioDTO>> findByUsuario(String user,Long funId) {
         List<Funcionario> funcionarioList = funcionarioRepository.findByUsuario(user);
+        funcionarioRepository.registrarTransaccion("buscar por nombre","Funcionario",funId,user);
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
         return Optional.ofNullable(funcionarioDTOList);
     }
 
     @Override
-    public Optional<List<FuncionarioDTO>> findByRolId(Long id) {
+    public Optional<List<FuncionarioDTO>> findByRolId(Long id,Long funId ) {
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioRepository.findByRol(id), FuncionarioDTO.class);
         if (funcionarioDTOList.isEmpty()) throw new NotFoundInformationException();
+        funcionarioRepository.registrarTransaccion("buscar por rol","Funcionario",funId,String.valueOf(id));
+
         return Optional.ofNullable(funcionarioDTOList);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado) {
+    public Optional<List<FuncionarioDTO>> findByEstado(boolean estado,Long funId) {
         List<Funcionario> funcionarioList = funcionarioRepository.findByEstado(estado);
         List<FuncionarioDTO> funcionarioDTOList = MapperUtils.DtoListFromEntityList(funcionarioList, FuncionarioDTO.class);
+        funcionarioRepository.registrarTransaccion("buscar por estado","Funcionario",funId,String.valueOf(estado));
+
         return Optional.ofNullable(funcionarioDTOList);
     }
 
@@ -120,8 +125,11 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id,Long funId) {
+
         funcionarioRepository.deleteById(id);
+        funcionarioRepository.registrarTransaccion("eliminar por id","Funcionario",funId,String.valueOf(id));
+
     }
 
     @Override
@@ -139,8 +147,10 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
     @Override
     @Transactional
-    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO) throws PasswordIsBlankException {
+    public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO,Long funId) throws PasswordIsBlankException {
         funcionarioDTO.setPasswordEncriptado(encriptarPassword(funcionarioDTO.getPasswordEncriptado()));
+        funcionarioRepository.registrarTransaccion("crear","Funcionario",funId,funcionarioDTO.getCedula());
+
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
 
@@ -151,8 +161,9 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
 
 
     @Override
-    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id) throws PasswordIsBlankException {
+    public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id,Long funId) throws PasswordIsBlankException {
        if (funcionarioRepository.findById(id).isEmpty()) return Optional.empty();
+        funcionarioRepository.registrarTransaccion("actualizar por id","Funcionario",funId,String.valueOf(id));
 
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }

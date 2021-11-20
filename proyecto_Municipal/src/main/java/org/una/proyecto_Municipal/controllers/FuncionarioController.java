@@ -29,18 +29,18 @@ public class FuncionarioController {
     @ApiOperation(value = "Obtiene una funcionario a partir de su id",
             response = FuncionarioDTO.class, tags = "Funcionarios")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GESTOR') or hasRole('GERENTE')")
-    @GetMapping("/id/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id);
+    @GetMapping("/id/{id}/{funId}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) {
+        Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findById(id,funId);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
     @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado);
+    @GetMapping("/estado/{estado}/{funId}")
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado, @PathVariable(value = "funId") Long funId) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado,funId);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
@@ -54,9 +54,9 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una funcionario a partir de su nombre usuario",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/usuario/{usuario}")
-    public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario);
+    @GetMapping("/usuario/{usuario}/{funId}")
+    public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario, @PathVariable(value = "funId") Long funId) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario,funId);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
@@ -71,17 +71,17 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = FuncionarioDTO.class, tags = "Funcionarios")
-    @GetMapping("/rolId/{rol}")
-    public ResponseEntity<?> findByRolId(@PathVariable(value = "rol") Long rol) {
-        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(rol);
+    @GetMapping("/rolId/{rol}/{funId}")
+    public ResponseEntity<?> findByRolId(@PathVariable(value = "rol") Long rol, @PathVariable(value = "funId") Long funId) {
+        Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(rol,funId);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
-    public ResponseEntity<?> create(@RequestBody FuncionarioDTO funcionarioDTO) {
+    @PostMapping("/{funId}")
+    public ResponseEntity<?> create(@RequestBody FuncionarioDTO funcionarioDTO, @PathVariable(value = "funId") Long funId) {
         try {
-            Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO);
+            Optional<FuncionarioDTO> usuarioCreated = funcionarioService.create(funcionarioDTO,funId);
             return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
         } catch (Exception | PasswordIsBlankException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,8 +89,8 @@ public class FuncionarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/solicitud/")
-    public ResponseEntity<?> createSolicitud(@RequestBody SolicitudDTO solicitud) {
+    @PostMapping("/solicitud/{funId}")
+    public ResponseEntity<?> createSolicitud(@RequestBody SolicitudDTO solicitud, @PathVariable(value = "funId") Long funId) {
         try {
             Optional<SolicitudDTO> usuarioCreated = null;// = funcionarioService.create(solicitud);
             return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
@@ -99,16 +99,16 @@ public class FuncionarioController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified) throws PasswordIsBlankException {
-        Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id);
+    @PutMapping("/{id}/{funId}")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified, @PathVariable(value = "funId") Long funId) throws PasswordIsBlankException {
+        Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id,funId);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        funcionarioService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
+        funcionarioService.delete(id,funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 

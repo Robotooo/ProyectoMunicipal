@@ -99,14 +99,14 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private Date convertStringToDate(String fechaString) throws java.text.ParseException {
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(fechaString);
+        Date date = new SimpleDateFormat("dd-MMM-yyyy").parse(fechaString);
         return date;
     }
 
     private void loadCalendario() throws ParseException {
         //calendario licencias
         Date d1 = convertStringToDate("2021-11-16");
-        Date d2 = convertStringToDate("2022-2-16");
+        Date d2 = convertStringToDate("2022-Jun-16");
         Date d3 = convertStringToDate("2022-5-16");
         Date d4 = convertStringToDate("2022-8-16");
         Date d5 = convertStringToDate("2022-11-16");
@@ -340,35 +340,35 @@ public class DataLoader implements ApplicationRunner {
                 .usuario("Data Loader")
                 .passwordEncriptado("Una2021")
                 .rol(gestorRol.orElseThrow()).build();
-        funcionarioService.create(gestorUsuario);
+        funcionarioService.create(gestorUsuario,Long.valueOf(1));
 
         FuncionarioDTO administradorUsuario = FuncionarioDTO.builder()
                 .cedula(cedula)
                 .usuario("Usuario Administrador")
                 .passwordEncriptado(password)
                 .rol(administradorRol.orElseThrow()).build();
-        funcionarioService.create(administradorUsuario);
+        funcionarioService.create(administradorUsuario,Long.valueOf(1));
 
         FuncionarioDTO botUsuario = FuncionarioDTO.builder()
                 .cedula("roboto")
                 .usuario("Usuario Bot")
                 .passwordEncriptado("botcito")
                 .rol(botRol.orElseThrow()).build();
-        funcionarioService.create(botUsuario);
+        funcionarioService.create(botUsuario,Long.valueOf(1));
 
         FuncionarioDTO gerenteUsuario = FuncionarioDTO.builder()
                 .cedula("2211")
                 .usuario("Usuario Gerente")
                 .passwordEncriptado("gerencia")
                 .rol(gerenteRol.orElseThrow()).build();
-        funcionarioService.create(gerenteUsuario);
+        funcionarioService.create(gerenteUsuario,Long.valueOf(1));
 
         FuncionarioDTO auditorUsuario = FuncionarioDTO.builder()
                 .cedula("8801")
                 .usuario("Usuario Auditor")
                 .passwordEncriptado("auditoría")
                 .rol(auditorRol.orElseThrow()).build();
-        funcionarioService.create(auditorUsuario);
+        funcionarioService.create(auditorUsuario,Long.valueOf(1));
     }
 
     private void loadColaboradores() throws ParseException {
