@@ -21,8 +21,9 @@ public class CalendarController {
     @Autowired
     private ICalendarioService calendarioService;
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ApiOperation(value = "Obtiene un calendario a partir de su id",
-            response = ParametroDTO.class, tags = "Parametros")
+            response = CalendarioDTO.class, tags = "Calendario")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CalendarioDTO> calendarioFound = calendarioService.findById(id);
