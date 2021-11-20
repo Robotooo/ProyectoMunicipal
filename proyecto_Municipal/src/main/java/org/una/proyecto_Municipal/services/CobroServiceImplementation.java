@@ -33,7 +33,7 @@ public class CobroServiceImplementation implements ICobroService{
 
     //findBy...
     @Override
-    public Optional<CobroDTO> findById(Long id) {
+    public Optional<CobroDTO> findById(Long id, Long funId) {
         Optional<Cobro> cobro = cobroRepository.findById(id);
         if (cobro.isEmpty()) throw new NotFoundInformationException();
         cobroRepository.saveTransaction("buscar por Id","Cobro","2",date);
@@ -57,7 +57,7 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
-    public Optional<List<CobroDTO>> findByBienId(Long id) {
+    public Optional<List<CobroDTO>> findByBienId(Long id, Long funId) {
         cobroRepository.saveTransaction("buscar por bien Id","Cobro","2",date);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findByBienId(id), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
@@ -74,7 +74,7 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
-    public Optional<List<CobroDTO>> findByTipo(int tipo) {
+    public Optional<List<CobroDTO>> findByTipo(int tipo, Long funId) {
         cobroRepository.saveTransaction("buscar por tipo","Cobro","2",date);
         List<Cobro> cobroList = cobroRepository.findByTipo(tipo);
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
@@ -82,36 +82,32 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
-    public Optional<List<CobroDTO>> findCobroByCedula(String cedula) {
+    public Optional<List<CobroDTO>> findCobroByCedula(String cedula,Long funId) {
         List<CobroDTO> cobroDTOList = MapperUtils.DtoListFromEntityList(cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
         if (cobroDTOList.isEmpty()) throw new NotFoundInformationException();
         return Optional.ofNullable(cobroDTOList);
     }
 
     @Override
-    public Optional<List<CobroDTO>> findCobroByCedulaAndTipo(String cedula,String tipo) {
+    public Optional<List<CobroDTO>> findCobroByCedulaAndTipo(String cedula,String tipo,Long funId) {
 
-        System.out.println("Service");
+        cobroRepository.registrarTransaccion("buscar por cedula y tipo","Cobro",funId,cedula);
 
         List<CobroDTO> cobroDTOList = new ArrayList<CobroDTO>();
         switch (tipo){
             case "LicenciaComercial":
-                cobroRepository.saveTransaction("buscar por cedula y licencia","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
-                        (cobroRepository.findByBienxColaborador_ColaboradorId_CedulaAndTipo("116380047",1), CobroDTO.class);
+                        (cobroRepository.findPendienteTotalLicencias(cedula), CobroDTO.class);
                 break;
             case "Limpiezadevías":
-                cobroRepository.saveTransaction("buscar por cedula y limpieza de vias","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findPendienteTotalPropiedades(cedula), CobroDTO.class);
                 break;
             case "Rutasdebuses":
-                cobroRepository.saveTransaction("buscar por cedula y rutas de buses","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findPendienteTotalRutas(cedula), CobroDTO.class);
                 break;
             case "Cobrostotales":
-                cobroRepository.saveTransaction("buscar por cedula","Cobro","2",date);
                 cobroDTOList = MapperUtils.DtoListFromEntityList
                         (cobroRepository.findCobroByCedula(cedula), CobroDTO.class);
 
@@ -149,7 +145,6 @@ public class CobroServiceImplementation implements ICobroService{
     public Optional< List<CobroDTO>> findPendienteTotalRutas(String cedula){
         List<Cobro> cobroList = cobroRepository.findPendienteTotalRutas(cedula);
         List<CobroDTO> cobroDTOList =  MapperUtils.DtoListFromEntityList(cobroList, CobroDTO.class);
-        cobroRepository.saveTransaction("buscar pedientes sobre rutas de buses","Cobro","2",date);
         return Optional.ofNullable(cobroDTOList);
     }
 
@@ -163,17 +158,16 @@ public class CobroServiceImplementation implements ICobroService{
     //create & update
     @Override
     @Transactional
-    public Optional<CobroDTO> create(CobroDTO cobroDTO) {
-        cobroRepository.saveTransaction("creacion","Cobro","2",date);
+    public Optional<CobroDTO> create(CobroDTO cobroDTO, Long funId) {
+        cobroRepository.registrarTransaccion("crear","Cobro",funId,null);
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
     }
 
     @Override
     @Transactional
-    public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id) {
+    public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id, Long funId) {
         if (cobroRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        cobroRepository.saveTransaction("actualizacion","Cobro","2",date);
-
+        cobroRepository.registrarTransaccion("actualizar","Cobro",funId,String.valueOf(cobroDTO.getId()));
         return Optional.ofNullable(getSavedCobroDTO(cobroDTO));
 
     }
@@ -181,16 +175,14 @@ public class CobroServiceImplementation implements ICobroService{
     //detele...
     @Override
     @Transactional
-    public void delete(Long id) {
-        cobroRepository.saveTransaction("eliminacion","Cobro","2",date);
+    public void delete(Long id, Long funId) {
+        cobroRepository.registrarTransaccion("eliminar","Cobro",funId,String.valueOf(id));
         cobroRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
-        cobroRepository.saveTransaction("eliminacion de todos los elementos","Cobro","2",date);
-
         cobroRepository.deleteAll();
     }
 

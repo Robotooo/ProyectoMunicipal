@@ -23,12 +23,12 @@ public interface IParametroRepository extends JpaRepository<Parametro, Long>{
             @Param("date_in") Date date_in
     );
 
-    @Query(value = "{call registrarTransaccion(:accion_in, :objeto_in, :objetoId_in, :funId_in )}", nativeQuery=true)
-    public String registrarTransaccion(
+    @Query(value = "{call registrarTransaccion(:accion_in, :objeto_in, :funId_in, :parametro_in)}", nativeQuery=true)
+    public void registrarTransaccion(
             @Param("accion_in") String accion_in,
             @Param("objeto_in") String objeto_in,
-            @Param("objetoId_in") Long objetoId_in,
-            @Param("funId_in") Long funId_in
+            @Param("funId_in") Long funId_in,
+            @Param("parametro_in") String parametro_in
     );
 
 }

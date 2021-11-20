@@ -9,21 +9,21 @@ import java.util.Optional;
 
 public interface ICobroService {
 
-    public Optional<CobroDTO> findById(Long id);
+    public Optional<CobroDTO> findById(Long id, Long funId);
 
     public Optional<List<CobroDTO>> findAll();
 
     public Optional<List<CobroDTO>> findByEstado(boolean estado);
 
-    public Optional<List<CobroDTO>> findByTipo(int tipo);
+    public Optional<List<CobroDTO>> findByTipo(int tipo, Long funId);
 
     public Optional<List<CobroDTO>> findByBienxColaboradorId(Long id);
 
-    public Optional<List<CobroDTO>> findByBienId(Long id);
+    public Optional<List<CobroDTO>> findByBienId(Long id, Long funId);
 
-    public Optional<List<CobroDTO>> findCobroByCedula(String cedula);
+    public Optional<List<CobroDTO>> findCobroByCedula(String cedula, Long funId);
 
-    public Optional<List<CobroDTO>> findCobroByCedulaAndTipo(String cedula,String tipo);
+    public Optional<List<CobroDTO>> findCobroByCedulaAndTipo(String cedula,String tipo,Long funId);
 
     public Optional<List<CobroDTO>> findPagosByCedulaAndFechasBetween(String cedula, Date fechaInicio, Date fechaFinal);
 
@@ -37,11 +37,11 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> generarCobrosLicencia(Date fechaP, int periodo);
 
-    public Optional<CobroDTO> create(CobroDTO cobroDTO);
+    public Optional<CobroDTO> create(CobroDTO cobroDTO,  Long funId);
 
-    public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id);
+    public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id, Long funId);
 
-    public void delete(Long id);
+    public void delete(Long id, Long funId);
 
     public void deleteAll();
 

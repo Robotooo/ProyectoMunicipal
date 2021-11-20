@@ -20,44 +20,41 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
 
     @Autowired
     private IColaboradorRepository colaboradorRepository;
-    Date date = new SimpleDateFormat("yyyy-mm-dd").parse("2021-11-16");
 
     public ColaboradorServiceImplementation() throws ParseException {
     }
 
 
     @Override
-    public Optional<ColaboradorDTO> findById(Long id) throws ParseException {
+    public Optional<ColaboradorDTO> findById(Long id,Long funId) throws ParseException {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if (colaborador.isEmpty()) throw new NotFoundInformationException();
-        colaboradorRepository.saveTransaction("buscar por id","Colaborador","2",date);
-
+        colaboradorRepository.registrarTransaccion("buscar por id","Colaborador",funId,String.valueOf(id));
         ColaboradorDTO colaboradorDTO = MapperUtils.DtoFromEntity(colaborador.get(), ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<ColaboradorDTO>> findAll() throws ParseException {
+    public Optional<List<ColaboradorDTO>> findAll(Long funId) throws ParseException {
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorRepository.findAll(), ColaboradorDTO.class);
-        colaboradorRepository.saveTransaction("buscar todos","Colaborador","2",date);
-
+        colaboradorRepository.registrarTransaccion("buscar todos","Colaborador",funId,null);
         return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado) throws ParseException {
-
+    public Optional<List<ColaboradorDTO>> findByEstado(boolean estado,Long funId) throws ParseException {
+        colaboradorRepository.registrarTransaccion("buscar por cedula","Colaborador",funId,String.valueOf(estado));
         List<Colaborador> colaboradorList = colaboradorRepository.findByEstado(estado);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
-        colaboradorRepository.saveTransaction("buscarPorEstado","Colaborador","2",date);
 
         return Optional.ofNullable(colaboradorDTOList);
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByNombre(String nombre) {
+    public Optional<List<ColaboradorDTO>> findByNombre(String nombre,Long funId) {
         List<Colaborador> colaboradorList = colaboradorRepository.findByNombre(nombre);
+        colaboradorRepository.registrarTransaccion("buscar por nombre","Colaborador",funId,nombre);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
         return Optional.ofNullable(colaboradorDTOList);
     }
@@ -65,7 +62,6 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     @Override
     @Transactional(readOnly = true)
     public Optional<List<ColaboradorDTO>> findByCedulaAproximate(String cedula,Long funId) {
-        //colaboradorRepository.saveTransaction("buscar por cedula","Colaborador","2",date);
         colaboradorRepository.registrarTransaccion("buscar por cedula","Colaborador",funId,cedula);
         List<Colaborador> colaboradorList = colaboradorRepository.findByCedulaContaining(cedula);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
@@ -73,9 +69,10 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByTelefono(String telefono) {
+    public Optional<List<ColaboradorDTO>> findByTelefono(String telefono,Long funId) {
         List<Colaborador> colaboradorList = colaboradorRepository.findByTelefono(telefono);
         List<ColaboradorDTO> colaboradorDTOList = MapperUtils.DtoListFromEntityList(colaboradorList, ColaboradorDTO.class);
+        colaboradorRepository.registrarTransaccion("buscar por telefono","Colaborador",funId,telefono);
         return Optional.ofNullable(colaboradorDTOList);
     }
 
@@ -89,38 +86,36 @@ public class ColaboradorServiceImplementation implements IColaboradorService {
     //create & update
     @Override
     @Transactional
-    public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO) throws ParseException {
-        colaboradorRepository.saveTransaction("creacion","Colaborador","2",date);
+    public Optional<ColaboradorDTO> create(ColaboradorDTO colaboradorDTO,Long funId) throws ParseException {
+        colaboradorRepository.registrarTransaccion("crear","Colaborador",funId,null);
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
     }
 
     @Override
     @Transactional
-    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id) throws ParseException {
+    public Optional<ColaboradorDTO> update(ColaboradorDTO colaboradorDTO, Long id,Long funId) throws ParseException {
         if (colaboradorRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
-        colaboradorRepository.saveTransaction("actualizar","Colaborador","2",date);
-
+        colaboradorRepository.registrarTransaccion("actualizar","Colaborador",funId,String.valueOf(id));
         return Optional.ofNullable(getSavedColaboradorDTO(colaboradorDTO));
 
     }
 
-    //detele...
     @Override
     @Transactional
-    public void delete(Long id) throws ParseException {
-        colaboradorRepository.saveTransaction("eliminar","Colaborador","2",date);
+    public void delete(Long id,Long funId) throws ParseException {
+        colaboradorRepository.registrarTransaccion("eliminar","Colaborador",funId,String.valueOf(id));
         colaboradorRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public void deleteAll() throws ParseException {
-        colaboradorRepository.saveTransaction("eliminar todos","Colaborador","2",date);
+    public void deleteAll(Long funId) throws ParseException {
+        colaboradorRepository.registrarTransaccion("eliminar todos","Colaborador",funId,null);
         colaboradorRepository.deleteAll();
     }
 
     @Override
-    public Optional<List<ColaboradorDTO>> findByBienId(Long bienId) {
+    public Optional<List<ColaboradorDTO>> findByBienId(Long bienId,Long funId) {
         return Optional.empty();
     }
 

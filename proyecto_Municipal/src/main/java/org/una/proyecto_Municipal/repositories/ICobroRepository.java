@@ -79,6 +79,14 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
             @Param("date_in") Date date_in
             );
 
+    @Query(value = "{call registrarTransaccion(:accion_in, :objeto_in, :funId_in, :parametro_in)}", nativeQuery=true)
+    public void registrarTransaccion(
+            @Param("accion_in") String accion_in,
+            @Param("objeto_in") String objeto_in,
+            @Param("funId_in") Long funId_in,
+            @Param("parametro_in") String parametro_in
+    );
+
 
     @Query(value = "CALL CobroRuta(:fechaP,:periodo);", nativeQuery = true)
     public List<Cobro> generarCobrosRuta(@Param("fechaP") Date fechaP, @Param("periodo") int periodo);

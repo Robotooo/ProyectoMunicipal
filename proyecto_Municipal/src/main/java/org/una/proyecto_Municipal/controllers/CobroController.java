@@ -28,16 +28,14 @@ public class CobroController {
     @Autowired
     private ICobroService cobroService;
 
-    @Autowired
-    private IColaboradorService colaboradorService;
 
     //findBy...
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/id/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        Optional<CobroDTO> cobroFound = cobroService.findById(id);
+    @GetMapping("/id/{id}/{funId}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) {
+        Optional<CobroDTO> cobroFound = cobroService.findById(id,funId);
         cobroService.generarCobros();
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
@@ -47,7 +45,7 @@ public class CobroController {
     @GetMapping("/{all}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll(@PathVariable(value = "funId") Long funId) {
         Optional<List<CobroDTO>> result = cobroService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -64,18 +62,18 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/bien/{bienId}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(bienId);
+    @GetMapping("/bien/{bienId}/{funId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId, @PathVariable(value = "funId") Long funId) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByBienId(bienId,funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/tipo/{tipo}")
-    public ResponseEntity<?> findByTipo(@PathVariable(value = "tipo") int tipo) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findByTipo(tipo);
+    @GetMapping("/tipo/{tipo}/{funId}")
+    public ResponseEntity<?> findByTipo(@PathVariable(value = "tipo") int tipo, @PathVariable(value = "funId") Long funId) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findByTipo(tipo,funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
@@ -91,19 +89,18 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/CobroByCedula/{cedula}")
-    public ResponseEntity<?>findCobroByCedula(@PathVariable(value = "cedula") String cedula) {
-        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula);
+    @GetMapping("/CobroByCedula/{cedula}/{funId}")
+    public ResponseEntity<?>findCobroByCedula(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "funId") Long funId) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula,funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/CobroByCedulaAndTipo/{cedula}/{tipo}")
-    public ResponseEntity<?>findCobroByCedulaAndTipo(@PathVariable(value = "cedula") String cedula,@PathVariable(value = "tipo") String tipo) {
-        System.out.println("Controller");
-        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndTipo(cedula,tipo);
+    @GetMapping("/CobroByCedulaAndTipo/{cedula}/{tipo}/{funId}")
+    public ResponseEntity<?>findCobroByCedulaAndTipo(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "tipo") String tipo, @PathVariable(value = "funId") Long funId) {
+        Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndTipo(cedula,tipo, funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
@@ -173,25 +170,25 @@ public class CobroController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{funId}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody CobroDTO cobroDto) {
-        Optional<CobroDTO> cobroCreated = cobroService.create(cobroDto);
+    public ResponseEntity<?> create(@RequestBody CobroDTO cobroDto, @PathVariable(value = "funId") Long funId) {
+        Optional<CobroDTO> cobroCreated = cobroService.create(cobroDto,funId);
         return new ResponseEntity<>(cobroCreated, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{funId}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified) {
-        Optional<CobroDTO> cobroUpdated = cobroService.update(cobroModified, id);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified, @PathVariable(value = "funId") Long funId) {
+        Optional<CobroDTO> cobroUpdated = cobroService.update(cobroModified, id,funId);
         return new ResponseEntity<>(cobroUpdated, HttpStatus.OK);
     }
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        cobroService.delete(id);
+    @DeleteMapping("/{id}/{funId}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
+        cobroService.delete(id,funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 

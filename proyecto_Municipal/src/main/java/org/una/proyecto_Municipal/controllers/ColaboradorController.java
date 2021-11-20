@@ -26,37 +26,38 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene un colaborador a partir de su id",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/id/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) throws ParseException {
-        Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id);
+    @GetMapping("/id/{id}/{funId}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id,
+                                      @PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<ColaboradorDTO> colaboradorFound = colaboradorService.findById(id,funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de todos los colaboradores",
             response = ColaboradorDTO.class, responseContainer = "List", tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/{all}")
+    @GetMapping("/{all}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> findAll() throws ParseException {
-        Optional<List<ColaboradorDTO>> result = colaboradorService.findAll();
+    public ResponseEntity<?> findAll(@PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<List<ColaboradorDTO>> result = colaboradorService.findAll(funId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su estado",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) throws ParseException {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado);
+    @GetMapping("/estado/{estado}/{funId}")
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado, @PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByEstado(estado, funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String departamentoName) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByNombre(departamentoName);
+    @GetMapping("/nombre/{nombre}/{funId}")
+    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String nombre, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByNombre(nombre, funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
 
     }
@@ -64,9 +65,9 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su telefono",
             response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/telefono/{telefono}")
-    public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono) {
-        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByTelefono(telefono);
+    @GetMapping("/telefono/{telefono}/{funId}")
+    public ResponseEntity<?> findByTelefono(@PathVariable(value = "telefono") String telefono, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ColaboradorDTO>> colaboradorFound = colaboradorService.findByTelefono(telefono,funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
 
     }
@@ -84,41 +85,41 @@ public class ColaboradorController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/bien/{bienId}")
-    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId) {
-        Optional<List<ColaboradorDTO>> cobroFound = colaboradorService.findByBienId(bienId);
+    @GetMapping("/bien/{bienId}/{funId}")
+    public ResponseEntity<?> findByBienId(@PathVariable(value = "bienId") Long bienId, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ColaboradorDTO>> cobroFound = colaboradorService.findByBienId(bienId,funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Se crea un colaborador", response = ColaboradorDTO.class, tags = "Colaboradores")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/")
+    @PostMapping("/{funId}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO) throws ParseException {
-        Optional<ColaboradorDTO> colaboradorCreated = colaboradorService.create(colaboradorDTO);
+    public ResponseEntity<?> create(@RequestBody ColaboradorDTO colaboradorDTO, @PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<ColaboradorDTO> colaboradorCreated = colaboradorService.create(colaboradorDTO,funId);
         return new ResponseEntity<>(colaboradorCreated, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified) throws ParseException {
-        Optional<ColaboradorDTO> colaboradorUpdated = colaboradorService.update(colaboradorModified, id);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ColaboradorDTO colaboradorModified, @PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<ColaboradorDTO> colaboradorUpdated = colaboradorService.update(colaboradorModified, id,funId);
         return new ResponseEntity<>(colaboradorUpdated, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        colaboradorService.delete(id);
+    @DeleteMapping("/{id}/{funId}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
+        colaboradorService.delete(id,funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @DeleteMapping("/")
-    public ResponseEntity<?> deleteAll() throws Exception {
-        colaboradorService.deleteAll();
+    @DeleteMapping("/{funId}")
+    public ResponseEntity<?> deleteAll( @PathVariable(value = "funId") Long funId) throws Exception {
+        colaboradorService.deleteAll(funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 

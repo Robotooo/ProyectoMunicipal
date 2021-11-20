@@ -184,7 +184,7 @@ public class DataLoader implements ApplicationRunner {
                 .tipo(1) //1. licencias 2. propiedades 3. rutas
                 .periodo(3)
                 .build();
-        cobroService.create(cobro);
+        cobroService.create(cobro,Long.valueOf(1));
 
         CobroDTO cobro1 = CobroDTO.builder()
                 .estado(false)
@@ -192,7 +192,7 @@ public class DataLoader implements ApplicationRunner {
                 .tipo(3)
                 .periodo(1)
                 .build();
-        cobroService.create(cobro1);
+        cobroService.create(cobro1,Long.valueOf(1));
 
         CobroDTO cobro2 = CobroDTO.builder()
                 .estado(true)
@@ -200,7 +200,7 @@ public class DataLoader implements ApplicationRunner {
                 .tipo(2)
                 .periodo(2)
                 .build();
-        cobroService.create(cobro2);
+        cobroService.create(cobro2,Long.valueOf(1));
 
         CobroDTO cobro3 = CobroDTO.builder()
                 .estado(false)
@@ -208,7 +208,7 @@ public class DataLoader implements ApplicationRunner {
                 .tipo(3)
                 .periodo(1)
                 .build();
-        cobroService.create(cobro3);
+        cobroService.create(cobro3,Long.valueOf(1));
     }
 
     private void loadRutas(){
@@ -365,21 +365,21 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("Andrey")
                 .telefono("89417655")
                 .build();
-        colaboradorService.create(colaborador);
+        colaboradorService.create(colaborador,Long.valueOf(1));
 
         ColaboradorDTO colaborador1 = ColaboradorDTO.builder()
                 .cedula("117940673")
                 .nombre("Danah")
                 .telefono("61519481")
                 .build();
-        colaboradorService.create(colaborador1);
+        colaboradorService.create(colaborador1,Long.valueOf(1));
 
         ColaboradorDTO colaborador2 = ColaboradorDTO.builder()
                 .cedula("116950926")
                 .nombre("Henry")
                 .telefono("83594798")
                 .build();
-        colaboradorService.create(colaborador2);
+        colaboradorService.create(colaborador2,Long.valueOf(1));
     }
 
     private void loadParametros() throws ParseException {

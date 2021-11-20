@@ -42,7 +42,7 @@ public class ParametroServiceImplementation implements IParametroService{
     @Transactional(readOnly = true)
     public Optional<List<ParametroDTO>> findAll(Long idFuncionario) {
         //parametroRepository.saveTransaction("buscar todos","Parametro","2",date);
-        parametroRepository.registrarTransaccion("buscar todos", "Parametro",Long.valueOf(1),idFuncionario);
+        //parametroRepository.registrarTransaccion("buscar todos", "Parametro",Long.valueOf(1),idFuncionario);
         List<ParametroDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(parametroRepository.findAll(), ParametroDTO.class);
         return Optional.ofNullable(parametroDTOList);
     }
