@@ -15,14 +15,6 @@ public interface IParametroRepository extends JpaRepository<Parametro, Long>{
 
     public List<Parametro> findByValor(int valor);
 
-    @Query(value = "{call saveTransaction(:accion_in, :objeto_in, :funId_in, :date_in)}", nativeQuery=true)
-    public String saveTransaction(
-            @Param("accion_in") String accion_in,
-            @Param("objeto_in") String objeto_in,
-            @Param("funId_in") String funId_in,
-            @Param("date_in") Date date_in
-    );
-
     @Query(value = "{call registrarTransaccion(:accion_in, :objeto_in, :funId_in, :parametro_in)}", nativeQuery=true)
     public void registrarTransaccion(
             @Param("accion_in") String accion_in,
@@ -31,4 +23,5 @@ public interface IParametroRepository extends JpaRepository<Parametro, Long>{
             @Param("parametro_in") String parametro_in
     );
 
+    List<Parametro> findByEstado(boolean estado);
 }

@@ -390,7 +390,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("horario")
                 .valor(2)
                 .build();
-        parametroService.create(horario1);
+        parametroService.create(horario1,Long.valueOf(1));
 
         ParametroDTO horario2 = ParametroDTO.builder()
                 .descripcion("Sabado de 8:00 am a 12:00 md")
@@ -398,7 +398,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("horario")
                 .valor(2)
                 .build();
-        parametroService.create(horario2);
+        parametroService.create(horario2,Long.valueOf(1));
 
         ParametroDTO formula1 = ParametroDTO.builder()
                 .descripcion("Formula licencias comerciales -> Tarifa trimestral = Ganancias brutas * 0,2 (minimo de 40 000 colones)")
@@ -406,7 +406,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("formula")
                 .valor(1)
                 .build();
-        parametroService.create(formula1);
+        parametroService.create(formula1,Long.valueOf(1));
 
         ParametroDTO formula2 = ParametroDTO.builder()
                 .descripcion("Formula limpieza de vías -> Tarifa bimestral = metros de frente / 1500 (mínimo de 8 metros a cobrar y un máximo de 35)")
@@ -414,7 +414,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("formula")
                 .valor(1)
                 .build();
-        parametroService.create(formula2);
+        parametroService.create(formula2,Long.valueOf(1));
 
         ParametroDTO formula3 = ParametroDTO.builder()
                 .descripcion("Formula rutas de buses -> Tarifa mensual = cantidad de salidas diarias * 200")
@@ -422,7 +422,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("formula")
                 .valor(1)
                 .build();
-        parametroService.create(formula3);
+        parametroService.create(formula3,Long.valueOf(1));
 
         ParametroDTO help1 = ParametroDTO.builder()
                 .descripcion("/horario Devuelve el horario de la empresa")
@@ -430,7 +430,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("help")
                 .valor(3)
                 .build();
-        parametroService.create(help1);
+        parametroService.create(help1,Long.valueOf(1));
 
         ParametroDTO help2 = ParametroDTO.builder()
                 .descripcion("/formulas Devuelve las formulas de calculo de impuestos")
@@ -438,7 +438,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("help")
                 .valor(3)
                 .build();
-        parametroService.create(help2);
+        parametroService.create(help2,Long.valueOf(1));
 
         ParametroDTO help3 = ParametroDTO.builder()
                 .descripcion("/pendiente cedula Devuelve los pendientes asociados a una cedula")
@@ -446,7 +446,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("help")
                 .valor(3)
                 .build();
-        parametroService.create(help3);
+        parametroService.create(help3,Long.valueOf(1));
 
         ParametroDTO help4 = ParametroDTO.builder()
                 .descripcion("/pagos cedula fecha inicio fecha final Devuelve los pagos asociados a una cedula entre un rango de fechas")
@@ -454,7 +454,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("help")
                 .valor(3)
                 .build();
-        parametroService.create(help4);
+        parametroService.create(help4,Long.valueOf(1));
 
         ParametroDTO help5 = ParametroDTO.builder()
                 .descripcion("/impuesto cedula tipo de impuesto (1. Licencias comerciales 2. Limpieza de vías 3. Rutas de buses) Devuelve los pendientes asociados a una cedula según un tipo de impuesto")
@@ -462,7 +462,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("help")
                 .valor(3)
                 .build();
-        parametroService.create(help5);
+        parametroService.create(help5,Long.valueOf(1));
 
         //--------------------------
         //---Variables 'valores'----
@@ -474,7 +474,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("PeriodoCobroLicencia")
                 .valor(4)
                 .build();
-        parametroService.create(periodoCobroLicencia);
+        parametroService.create(periodoCobroLicencia,Long.valueOf(1));
 
         ParametroDTO montoMinimoLicencia = ParametroDTO.builder()
                 .descripcion("monto mínimo a cobrar por el servicio de licencia")
@@ -482,7 +482,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("MontoMinimoLicencia")
                 .valor(4)
                 .build();
-        parametroService.create(montoMinimoLicencia);
+        parametroService.create(montoMinimoLicencia,Long.valueOf(1));
 
         ParametroDTO porcentajeSobreGananciaBrutaLicencia = ParametroDTO.builder()
                 .descripcion("porcentaje sobre ganancias brutas que se va a cobrar")
@@ -490,7 +490,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("PorcentajeSobreGananciasBrutasLicencia")
                 .valor(4)
                 .build();
-        parametroService.create(porcentajeSobreGananciaBrutaLicencia);
+        parametroService.create(porcentajeSobreGananciaBrutaLicencia,Long.valueOf(1));
 
         ParametroDTO costoTimbre = ParametroDTO.builder()
                 .descripcion("costo del timbre")
@@ -498,7 +498,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("CostoTimbre")
                 .valor(4)
                 .build();
-        parametroService.create(costoTimbre);
+        parametroService.create(costoTimbre,Long.valueOf(1));
 
         ParametroDTO periodoCobroLimpieza = ParametroDTO.builder()
                 .descripcion("cantidad de meses por los que se cobra")
@@ -506,7 +506,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("PeriodoCobroLimpieza")
                 .valor(4)
                 .build();
-        parametroService.create(periodoCobroLimpieza);
+        parametroService.create(periodoCobroLimpieza,Long.valueOf(1));
 
         ParametroDTO montoPorMetroFrenteLimpieza = ParametroDTO.builder()
                 .descripcion("monto a cobrar por cada metro de frente en la propiedad")
@@ -514,7 +514,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("montoPorMetroFrenteLimpieza")
                 .valor(4)
                 .build();
-        parametroService.create(montoPorMetroFrenteLimpieza);
+        parametroService.create(montoPorMetroFrenteLimpieza,Long.valueOf(1));
 
         ParametroDTO maximoMetrosLimpieza = ParametroDTO.builder()
                 .descripcion("cantidad máxima de metros de frente a considerar")
@@ -522,7 +522,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("maximoMetrosLimpieza")
                 .valor(4)
                 .build();
-        parametroService.create(maximoMetrosLimpieza);
+        parametroService.create(maximoMetrosLimpieza,Long.valueOf(1));
 
         ParametroDTO minimoMetrosLimpieza = ParametroDTO.builder()
                 .descripcion("cantidad minima de metros de frente a considerar")
@@ -530,7 +530,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("minimoMetrosLimpieza")
                 .valor(4)
                 .build();
-        parametroService.create(minimoMetrosLimpieza);
+        parametroService.create(minimoMetrosLimpieza,Long.valueOf(1));
 
         ParametroDTO periodoCobroBuses = ParametroDTO.builder()
                 .descripcion("cantidad de meses por los que se cobra")
@@ -538,7 +538,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("PeriodoCobroBuses")
                 .valor(4)
                 .build();
-        parametroService.create(periodoCobroBuses);
+        parametroService.create(periodoCobroBuses,Long.valueOf(1));
 
         ParametroDTO salidaPorDiaBuses = ParametroDTO.builder()
                 .descripcion("cantidad de salidas por dia")
@@ -546,7 +546,7 @@ public class DataLoader implements ApplicationRunner {
                 .nombre("salidaPorDiaBuses")
                 .valor(4)
                 .build();
-        parametroService.create(salidaPorDiaBuses);
+        parametroService.create(salidaPorDiaBuses,Long.valueOf(1));
     }
 
 }

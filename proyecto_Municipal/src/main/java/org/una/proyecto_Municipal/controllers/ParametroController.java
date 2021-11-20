@@ -48,9 +48,9 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado) {
-        Optional<List<ParametroDTO>> cobroFound = parametroService.findByEstado(estado);
+    @GetMapping("/estado/{estado}/{funId}")
+    public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ParametroDTO>> cobroFound = parametroService.findByEstado(estado,funId);
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
@@ -58,9 +58,9 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String nombre) {
-        Optional<List<ParametroDTO>> colaboradorFound = parametroService.findByNombre(nombre);
+    @GetMapping("/nombre/{nombre}/{funId}")
+    public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String nombre, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ParametroDTO>> colaboradorFound = parametroService.findByNombre(nombre, funId);
         return new ResponseEntity<>(colaboradorFound, HttpStatus.OK);
     }
 
@@ -68,19 +68,19 @@ public class ParametroController {
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su valor",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/valor/{valor}")
-    public ResponseEntity<?> findByValor(@RequestParam(value="valor") int valor) {
-        Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor);
+    @GetMapping("/valor/{valor}/{funId}")
+    public ResponseEntity<?> findByValor(@RequestParam(value="valor") int valor, @PathVariable(value = "funId") Long funId) {
+        Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor,funId);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/")
+    @PostMapping("/{funId}")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody ParametroDTO parametroDto) {
+    public ResponseEntity<?> create(@RequestBody ParametroDTO parametroDto, @PathVariable(value = "idFuncionario") Long idFuncionario) {
         try {
-            Optional<ParametroDTO> parametroCreated = parametroService.create(parametroDto);
+            Optional<ParametroDTO> parametroCreated = parametroService.create(parametroDto,idFuncionario);
             return new ResponseEntity<>(parametroCreated, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,17 +89,17 @@ public class ParametroController {
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified) throws ParseException {
-        Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified, @PathVariable(value = "idFuncionario") Long idFuncionario) throws ParseException {
+        Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id, idFuncionario);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
-        parametroService.delete(id);
+    @DeleteMapping("/{id}/{funId}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "idFuncionario") Long idFuncionario) throws Exception {
+        parametroService.delete(id,idFuncionario);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
