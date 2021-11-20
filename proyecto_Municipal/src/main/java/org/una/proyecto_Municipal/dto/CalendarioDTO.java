@@ -14,6 +14,7 @@ public class CalendarioDTO {
     private Long id;
     private int periodo;
     private int tipo;
+    private int anio;
     private Date fecha1;
     private Date fecha2;
     private Date fecha3;
