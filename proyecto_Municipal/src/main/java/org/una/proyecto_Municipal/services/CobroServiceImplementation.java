@@ -201,6 +201,13 @@ public class CobroServiceImplementation implements ICobroService{
     }
 
     @Override
+    @Transactional
+    public Optional<List<CobroDTO>> generarCobrosLimpieza(int tipo, int periodo, Date fecha, int anio){
+        cobroRepository.generarCobrosLimpieza(tipo,periodo,fecha,anio);
+        return Optional.empty();
+    }
+
+    @Override
     public void generarCobros() {
         String mensaje;
         mensaje = cobroRepository.saveTransaction("GenerarCobros","Cobro","1",date);

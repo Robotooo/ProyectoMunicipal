@@ -149,7 +149,7 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Genera cobros de ruta",
+    @ApiOperation(value = "Genera cobros de rutas de buses",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
@@ -163,7 +163,7 @@ public class CobroController {
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Genera cobros de licencia",
+    @ApiOperation(value = "Genera cobros de licencias comerciales",
             response = CobroDTO.class, tags = "Cobros")
     @GetMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo,
@@ -171,6 +171,17 @@ public class CobroController {
                                                   @PathVariable(value = "fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date fecha,
                                                   @PathVariable(value = "anio") int anio) {
         Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(tipo, periodo,fecha, anio);
+        return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Genera cobros de limpieza de vias",
+            response = CobroDTO.class, tags = "Cobros")
+    @GetMapping("/GenerarCobroLimpieza/{tipo}/{periodo}/{fecha}/{anio}")
+    public ResponseEntity<?>generarCobrosLimpieza(@PathVariable(value = "tipo") int tipo,
+                                                  @PathVariable(value = "periodo") int periodo,
+                                                  @PathVariable(value = "fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date fecha,
+                                                  @PathVariable(value = "anio") int anio) {
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLimpieza(tipo, periodo,fecha, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 

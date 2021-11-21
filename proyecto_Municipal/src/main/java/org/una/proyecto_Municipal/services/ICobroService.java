@@ -37,6 +37,8 @@ public interface ICobroService {
 
     public Optional<List<CobroDTO>> generarCobrosLicencia(int tipo, int periodo, Date fecha, int anio);
 
+    public Optional<List<CobroDTO>> generarCobrosLimpieza(int tipo, int periodo, Date fecha, int anio);
+
     public Optional<CobroDTO> create(CobroDTO cobroDTO,  Long funId);
 
     public Optional<CobroDTO> update(CobroDTO cobroDTO, Long id, Long funId);
