@@ -9,6 +9,7 @@ import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.repositories.ICalendarioRepository;
 import org.una.proyecto_Municipal.utils.MapperUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,14 @@ public class CalendarioServiceImplementation implements ICalendarioService {
 
         CalendarioDTO calendarioDTO = MapperUtils.DtoFromEntity(calendar.get(), CalendarioDTO.class);
         return Optional.ofNullable(calendarioDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<CalendarioDTO>> findByTipoAndAnio(Integer tipo, Integer anio) {
+        List<Calendario> calendarioList = calendarioRepository.findByTipoAndAnio(tipo, anio);
+        List<CalendarioDTO> calendarioDTOList = MapperUtils.DtoListFromEntityList(calendarioList, CalendarioDTO.class);
+        return Optional.ofNullable(calendarioDTOList);
     }
 
     private CalendarioDTO getSavedCalendarDTO(CalendarioDTO calendarioDTO) {
@@ -61,4 +70,5 @@ public class CalendarioServiceImplementation implements ICalendarioService {
     public void deleteAll() {
         calendarioRepository.deleteAll();
     }
+
 }

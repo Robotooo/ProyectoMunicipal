@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CalendarioDTO;
-import org.una.proyecto_Municipal.dto.ParametroDTO;
 import org.una.proyecto_Municipal.services.ICalendarioService;
-import org.una.proyecto_Municipal.services.IParametroService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +26,15 @@ public class CalendarController {
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CalendarioDTO> calendarioFound = calendarioService.findById(id);
+        return new ResponseEntity<>(calendarioFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de calendario a partir de su tipo y año",
+            responseContainer = "List", response = CalendarioDTO.class, tags = "Calendario")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/tipo/{tipo}/{anio}")
+    public ResponseEntity<?> findByTipoAndAnio(@PathVariable(value = "tipo") Integer tipo, @PathVariable(value = "anio") Integer anio) {
+        Optional<List<CalendarioDTO>> calendarioFound = calendarioService.findByTipoAndAnio(tipo, anio);
         return new ResponseEntity<>(calendarioFound, HttpStatus.OK);
     }
 
