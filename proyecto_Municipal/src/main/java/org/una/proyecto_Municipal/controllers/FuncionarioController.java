@@ -88,17 +88,6 @@ public class FuncionarioController {
         }
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/solicitud/{funId}")
-    public ResponseEntity<?> createSolicitud(@RequestBody SolicitudDTO solicitud, @PathVariable(value = "funId") Long funId) {
-        try {
-            Optional<SolicitudDTO> usuarioCreated = null;// = funcionarioService.create(solicitud);
-            return new ResponseEntity<>(usuarioCreated, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @PutMapping("/{id}/{funId}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified, @PathVariable(value = "funId") Long funId) throws PasswordIsBlankException {
         Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id,funId);

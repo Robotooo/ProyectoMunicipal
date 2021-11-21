@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.una.proyecto_Municipal.dto.*;
 import org.una.proyecto_Municipal.entities.Funcionario;
+import org.una.proyecto_Municipal.entities.Solicitud;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
@@ -30,6 +31,7 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     @Autowired
     private IFuncionarioRepository funcionarioRepository;
 
+    //@Autowired
     private ISolicitudRepository solicitudRepository;
 
     @Autowired
@@ -154,19 +156,48 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
 
-    @Transactional
-    public Optional<SolicitudDTO> crearSolicitud(SolicitudDTO solicitud){
-        return null;
-    }
-
-
     @Override
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id,Long funId) throws PasswordIsBlankException {
-       if (funcionarioRepository.findById(id).isEmpty()) return Optional.empty();
+        if (funcionarioRepository.findById(id).isEmpty()) return Optional.empty();
         funcionarioRepository.registrarTransaccion("actualizar por id","Funcionario",funId,String.valueOf(id));
 
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
+
+    @Override
+    @Transactional
+    public Optional<SolicitudDTO> createSolicitud(SolicitudDTO solicitudDTO,Long funId){
+
+        Solicitud solicitud = MapperUtils.EntityFromDto(solicitudDTO, Solicitud.class);
+        Solicitud solicitudCreated = solicitudRepository.save(solicitud);
+        solicitudRepository.registrarTransaccion("Crear","Solicitud",funId,solicitudDTO.getGestor().getCedula());
+        return Optional.ofNullable(
+                MapperUtils.DtoFromEntity(solicitudCreated, SolicitudDTO.class));
+    }
+
+    @Override
+    @Transactional
+    public Optional<SolicitudDTO> updateSolicitud(SolicitudDTO solicitudDTO,Long id, Long funId){
+
+        if (solicitudRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        solicitudRepository.registrarTransaccion("actualizar", "Solicitud",funId,String.valueOf(id));
+
+        Solicitud solicitud = MapperUtils.EntityFromDto(solicitudDTO, Solicitud.class);
+        Solicitud solicitudCreated = solicitudRepository.save(solicitud);
+        return Optional.ofNullable(
+                MapperUtils.DtoFromEntity(solicitudCreated, SolicitudDTO.class));    }
+
+    @Override
+    @Transactional
+    public Optional<List<SolicitudDTO>> findAllSolicitud( Long funId){
+
+        solicitudRepository.registrarTransaccion("buscar todos", "Solicitud",funId,null);
+        List<SolicitudDTO> solicitudDTOList = MapperUtils.DtoListFromEntityList(solicitudRepository.findAll(), SolicitudDTO.class);
+        return Optional.ofNullable(solicitudDTOList);
+    }
+
+
+
 
 
 

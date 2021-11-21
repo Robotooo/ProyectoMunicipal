@@ -2,6 +2,7 @@ package org.una.proyecto_Municipal.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
+import org.una.proyecto_Municipal.dto.SolicitudDTO;
 import org.una.proyecto_Municipal.exceptions.PasswordIsBlankException;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public interface IFuncionarioService {
     public Optional<List<FuncionarioDTO>> findByCedulaAproximate(String cedula);
 
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO,Long funId) throws PasswordIsBlankException;
+
+    public Optional<SolicitudDTO> createSolicitud(SolicitudDTO solicitudDto, Long funId) ;
+
+    public Optional<SolicitudDTO> updateSolicitud(SolicitudDTO solicitudDto,Long id, Long funId) ;
+
+    public Optional<List<SolicitudDTO>> findAllSolicitud( Long funId) ;
 
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id,Long funId) throws PasswordIsBlankException;
 
