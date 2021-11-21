@@ -69,7 +69,7 @@ public class ParametroController {
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/valor/{valor}/{funId}")
-    public ResponseEntity<?> findByValor(@RequestParam(value="valor") int valor, @PathVariable(value = "funId") Long funId) {
+    public ResponseEntity<?> findByValor(@PathVariable(value="valor") int valor, @PathVariable(value = "funId") Long funId) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor,funId);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
