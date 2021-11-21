@@ -38,7 +38,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de todos los parametros",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @GetMapping("/{all}/{idFuncionario}")
     @ResponseBody
     public ResponseEntity<?> findAll(@PathVariable(value = "idFuncionario") Long idFuncionario) {
