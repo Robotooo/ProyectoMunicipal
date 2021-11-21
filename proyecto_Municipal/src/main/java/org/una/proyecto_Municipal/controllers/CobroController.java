@@ -3,6 +3,7 @@ package org.una.proyecto_Municipal.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -151,21 +152,25 @@ public class CobroController {
     @ApiOperation(value = "Genera cobros de ruta",
             response = CobroDTO.class, tags = "Cobros")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
-    public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "tipo") int tipo, @PathVariable(value = "periodo") int periodo, @PathVariable(value = "fecha") String fecha, @PathVariable(value = "anio") int anio) {
+    @GetMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
+    public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "tipo") int tipo,
+                                              @PathVariable(value = "periodo") int periodo,
+                                              @PathVariable(value = "fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") String fecha,
+                                              @PathVariable(value = "anio") int anio) {
         LocalDate fechaC = LocalDate.parse(fecha);
         Date fp  = convertLocaDateToDate(fechaC);
         Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(tipo, periodo,fp, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Genera cobros de ruta",
+    @ApiOperation(value = "Genera cobros de licencia",
             response = CobroDTO.class, tags = "Cobros")
-    @PostMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
-    public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo, @PathVariable(value = "periodo") int periodo, @PathVariable(value = "fecha") String fecha, @PathVariable(value = "anio") int anio) {
-        LocalDate fechaC = LocalDate.parse(fecha);
-        Date fp  = convertLocaDateToDate(fechaC);
-        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(tipo, periodo,fp, anio);
+    @GetMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
+    public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo,
+                                                  @PathVariable(value = "periodo") int periodo,
+                                                  @PathVariable(value = "fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date fecha,
+                                                  @PathVariable(value = "anio") int anio) {
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(tipo, periodo,fecha, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
