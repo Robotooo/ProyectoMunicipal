@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.RolDTO;
@@ -25,6 +26,7 @@ public class RolController {
 
     @ApiOperation(value = "Obtiene un Rol a partir de su id",
             response = RolDTO.class, tags = "Roles")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<RolDTO> rolFound = rolService.findById(id);
@@ -33,6 +35,7 @@ public class RolController {
 
     @ApiOperation(value = "Obtiene una lista de todos los roles",
             response = RolDTO.class, responseContainer = "List", tags = "Roles")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}")
     @ResponseBody
     public ResponseEntity<?> findAll() {
@@ -49,6 +52,7 @@ public class RolController {
 //    }
 
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody RolDTO rolDto) {
@@ -61,6 +65,7 @@ public class RolController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolDTO rolModified) {
@@ -69,6 +74,7 @@ public class RolController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         rolService.delete(id);

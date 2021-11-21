@@ -20,9 +20,9 @@ public class CalendarController {
     @Autowired
     private ICalendarioService calendarioService;
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @ApiOperation(value = "Obtiene un calendario a partir de su id",
             response = CalendarioDTO.class, tags = "Calendario")
+    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CalendarioDTO> calendarioFound = calendarioService.findById(id);
@@ -31,14 +31,14 @@ public class CalendarController {
 
     @ApiOperation(value = "Obtiene una lista de calendario a partir de su tipo y año",
             responseContainer = "List", response = CalendarioDTO.class, tags = "Calendario")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR')")
     @GetMapping("/tipo/{tipo}/{anio}")
     public ResponseEntity<?> findByTipoAndAnio(@PathVariable(value = "tipo") Integer tipo, @PathVariable(value = "anio") Integer anio) {
         Optional<List<CalendarioDTO>> calendarioFound = calendarioService.findByTipoAndAnio(tipo, anio);
         return new ResponseEntity<>(calendarioFound, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -51,7 +51,7 @@ public class CalendarController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR')")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     @ResponseBody
@@ -60,6 +60,7 @@ public class CalendarController {
         return new ResponseEntity<>(calendarioUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {
         calendarioService.delete(id);

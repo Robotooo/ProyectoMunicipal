@@ -25,6 +25,7 @@ public class TransaccionesController {
 
     @ApiOperation(value = "Obtiene un cobro a partir de su id",
             response = TransaccionDTO.class, tags = "Transacciones")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<TransaccionDTO> transaccionFound = transaccionService.findById(id);
@@ -33,6 +34,7 @@ public class TransaccionesController {
 
     @ApiOperation(value = "Obtiene una lista de todas las transacciones",
             response = TransaccionDTO.class, responseContainer = "List", tags = "Transacciones")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}")
     @ResponseBody
     public ResponseEntity<?> findAll() {
@@ -40,7 +42,7 @@ public class TransaccionesController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
@@ -54,6 +56,7 @@ public class TransaccionesController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody TransaccionDTO transaccionModified) throws PasswordIsBlankException {
@@ -63,13 +66,14 @@ public class TransaccionesController {
 
     @ApiOperation(value = "Obtiene una lista de transacciones a partir del id de Funcionario",
             response = FuncionarioDTO.class, tags = "Transacciones")
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/byFuncionarioId/{funcionarioId}")
     public ResponseEntity<?> findByFuncionarioId(@PathVariable(value = "funcionarioId") Long funcionarioId) {
         Optional<List<TransaccionDTO>> transaccionFound = transaccionService.findByFuncionarioId(funcionarioId);
         return new ResponseEntity<>(transaccionFound, HttpStatus.OK);
     }
 
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws Exception {

@@ -29,7 +29,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene un parametro a partir de su id",
             response = ParametroDTO.class, tags = "Parametros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<ParametroDTO> parametroFound = parametroService.findById(id);
@@ -38,7 +38,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de todos los parametros",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}/{idFuncionario}")
     @ResponseBody
     public ResponseEntity<?> findAll(@PathVariable(value = "idFuncionario") Long idFuncionario) {
@@ -47,7 +47,7 @@ public class ParametroController {
     }
     @ApiOperation(value = "Obtiene una lista de cobros a partir de su estado",
             responseContainer = "List", response = CobroDTO.class, tags = "Parametros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/estado/{estado}/{funId}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado, @PathVariable(value = "funId") Long funId) {
         Optional<List<ParametroDTO>> cobroFound = parametroService.findByEstado(estado,funId);
@@ -57,7 +57,7 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de colaboradors a partir de su nombre",
             response = ColaboradorDTO.class, tags = "Parametros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/nombre/{nombre}/{funId}")
     public ResponseEntity<?> findByNombre(@PathVariable(value = "nombre") String nombre, @PathVariable(value = "funId") Long funId) {
         Optional<List<ParametroDTO>> colaboradorFound = parametroService.findByNombre(nombre, funId);
@@ -67,14 +67,14 @@ public class ParametroController {
 
     @ApiOperation(value = "Obtiene una lista de parametros a partir de su valor",
             response = ParametroDTO.class, responseContainer = "List", tags = "Parametros")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/valor/{valor}/{funId}")
     public ResponseEntity<?> findByValor(@PathVariable(value="valor") int valor, @PathVariable(value = "funId") Long funId) {
         Optional<List<ParametroDTO>> parametroFound = parametroService.findByValor(valor,funId);
         return new ResponseEntity<>(parametroFound, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{funId}")
     @ResponseBody
@@ -87,23 +87,22 @@ public class ParametroController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}/{funId}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified, @PathVariable(value = "idFuncionario") Long idFuncionario) throws ParseException {
-        Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id, idFuncionario);
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody ParametroDTO usuarioModified, @PathVariable(value = "funId") Long funId) throws ParseException {
+        Optional<ParametroDTO> usuarioUpdated = parametroService.update(usuarioModified, id, funId);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}/{funId}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "idFuncionario") Long idFuncionario) throws Exception {
         parametroService.delete(id,idFuncionario);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/")
     public ResponseEntity<?> deleteAll() throws Exception {
         parametroService.deleteAll();

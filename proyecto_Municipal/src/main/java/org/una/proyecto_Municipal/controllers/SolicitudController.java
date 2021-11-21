@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.FuncionarioDTO;
 import org.una.proyecto_Municipal.dto.SolicitudDTO;
@@ -24,6 +25,7 @@ public class SolicitudController {
 
 
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @PostMapping("/{funId}")
     public ResponseEntity<?> create(@RequestBody SolicitudDTO solicitud, @PathVariable(value = "funId") Long funId) {
         try {
@@ -34,6 +36,7 @@ public class SolicitudController {
         }
     }
 
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @PutMapping("/{id}/{funId}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody SolicitudDTO usuarioModified, @PathVariable(value = "funId") Long funId) throws PasswordIsBlankException {
         Optional<SolicitudDTO> usuarioUpdated = funcionarioService.updateSolicitud(usuarioModified, id,funId);
@@ -42,6 +45,7 @@ public class SolicitudController {
 
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Solicitudes")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/{all}/{funId}")
     public ResponseEntity<?> findAll(@PathVariable(value = "funId") Long funId) {
         Optional<List<SolicitudDTO>> result = funcionarioService.findAllSolicitud(funId);

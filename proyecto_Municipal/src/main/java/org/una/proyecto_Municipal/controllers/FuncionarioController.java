@@ -37,7 +37,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su estado",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
-    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     @GetMapping("/estado/{estado}/{funId}")
     public ResponseEntity<?> findByEstado(@PathVariable(value = "estado") boolean estado, @PathVariable(value = "funId") Long funId) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByEstado(estado,funId);
@@ -46,6 +46,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
             response = FuncionarioDTO.class, responseContainer = "List", tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     @GetMapping("/{all}")
     public ResponseEntity<?> findAll() {
         Optional<List<FuncionarioDTO>> result = funcionarioService.findAll();
@@ -54,6 +55,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una funcionario a partir de su nombre usuario",
             response = FuncionarioDTO.class, tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     @GetMapping("/usuario/{usuario}/{funId}")
     public ResponseEntity<?> findByUsuario(@PathVariable(value = "usuario") String usuario, @PathVariable(value = "funId") Long funId) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByUsuario(usuario,funId);
@@ -63,6 +65,7 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene un funcionario a partir de su cedula",
             response = FuncionarioDTO.class, tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     @GetMapping("/cedula/{cedula}")
     public ResponseEntity<?> findByCedula(@PathVariable(value = "cedula") String cedula) {
         Optional<FuncionarioDTO> funcionarioFound = funcionarioService.findByCedula(cedula);
@@ -71,12 +74,14 @@ public class FuncionarioController {
 
     @ApiOperation(value = "Obtiene una lista de funcionarios a partir de su rol",
             response = FuncionarioDTO.class, tags = "Funcionarios")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('AUDITOR') or hasRole('GERENTE')")
     @GetMapping("/rolId/{rol}/{funId}")
     public ResponseEntity<?> findByRolId(@PathVariable(value = "rol") Long rol, @PathVariable(value = "funId") Long funId) {
         Optional<List<FuncionarioDTO>> funcionarioFound = funcionarioService.findByRolId(rol,funId);
         return new ResponseEntity<>(funcionarioFound, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('GERENTE')")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{funId}")
     public ResponseEntity<?> create(@RequestBody FuncionarioDTO funcionarioDTO, @PathVariable(value = "funId") Long funId) {
@@ -88,12 +93,14 @@ public class FuncionarioController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('GERENTE')")
     @PutMapping("/{id}/{funId}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody FuncionarioDTO usuarioModified, @PathVariable(value = "funId") Long funId) throws PasswordIsBlankException {
         Optional<FuncionarioDTO> usuarioUpdated = funcionarioService.update(usuarioModified, id,funId);
         return new ResponseEntity<>(usuarioUpdated, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('GERENTE')")
     @DeleteMapping("/{id}/{funId}")
     @ResponseBody
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
