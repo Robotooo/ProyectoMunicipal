@@ -22,7 +22,7 @@ public class CalendarController {
 
     @ApiOperation(value = "Obtiene un calendario a partir de su id",
             response = CalendarioDTO.class, tags = "Calendario")
-    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR')")
+    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<CalendarioDTO> calendarioFound = calendarioService.findById(id);
@@ -31,7 +31,7 @@ public class CalendarController {
 
     @ApiOperation(value = "Obtiene una lista de calendario a partir de su tipo y año",
             responseContainer = "List", response = CalendarioDTO.class, tags = "Calendario")
-    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR')")
+    @PreAuthorize(" hasRole('AUDITOR') or hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @GetMapping("/tipo/{tipo}/{anio}")
     public ResponseEntity<?> findByTipoAndAnio(@PathVariable(value = "tipo") Integer tipo, @PathVariable(value = "anio") Integer anio) {
         Optional<List<CalendarioDTO>> calendarioFound = calendarioService.findByTipoAndAnio(tipo, anio);
