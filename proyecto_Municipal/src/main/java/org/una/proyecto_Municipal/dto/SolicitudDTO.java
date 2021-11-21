@@ -16,7 +16,7 @@ public class SolicitudDTO {
     private boolean respuesta;
     private boolean estado;
     private Date fechaSolicitud;
-    @JsonIgnore
+    //@JsonIgnore
     private FuncionarioDTO gestor;
     @JsonIgnore
     private FuncionarioDTO gerente;
