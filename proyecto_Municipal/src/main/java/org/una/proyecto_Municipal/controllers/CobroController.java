@@ -124,7 +124,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por licencias comerciales",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaLicencias/{cedula}")
     public ResponseEntity<?>findPendienteTotalLicencias(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalLicencias(cedula);
@@ -133,7 +133,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por propiedades",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaPropiedades/{cedula}")
     public ResponseEntity<?>findPendienteTotalPropiedades(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalPropiedades(cedula);
@@ -142,7 +142,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de cobros por rutas",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaRutas/{cedula}")
     public ResponseEntity<?>findPendienteTotalRutas(@PathVariable(value = "cedula") String cedula) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findPendienteTotalRutas(cedula);
@@ -151,7 +151,7 @@ public class CobroController {
 
     @ApiOperation(value = "Genera cobros de rutas de buses",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @GetMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "tipo") int tipo,
                                               @PathVariable(value = "periodo") int periodo,
@@ -165,7 +165,7 @@ public class CobroController {
 
     @ApiOperation(value = "Genera cobros de licencias comerciales",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @GetMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo,
                                                   @PathVariable(value = "periodo") int periodo,
@@ -177,7 +177,7 @@ public class CobroController {
 
     @ApiOperation(value = "Genera cobros de limpieza de vias",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @GetMapping("/GenerarCobroLimpieza/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosLimpieza(@PathVariable(value = "tipo") int tipo,
                                                   @PathVariable(value = "periodo") int periodo,
@@ -189,7 +189,7 @@ public class CobroController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{funId}")
-    @PreAuthorize("  hasRole('GERENTE')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody CobroDTO cobroDto, @PathVariable(value = "funId") Long funId) {
         Optional<CobroDTO> cobroCreated = cobroService.create(cobroDto,funId);
@@ -197,13 +197,13 @@ public class CobroController {
     }
 
     @PutMapping("/{id}/{funId}")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CobroDTO cobroModified, @PathVariable(value = "funId") Long funId) {
         Optional<CobroDTO> cobroUpdated = cobroService.update(cobroModified, id,funId);
         return new ResponseEntity<>(cobroUpdated, HttpStatus.OK);
     }
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}/{funId}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
         cobroService.delete(id,funId);
