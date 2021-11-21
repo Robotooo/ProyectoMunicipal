@@ -26,12 +26,6 @@ public interface IFuncionarioService {
 
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO,Long funId) throws PasswordIsBlankException;
 
-    public Optional<SolicitudDTO> createSolicitud(SolicitudDTO solicitudDto, Long funId) ;
-
-    public Optional<SolicitudDTO> updateSolicitud(SolicitudDTO solicitudDto,Long id, Long funId) ;
-
-    public Optional<List<SolicitudDTO>> findAllSolicitud( Long funId) ;
-
     public Optional<FuncionarioDTO> update(FuncionarioDTO funcionarioDTO, Long id,Long funId) throws PasswordIsBlankException;
 
     public void delete(Long id,Long funId);

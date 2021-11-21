@@ -1,5 +1,6 @@
 package org.una.proyecto_Municipal.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.Date;
@@ -15,6 +16,8 @@ public class SolicitudDTO {
     private boolean respuesta;
     private boolean estado;
     private Date fechaSolicitud;
+    @JsonIgnore
     private FuncionarioDTO gestor;
+    @JsonIgnore
     private FuncionarioDTO gerente;
 }

@@ -89,7 +89,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedula/{cedula}/{funId}")
     public ResponseEntity<?>findCobroByCedula(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "funId") Long funId) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedula(cedula,funId);
@@ -98,7 +98,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pendientes por cedula",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/CobroByCedulaAndTipo/{cedula}/{tipo}/{funId}")
     public ResponseEntity<?>findCobroByCedulaAndTipo(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "tipo") String tipo, @PathVariable(value = "funId") Long funId) {
         Optional<List<CobroDTO>> cobroFound = cobroService.findCobroByCedulaAndTipo(cedula,tipo, funId);
@@ -107,7 +107,7 @@ public class CobroController {
 
     @ApiOperation(value = "Obtiene una lista de los cobros pagados por cedula entre fechas",
             response = CobroDTO.class, tags = "Cobros")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @GetMapping("/PagosByCedulaAndFechasBetween/{cedula}/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<?>findPagosByCedulaAndFechasBetween(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "fechaInicio") String fechaInicio,  @PathVariable(value = "fechaFinal") String fechaFinal) {
         LocalDate dateini = LocalDate.parse(fechaInicio);
