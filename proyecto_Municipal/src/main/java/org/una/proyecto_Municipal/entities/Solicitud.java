@@ -16,17 +16,21 @@ import java.util.Date;
 @Builder
 public class Solicitud implements Serializable {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tipo", length = 15)
-    private String tipo;
+    @Column(name = "registroId")
+    private Long registroId;
+
+    @Column(name = "accion", length = 20)
+    private String accion;
 
     @Column(name = "estado")
     private boolean estado;
+
+    @Column(name = "respuesta")
+    private boolean respuesta;
 
     @ManyToOne
     @JoinColumn(name="gestor_id")

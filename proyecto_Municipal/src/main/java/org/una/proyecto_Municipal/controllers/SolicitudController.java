@@ -53,4 +53,13 @@ public class SolicitudController {
         Optional<List<SolicitudDTO>> result = solicitudService.findAll(funId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Obtiene una lista de todos los funcionarios",
+            response = FuncionarioDTO.class, responseContainer = "List", tags = "Solicitudes")
+    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
+    @GetMapping("/findByRegistroId/{registroId}/{funId}")
+    public ResponseEntity<?> findByRegistroId(@PathVariable(value = "registroId") Long registroId,@PathVariable(value = "funId") Long funId) {
+        Optional<List<SolicitudDTO>> result = solicitudService.findByRegistroId(registroId,funId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

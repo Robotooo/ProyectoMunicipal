@@ -1,8 +1,13 @@
 package org.una.proyecto_Municipal.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.una.proyecto_Municipal.entities.Solicitud;
+import org.una.proyecto_Municipal.entities.Transaccion;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +24,10 @@ public class FuncionarioDTO {
     private Date fechaModificacion;
     private String passwordEncriptado;
     private RolDTO rol;
+    @JsonIgnore
+    private List<TransaccionDTO> transaccion= new ArrayList<>();
+    @JsonIgnore
+    private List<SolicitudDTO> solicitudesRecibidas = new ArrayList<>();
+    @JsonIgnore
+    private List<SolicitudDTO> solicitudesEnviadas = new ArrayList<>();
 }

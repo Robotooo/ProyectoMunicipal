@@ -12,12 +12,12 @@ import java.util.Date;
 @Builder
 public class SolicitudDTO {
     private Long id;
-    private String tipo;
+    private Long registroId;
+    private String accion;
     private boolean respuesta;
     private boolean estado;
     private Date fechaSolicitud;
     //@JsonIgnore
     private FuncionarioDTO gestor;
-    @JsonIgnore
     private FuncionarioDTO gerente;
 }

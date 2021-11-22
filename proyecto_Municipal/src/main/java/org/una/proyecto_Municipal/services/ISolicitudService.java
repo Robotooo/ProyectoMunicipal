@@ -11,6 +11,8 @@ public interface ISolicitudService {
 
     public Optional<List<SolicitudDTO>> findAll(Long funId);
 
+    public Optional<List<SolicitudDTO>> findByRegistroId(Long registroId, Long funId);
+
     public Optional<SolicitudDTO> create(SolicitudDTO solicitudDto, Long funId) throws ParseException;
 
     public Optional<SolicitudDTO> update(SolicitudDTO solicitudDto, Long id, Long funId) throws ParseException;

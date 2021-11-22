@@ -151,8 +151,8 @@ public class FuncionarioServiceImplementation implements IFuncionarioService, Us
     @Transactional
     public Optional<FuncionarioDTO> create(FuncionarioDTO funcionarioDTO,Long funId) throws PasswordIsBlankException {
         funcionarioDTO.setPasswordEncriptado(encriptarPassword(funcionarioDTO.getPasswordEncriptado()));
-        funcionarioRepository.registrarTransaccion("crear","Funcionario",funId,funcionarioDTO.getCedula());
-
+        //funcionarioRepository.registrarTransaccion("crear","Funcionario",funId,funcionarioDTO.getCedula());
+    //---> da error en el Data Loader, en la creación de primeros funcionarios---
         return Optional.ofNullable(getSavedFuncionarioDTO(funcionarioDTO));
     }
 
