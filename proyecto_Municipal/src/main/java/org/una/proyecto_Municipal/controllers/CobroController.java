@@ -41,7 +41,7 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de todos los bienes",
+    @ApiOperation(value = "Obtiene una lista de todos los cobros",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{all}")
     @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
