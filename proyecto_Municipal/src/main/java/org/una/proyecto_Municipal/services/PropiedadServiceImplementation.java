@@ -3,6 +3,7 @@ package org.una.proyecto_Municipal.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.una.proyecto_Municipal.dto.LicenciaDTO;
 import org.una.proyecto_Municipal.dto.PropiedadDTO;
 import org.una.proyecto_Municipal.entities.Propiedad;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -30,7 +31,8 @@ public class PropiedadServiceImplementation implements IPropiedadService{
 
     @Override
     public Optional<List<PropiedadDTO>> findAll() {
-        return Optional.empty();
+        List<PropiedadDTO> propiedadDTOList = MapperUtils.DtoListFromEntityList(propiedadRepository.findAll(), PropiedadDTO.class);
+        return Optional.ofNullable(propiedadDTOList);
     }
 
 //    @Override

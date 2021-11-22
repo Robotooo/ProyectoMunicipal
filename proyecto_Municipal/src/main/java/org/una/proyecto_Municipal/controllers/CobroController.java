@@ -41,12 +41,12 @@ public class CobroController {
         return new ResponseEntity<>(cobroFound, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Obtiene una lista de todos los bienes",
+    @ApiOperation(value = "Obtiene una lista de todos los cobros",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{all}")
-    @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT')")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @ResponseBody
-    public ResponseEntity<?> findAll(@PathVariable(value = "funId") Long funId) {
+    public ResponseEntity<?> findAll() {
         Optional<List<CobroDTO>> result = cobroService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

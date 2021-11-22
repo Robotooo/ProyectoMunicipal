@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
@@ -41,6 +42,16 @@ public class LicenciaController {
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
         Optional<LicenciaDTO> proveedorFound = licenciaService.findById(id);
         return new ResponseEntity<>(proveedorFound, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Obtiene una lista de todos las licencias",
+            response = LicenciaDTO.class, responseContainer = "List", tags = "Licencias")
+    @GetMapping("/{all}")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
+    @ResponseBody
+    public ResponseEntity<?> findAll() {
+        Optional<List<LicenciaDTO>> result = licenciaService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Obtiene una lista de licencias a partir de su estado",
