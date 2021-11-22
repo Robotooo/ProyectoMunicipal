@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.una.proyecto_Municipal.dto.CobroDTO;
 import org.una.proyecto_Municipal.dto.ColaboradorDTO;
@@ -46,6 +47,7 @@ public class PropiedadController {
     @ApiOperation(value = "Obtiene una lista de todos los propiedades",
             response = PropiedadDTO.class, responseContainer = "List", tags = "Propiedades")
     @GetMapping("/{all}")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
     @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<PropiedadDTO>> result = propiedadService.findAll();
