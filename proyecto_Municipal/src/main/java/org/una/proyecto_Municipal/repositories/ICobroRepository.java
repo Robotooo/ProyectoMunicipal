@@ -90,13 +90,13 @@ public interface ICobroRepository extends JpaRepository<Cobro, Long> {
 
 
     @Procedure("CobroRuta")
-    public void generarCobrosRuta(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") Date fecha, @Param("anio") int anio);
+    public void generarCobrosRuta(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") String fecha, @Param("anio") int anio);
 
     @Procedure("CobroLicencia")
-    public void generarCobrosLicencia(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") Date fecha, @Param("anio") int anio);
+    public void generarCobrosLicencia(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") String fecha, @Param("anio") int anio);
 
     @Procedure("CobroLimpieza")
-    public void generarCobrosLimpieza(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") Date fecha, @Param("anio") int anio);
+    public void generarCobrosLimpieza(@Param("tipo") int tipo, @Param("periodo") int periodo,@Param("fecha") String fecha, @Param("anio") int anio);
 
 //    @Query(value=”{call valuate_actives_for_inventory(/*:id_in*/)}”)
 //    Boolean calculateValuesOfActivesForInventory(Long inventoryId);

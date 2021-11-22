@@ -188,21 +188,21 @@ public class CobroServiceImplementation implements ICobroService{
 
     @Override
     @Transactional
-    public Optional< List<CobroDTO>> generarCobrosRuta(int tipo, int periodo, Date fecha, int anio){
+    public Optional< List<CobroDTO>> generarCobrosRuta(int tipo, int periodo, String fecha, int anio){
         cobroRepository.generarCobrosRuta(tipo,periodo,fecha,anio);
         return Optional.empty();
     }
 
     @Override
     @Transactional
-    public Optional<List<CobroDTO>> generarCobrosLicencia(int tipo, int periodo, Date fecha, int anio){
+    public Optional<List<CobroDTO>> generarCobrosLicencia(int tipo, int periodo, String fecha, int anio){
         cobroRepository.generarCobrosLicencia(tipo,periodo,fecha,anio);
         return Optional.empty();
     }
 
     @Override
     @Transactional
-    public Optional<List<CobroDTO>> generarCobrosLimpieza(int tipo, int periodo, Date fecha, int anio){
+    public Optional<List<CobroDTO>> generarCobrosLimpieza(int tipo, int periodo, String fecha, int anio){
         cobroRepository.generarCobrosLimpieza(tipo,periodo,fecha,anio);
         return Optional.empty();
     }

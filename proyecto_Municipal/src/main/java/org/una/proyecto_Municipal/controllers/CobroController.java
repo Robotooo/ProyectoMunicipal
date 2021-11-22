@@ -155,11 +155,9 @@ public class CobroController {
     @GetMapping("/GenerarCobroRuta/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosRuta(@PathVariable(value = "tipo") int tipo,
                                               @PathVariable(value = "periodo") int periodo,
-                                              @PathVariable(value = "fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") String fecha,
+                                              @PathVariable(value = "fecha") String  fecha,
                                               @PathVariable(value = "anio") int anio) {
-        LocalDate fechaC = LocalDate.parse(fecha);
-        Date fp  = convertLocaDateToDate(fechaC);
-        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(tipo, periodo,fp, anio);
+        Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosRuta(tipo, periodo, fecha, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
     }
 
@@ -169,7 +167,7 @@ public class CobroController {
     @GetMapping("/GenerarCobroLicencia/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosLicencia(@PathVariable(value = "tipo") int tipo,
                                                   @PathVariable(value = "periodo") int periodo,
-                                                  @PathVariable(value = "fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date fecha,
+                                                  @PathVariable(value = "fecha") String fecha,
                                                   @PathVariable(value = "anio") int anio) {
         Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLicencia(tipo, periodo,fecha, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
@@ -181,7 +179,7 @@ public class CobroController {
     @GetMapping("/GenerarCobroLimpieza/{tipo}/{periodo}/{fecha}/{anio}")
     public ResponseEntity<?>generarCobrosLimpieza(@PathVariable(value = "tipo") int tipo,
                                                   @PathVariable(value = "periodo") int periodo,
-                                                  @PathVariable(value = "fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  Date fecha,
+                                                  @PathVariable(value = "fecha") String fecha,
                                                   @PathVariable(value = "anio") int anio) {
         Optional<List<CobroDTO>> cobroCreated = cobroService.generarCobrosLimpieza(tipo, periodo,fecha, anio);
         return new ResponseEntity<>(cobroCreated, HttpStatus.OK);
