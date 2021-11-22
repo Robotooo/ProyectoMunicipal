@@ -45,7 +45,7 @@ public class Ruta implements Serializable {
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)
     @Setter(AccessLevel.NONE)
-    private Date fechaRegistro;
+    private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
     @Setter(AccessLevel.NONE)
@@ -57,7 +57,7 @@ public class Ruta implements Serializable {
     @PrePersist
     public void prePersist() {
         estado = true;
-        fechaRegistro = new Date();
+        fechaCreacion = new Date();
         fechaModificacion = new Date();
     }
 
