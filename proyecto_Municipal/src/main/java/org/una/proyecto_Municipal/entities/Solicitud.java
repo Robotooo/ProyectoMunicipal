@@ -22,11 +22,14 @@ public class Solicitud implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tipo", length = 15)
-    private String tipo;
+    @Column(name = "accion", length = 15)
+    private String accion;
 
     @Column(name = "estado")
     private boolean estado;
+
+    @Column(name = "registroId")
+    private Long registroId;
 
     @ManyToOne
     @JoinColumn(name="gestor_id")

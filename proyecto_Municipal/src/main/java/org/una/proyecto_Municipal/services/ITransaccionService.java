@@ -1,6 +1,5 @@
 package org.una.proyecto_Municipal.services;
 
-import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 
 import java.util.Date;
@@ -13,21 +12,19 @@ public interface ITransaccionService {
 
     public Optional<List<TransaccionDTO>> findAll();
 
-    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate,Long idFuncionario);
 
-    //public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate, Long idFuncionario);
 
-    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objetoId, Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate, Long idFuncionario);
 
-    public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate);
+    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long funcionarioId, Long idFuncionario);
 
-    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long funcionarioId);
+    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO, Long idFuncionario);
 
-    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO);
+    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO,  Long id, Long idFuncionario);
 
-    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id);
-
-    public void delete(Long id);
+    public void delete(Long id, Long idFuncionario);
 
     public void deleteAll();
 }

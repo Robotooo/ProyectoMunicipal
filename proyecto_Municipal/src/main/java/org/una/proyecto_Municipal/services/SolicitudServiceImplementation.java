@@ -31,6 +31,13 @@ public class SolicitudServiceImplementation implements ISolicitudService{
         return Optional.ofNullable(parametroDTOList);
     }
 
+    @Override
+    public Optional<List<SolicitudDTO>> findByRegistroId(Long registroId, Long funId) {
+        solicitudRepository.registrarTransaccion("buscar por id del registro", "Solicitud",funId,String.valueOf(registroId));
+        List<SolicitudDTO> parametroDTOList = MapperUtils.DtoListFromEntityList(solicitudRepository.findByRegistroId(registroId), SolicitudDTO.class);
+        return Optional.ofNullable(parametroDTOList);
+    }
+
     private SolicitudDTO getSavedParametroDTO(SolicitudDTO solicitudDto) {
         Solicitud parametro = MapperUtils.EntityFromDto(solicitudDto, Solicitud.class);
         Solicitud parametroCreated = solicitudRepository.save(parametro);

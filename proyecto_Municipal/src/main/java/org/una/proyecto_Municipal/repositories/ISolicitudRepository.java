@@ -3,8 +3,11 @@ package org.una.proyecto_Municipal.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.una.proyecto_Municipal.dto.SolicitudDTO;
 import org.una.proyecto_Municipal.entities.Funcionario;
 import org.una.proyecto_Municipal.entities.Solicitud;
+
+import java.util.List;
 
 public interface ISolicitudRepository extends JpaRepository<Solicitud, Long> {
 
@@ -15,4 +18,6 @@ public interface ISolicitudRepository extends JpaRepository<Solicitud, Long> {
             @Param("funId_in") Long funId_in,
             @Param("parametro_in") String parametro_in
     );
+
+    List<SolicitudDTO> findByRegistroId(Long registroId);
 }

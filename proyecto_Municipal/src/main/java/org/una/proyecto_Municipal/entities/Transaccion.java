@@ -1,10 +1,15 @@
 package org.una.proyecto_Municipal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.una.proyecto_Municipal.dto.SolicitudDTO;
+import org.una.proyecto_Municipal.dto.TransaccionDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "transacciones")
@@ -35,6 +40,8 @@ public class Transaccion implements Serializable {
 
     @Column(name = "parametro", length = 50)
     private String parametro;
+
+
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)

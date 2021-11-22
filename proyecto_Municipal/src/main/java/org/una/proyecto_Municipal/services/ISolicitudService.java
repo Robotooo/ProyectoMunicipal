@@ -15,4 +15,5 @@ public interface ISolicitudService {
 
     public Optional<SolicitudDTO> update(SolicitudDTO solicitudDto, Long id, Long funId) throws ParseException;
 
+    Optional<List<SolicitudDTO>> findByRegistroId(Long registroId, Long funId);
 }
