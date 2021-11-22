@@ -3,7 +3,6 @@ package org.una.proyecto_Municipal.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.una.proyecto_Municipal.dto.RutaDTO;
 import org.una.proyecto_Municipal.dto.TransaccionDTO;
 import org.una.proyecto_Municipal.entities.Transaccion;
 import org.una.proyecto_Municipal.exceptions.NotFoundInformationException;
@@ -37,37 +36,36 @@ public class TransaccionServiceImplementation implements ITransaccionService{
     }
 
     @Override
-    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate) {
+    public Optional<List<TransaccionDTO>> findByFuncionarioIdAndFechaCreacionBetween(Long usuarioId, Date startDate, Date endDate, Long idFuncionario) {
         List<Transaccion> transacciones = transaccionRepository.findByFuncionarioIdAndFechaCreacionBetween(usuarioId, startDate, endDate);
         List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        transaccionRepository.registrarTransaccion("Buscar Por FuncionarioId y Fecha Creacion Between","Transaccion",idFuncionario,String.valueOf(usuarioId));
         return Optional.ofNullable(transaccionDTOList);
     }
 
-   /* @Override
-    public Optional<List<TransaccionDTO>> findByRolIdAndFechaCreacionBetween(Long rolId, Date startDate, Date endDate) {
-        List<Transaccion> transacciones = transaccionRepository.findByRolIdAndFechaCreacionBetween(rolId, startDate, endDate);
-        List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
-        return Optional.ofNullable(transaccionDTOList);
-    }*/
+
 
     @Override
-    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objeto, Date startDate, Date endDate) {
+    public Optional<List<TransaccionDTO>> findByObjetoAndFechaCreacionBetween(String objeto, Date startDate, Date endDate, Long idFuncionario) {
         List<Transaccion> transacciones = transaccionRepository.findByObjetoAndFechaCreacionBetween(objeto, startDate, endDate);
         List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        transaccionRepository.registrarTransaccion("Buscar Por FuncionarioId y Fecha Creacion Between","Transaccion",idFuncionario,objeto);
         return Optional.ofNullable(transaccionDTOList);
     }
 
     @Override
-    public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate) {
+    public Optional<List<TransaccionDTO>> findByFechaCreacionBetween(Date startDate, Date endDate, Long idFuncionario) {
         List<Transaccion> transacciones = transaccionRepository.findByFechaCreacionBetween(startDate, endDate);
         List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        transaccionRepository.registrarTransaccion("Buscar Por FuncionarioId y Fecha Creacion Between","Transaccion",idFuncionario,String.valueOf(startDate));
         return Optional.ofNullable(transaccionDTOList);
     }
 
     @Override
-    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long funcionarioId) {
+    public Optional<List<TransaccionDTO>> findByFuncionarioId(Long funcionarioId, Long idFuncionario) {
         List<Transaccion> transacciones = transaccionRepository.findByFuncionarioId(funcionarioId);
         List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
+        transaccionRepository.registrarTransaccion("Buscar Por FuncionarioId y Fecha Creacion Between","Transaccion",idFuncionario,String.valueOf(funcionarioId));
         return Optional.ofNullable(transaccionDTOList);
     }
 
@@ -79,14 +77,16 @@ public class TransaccionServiceImplementation implements ITransaccionService{
 
     @Override
     @Transactional
-    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO) {
+    public Optional<TransaccionDTO> create(TransaccionDTO transaccionDTO, Long idFuncionario) {
+        transaccionRepository.registrarTransaccion("Crear Transaccion","Transaccion",idFuncionario,null);
         return Optional.ofNullable(getSavedTransaccionDTO(transaccionDTO));
     }
 
     @Override
     @Transactional
-    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id) {
+    public Optional<TransaccionDTO> update(TransaccionDTO transaccionDTO, Long id, Long idFuncionario) {
         if (transaccionRepository.findById(id).isEmpty()) throw new NotFoundInformationException();
+        transaccionRepository.registrarTransaccion("Actualizar Transaccion","Transaccion",idFuncionario,String.valueOf(transaccionDTO.getId()));
 
         return Optional.ofNullable(getSavedTransaccionDTO(transaccionDTO));
 
@@ -95,7 +95,9 @@ public class TransaccionServiceImplementation implements ITransaccionService{
     //delete
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id, Long idFuncionario) {
+
+        transaccionRepository.registrarTransaccion("Eliminar Transaccion","Transaccion",idFuncionario,String.valueOf(id));
         transaccionRepository.deleteById(id);
     }
 
