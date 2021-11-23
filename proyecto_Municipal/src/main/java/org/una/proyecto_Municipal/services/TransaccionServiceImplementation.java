@@ -62,6 +62,7 @@ public class TransaccionServiceImplementation implements ITransaccionService {
 
     @Override
     public Optional<List<TransaccionDTO>> findByFuncionarioId(Long funcionarioId, Long idFuncionario) {
+        System.out.println("Ha llegado a la implementacion");
         List<Transaccion> transacciones = transaccionRepository.findByFuncionarioId(funcionarioId);
         List<TransaccionDTO> transaccionDTOList = MapperUtils.DtoListFromEntityList(transacciones, TransaccionDTO.class);
         transaccionRepository.registrarTransaccion("Buscar Por FuncionarioId y Fecha Creacion Between", "Transaccion", idFuncionario, String.valueOf(funcionarioId));

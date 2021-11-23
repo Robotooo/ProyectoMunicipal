@@ -176,6 +176,7 @@ public class CobroServiceImplementation implements ICobroService{
     @Override
     @Transactional
     public void delete(Long id, Long funId) {
+        System.out.println("Eliminando cobro....");
         cobroRepository.registrarTransaccion("eliminar","Cobro",funId,String.valueOf(id));
         cobroRepository.deleteById(id);
     }

@@ -19,5 +19,5 @@ public interface ISolicitudRepository extends JpaRepository<Solicitud, Long> {
             @Param("parametro_in") String parametro_in
     );
 
-    List<SolicitudDTO> findByRegistroId(Long registroId);
+    List<Solicitud> findByRegistroId(Long registroId);
 }
