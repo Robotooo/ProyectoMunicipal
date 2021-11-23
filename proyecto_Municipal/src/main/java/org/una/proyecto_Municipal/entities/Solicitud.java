@@ -27,7 +27,7 @@ public class Solicitud implements Serializable {
     private String accion;
 
     @Column(name = "respuesta")
-    private boolean respuesta;
+    private String respuesta;
 
     @Column(name = "estado")
     private boolean estado;

@@ -14,7 +14,7 @@ public class SolicitudDTO {
     private Long id;
     private Long registroId;
     private String accion;
-    private boolean respuesta;
+    private String respuesta;
     private boolean estado;
     private Date fechaSolicitud;
     //@JsonIgnore
