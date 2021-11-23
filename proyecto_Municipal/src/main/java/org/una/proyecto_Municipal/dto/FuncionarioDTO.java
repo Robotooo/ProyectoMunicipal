@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 @Builder
 public class FuncionarioDTO {
+
     private Long id;
     private String usuario;
     private String telefono;
@@ -23,9 +24,10 @@ public class FuncionarioDTO {
     private String passwordEncriptado;
     private RolDTO rol;
     @JsonIgnore
-    private List<TransaccionDTO> transaccion= new ArrayList<>();
+    private List<TransaccionDTO> transaccion = new ArrayList<>();
     @JsonIgnore
     private List<SolicitudDTO> solicitudesRecibidas = new ArrayList<>();
     @JsonIgnore
     private List<SolicitudDTO> solicitudesEnviadas = new ArrayList<>();
+
 }

@@ -20,10 +20,5 @@ public class TransaccionDTO {
     private String parametro;
     private Date fechaCreacion;
     private FuncionarioDTO funcionarioId;
-    @JsonIgnore
-    private List<TransaccionDTO> transaccion= new ArrayList<>();
-    @JsonIgnore
-    private List<SolicitudDTO> solicitudesRecibidas = new ArrayList<>();
-    @JsonIgnore
-    private List<SolicitudDTO> solicitudesEnviadas = new ArrayList<>();
+
 }

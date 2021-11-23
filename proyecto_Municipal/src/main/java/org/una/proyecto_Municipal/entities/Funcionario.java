@@ -39,17 +39,17 @@ public class Funcionario implements Serializable {
     @JoinColumn(name="roles_id")
     private Rol rol;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gestor")
-    private List<Solicitud> solicitudesEnviadas = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gerente")
-    private List<Solicitud> solicitudesRecibidas = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gestor")
+//    private List<Solicitud> solicitudesEnviadas;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gerente")
+//    private List<Solicitud> solicitudesRecibidas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cajeroId")
-    private List<Factura> factura = new ArrayList<>();
+    private List<Factura> factura;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioId")
-    private List<Transaccion> transaccion= new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioId")
+//    private List<Transaccion> transaccion;
 
     @Column(name = "fecha_creacion", updatable = false)
     @Temporal(TemporalType.DATE)
