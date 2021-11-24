@@ -47,7 +47,7 @@ public class LicenciaController {
     @ApiOperation(value = "Obtiene una lista de todos las licencias",
             response = LicenciaDTO.class, responseContainer = "List", tags = "Licencias")
     @GetMapping("/{all}")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<LicenciaDTO>> result = licenciaService.findAll();
