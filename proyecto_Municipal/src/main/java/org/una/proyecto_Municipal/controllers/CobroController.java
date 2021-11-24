@@ -44,7 +44,7 @@ public class CobroController {
     @ApiOperation(value = "Obtiene una lista de todos los cobros",
             response = CobroDTO.class, responseContainer = "List", tags = "Cobros")
     @GetMapping("/{all}")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<CobroDTO>> result = cobroService.findAll();

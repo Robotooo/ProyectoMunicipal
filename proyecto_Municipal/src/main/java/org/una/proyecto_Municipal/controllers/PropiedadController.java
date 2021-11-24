@@ -47,7 +47,7 @@ public class PropiedadController {
     @ApiOperation(value = "Obtiene una lista de todos los propiedades",
             response = PropiedadDTO.class, responseContainer = "List", tags = "Propiedades")
     @GetMapping("/{all}")
-    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('GESTOR') or hasRole('BOT') or hasRole('ADMINISTRADOR') or hasRole('AUDITOR')")
     @ResponseBody
     public ResponseEntity<?> findAll() {
         Optional<List<PropiedadDTO>> result = propiedadService.findAll();
