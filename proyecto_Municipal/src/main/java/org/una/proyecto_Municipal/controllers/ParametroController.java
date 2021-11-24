@@ -98,8 +98,8 @@ public class ParametroController {
 
     @PreAuthorize("  hasRole('GERENTE') or hasRole('GESTOR') or hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}/{funId}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "idFuncionario") Long idFuncionario) throws Exception {
-        parametroService.delete(id,idFuncionario);
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, @PathVariable(value = "funId") Long funId) throws Exception {
+        parametroService.delete(id,funId);
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
 
